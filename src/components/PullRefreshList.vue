@@ -1,24 +1,13 @@
 <script lang='ts' setup generic="T">
-const props = withDefaults(defineProps<{
+import type { ListProps, PullRefreshProps } from 'vant'
+
+type PartialVantProps = Partial<PullRefreshProps> & Partial<ListProps>
+
+const props = withDefaults(defineProps <{
   dataFetch: () => Promise<PagenationResponse<T>>
-  finishedText?: string
-  errorText?: string
-  loadingText?: string
-  /* 下拉中text */
-  pullingText?: string
-  /* 下拉加载中text */
-  loosingText?: string
-  /* 触底加载距离 */
-  offset?: number
-  /* 是否立即调用触底加载 */
-  immediateCheck?: boolean
-  /* 是否禁用下拉刷新 */
   disabledPullRefresh?: boolean
-  /* 是否禁用触底加载 */
   disabledDropDown?: boolean
-  /* 触发下拉刷新的距离 */
-  pullDistance?: number
-}>(), {
+} & PartialVantProps>(), {
   finishedText: '没有更多了',
   pullingText: '下拉刷新',
   loosingText: '释放加载',
