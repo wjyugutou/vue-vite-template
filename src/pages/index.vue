@@ -39,7 +39,7 @@ function changeUsename() {
       @keydown.enter="go"
     >
 
-    <div>
+    <div class="flex justify-center">
       <button
         class="m-3 text-sm btn"
         :disabled="!userStore.name"
@@ -47,6 +47,10 @@ function changeUsename() {
       >
         Go
       </button>
+
+      <RouterLink to="/list" class="m-3 text-sm btn">
+        List
+      </RouterLink>
     </div>
   </div>
 </template>

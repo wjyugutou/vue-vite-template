@@ -1,13 +1,32 @@
 <script lang='ts' setup generic="T">
-import type { ListProps, PullRefreshProps } from 'vant'
+import type { ListDirection } from 'vant'
 
-type PartialVantProps = Partial<PullRefreshProps> & Partial<ListProps>
-
-const props = withDefaults(defineProps <{
+interface PullRefreshListProps {
   dataFetch: () => Promise<PagenationResponse<T>>
+  /* 禁止下拉刷新 */
   disabledPullRefresh?: boolean
-  disabledDropDown?: boolean
-} & PartialVantProps>(), {
+  /* 禁止触底加载 */
+  disabledDownFetch?: boolean
+  // list props
+  offset?: string | number
+  direction?: ListDirection
+  immediateCheck?: boolean
+  finishedText?: string
+  errorListText?: string
+  loadingText?: string
+  scroller?: Element
+
+  // 下拉刷新 props
+  pullingText?: string
+  loosingText?: string
+  errorPullRefreshText?: string
+  successText?: string
+  headHeight?: string | number
+  successDuration?: string | number
+  animationDuration?: string | number
+}
+
+const props = withDefaults(defineProps<PullRefreshListProps>(), {
   finishedText: '没有更多了',
   pullingText: '下拉刷新',
   loosingText: '释放加载',
@@ -27,7 +46,7 @@ const refreshLoading = ref(false)
 
 // 触底加载loading
 const listLoading = ref(false)
-const finished = ref(false)
+const listFinished = ref(false)
 const listError = ref(false)
 
 const pagenation = ref({
@@ -43,31 +62,25 @@ async function getData() {
 
     data.value = [...data.value, ...res.list]
     refreshLoading.value = false
-    finished.value = data.value.length >= pagenation.value.total
+    listFinished.value = data.value.length >= pagenation.value.total
   }
   catch (error) {
-    console.error('PullRefreshList Error', error)
+    console.error('PullRefreshList Error:', error)
   }
 }
 getData()
 
 async function onRefresh() {
-  if (props.disabledPullRefresh)
-    return
-
   refreshLoading.value = true
   data.value = []
   pagenation.value.page = 1
   pagenation.value.total = 10
-  finished.value = false
+  listFinished.value = false
   await getData()
   refreshLoading.value = false
 }
 
 async function onListLoad() {
-  if (props.disabledDropDown)
-    return
-
   listLoading.value = true
   pagenation.value.page++
   await getData()
@@ -76,7 +89,7 @@ async function onListLoad() {
 </script>
 
 <template>
-  <VanPullRefresh v-model="refreshLoading" class="h-full" @refresh="onRefresh">
+  <VanPullRefresh v-model="refreshLoading" class="h-full" :disabled="disabledPullRefresh" @refresh="onRefresh">
     <!-- 下拉 -->
     <template #pulling="props">
       <slot name="pulling" v-bind="props">
@@ -92,7 +105,8 @@ async function onListLoad() {
     <VanList
       v-model:loading="listLoading"
       v-model:error="listError" error-text="请求失败，点击重新加载"
-      :finished="finished" :finished-text="finishedText"
+      :disabled="disabledDownFetch"
+      :finished="listFinished" :finished-text="finishedText"
       :offset="offset" :immediate-check="immediateCheck"
       @load="onListLoad"
     >
