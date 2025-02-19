@@ -76,5 +76,19 @@ export default defineConfig(({ mode }) => {
         deleteOriginFile: false,
       }),
     ],
+    build: {
+      esbuild: {
+        drop: mode === 'production' ? ['console', 'debugger'] : [],
+      },
+      outDir: 'dist',
+      assetsDir: 'assets/',
+      emptyOutDir: true,
+      rollupOptions: {
+        output: {
+          assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
+          chunkFileNames: 'static/js/[name]-[hash].js',
+        },
+      },
+    },
   }
 })
