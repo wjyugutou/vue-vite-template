@@ -7,6 +7,9 @@ console.log('[404]', route)
 <template>
   <div>
     <p>[...404].vue</p>
-    Not Found
+    <p>Not Found</p>
+    <RouterLink to="/" class="text-blue">
+      Home
+    </RouterLink>
   </div>
 </template>
