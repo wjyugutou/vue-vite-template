@@ -2,7 +2,7 @@
 import type { ListDirection } from 'vant'
 
 interface PullRefreshListProps {
-  dataFetch: () => Promise<PagenationResponse<T>>
+  dataFetch: (params: Record<string, any>) => Promise<PagenationResponse<T>>
   /* 禁止下拉刷新 */
   disabledPullRefresh?: boolean
   /* 禁止触底加载 */
@@ -24,6 +24,16 @@ interface PullRefreshListProps {
   headHeight?: string | number
   successDuration?: string | number
   animationDuration?: string | number
+
+  // limit
+  limit?: number
+
+  // dropdown props
+  dropdownList?: {
+    prop: string
+    title: string
+    options: { text: string, value: string | number }[]
+  }[]
 }
 
 const props = withDefaults(defineProps<PullRefreshListProps>(), {
@@ -32,13 +42,27 @@ const props = withDefaults(defineProps<PullRefreshListProps>(), {
   loosingText: '释放加载',
   errorText: '请求失败，点击重新加载',
   offset: 300,
+  immediateCheck: true,
+  limit: 10,
 })
 
 defineSlots<{
+  dropdown: () => any
   pulling: (props: { distance: number }) => any
   loosing: (props: { distance: number }) => any
   default: (props: { data: T, index: number }) => any
 }>()
+
+const _dropdownList = ref<typeof props.dropdownList>([])
+watch(() => props.dropdownList, () => {
+  _dropdownList.value = props.dropdownList
+})
+
+const params = reactive<{
+  dropdown: Record<string, string | number>
+}>({
+  dropdown: {},
+})
 
 const data = ref([]) as Ref<T[]>
 // 下拉刷新loading
@@ -49,38 +73,42 @@ const listLoading = ref(false)
 const listFinished = ref(false)
 const listError = ref(false)
 
+const limit = computed(() => props.limit)
+
 const pagenation = ref({
   page: 1,
-  limit: 10,
   total: 10,
 })
 
 async function getData() {
   try {
-    refreshLoading.value = true
-    const res = await props.dataFetch()
+    const res = await props.dataFetch({
+      ...params,
+      page: pagenation.value.page,
+      limit: limit.value,
+    })
 
     data.value = [...data.value, ...res.list]
-    refreshLoading.value = false
+    pagenation.value.total = res.total
+
     listFinished.value = data.value.length >= pagenation.value.total
   }
   catch (error) {
     console.error('PullRefreshList Error:', error)
   }
 }
-getData()
 
-async function onRefresh() {
-  refreshLoading.value = true
-  data.value = []
+function onRefresh() {
+  // 清空数就会触发 list-load
   pagenation.value.page = 1
   pagenation.value.total = 10
   listFinished.value = false
-  await getData()
-  refreshLoading.value = false
+  data.value = []
 }
 
 async function onListLoad() {
+  refreshLoading.value = false
+
   listLoading.value = true
   pagenation.value.page++
   await getData()
@@ -89,6 +117,11 @@ async function onListLoad() {
 </script>
 
 <template>
+  <slot name="dropdown">
+    <van-dropdown-menu v-if="dropdownList?.length">
+      <van-dropdown-item v-for="item, index in dropdownList" :key="index" v-model="params.dropdown[item.prop]" :title="params.dropdown[item.prop] ? undefined : item.title" :options="item.options" />
+    </van-dropdown-menu>
+  </slot>
   <VanPullRefresh v-model="refreshLoading" class="h-full" :disabled="disabledPullRefresh" @refresh="onRefresh">
     <!-- 下拉 -->
     <template #pulling="props">
