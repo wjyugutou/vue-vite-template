@@ -17,6 +17,8 @@ interface RouteInfo {
  * @param {RouteInfo} route 生成的路由对象
  */
 export function beforeWriteFilesFn(route: EditableTreeNode) {
+  console.log('vue-router auto route register')
+
   const routeInfo = getRouteInfo(route)
   writeRouteInfo(routeInfo)
   writeRouteTreeInfo(route)
