@@ -17,11 +17,6 @@ function changeUsename() {
   }
   userStore.name = _name
 }
-
-const loading = ref(true)
-const { open } = useLoading()
-
-open()
 </script>
 
 <template>
@@ -53,17 +48,5 @@ open()
         Go
       </button>
     </div>
-
-    <div>
-      <button
-        class="m-3 text-sm btn"
-        :disabled="!userStore.name"
-        @click="loading = !loading"
-      >
-        loading
-      </button>
-    </div>
-
-    <div v-loading="loading" class="h-50 w-50 bg-red-600" />
   </div>
 </template>
