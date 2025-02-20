@@ -28,6 +28,7 @@
     "@vant/auto-import-resolver": "^1.2.1",
     "@vitejs/plugin-vue": "^5.2.1",
     "autoprefixer": "^10.4.20",
+    "code-inspector-plugin": "^0.20.0",
     "eslint": "^9.20.1",
     "lib-flexible": "^0.3.2",
     "postcss-pxtorem": "^6.1.0",

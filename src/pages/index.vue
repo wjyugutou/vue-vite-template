@@ -17,6 +17,11 @@ function changeUsename() {
   }
   userStore.name = _name
 }
+
+const loading = ref(true)
+const { open } = useLoading()
+
+open()
 </script>
 
 <template>
@@ -47,10 +52,19 @@ function changeUsename() {
       >
         Go
       </button>
-
       <RouterLink to="/list" class="m-3 text-sm btn">
         List
       </RouterLink>
+    </div>
+
+    <div>
+      <button
+        class="m-3 text-sm btn"
+        :disabled="!userStore.name"
+        @click="loading = !loading"
+      >
+        loading
+      </button>
     </div>
   </div>
 </template>
