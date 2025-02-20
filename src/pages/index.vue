@@ -19,6 +19,9 @@ function changeUsename() {
 }
 
 const loading = ref(true)
+const { open } = useLoading()
+
+open()
 </script>
 
 <template>
@@ -61,9 +64,6 @@ const loading = ref(true)
       </button>
     </div>
 
-    <div class="h-50 overflow-auto">
-      <div v-loading="loading" class="h-50 w-50 bg-red-400" />
-      <div class="h-100" />
-    </div>
+    <div v-loading="loading" class="h-50 w-50 bg-red-600" />
   </div>
 </template>
