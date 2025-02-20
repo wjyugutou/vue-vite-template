@@ -17,11 +17,13 @@ function changeUsename() {
   }
   userStore.name = _name
 }
+
+const loading = ref(true)
 </script>
 
 <template>
   <div>
-    <div class="i-carbon-campsite inline-block cursor-pointer text-4xl" @click="changeUsename" />
+    <div class="i-carbon-campsite inline-block cursor-pointer bg-gray-500/50 text-4xl" @click="changeUsename" />
     <p> Vitesse Lite </p>
     <p>
       <em class="text-sm op75">Opinionated Vite Starter Template</em>
@@ -47,6 +49,21 @@ function changeUsename() {
       >
         Go
       </button>
+    </div>
+
+    <div>
+      <button
+        class="m-3 text-sm btn"
+        :disabled="!userStore.name"
+        @click="loading = !loading"
+      >
+        loading
+      </button>
+    </div>
+
+    <div class="h-50 overflow-auto">
+      <div v-loading="loading" class="h-50 w-50 bg-red-400" />
+      <div class="h-100" />
     </div>
   </div>
 </template>
