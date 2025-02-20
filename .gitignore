@@ -12,5 +12,3 @@ node_modules
 *.zip
 *.7z
 *.rar
-vite/routes.json
-vite/routeTree.json
