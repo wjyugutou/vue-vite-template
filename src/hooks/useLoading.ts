@@ -82,8 +82,5 @@ export function useLoading() {
   function close(el: HTMLElement = document.body) {
     removeLoading(el)
   }
-  return {
-    open,
-    close,
-  }
+  return [open, close]
 }

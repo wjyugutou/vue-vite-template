@@ -1,6 +1,6 @@
 import type { CustomDirective } from '.'
 
-const { open, close } = useLoading()
+const [open, close] = useLoading()
 
 const loadingDirective: CustomDirective = {
   name: 'loading',
