@@ -35,7 +35,7 @@ function changeUsename() {
       placeholder="What's your name?"
       type="text"
       autocomplete="false"
-      class="border-rounded-gray-200 w-250px border border-(dark:gray-700) bg-transparent p-(x-4 y-2) text-center outline-(none)"
+      class="w-250px border border-(dark:gray-700 gray-600 rounded) bg-transparent p-(x-4 y-2) text-center outline-(none)"
       @keydown.enter="go"
     >
 
