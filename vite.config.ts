@@ -1,5 +1,6 @@
 import path from 'node:path'
 import Vue from '@vitejs/plugin-vue'
+import { codeInspectorPlugin } from 'code-inspector-plugin'
 import UnoCSS from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
@@ -66,6 +67,11 @@ export default defineConfig(({ mode }) => {
         dts: './types/components.d.ts',
       }),
 
+      codeInspectorPlugin({
+        bundler: 'vite',
+        dev: mode !== 'preduction',
+        showSwitch: false, // 是否显示切换按钮,移动端建议打开
+      }),
       // gzip
       env.VITE_BUILD_GZIP === 'true' && mode === 'production' && Compression({
         verbose: true, // 输出压缩日志

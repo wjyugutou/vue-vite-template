@@ -26,6 +26,7 @@
     "@unocss/reset": "^65.5.0",
     "@vitejs/plugin-vue": "^5.2.1",
     "autoprefixer": "^10.4.20",
+    "code-inspector-plugin": "^0.20.0",
     "eslint": "^9.20.1",
     "typescript": "^5.7.3",
     "unocss": "^65.5.0",
