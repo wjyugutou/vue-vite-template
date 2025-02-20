@@ -23,9 +23,6 @@ function changeUsename() {
   <div>
     <div class="i-carbon-campsite inline-block cursor-pointer bg-gray-500/50 text-4xl" @click="changeUsename" />
     <p> Vitesse Lite </p>
-    <p>
-      <em class="text-sm op75">Opinionated Vite Starter Template</em>
-    </p>
 
     <div class="py-4" />
 
