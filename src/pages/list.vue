@@ -18,6 +18,17 @@ const dropdownList = [
   },
 ]
 
+const pickerOptions = {
+  prop: 'city',
+  columns: [
+    { text: '杭州', value: 'Hangzhou' },
+    { text: '宁波', value: 'Ningbo' },
+    { text: '温州', value: 'Wenzhou' },
+    { text: '绍兴', value: 'Shaoxing' },
+    { text: '湖州', value: 'Huzhou' },
+  ],
+}
+
 function getData(params: Record<string, any>) {
   console.log('params', params)
 
@@ -37,7 +48,7 @@ function getData(params: Record<string, any>) {
 </script>
 
 <template>
-  <PullRefreshList :dropdown-list="dropdownList" :data-fetch="getData">
+  <PullRefreshList :dropdown-options="dropdownList" picker-prop="city" :picker-options="pickerOptions" :data-fetch="getData">
     <template #default="props">
       <div>
         {{ props.data }}
