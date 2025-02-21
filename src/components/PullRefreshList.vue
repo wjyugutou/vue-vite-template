@@ -28,7 +28,11 @@ interface PullRefreshListProps {
   // limit
   limit?: number
 
-  // dropdown props
+  /**
+   * dropdown props
+   * @field prop dropdown-item 的 v-model 属性
+   * @field title dropdown-item 的 title 属性
+   */
   dropdownList?: {
     prop: string
     title: string
