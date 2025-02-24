@@ -10,21 +10,25 @@ export default antfu({
   {
     rules: {
       'no-console': 'off',
+      // 关闭，可使 对象/数组 自由换行
+      'antfu/consistent-list-newline': 'off',
     },
   },
   {
-    files: ['*.vue'],
+    files: ['**/*.vue'],
     rules: {
-      // 关闭，可使 对象/数组 自由换行
-      'antfu/consistent-list-newline': 'off',
-      // vue template标签不自动换行
+      // vue 标签不自动换行
       'vue/singleline-html-element-content-newline': [0],
-      // // 组件名称 书写方式 自动修复为PascalCase
-      'vue/component-name-in-template-casing': ['error', 'PascalCase', {
-        // 为false检查全部组件，true 检查注册组件（对unplugin-vue-components无效），
-        registeredComponentsOnly: true,
-        ignores: [],
-      }],
+      // 组件名称 书写方式 自动修复为PascalCase
+      'vue/component-name-in-template-casing': [
+        'error',
+        'PascalCase',
+        {
+          // 为false检查全部组件，true 检查注册组件（对unplugin-vue-components无效），
+          registeredComponentsOnly: false,
+          ignores: [],
+        },
+      ],
     },
   },
   {
@@ -33,8 +37,5 @@ export default antfu({
       // tsconfig.json中的key值排序
       'jsonc/sort-keys': 'off',
     },
-  },
-  {
-    ignores: ['cursorrules'],
   },
 ])
