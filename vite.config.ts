@@ -17,7 +17,6 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, './env') as ImportMetaEnv
 
   return {
-    envDir: './env',
     resolve: {
       alias: {
         '@/': `${path.resolve(__dirname, 'src')}/`,
