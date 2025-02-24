@@ -17,7 +17,6 @@ export default antfu({
   {
     files: ['**/*.vue'],
     rules: {
-
       // vue 标签不自动换行
       'vue/singleline-html-element-content-newline': [0],
       // 组件名称 书写方式 自动修复为PascalCase
@@ -38,8 +37,5 @@ export default antfu({
       // tsconfig.json中的key值排序
       'jsonc/sort-keys': 'off',
     },
-  },
-  {
-    ignores: ['cursorrules'],
   },
 ])
