@@ -10,14 +10,15 @@ export default antfu({
   {
     rules: {
       'no-console': 'off',
+      // 关闭，可使 对象/数组 自由换行
+      'antfu/consistent-list-newline': 'off',
     },
   },
   {
-    files: ['*.vue'],
+    files: ['**/*.vue'],
     rules: {
-      // 关闭，可使 对象/数组 自由换行
-      'antfu/consistent-list-newline': 'off',
-      // vue template标签不自动换行
+
+      // vue 标签不自动换行
       'vue/singleline-html-element-content-newline': [0],
       // 组件名称 书写方式 自动修复为PascalCase
       'vue/component-name-in-template-casing': [
