@@ -18,7 +18,7 @@
       "exclude": [],
       "routesFolder": [
         {
-          "src": "F:/CODE/demo/demo/vue-vite-template/src/pages"
+          "src": "F:/CODE/demo/demo/vue-vite-template/apps/h5/src/pages"
         }
       ],
       "filePatterns": [
@@ -26,7 +26,7 @@
       ],
       "routeBlockLang": "json5",
       "importMode": "async",
-      "root": "F:\\CODE\\demo\\demo\\vue-vite-template",
+      "root": "F:\\CODE\\demo\\demo\\vue-vite-template\\apps\\h5",
       "dts": "./types/vue-router.d.ts",
       "logs": false,
       "_inspect": false,
@@ -82,7 +82,7 @@
             "exclude": [],
             "routesFolder": [
               {
-                "src": "F:/CODE/demo/demo/vue-vite-template/src/pages"
+                "src": "F:/CODE/demo/demo/vue-vite-template/apps/h5/src/pages"
               }
             ],
             "filePatterns": [
@@ -90,7 +90,7 @@
             ],
             "routeBlockLang": "json5",
             "importMode": "async",
-            "root": "F:\\CODE\\demo\\demo\\vue-vite-template",
+            "root": "F:\\CODE\\demo\\demo\\vue-vite-template\\apps\\h5",
             "dts": "./types/vue-router.d.ts",
             "logs": false,
             "_inspect": false,
@@ -110,7 +110,7 @@
           "exclude": [],
           "routesFolder": [
             {
-              "src": "F:/CODE/demo/demo/vue-vite-template/src/pages"
+              "src": "F:/CODE/demo/demo/vue-vite-template/apps/h5/src/pages"
             }
           ],
           "filePatterns": [
@@ -118,7 +118,7 @@
           ],
           "routeBlockLang": "json5",
           "importMode": "async",
-          "root": "F:\\CODE\\demo\\demo\\vue-vite-template",
+          "root": "F:\\CODE\\demo\\demo\\vue-vite-template\\apps\\h5",
           "dts": "./types/vue-router.d.ts",
           "logs": false,
           "_inspect": false,
@@ -173,7 +173,7 @@
             "exclude": [],
             "routesFolder": [
               {
-                "src": "F:/CODE/demo/demo/vue-vite-template/src/pages"
+                "src": "F:/CODE/demo/demo/vue-vite-template/apps/h5/src/pages"
               }
             ],
             "filePatterns": [
@@ -181,7 +181,7 @@
             ],
             "routeBlockLang": "json5",
             "importMode": "async",
-            "root": "F:\\CODE\\demo\\demo\\vue-vite-template",
+            "root": "F:\\CODE\\demo\\demo\\vue-vite-template\\apps\\h5",
             "dts": "./types/vue-router.d.ts",
             "logs": false,
             "_inspect": false,
@@ -201,7 +201,7 @@
           "exclude": [],
           "routesFolder": [
             {
-              "src": "F:/CODE/demo/demo/vue-vite-template/src/pages"
+              "src": "F:/CODE/demo/demo/vue-vite-template/apps/h5/src/pages"
             }
           ],
           "filePatterns": [
@@ -209,7 +209,7 @@
           ],
           "routeBlockLang": "json5",
           "importMode": "async",
-          "root": "F:\\CODE\\demo\\demo\\vue-vite-template",
+          "root": "F:\\CODE\\demo\\demo\\vue-vite-template\\apps\\h5",
           "dts": "./types/vue-router.d.ts",
           "logs": false,
           "_inspect": false,
@@ -280,7 +280,7 @@
             "exclude": [],
             "routesFolder": [
               {
-                "src": "F:/CODE/demo/demo/vue-vite-template/src/pages"
+                "src": "F:/CODE/demo/demo/vue-vite-template/apps/h5/src/pages"
               }
             ],
             "filePatterns": [
@@ -288,7 +288,7 @@
             ],
             "routeBlockLang": "json5",
             "importMode": "async",
-            "root": "F:\\CODE\\demo\\demo\\vue-vite-template",
+            "root": "F:\\CODE\\demo\\demo\\vue-vite-template\\apps\\h5",
             "dts": "./types/vue-router.d.ts",
             "logs": false,
             "_inspect": false,
@@ -308,7 +308,7 @@
           "exclude": [],
           "routesFolder": [
             {
-              "src": "F:/CODE/demo/demo/vue-vite-template/src/pages"
+              "src": "F:/CODE/demo/demo/vue-vite-template/apps/h5/src/pages"
             }
           ],
           "filePatterns": [
@@ -316,7 +316,7 @@
           ],
           "routeBlockLang": "json5",
           "importMode": "async",
-          "root": "F:\\CODE\\demo\\demo\\vue-vite-template",
+          "root": "F:\\CODE\\demo\\demo\\vue-vite-template\\apps\\h5",
           "dts": "./types/vue-router.d.ts",
           "logs": false,
           "_inspect": false,
@@ -371,7 +371,7 @@
             "exclude": [],
             "routesFolder": [
               {
-                "src": "F:/CODE/demo/demo/vue-vite-template/src/pages"
+                "src": "F:/CODE/demo/demo/vue-vite-template/apps/h5/src/pages"
               }
             ],
             "filePatterns": [
@@ -379,7 +379,7 @@
             ],
             "routeBlockLang": "json5",
             "importMode": "async",
-            "root": "F:\\CODE\\demo\\demo\\vue-vite-template",
+            "root": "F:\\CODE\\demo\\demo\\vue-vite-template\\apps\\h5",
             "dts": "./types/vue-router.d.ts",
             "logs": false,
             "_inspect": false,
@@ -399,7 +399,7 @@
           "exclude": [],
           "routesFolder": [
             {
-              "src": "F:/CODE/demo/demo/vue-vite-template/src/pages"
+              "src": "F:/CODE/demo/demo/vue-vite-template/apps/h5/src/pages"
             }
           ],
           "filePatterns": [
@@ -407,7 +407,7 @@
           ],
           "routeBlockLang": "json5",
           "importMode": "async",
-          "root": "F:\\CODE\\demo\\demo\\vue-vite-template",
+          "root": "F:\\CODE\\demo\\demo\\vue-vite-template\\apps\\h5",
           "dts": "./types/vue-router.d.ts",
           "logs": false,
           "_inspect": false,

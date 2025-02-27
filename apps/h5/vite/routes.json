@@ -17,7 +17,7 @@
       "name": "/",
       "meta": {},
       "children": [],
-      "component": "F:/CODE/demo/demo/vue-vite-template/src/pages/index.vue"
+      "component": "F:/CODE/demo/demo/vue-vite-template/apps/h5/src/pages/index.vue"
     },
     {
       "parent": {
@@ -31,7 +31,7 @@
       "name": "/list",
       "meta": {},
       "children": [],
-      "component": "F:/CODE/demo/demo/vue-vite-template/src/pages/list.vue"
+      "component": "F:/CODE/demo/demo/vue-vite-template/apps/h5/src/pages/list.vue"
     },
     {
       "parent": {
@@ -45,7 +45,7 @@
       "name": "/[...404]",
       "meta": {},
       "children": [],
-      "component": "F:/CODE/demo/demo/vue-vite-template/src/pages/[...404].vue"
+      "component": "F:/CODE/demo/demo/vue-vite-template/apps/h5/src/pages/[...404].vue"
     },
     {
       "parent": {
@@ -71,7 +71,7 @@
           "name": "/hi/",
           "meta": {},
           "children": [],
-          "component": "F:/CODE/demo/demo/vue-vite-template/src/pages/hi/index.vue"
+          "component": "F:/CODE/demo/demo/vue-vite-template/apps/h5/src/pages/hi/index.vue"
         },
         {
           "parent": {
@@ -87,7 +87,7 @@
             "title": "Name113322"
           },
           "children": [],
-          "component": "F:/CODE/demo/demo/vue-vite-template/src/pages/hi/[name].vue"
+          "component": "F:/CODE/demo/demo/vue-vite-template/apps/h5/src/pages/hi/[name].vue"
         }
       ]
     }
