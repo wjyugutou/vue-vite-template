@@ -26,20 +26,6 @@
         "name": "",
         "meta": {}
       },
-      "fullPath": "/list",
-      "path": "/list",
-      "name": "/list",
-      "meta": {},
-      "children": [],
-      "component": "F:/CODE/demo/demo/vue-vite-template/src/pages/list.vue"
-    },
-    {
-      "parent": {
-        "path": "",
-        "fullPath": "/",
-        "name": "",
-        "meta": {}
-      },
       "fullPath": "/:404(.*)",
       "path": "/:404(.*)",
       "name": "/[...404]",

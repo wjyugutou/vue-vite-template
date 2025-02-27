@@ -3,8 +3,10 @@
   "private": true,
   "scripts": {
     "build:tsc": "tsc -b && vite build",
-    "build": "vite build",
-    "dev": "vite --port 3333",
+    "dev:pc": "pnpm --filter pc dev",
+    "dev:h5": "pnpm --filter h5 dev",
+    "build:pc": "pnpm --filter pc build",
+    "build:h5": "pnpm --filter h5 build",
     "fix": "eslint --fix .",
     "lint": "eslint .",
     "typecheck": "vue-tsc --noEmit",
@@ -26,6 +28,7 @@
     "@unocss/reset": "^65.5.0",
     "@vant/auto-import-resolver": "^1.2.1",
     "@vitejs/plugin-vue": "^5.2.1",
+    "autoprefixer": "^10.4.20",
     "code-inspector-plugin": "^0.20.0",
     "eslint": "^9.20.1",
     "typescript": "^5.7.3",
@@ -39,7 +42,8 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "esbuild"
+      "esbuild",
+      "vue-demi"
     ]
   }
 }
