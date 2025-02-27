@@ -59,7 +59,6 @@ export default defineConfig(({ mode }) => {
         dirs: [
           './src/hooks',
           './src/store',
-          './src/utils',
         ],
       }),
 

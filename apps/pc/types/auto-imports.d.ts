@@ -33,22 +33,18 @@ declare global {
   const defineAsyncComponent: typeof import('vue')['defineAsyncComponent']
   const defineComponent: typeof import('vue')['defineComponent']
   const defineStore: typeof import('pinia')['defineStore']
-  const download: typeof import('../src/utils/download')['download']
   const eagerComputed: typeof import('@vueuse/core')['eagerComputed']
   const effectScope: typeof import('vue')['effectScope']
   const extendRef: typeof import('@vueuse/core')['extendRef']
-  const generatTreeNode: typeof import('../src/utils/index')['generatTreeNode']
   const getActivePinia: typeof import('pinia')['getActivePinia']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
   const h: typeof import('vue')['h']
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
-  const imgExt: typeof import('../src/utils/download')['imgExt']
   const inject: typeof import('vue')['inject']
   const injectLocal: typeof import('@vueuse/core')['injectLocal']
   const isDark: typeof import('../src/hooks/dark')['isDark']
   const isDefined: typeof import('@vueuse/core')['isDefined']
-  const isPreviewFile: typeof import('../src/utils/download')['isPreviewFile']
   const isProxy: typeof import('vue')['isProxy']
   const isReactive: typeof import('vue')['isReactive']
   const isReadonly: typeof import('vue')['isReadonly']
@@ -83,11 +79,8 @@ declare global {
   const onUpdated: typeof import('vue')['onUpdated']
   const onWatcherCleanup: typeof import('vue')['onWatcherCleanup']
   const pausableWatch: typeof import('@vueuse/core')['pausableWatch']
-  const pdfExt: typeof import('../src/utils/download')['pdfExt']
-  const previewExt: typeof import('../src/utils/download')['previewExt']
   const provide: typeof import('vue')['provide']
   const provideLocal: typeof import('@vueuse/core')['provideLocal']
-  const queryString: typeof import('../src/utils/index')['queryString']
   const reactify: typeof import('@vueuse/core')['reactify']
   const reactifyObject: typeof import('@vueuse/core')['reactifyObject']
   const reactive: typeof import('vue')['reactive']
@@ -101,7 +94,6 @@ declare global {
   const refDefault: typeof import('@vueuse/core')['refDefault']
   const refThrottled: typeof import('@vueuse/core')['refThrottled']
   const refWithControl: typeof import('@vueuse/core')['refWithControl']
-  const request: typeof import('../src/utils/request')['default']
   const resolveComponent: typeof import('vue')['resolveComponent']
   const resolveRef: typeof import('@vueuse/core')['resolveRef']
   const resolveUnref: typeof import('@vueuse/core')['resolveUnref']
@@ -211,7 +203,6 @@ declare global {
   const useKeyModifier: typeof import('@vueuse/core')['useKeyModifier']
   const useLastChanged: typeof import('@vueuse/core')['useLastChanged']
   const useLink: typeof import('vue-router')['useLink']
-  const useLoading: typeof import('../src/hooks/useLoading')['useLoading']
   const useLocalStorage: typeof import('@vueuse/core')['useLocalStorage']
   const useMagicKeys: typeof import('@vueuse/core')['useMagicKeys']
   const useManualRefHistory: typeof import('@vueuse/core')['useManualRefHistory']
@@ -302,15 +293,6 @@ declare global {
   const useWindowFocus: typeof import('@vueuse/core')['useWindowFocus']
   const useWindowScroll: typeof import('@vueuse/core')['useWindowScroll']
   const useWindowSize: typeof import('@vueuse/core')['useWindowSize']
-  const vaildateIdCard: typeof import('../src/utils/validate')['vaildateIdCard']
-  const vaildatePc: typeof import('../src/utils/validate')['vaildatePc']
-  const validateBankCard: typeof import('../src/utils/validate')['validateBankCard']
-  const validateCreditCode: typeof import('../src/utils/validate')['validateCreditCode']
-  const validateEmail: typeof import('../src/utils/validate')['validateEmail']
-  const validatePhone: typeof import('../src/utils/validate')['validatePhone']
-  const validateTelephone: typeof import('../src/utils/validate')['validateTelephone']
-  const validatenull: typeof import('../src/utils/validate')['validatenull']
-  const videoExt: typeof import('../src/utils/download')['videoExt']
   const watch: typeof import('vue')['watch']
   const watchArray: typeof import('@vueuse/core')['watchArray']
   const watchAtMost: typeof import('@vueuse/core')['watchAtMost']
@@ -336,10 +318,4 @@ declare global {
   // @ts-ignore
   export type { DictItem, DictReturn } from '../src/hooks/useDict'
   import('../src/hooks/useDict')
-  // @ts-ignore
-  export type { TreeNodeConfig, TreeNode } from '../src/utils/index'
-  import('../src/utils/index')
-  // @ts-ignore
-  export type { AlovaCustomTypes } from '../src/utils/request'
-  import('../src/utils/request')
 }

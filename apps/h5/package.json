@@ -13,6 +13,7 @@
     "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
+    "utils": "workspace:*",
     "vant": "^4.9.17"
   },
   "devDependencies": {

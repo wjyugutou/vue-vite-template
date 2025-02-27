@@ -29,7 +29,6 @@ export function generatePlugins(mode: 'development' | 'production' | string, env
       dirs: [
         './src/hooks',
         './src/store',
-        './src/utils',
       ],
     }),
 
