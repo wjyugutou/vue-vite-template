@@ -1,11 +1,11 @@
 <script setup lang="ts">
-const userStore = useUserStore()
-
 const router = useRouter()
 
+const name = ref('')
+
 function go() {
-  if (userStore.name)
-    router.push(`/hi/${encodeURIComponent(userStore.name)}`)
+  if (name.value)
+    router.push(`/hi/${encodeURIComponent(name.value)}`)
 }
 
 function changeUsename() {
@@ -15,12 +15,12 @@ function changeUsename() {
   for (let i = 0; i < nameLength; i++) {
     _name += String.fromCharCode(Math.floor(Math.random() * 26) + 97)
   }
-  userStore.name = _name
+  name.value = _name
 }
 </script>
 
 <template>
-  <div>
+  <div class="text-center">
     <div class="i-carbon-campsite inline-block cursor-pointer bg-gray-500/50 text-4xl" @click="changeUsename" />
     <p> Vitesse Lite </p>
 
@@ -28,7 +28,7 @@ function changeUsename() {
 
     <input
       id="input"
-      v-model="userStore.name"
+      v-model="name"
       placeholder="What's your name?"
       type="text"
       autocomplete="false"
@@ -39,7 +39,7 @@ function changeUsename() {
     <div>
       <button
         class="m-3 text-sm btn"
-        :disabled="!userStore.name"
+        :disabled="!name"
         @click="go"
       >
         Go

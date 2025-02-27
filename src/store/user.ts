@@ -1,28 +1,47 @@
+import type { RouteRecordRawC } from '@/router/type'
+import { getUserRoutesApi } from '@/api/user'
+import { resetRouter } from '@/router'
+import { basicRoutes } from '@/router/routes'
+
+interface UserState {
+  userInfo: {
+    name: string
+    age: number
+    email: string
+  }
+  routes: RouteRecordRawC[]
+  menus: RouteRecordRawC[]
+}
+
 export const useUserStore = defineStore('user', {
   // 持久化
-  state: () => useLocalStorage('user', {
-    // Define your state properties here
-    name: '',
-    age: 0,
-    email: '',
+  state: () => ({
+    userInfo: useLocalStorage('user-userInfo', {
+      // Define your state properties here
+      name: '',
+      age: 0,
+      email: '',
+    }),
+    routes: [] as RouteRecordRawC[],
+    menus: [] as RouteRecordRawC[],
   }),
   getters: {
     // Define your getters here
-    fullName(): string {
-      return `${this.name} (${this.age})`
-    },
+
   },
   actions: {
     // Define your actions here
-    setName(name: string) {
-      this.name = name
+    setUserInfo(userInfo: UserState['userInfo']) {
+      this.userInfo = userInfo
     },
-    // You can also use async/await
-    setAge(age: number) {
-      this.age = age
-    },
-    setEmail(email: string) {
-      this.email = email
+    async getUserRoutes() {
+      const userRoutes = (await getUserRoutesApi()).data
+      this.routes = userRoutes
+
+      const menus = [...basicRoutes].find(item => item.name === 'Index')!.children!.concat(userRoutes)
+      this.menus = menus
+
+      resetRouter(userRoutes)
     },
   },
 })

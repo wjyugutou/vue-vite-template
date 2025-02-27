@@ -10,13 +10,16 @@ import {
 export default defineConfig({
   theme: {
     colors: {
-      'primary': 'var(--color-primary)',
-      'primary-hover': 'var(--color-primary-hover)',
+      default: 'hsl(var(--default))',
+      destructive: 'hsl(var(--destructive))',
+      primary: 'hsl(var(--primary))',
+      success: 'hsl(var(--success))',
+      warning: 'hsl(var(--warning))',
     },
   },
   shortcuts: [
     ['flex-center', 'flex justify-center items-center'],
-    ['btn', 'text-white px-2 py-1 rounded inline-block bg-primary hover:bg-primary-hover cursor-pointer'],
+    ['btn', 'text-white px-2 py-1 rounded inline-block bg-primary hover:bg-primary/90 active:bg-primary/60 cursor-pointer'],
   ],
   presets: [
     presetUno(),
