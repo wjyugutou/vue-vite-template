@@ -9,10 +9,6 @@
       "path": "apps/pc",
     },
     {
-      "name": "request",
-      "path": "packages/request",
-    },
-    {
       "name": "utils",
       "path": "packages/utils",
     },

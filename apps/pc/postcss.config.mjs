@@ -1,5 +1,5 @@
 import autoprefixer from 'autoprefixer'
-import PxToRem from 'postcss-pxtorem'
+// import PxToRem from 'postcss-pxtorem'
 
 export default {
   plugins: [

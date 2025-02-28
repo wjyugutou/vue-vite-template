@@ -16,6 +16,7 @@ const navbarStyle = computed<CSSProperties>(() => ({
 
 <template>
   <header class="fixed right-0 top-0 h-[var(--header-height)] flex items-center justify-between b-b px-4 transition-all" :style="navbarStyle">
+    <Logo v-if="settings.layoutMode === 'side'" />
     <div />
     <div class="flex items-center gap-col-4">
       <button @click="settings.layoutMode = 'side'">side</button>

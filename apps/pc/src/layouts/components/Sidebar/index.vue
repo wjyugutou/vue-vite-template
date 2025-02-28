@@ -45,6 +45,8 @@ function handleSelect(index: string, indexPath: string[], item: MenuItemClicked)
     :collapse="settings.sidebarCollapse"
     @select="handleSelect"
   >
+    <Logo v-if="settings.layoutMode === 'vertical'" class="b-b px-20px" />
+
     <ElScrollbar>
       <template v-for="menu in menus" :key="menu.path">
         <SidebarItem v-if="!menu.meta?.hideInMenu" :item="menu" />

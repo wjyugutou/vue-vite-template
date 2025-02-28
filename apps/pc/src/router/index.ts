@@ -1,4 +1,5 @@
 import type { RouteRecordRawC } from './type'
+import NProgress from 'nprogress'
 import { createRouter, createWebHistory } from 'vue-router'
 import routes, { NotFoundRoute } from './routes'
 
@@ -9,6 +10,14 @@ const router = createRouter({
 })
 
 export default router
+
+router.beforeEach(() => {
+  NProgress.start()
+})
+
+router.afterEach(() => {
+  NProgress.done()
+})
 
 /**
  * 注册动态路由

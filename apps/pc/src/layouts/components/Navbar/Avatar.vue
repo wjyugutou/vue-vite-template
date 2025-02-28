@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <ElPopover :visible="true" width="auto">
+  <ElPopover width="auto">
     <template #reference>
       <ElAvatar src="https://unpkg.com/@vbenjs/static-source@0.1.7/source/avatar-v1.webp" />
     </template>
