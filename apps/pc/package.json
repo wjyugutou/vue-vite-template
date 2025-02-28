@@ -14,7 +14,10 @@
   },
   "dependencies": {
     "element-plus": "^2.9.5",
+    "nprogress": "^0.2.0",
     "utils": "workspace:*"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/nprogress": "^0.2.3"
+  }
 }
