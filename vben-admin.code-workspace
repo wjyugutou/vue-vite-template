@@ -1,0 +1,20 @@
+{
+  "folders": [
+    {
+      "name": "h5",
+      "path": "apps/h5",
+    },
+    {
+      "name": "pc",
+      "path": "apps/pc",
+    },
+    {
+      "name": "request",
+      "path": "packages/request",
+    },
+    {
+      "name": "utils",
+      "path": "packages/utils",
+    },
+  ],
+}
