@@ -13,7 +13,6 @@
     "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
-    "alova": "^3.2.9",
     "utils": "workspace:*",
     "vant": "^4.9.17"
   },

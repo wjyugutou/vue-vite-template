@@ -2,14 +2,16 @@ import { createAlova } from 'alova'
 import adapterFetch from 'alova/fetch'
 import vueHook from 'alova/vue'
 
+export interface CustomMeta {
+  /** 是否过滤data */
+  filterData?: false
+  /** blob */
+  blob?: boolean
+}
+
 declare module 'alova' {
   export interface AlovaCustomTypes {
-    meta: {
-      /** 是否过滤data */
-      filterData?: false
-      /** blob */
-      blob?: boolean
-    }
+    meta: CustomMeta
   }
 }
 
@@ -30,6 +32,8 @@ const alovaInstance = createAlova({
   //   // config.config.headers.Authorization = `Bearer ${token}`
   // },
   responded: async (response, instance) => {
+    console.log(import.meta.env.DEV)
+
     const contentType = response.headers.get('content-type')
     if (response.status === 200 && response.ok) {
       if (contentType?.includes('application/json')) {
