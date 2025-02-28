@@ -10,7 +10,7 @@ import {
 export default defineConfig({
   theme: {
     colors: {
-      'primary': 'var(--color-primary)',
+      'primary': 'var(--el-color-primary)',
       'primary-hover': 'var(--color-primary-hover)',
     },
   },

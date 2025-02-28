@@ -13,9 +13,9 @@ const route = useRoute()
     <div class="h-[calc(100vh-var(--header-height))] flex">
       <Sidebar />
       <main class="mt-[var(--header-height)] h-full flex-1">
-        <ElScrollbar>
-          <IFrame v-if="route.meta.iframeSrc" />
-          <RouterView v-else />
+        <IFrame v-if="route.meta.iframeSrc" />
+        <ElScrollbar class="p-2">
+          <RouterView />
         </ElScrollbar>
       </main>
     </div>

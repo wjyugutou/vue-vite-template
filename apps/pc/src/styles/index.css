@@ -1,11 +1,5 @@
+@import url('./theme-transition.css');
 :root {
-  /* hsl */
-  --default: 212 100% 50%;
-  --primary: 212 100% 45%;
-  --destructive: 0 78% 68%;
-  --success: 144 57% 58%;
-  --warning: 42 84% 61%;
-
   --header-height: 50px;
   --sidebar-width: 224px;
   --sidebar-width-collapsed: 50px;

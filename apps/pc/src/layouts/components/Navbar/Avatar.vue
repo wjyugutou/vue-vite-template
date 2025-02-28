@@ -8,7 +8,7 @@
       <ElAvatar src="https://unpkg.com/@vbenjs/static-source@0.1.7/source/avatar-v1.webp" />
     </template>
     <div class="w-64">
-      <div class="flex gap-4 b-b b-b-gray-400 pb-2">
+      <div class="flex gap-4 b-b b-b-[var(--el-border-color)] pb-2">
         <ElAvatar src="https://unpkg.com/@vbenjs/static-source@0.1.7/source/avatar-v1.webp" />
         <div class="flex flex-col justify-around">
           <div>name</div>
