@@ -15,6 +15,7 @@ declare module 'vue' {
     ElButton: typeof import('element-plus/es')['ElButton']
     ElDialog: typeof import('element-plus/es')['ElDialog']
     ElIcon: typeof import('element-plus/es')['ElIcon']
+    ElImage: typeof import('element-plus/es')['ElImage']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
     ElMenuItemGroup: typeof import('element-plus/es')['ElMenuItemGroup']
@@ -24,10 +25,11 @@ declare module 'vue' {
     ElUpload: typeof import('element-plus/es')['ElUpload']
     Footer: typeof import('./../src/components/Footer.vue')['default']
     IFrame: typeof import('./../src/components/IFrame.vue')['default']
+    ImagePreview: typeof import('./../src/components/ImagePreview.vue')['default']
+    ImageUpload: typeof import('./../src/components/ImageUpload.vue')['default']
     Logo: typeof import('./../src/components/Logo.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    Upload: typeof import('./../src/components/Upload.vue')['default']
   }
   export interface ComponentCustomProperties {
     vLoading: typeof import('element-plus/es')['ElLoadingDirective']

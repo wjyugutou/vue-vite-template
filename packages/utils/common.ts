@@ -91,3 +91,16 @@ export function queryString(params: Record<string, any>) {
   }
   return result
 }
+
+/**
+ * 获取文件类型
+ * @example getFileType('https://example.com/image.jpg?width=100&height=100') // 'jpg'
+ */
+export function getFileType(fileUrl?: string) {
+  if (!fileUrl)
+    return ''
+  const arr1 = fileUrl.split('?')[0]
+  const arr2 = arr1.split('.')
+  const fileType = arr2.at(-1)
+  return fileType
+}

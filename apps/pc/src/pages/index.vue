@@ -45,5 +45,7 @@ function changeUsename() {
         Go
       </button>
     </div>
+
+    <ImageUpload />
   </div>
 </template>
