@@ -19,7 +19,7 @@ function toggleThemeMode(e: MouseEvent) {
 </script>
 
 <template>
-  <header class="fixed right-0 top-0 h-[var(--header-height)] flex items-center justify-between b-b b-b-[var(--el-border-color)] px-4 transition-all" :style="navbarStyle">
+  <nav class="fixed right-0 top-0 h-[var(--header-height)] flex items-center justify-between b-b b-b-[var(--el-border-color)] px-4 transition-all" :style="navbarStyle">
     <Logo v-if="settings.layoutMode === 'side'" />
     <div />
     <div class="flex items-center gap-col-4">
@@ -32,5 +32,5 @@ function toggleThemeMode(e: MouseEvent) {
 
       <Avatar />
     </div>
-  </header>
+  </nav>
 </template>

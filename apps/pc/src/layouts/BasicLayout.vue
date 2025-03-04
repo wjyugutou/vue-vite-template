@@ -12,12 +12,12 @@ const route = useRoute()
     <Navbar />
     <div class="h-[calc(100vh-var(--header-height))] flex">
       <Sidebar />
-      <main class="mt-[var(--header-height)] h-full flex-1">
+      <section class="mt-[var(--header-height)] h-full flex-1">
         <IFrame v-if="route.meta.iframeSrc" />
         <ElScrollbar class="p-2">
           <RouterView />
         </ElScrollbar>
-      </main>
+      </section>
     </div>
   </div>
 </template>
