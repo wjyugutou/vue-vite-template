@@ -8,8 +8,6 @@ const visible = defineModel<boolean>('visible', { required: true })
 const url = defineModel<string>('url', { required: true })
 const index = computed(() => props.urlList.indexOf(url.value))
 function handleClose() {
-  console.log(1)
-
   visible.value = false
 }
 
