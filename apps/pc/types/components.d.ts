@@ -30,6 +30,7 @@ declare module 'vue' {
     Logo: typeof import('./../src/components/Logo.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SimpleForm: typeof import('./../src/components/SimpleForm.vue')['default']
   }
   export interface ComponentCustomProperties {
     vLoading: typeof import('element-plus/es')['ElLoadingDirective']
