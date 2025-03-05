@@ -46,13 +46,17 @@ props.formItems.forEach((item) => {
 defineExpose({
   // 获取表单数据
   getFormData: () => formData,
+  // 清除表单验证
+  clearValidate: () => {
+    formRef.value?.clearValidate()
+  },
   // 重置表单
   resetForm: () => {
     formRef.value?.resetFields()
   },
   // 验证表单
-  validate: (cb: (valid: boolean) => void) => {
-    return formRef.value?.validate(cb)
+  validate: () => {
+    return formRef.value?.validate()
   },
 })
 </script>
