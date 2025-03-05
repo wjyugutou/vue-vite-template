@@ -8,13 +8,13 @@ const route = useRoute()
 </script>
 
 <template>
-  <div class="h-100vh">
+  <div class="h-100vh overflow-hidden">
     <Navbar />
-    <div class="h-[calc(100vh-var(--header-height))] flex">
+    <div class="mt-[var(--header-height)] h-full flex">
       <Sidebar />
-      <section class="mt-[var(--header-height)] h-full flex-1">
+      <section class="h-full flex-1">
         <IFrame v-if="route.meta.iframeSrc" />
-        <ElScrollbar class="p-2">
+        <ElScrollbar v-else class="p-2" max-height="100%" height="100%">
           <RouterView />
         </ElScrollbar>
       </section>

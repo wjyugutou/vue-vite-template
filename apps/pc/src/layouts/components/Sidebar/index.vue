@@ -33,32 +33,34 @@ function handleSelect(index: string, indexPath: string[], item: MenuItemClicked)
 </script>
 
 <template>
-  <!-- sidebar 占位 -->
-  <div :style="sidebarSeatStyle" class="h-0 transition-all" />
-  <ElMenu
-    :style="sidebarStyle" class="sidebar"
-    router
-    :hide-timeout="0"
-    :collapse-transition="false"
-    :default-openeds="menuState.defaultOpeneds"
-    :default-active="menuState.defaultActive"
-    :collapse="settings.sidebarCollapse"
-    @select="handleSelect"
-  >
-    <Logo v-if="settings.layoutMode === 'vertical'" class="b-b b-b-[var(--el-border-color)] px-20px" />
+  <div>
+    <!-- sidebar 占位 -->
+    <div :style="sidebarSeatStyle" class="h-0 transition-all" />
+    <ElMenu
+      :style="sidebarStyle" class="sidebar"
+      router
+      :hide-timeout="0"
+      :collapse-transition="false"
+      :default-openeds="menuState.defaultOpeneds"
+      :default-active="menuState.defaultActive"
+      :collapse="settings.sidebarCollapse"
+      @select="handleSelect"
+    >
+      <Logo v-if="settings.layoutMode === 'vertical'" class="b-b b-b-[var(--el-border-color)] px-20px" />
 
-    <ElScrollbar>
-      <template v-for="menu in menus" :key="menu.path">
-        <SidebarItem v-if="!menu.meta?.hideInMenu" :item="menu" />
-      </template>
-    </ElScrollbar>
-    <div class="absolute bottom-0 h-[var(--sidebar-bottom-height)] w-full content-center px-4">
-      <div
-        class="i-carbon-distribute-horizontal-left cursor-pointer hover:bg-primary/90" :class="{ 'bg-primary/90': settings.sidebarCollapse }"
-        @click="settings.sidebarCollapse = !settings.sidebarCollapse"
-      />
-    </div>
-  </ElMenu>
+      <ElScrollbar>
+        <template v-for="menu in menus" :key="menu.path">
+          <SidebarItem v-if="!menu.meta?.hideInMenu" :item="menu" />
+        </template>
+      </ElScrollbar>
+      <div class="absolute bottom-0 h-[var(--sidebar-bottom-height)] w-full content-center px-4">
+        <div
+          class="i-carbon-distribute-horizontal-left cursor-pointer hover:bg-primary/90" :class="{ 'bg-primary/90': settings.sidebarCollapse }"
+          @click="settings.sidebarCollapse = !settings.sidebarCollapse"
+        />
+      </div>
+    </ElMenu>
+  </div>
 </template>
 
 <style>
