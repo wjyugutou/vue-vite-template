@@ -7,6 +7,8 @@ export interface CustomMeta {
   original?: true
   /** blob */
   blob?: boolean
+  /** 是否隐藏错误提示 */
+  hideAlert?: true
 }
 
 declare module 'alova' {
@@ -18,7 +20,7 @@ declare module 'alova' {
 // 默认只缓存get请求 cacheFor
 const alovaInstance = createAlova({
   baseURL: '/api',
-  timeout: 10000,
+  timeout: 5000,
   statesHook: vueHook,
   cacheFor: {
     GET: 1000 * 60 * 1, // 1min
@@ -26,7 +28,7 @@ const alovaInstance = createAlova({
   },
   requestAdapter: adapterFetch(),
   beforeRequest: (config) => {
-    console.log('beforeRequest', config)
+    // console.log('beforeRequest', config)
     // const token = localStorage.getItem('token')
     // if (token)
     // config.config.headers.Authorization = `Bearer ${token}`
@@ -34,8 +36,13 @@ const alovaInstance = createAlova({
   responded: {
     onSuccess: async (response, instance) => {
       if (response.status === 200 && response.ok) {
-        const contentType = response.headers.get('content-type')
-        if (contentType?.includes('application/json')) {
+        if (instance.meta?.blob) {
+          return {
+            data: response.blob(),
+            fileName: response.headers.get('content-disposition')?.split('filename=')[1],
+          }
+        }
+        else {
           const res = await response.json()
           if (instance.meta?.original === true) {
             return res
@@ -45,13 +52,25 @@ const alovaInstance = createAlova({
               return res.data
             }
             else {
-              return Promise.reject(res.msg)
+              if (instance.meta?.hideAlert !== true) {
+                ElMessage.error(res.message)
+              }
+              return Promise.reject(res.message)
             }
           }
         }
       }
+      else {
+        if (instance.meta?.hideAlert !== true) {
+          ElMessage.error(response.statusText)
+        }
+        return Promise.reject(response.statusText)
+      }
     },
-    onError: (error) => {
+    onError: (error, instance) => {
+      if (instance.meta?.hideAlert !== true) {
+        ElMessage.error(error.message)
+      }
       return Promise.reject(error)
     },
   },

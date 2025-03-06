@@ -1,12 +1,15 @@
 import { createAlova } from 'alova'
 import adapterFetch from 'alova/fetch'
 import vueHook from 'alova/vue'
+import { showFailToast } from 'vant'
 
 export interface CustomMeta {
   /** 是否过滤data */
   original?: true
   /** blob */
   blob?: boolean
+  /** 是否隐藏错误提示 */
+  hideAlert?: true
 }
 
 declare module 'alova' {
@@ -45,13 +48,25 @@ const alovaInstance = createAlova({
               return res.data
             }
             else {
+              if (instance.meta?.hideAlert !== true) {
+                showFailToast(res.message)
+              }
               return Promise.reject(res.msg)
             }
           }
         }
       }
+      else {
+        if (instance.meta?.hideAlert !== true) {
+          showFailToast(response.statusText)
+        }
+        return Promise.reject(response.statusText)
+      }
     },
-    onError: (error) => {
+    onError: (error, instance) => {
+      if (instance.meta?.hideAlert !== true) {
+        showFailToast(error.message)
+      }
       return Promise.reject(error)
     },
   },
