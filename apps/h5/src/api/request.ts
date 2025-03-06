@@ -18,7 +18,7 @@ declare module 'alova' {
 // 默认只缓存get请求 cacheFor
 const alovaInstance = createAlova({
   baseURL: '/api',
-  timeout: 10000,
+  timeout: 5000,
   statesHook: vueHook,
   cacheFor: {
     GET: 1000 * 60 * 1, // 1min
