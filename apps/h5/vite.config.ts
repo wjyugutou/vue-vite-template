@@ -15,7 +15,7 @@ import { beforeWriteFilesFn } from './vite/auto-route-register'
  * mode: 'development' | 'production'
  */
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, './env') as ImportMetaEnv
+  const env = loadEnv(mode, '../../') as ImportMetaEnv
 
   return {
     resolve: {

@@ -6,7 +6,7 @@ import { generatePlugins } from './vite/plugins'
  * mode: 'development' | 'production'
  */
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, './env') as ImportMetaEnv
+  const env = loadEnv(mode, '../../') as ImportMetaEnv
 
   return {
     envDir: '../../',
@@ -31,7 +31,7 @@ export default defineConfig(({ mode }) => {
       esbuild: {
         drop: mode === 'production' ? ['console', 'debugger'] : [],
       },
-      outDir: 'dist',
+      outDir: './dist',
       assetsDir: 'assets/',
       emptyOutDir: true,
       rollupOptions: {
