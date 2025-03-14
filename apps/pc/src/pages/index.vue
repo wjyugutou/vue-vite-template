@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { testApi, useRequest } from 'api'
+
 const router = useRouter()
 
 const name = ref('')
@@ -30,7 +32,13 @@ const tableData = [
   { name: '王五', age: 22, gender: '男' },
 ]
 
-const date = ref('')
+const { data, loading, error } = useRequest(testApi)
+
+watchEffect(() => {
+  console.log('data', data.value)
+  console.log('loading', loading.value)
+  console.log('error', error.value)
+})
 </script>
 
 <template>

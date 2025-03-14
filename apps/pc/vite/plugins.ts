@@ -5,6 +5,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import Compression from 'vite-plugin-compression'
+import virtualRequest from './plugins/virtual-request'
 
 export function generatePlugins(mode: 'development' | 'production' | string, env: ImportMetaEnv) {
   return [
@@ -43,6 +44,8 @@ export function generatePlugins(mode: 'development' | 'production' | string, env
       dev: mode !== 'preduction',
       showSwitch: false, // 是否显示切换按钮,移动端建议打开
     }),
+
+    virtualRequest(),
 
     // gzip
     env.VITE_BUILD_GZIP === 'true' && mode === 'production' && Compression({

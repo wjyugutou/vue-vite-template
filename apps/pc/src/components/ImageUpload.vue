@@ -58,10 +58,6 @@ const handleError: UploadProps['onError'] = (error, uploadFile, uploadFiles) => 
   ElMessage.error(error.message)
 }
 
-watchEffect(() => {
-  console.log(fileList.value)
-})
-
 function handleClickPreview(file: UploadUserFile) {
   dialogVisible.value = true
   previewUrl.value = file.url!

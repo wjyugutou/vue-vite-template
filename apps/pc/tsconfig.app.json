@@ -18,5 +18,5 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true
   },
-  "include": ["./src", "./types", "./vite"]
+  "include": ["./src", "./types", "./vite", "../../packages/api/request.ts"]
 }

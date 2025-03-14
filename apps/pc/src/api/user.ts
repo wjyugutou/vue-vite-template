@@ -1,4 +1,6 @@
 import type { RouteRecordRawC } from '@/router/type'
+// import request from 'virtual:request'
+import request from '../../../../packages/api/request'
 
 /**
  * 获取用户路由
@@ -883,5 +885,14 @@ export function getUserRoutesApi() {
         path: '/vben-admin/about',
       },
     ] as RouteRecordRawC[],
+  })
+}
+
+/**
+ * 获取用户信息
+ */
+export function getUserInfo() {
+  return request.get('/user/info', {
+    params,
   })
 }

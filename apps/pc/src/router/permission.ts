@@ -2,10 +2,6 @@ import router from './index'
 
 router.beforeEach(async (to, form, next) => {
   const store = useUserStore()
-  console.log({
-    to,
-    form,
-  })
 
   try {
     if (store.routes.length === 0) {

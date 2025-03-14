@@ -11,6 +11,64 @@ export type TreeNode<T extends [...string[]]> = {
 }
 
 /**
+ * 对象（包括函数属性）转换为字符串
+ * @example objToString({ a: 1, b: 2, c: 3 }) // '{"a":1,"b":2,"c":3}'
+ */
+export function objToString(obj: Record<string, any>) {
+  return JSON.stringify(obj, (key, value) => {
+    // 处理函数
+    if (typeof value === 'function') {
+      return value.toString()
+    }
+    // 处理 undefined
+    if (value === undefined) {
+      return 'undefined'
+    }
+    // 处理 Symbol
+    if (typeof value === 'symbol') {
+      return value.toString()
+    }
+    // 处理 BigInt
+    if (typeof value === 'bigint') {
+      return value.toString()
+    }
+    return value
+  }, 2)
+}
+
+/**
+ * 字符串转换为对象（包括函数属性）
+ * @example stringToObj('{"a":1,"b":2,"c":3}') // { a: 1, b: 2, c: 3 }
+ */
+export function stringToObj(str: string) {
+  return JSON.parse(str, (key, value) => {
+    // 处理函数字符串
+    if (typeof value === 'string' && value.startsWith('function')) {
+      try {
+        // eslint-disable-next-line no-new-func
+        return new Function(`return ${value}`)()
+      }
+      catch {
+        return value
+      }
+    }
+    // 处理 undefined
+    if (value === 'undefined') {
+      return undefined
+    }
+    // 处理 Symbol
+    if (typeof value === 'string' && value.startsWith('Symbol(')) {
+      return Symbol(value.slice(7, -1))
+    }
+    // 处理 BigInt
+    if (typeof value === 'string' && /^\d+n$/.test(value)) {
+      return BigInt(value.slice(0, -1))
+    }
+    return value
+  })
+}
+
+/**
  * 构造树型结构数据
  * @param {*} data 数据源
  * @param {*} args 配置项 必须显示指定才有类型提示 id:'id' parentId:'parentId' childrenList:'children'
