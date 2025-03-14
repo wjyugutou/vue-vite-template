@@ -46,14 +46,14 @@ function handleSelect(index: string, indexPath: string[], item: MenuItemClicked)
       :collapse="settings.sidebarCollapse"
       @select="handleSelect"
     >
-      <Logo v-if="settings.layoutMode === 'vertical'" class="b-b b-b-[var(--el-border-color)] px-20px" />
+      <Logo v-if="settings.layoutMode === 'vertical'" class="flex-shrink-0 b-b b-b-[var(--el-border-color)] px-20px" />
 
-      <ElScrollbar>
+      <ElScrollbar class="flex-1">
         <template v-for="menu in menus" :key="menu.path">
           <SidebarItem v-if="!menu.meta?.hideInMenu" :item="menu" />
         </template>
       </ElScrollbar>
-      <div class="absolute bottom-0 h-[var(--sidebar-bottom-height)] w-full content-center px-4">
+      <div class="h-[var(--sidebar-bottom-height)] w-full flex-shrink-0 content-center px-4">
         <div
           class="i-carbon-distribute-horizontal-left cursor-pointer hover:bg-primary/90" :class="{ 'bg-primary/90': settings.sidebarCollapse }"
           @click="settings.sidebarCollapse = !settings.sidebarCollapse"
@@ -66,7 +66,8 @@ function handleSelect(index: string, indexPath: string[], item: MenuItemClicked)
 <style>
 .sidebar {
   --sidebar-bottom-height: 35px;
-  @apply bottom-0 left-0 flex-shrink-0 flex-basis-[var(--sidebar-width)] transition-all important-fixed pb-[var(--sidebar-bottom-height)];
+  @apply bottom-0 left-0 flex-shrink-0 flex-basis-[var(--sidebar-width)] transition-all important-fixed;
+  @apply flex flex-col;
 
   &:not(.el-menu--collapse) {
     width: var(--sidebar-width);

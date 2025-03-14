@@ -6,7 +6,14 @@
   "author": "",
   "license": "ISC",
   "keywords": [],
+  "exports": {
+    ".": "./index.ts",
+    "./alova": "./alova.ts"
+  },
   "main": "index.js",
+  "files": [
+    "index.ts"
+  ],
   "scripts": {},
   "dependencies": {
     "alova": "^3.2.9",

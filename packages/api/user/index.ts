@@ -1,11 +1,11 @@
-import type { RouteRecordRawC } from '@/router/type'
+// import type { RouteRecordRawC } from './type'
 // import request from 'virtual:request'
-import request from '../../../../packages/api/request'
+import request from '../request'
 
 /**
  * 获取用户路由
  */
-export function getUserRoutesApi() {
+export function getUserRoutesApi<T>() {
   // return request.Get<RouteRecordRawC[]>('/user/routes')
   return Promise.resolve({
     code: 200,
@@ -416,9 +416,9 @@ export function getUserRoutesApi() {
                     path: '/demos/outside/iframe/vue-document',
                     meta: {
                       // icon: 'logos:vue',
-                      iframeSrc: 'https://cn.vuejs.org/',
+                      iframeSrc: 'http://localhost/emergency/screen/secure',
                       keepAlive: true,
-                      title: 'Vue',
+                      title: '应急大屏',
                     },
                   },
                   {
@@ -884,7 +884,7 @@ export function getUserRoutesApi() {
         name: 'VbenAbout',
         path: '/vben-admin/about',
       },
-    ] as RouteRecordRawC[],
+    ] as T[],
   })
 }
 
@@ -892,7 +892,7 @@ export function getUserRoutesApi() {
  * 获取用户信息
  */
 export function getUserInfo() {
-  return request.get('/user/info', {
-    params,
+  return request.Get('/user/info', {
+    params: {},
   })
 }
