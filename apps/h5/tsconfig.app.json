@@ -19,5 +19,5 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true
   },
-  "include": ["src", "types", "unocss.config.ts", "../../packages/utils/request copy.ts"]
+  "include": ["src", "types", "unocss.config.ts"]
 }

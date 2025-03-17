@@ -9,9 +9,14 @@ export default antfu({
 }, [
   {
     rules: {
-      'no-console': 'off',
+      // 'no-console': 'off',
       // 关闭，可使 对象/数组 自由换行
       'antfu/consistent-list-newline': 'off',
+      // 必须使用const enums
+      'no-restricted-syntax': ['error', {
+        selector: 'TSEnumDeclaration:not([const=true])',
+        message: 'const enum must be used',
+      }],
     },
   },
   {
