@@ -1,5 +1,5 @@
 {
-  "name": "pc",
+  "name": "desktop",
   "type": "module",
   "private": true,
   "scripts": {

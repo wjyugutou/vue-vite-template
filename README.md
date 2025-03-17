@@ -26,7 +26,24 @@ interface ImportMetaEnv {
 使用 eslint + @antfu/eslint-config
 
 # 请求
+
 请求使用alova + fetchAdapter
+封装在 package `api` 中
+
+```ts
+// 请求
+import { testApi } from 'api'
+// alova hooks
+import { useRequest } from 'api/alova'
+
+const { data, loading, error } = useRequest(testApi)
+
+watchEffect(() => {
+  console.log('data', data.value)
+  console.log('loading', loading.value)
+  console.log('error', error.value)
+})
+```
 
 # 样式
-使用unocss
+使用unocss 搭配 tailwindcss@4 的预设
