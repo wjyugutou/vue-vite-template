@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
 
-interface ImportMetaEnv {
+declare interface ImportMetaEnv {
   readonly VITE_APP_TITLE: string
   /** 请求的基础路径 */
   readonly VITE_BASE_URL: string
@@ -10,6 +10,10 @@ interface ImportMetaEnv {
   readonly VITE_BUILD_GZIP: 'true' | 'false'
 }
 
-interface ImportMeta {
+declare interface ImportMeta {
   readonly env: ImportMetaEnv
+}
+
+declare interface Window {
+  errAlert: (message: string, instance: any) => void
 }

@@ -1,12 +1,12 @@
 import { createApp } from 'vue'
-import App from './App.vue'
 
+import App from './App.vue'
 import directivePlugins from './directives'
 import router from './router'
 import '@unocss/reset/tailwind.css'
 import 'uno.css'
-import 'element-plus/theme-chalk/dark/css-vars.css'
 
+import 'element-plus/theme-chalk/dark/css-vars.css'
 import './styles/index.css'
 import './router/permission'
 
@@ -30,3 +30,7 @@ app.config.errorHandler = (err, vm, info) => {
 router.onError((error, to, from) => {
   console.error(`routerError:: ${error}`, { to, from })
 })
+
+window.errAlert = (message: string) => {
+  ElMessage.error(message)
+}

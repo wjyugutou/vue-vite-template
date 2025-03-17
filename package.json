@@ -10,8 +10,6 @@
     "build:desktop": "pnpm --filter desktop build",
     "fix": "eslint --fix .",
     "lint": "eslint .",
-    "typecheck": "vue-tsc --noEmit",
-    "preview": "vite preview",
     "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {

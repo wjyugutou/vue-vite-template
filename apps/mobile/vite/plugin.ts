@@ -8,7 +8,6 @@ import { VueRouterAutoImports } from 'unplugin-vue-router'
 import VueRouter from 'unplugin-vue-router/vite'
 import Compression from 'vite-plugin-compression'
 import { beforeWriteFilesFn } from './plugins/auto-route-register'
-import VirtualRequest from './plugins/virtual-request'
 
 export default function generatePlugins(mode: 'development' | 'production' | string, env: ImportMetaEnv) {
   return [
@@ -53,8 +52,6 @@ export default function generatePlugins(mode: 'development' | 'production' | str
         dev: mode !== 'preduction',
         showSwitch: false, // 是否显示切换按钮,移动端建议打开
       }),
-
-      VirtualRequest(),
 
       // gzip
       env.VITE_BUILD_GZIP === 'true' && mode === 'production' && Compression({
