@@ -1,11 +1,11 @@
 import type { Directive, Plugin } from 'vue'
-import auth from './auth'
+import { permissionAuthDirective, roleAuthDirective } from './auth'
 
 export type CustomDirective = Directive & {
   name: string
 }
 
-const directives: CustomDirective[] = [auth]
+const directives: CustomDirective[] = [permissionAuthDirective, roleAuthDirective]
 
 const directivePlugins: Plugin = {
   install(app) {

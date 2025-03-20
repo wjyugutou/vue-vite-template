@@ -1,4 +1,4 @@
-import type { RouteRecordRaw } from 'vue-router'
+import type { RouteComponent, RouteRecordRaw } from 'vue-router'
 
 export interface RouteMeta {
   /**
@@ -46,17 +46,22 @@ export interface RouteMeta {
    * 当前路由的子级在菜单中不展现
    * @default false
    */
-  hideChildrenInMenu?: boolean
+  // hideChildrenInMenu?: boolean
   /**
    * 当前路由在面包屑中不展现
    * @default false
    */
-  hideInBreadcrumb?: boolean
+  // hideInBreadcrumb?: boolean
   /**
    * 当前路由在菜单中不展现
    * @default false
    */
   hideInMenu?: boolean
+  /**
+   * 当前路由的子级在菜单中不展现
+   * @default false
+   */
+  hideChildrenInMenu?: boolean
   /**
    * 当前路由在标签页不展现
    * @default false
@@ -120,5 +125,6 @@ export interface RouteMeta {
 
 export type RouteRecordRawC = {
   meta?: RouteMeta
+  component?: string | RouteComponent
   children?: RouteRecordRawC[]
 } & RouteRecordRaw

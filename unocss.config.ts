@@ -2,7 +2,7 @@ import {
   defineConfig,
   // presetAttributify,
   presetIcons,
-  presetUno,
+  presetWind3,
   transformerDirectives, // @apply
   transformerVariantGroup,
 } from 'unocss'
@@ -19,7 +19,7 @@ export default defineConfig({
     ['btn', 'text-white px-2 py-1 rounded inline-block bg-primary hover:bg-primary-hover cursor-pointer'],
   ],
   presets: [
-    presetUno(),
+    presetWind3(),
     // presetAttributify(),
     presetIcons({
       scale: 1.2,

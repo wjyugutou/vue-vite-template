@@ -1,5 +1,6 @@
 <template>
   <svg
+    class="error-icon-svg"
     height="571"
     viewBox="0 0 860 571"
     width="860"

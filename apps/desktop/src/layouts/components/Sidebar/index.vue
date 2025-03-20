@@ -1,7 +1,6 @@
 <script lang='ts' setup>
-import type { RouteRecordRawC } from '@/router/type'
-import type { MenuItemClicked } from 'element-plus'
 import type { CSSProperties } from 'vue'
+import Logo from '../Logo.vue'
 import SidebarItem from './SidebarItem.vue'
 
 defineOptions({ name: 'Sidebar' })
@@ -19,17 +18,6 @@ const sidebarStyle = computed<CSSProperties>(() => ({
   left: 0,
   top: settings.value.layoutMode === 'vertical' ? 0 : 'var(--header-height)',
 }))
-
-function handleSelect(index: string, indexPath: string[], item: MenuItemClicked) {
-  const route = item.route as RouteRecordRawC
-  if (route.meta?.link) {
-    window.open(route.meta.link, '_blank')
-  }
-  else {
-    menuState.value.defaultActive = index
-    menuState.value.defaultOpeneds = indexPath
-  }
-}
 </script>
 
 <template>
@@ -38,13 +26,11 @@ function handleSelect(index: string, indexPath: string[], item: MenuItemClicked)
     <div :style="sidebarSeatStyle" class="h-0 transition-all" />
     <ElMenu
       :style="sidebarStyle" class="sidebar"
-      router
       :hide-timeout="0"
       :collapse-transition="false"
       :default-openeds="menuState.defaultOpeneds"
       :default-active="menuState.defaultActive"
       :collapse="settings.sidebarCollapse"
-      @select="handleSelect"
     >
       <Logo v-if="settings.layoutMode === 'vertical'" class="flex-shrink-0 b-b b-b-[var(--el-border-color)] px-20px" />
 

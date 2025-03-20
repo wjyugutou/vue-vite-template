@@ -9,7 +9,7 @@ export const basicRoutes: RouteRecordRawC[] = [
     component: BasicLayout,
     children: [
       {
-        path: '',
+        path: '/',
         name: 'Home',
         meta: {
           title: '首页',
@@ -46,7 +46,7 @@ const staticRoutes: RouteRecordRawC[] = [
     }],
   },
 ]
-export const NotFoundRoute: RouteRecordRawC = {
+export const ErrorRoute: RouteRecordRawC = {
   path: '/:pathMatch(.*)*',
   redirect(to) {
     return {

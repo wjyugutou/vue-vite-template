@@ -13,7 +13,3 @@ declare interface ImportMetaEnv {
 declare interface ImportMeta {
   readonly env: ImportMetaEnv
 }
-
-declare interface Window {
-  errAlert: (message: string, instance: any) => void
-}

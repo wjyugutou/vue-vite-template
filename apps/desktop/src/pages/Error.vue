@@ -64,6 +64,7 @@ function goHome() {
 
 <template>
   <div class="size-full flex flex-col items-center justify-center duration-300">
+    <h1 v-if="title">{{ title }}</h1>
     <img v-if="image" :src="image" class="w-1/2 lg:w-1/4">
     <component
       :is="fallbackIcon"

@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "noErrorTruncation": true,
     "target": "ESNext",
     "jsx": "preserve",
     "lib": ["DOM", "ESNext"],

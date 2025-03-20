@@ -1,8 +1,12 @@
-export const isDark = useDark({
+const isDark = useDark({
   valueLight: 'light',
   valueDark: 'dark',
   storageKey: import.meta.env.VITE_COLOR_SCHEMA_STORAGE_KEY,
 })
+
+export function useTheme() {
+  return isDark
+}
 
 const isAppearanceTransition
   = typeof document !== 'undefined'

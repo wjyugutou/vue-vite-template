@@ -1,6 +1,10 @@
 interface Settings {
   sidebarCollapse: boolean
   layoutMode: 'vertical' | 'side'
+  /** 设置抽屉是否可见 */
+  settingsDrawerVisible: boolean
+  /** 是否显示标签栏 */
+  showTagView: boolean
 }
 
 interface Default {
@@ -22,7 +26,9 @@ export const useAppStore = defineStore('app', {
   state: () => ({
     settings: useLocalStorage<Settings>('app-settings', {
       sidebarCollapse: false,
-      layoutMode: 'vertical',
+      layoutMode: 'side',
+      settingsDrawerVisible: false,
+      showTagView: true,
     }),
     default: useLocalStorage('app-default', {
       homePath: '/home',

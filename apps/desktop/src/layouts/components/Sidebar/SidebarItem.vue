@@ -6,6 +6,10 @@ const props = defineProps<{
   parentPath?: RouteRecordRawC['path']
 }>()
 
+const router = useRouter()
+
+const { menuState } = storeToRefs(useAppStore())
+
 const index = computed(() => `${props.item.path}`)
 
 const badgeClassMap: Record<string, string> = {
@@ -17,6 +21,17 @@ const badgeClassMap: Record<string, string> = {
 }
 
 const badgeClass = computed(() => badgeClassMap[props.item.meta?.badgeVariants || 'default'])
+
+function handleClick() {
+  menuState.value.defaultActive = props.item.meta?.activePath || props.item.path
+
+  if (props.item.meta?.link) {
+    window.open(props.item.meta.link, '_blank')
+  }
+  else {
+    router.push(props.item.path)
+  }
+}
 </script>
 
 <template>
@@ -29,7 +44,7 @@ const badgeClass = computed(() => badgeClassMap[props.item.meta?.badgeVariants |
       <SidebarItem v-if="!child.meta?.hideInMenu" :item="child" :parent-path="item.path" />
     </template>
   </ElSubMenu>
-  <ElMenuItem v-else :index="index" :route="item">
+  <ElMenuItem v-else :index="index" :route="item" @click="handleClick">
     <template #title>
       <div class="relative w-full flex items-center">
         <span v-if="item.meta?.icon" :class="item.meta.icon" class="mr-4" />

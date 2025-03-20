@@ -1,5 +1,6 @@
 <script lang='ts' setup>
 import Navbar from './components/Navbar/index.vue'
+import Settings from './components/Settings/index.vue'
 import Sidebar from './components/Sidebar/index.vue'
 
 defineOptions({ name: 'BasicLayout' })
@@ -8,20 +9,24 @@ const route = useRoute()
 </script>
 
 <template>
-  <div class="h-100vh overflow-hidden">
-    <Navbar />
-    <div class="mt-[var(--header-height)] h-full flex">
-      <Sidebar />
-      <section class="h-full flex-1">
-        <IFrame v-if="route.meta.iframeSrc" />
-        <ElScrollbar v-else class="p-2" max-height="100%" height="100%">
-          <RouterView />
-        </ElScrollbar>
-      </section>
+  <div class="h-100vh flex">
+    <Sidebar />
+    <div class="mt-[var(--header-height)] h-[calc(100vh-var(--header-height))] flex flex-grow-1">
+      <Navbar />
+      <main class="h-full flex-1">
+        <TagView />
+        <div class="h-full p-2">
+          <IFrame v-if="route.meta.iframeSrc" />
+          <RouterView v-else>
+            <template #default="{ Component }">
+              <Transition name="fade-transform">
+                <component :is="Component" />
+              </Transition>
+            </template>
+          </RouterView>
+        </div>
+      </main>
     </div>
+    <Settings />
   </div>
 </template>
-
-<style scoped>
-
-</style>

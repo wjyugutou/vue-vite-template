@@ -1,4 +1,6 @@
 @import url('./theme-transition.css');
+@import url('./app-transition.css');
+
 :root {
   --header-height: 50px;
   --sidebar-width: 224px;
@@ -21,21 +23,21 @@ body {
   min-height: 100vh;
 }
 
-/* 只有非mac下才进行调整，mac下使用默认滚动条 */
-html:not([data-platform='macOs']) {
-  ::-webkit-scrollbar {
-    @apply h-[10px] w-[10px];
-  }
+.error-icon-svg {
+  --success: 144 57% 58%;
+  --primary: 212 100% 45%;
+  --destructive: 348 100% 61%;
+  --warning: 42 84% 61%;
+  --radius: 0.5rem;
+  
+  --foreground: 210 6% 21%;
 
-  ::-webkit-scrollbar-thumb {
-    @apply bg-border rounded-sm border-none;
-  }
-
-  ::-webkit-scrollbar-track {
-    @apply rounded-sm border-none bg-transparent shadow-none;
-  }
-
-  ::-webkit-scrollbar-button {
-    @apply hidden;
+  .dark & {
+    
+    --success: 144 57% 58%;
+    --primary: 212 100% 45%;
+    --destructive: 348 100% 61%;
+    --warning: 42 84% 61%;
+    --foreground: 0 0% 95%;
   }
 }

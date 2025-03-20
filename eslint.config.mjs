@@ -9,7 +9,7 @@ export default antfu({
 }, [
   {
     rules: {
-      // 'no-console': 'off',
+      'no-console': 'off',
       'no-unused-vars': 'warn',
       'unused-imports/no-unused-vars': 'warn',
       // 关闭，可使 对象/数组 自由换行

@@ -1,7 +1,7 @@
 import type { RouteRecordRawC } from '@/router/type'
 import { resetRouter } from '@/router'
 import { basicRoutes } from '@/router/routes'
-import { getUserRoutesApi } from 'api'
+import { getUserMenuApi } from 'api'
 
 interface UserState {
   userInfo: {
@@ -11,6 +11,8 @@ interface UserState {
   }
   routes: RouteRecordRawC[]
   menus: RouteRecordRawC[]
+  roles: string[]
+  permissions: string[]
 }
 
 export const useUserStore = defineStore('user', {
@@ -24,6 +26,8 @@ export const useUserStore = defineStore('user', {
     }),
     routes: [] as RouteRecordRawC[],
     menus: [] as RouteRecordRawC[],
+    roles: [] as string[],
+    permissions: [] as string[],
   }),
   getters: {
     // Define your getters here
@@ -35,7 +39,7 @@ export const useUserStore = defineStore('user', {
       this.userInfo = userInfo
     },
     async getUserRoutes() {
-      const userRoutes = (await getUserRoutesApi<RouteRecordRawC>()).data
+      const userRoutes = (await getUserMenuApi<RouteRecordRawC>()).data
       this.routes = userRoutes
 
       const menus = [...basicRoutes].find(item => item.name === 'Index')!.children!.concat(userRoutes)

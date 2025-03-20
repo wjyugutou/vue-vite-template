@@ -13,8 +13,9 @@
     "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
+    "alova": "^3.2.10",
     "api": "workspace:*",
-    "element-plus": "^2.9.5",
+    "element-plus": "^2.9.6",
     "nprogress": "^0.2.0",
     "utils": "workspace:*"
   },

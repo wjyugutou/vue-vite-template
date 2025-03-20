@@ -1,38 +1,8 @@
-import { createAlova } from 'alova'
-import adapterFetch from 'alova/fetch'
-import vueHook from 'alova/vue'
-import { showFailToast } from 'vant'
+import { setInterceptor } from 'api'
 
-export interface CustomMeta {
-  /** 是否过滤data */
-  original?: true
-  /** blob */
-  blob?: boolean
-  /** 是否隐藏错误提示 */
-  hideAlert?: true
-}
-
-declare module 'alova' {
-  export interface AlovaCustomTypes {
-    meta: CustomMeta
-  }
-}
-
-// 默认只缓存get请求 cacheFor
-const alovaInstance = createAlova({
-  baseURL: '/api',
-  timeout: 5000,
-  statesHook: vueHook,
-  cacheFor: {
-    GET: 1000 * 60 * 1, // 1min
-    POST: 1000 * 60 * 1, // 1min
-  },
-  requestAdapter: adapterFetch(),
+setInterceptor({
   beforeRequest: (config) => {
     console.log('beforeRequest', config)
-    // const token = localStorage.getItem('token')
-    // if (token)
-    // config.config.headers.Authorization = `Bearer ${token}`
   },
   responded: {
     onSuccess: async (response, instance) => {
@@ -49,15 +19,20 @@ const alovaInstance = createAlova({
             }
             else {
               if (instance.meta?.hideAlert !== true) {
-                showFailToast(res.message)
+                console.error(`${instance.url}: ${res.msg}`)
+                showFailToast(res.msg)
               }
               return Promise.reject(res.msg)
             }
           }
         }
+        else {
+          return response
+        }
       }
       else {
         if (instance.meta?.hideAlert !== true) {
+          console.error(`${instance.url}: ${response.statusText}`)
           showFailToast(response.statusText)
         }
         return Promise.reject(response.statusText)
@@ -65,11 +40,10 @@ const alovaInstance = createAlova({
     },
     onError: (error, instance) => {
       if (instance.meta?.hideAlert !== true) {
+        console.error(`${instance.url}: ${error.message}`)
         showFailToast(error.message)
       }
       return Promise.reject(error)
     },
   },
 })
-
-export default alovaInstance

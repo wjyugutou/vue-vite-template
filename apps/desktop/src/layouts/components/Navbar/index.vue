@@ -1,5 +1,6 @@
 <script lang='ts' setup>
 import type { CSSProperties } from 'vue'
+import Logo from '../Logo.vue'
 import Avatar from './Avatar.vue'
 
 defineOptions({ name: 'Navbars' })
@@ -16,6 +17,10 @@ const navbarStyle = computed<CSSProperties>(() => ({
 function toggleThemeMode(e: MouseEvent) {
   toggleDark(e)
 }
+
+function handleSettings() {
+  settings.value.settingsDrawerVisible = true
+}
 </script>
 
 <template>
@@ -23,8 +28,9 @@ function toggleThemeMode(e: MouseEvent) {
     <Logo v-if="settings.layoutMode === 'side'" />
     <div />
     <div class="flex items-center gap-col-4">
-      <button @click="settings.layoutMode = 'side'">side</button>
-      <button class="ml-10" @click="settings.layoutMode = 'vertical'">vertical</button>
+      <button class="icon-btn hover:text-primary">
+        <div class="i-carbon-settings" @click="handleSettings" />
+      </button>
 
       <button class="icon-btn hover:text-primary" @click="toggleThemeMode">
         <div class="dark:i-carbon-moon i-carbon-sun" />
@@ -33,4 +39,6 @@ function toggleThemeMode(e: MouseEvent) {
       <Avatar />
     </div>
   </nav>
+
+  <TagView v-if="settings.showTagView" />
 </template>
