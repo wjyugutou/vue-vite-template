@@ -33,6 +33,7 @@ declare module 'vue' {
     Logo: typeof import('../src/layouts/components/Logo.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    ScrollView: typeof import('./../src/components/ScrollView.vue')['default']
     SimpleForm: typeof import('./../src/components/SimpleForm.vue')['default']
     SimpleTable: typeof import('./../src/components/SimpleTable.vue')['default']
   }
