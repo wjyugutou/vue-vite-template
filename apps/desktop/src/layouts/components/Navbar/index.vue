@@ -2,6 +2,7 @@
 import type { CSSProperties } from 'vue'
 import Logo from '../Logo.vue'
 import Avatar from './Avatar.vue'
+import TagView from './TagView.vue'
 
 defineOptions({ name: 'Navbars' })
 
@@ -24,21 +25,23 @@ function handleSettings() {
 </script>
 
 <template>
-  <nav class="fixed right-0 top-0 h-[var(--header-height)] flex items-center justify-between b-b b-b-[var(--el-border-color)] px-4 transition-all" :style="navbarStyle">
-    <Logo v-if="settings.layoutMode === 'side'" />
-    <div />
-    <div class="flex items-center gap-col-4">
-      <button class="icon-btn hover:text-primary">
-        <div class="i-carbon-settings" @click="handleSettings" />
-      </button>
+  <div class="navbar">
+    <nav class="fixed right-0 top-0 h-[var(--header-height)] flex items-center justify-between b-b b-b-[var(--el-border-color)] px-4 transition-all" :style="navbarStyle">
+      <Logo v-if="settings.layoutMode === 'side'" />
+      <div />
+      <div class="flex items-center gap-col-4">
+        <button class="icon-btn hover:text-primary">
+          <div class="i-carbon-settings" @click="handleSettings" />
+        </button>
 
-      <button class="icon-btn hover:text-primary" @click="toggleThemeMode">
-        <div class="dark:i-carbon-moon i-carbon-sun" />
-      </button>
+        <button class="icon-btn hover:text-primary" @click="toggleThemeMode">
+          <div class="dark:i-carbon-moon i-carbon-sun" />
+        </button>
 
-      <Avatar />
-    </div>
-  </nav>
+        <Avatar />
+      </div>
+    </nav>
 
-  <TagView v-if="settings.showTagView" />
+    <TagView v-if="settings.showTagView" />
+  </div>
 </template>

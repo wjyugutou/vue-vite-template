@@ -55,7 +55,7 @@ watchEffect(() => {
       v-model="name"
       placeholder="What's your name?"
       type="text"
-      autocomplete="false"
+      autocomplete="off"
       class="w-250px border border-(dark:gray-700 gray-600 rounded) bg-transparent p-(x-4 y-2) text-center outline-(none)"
       @keydown.enter="go"
     >

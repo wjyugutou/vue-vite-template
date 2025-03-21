@@ -18,6 +18,17 @@ const { settings } = storeToRefs(useAppStore())
             </ElRadio>
           </ElRadioGroup>
         </ElFormItem>
+
+        <ElFormItem label="标签栏">
+          <ElRadioGroup v-model="settings.showTagView">
+            <ElRadio :value="true">
+              <span>显示</span>
+            </ElRadio>
+            <ElRadio :value="false">
+              <span>隐藏</span>
+            </ElRadio>
+          </ElRadioGroup>
+        </ElFormItem>
       </ElForm>
     </template>
   </ElDrawer>

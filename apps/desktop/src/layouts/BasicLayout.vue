@@ -11,20 +11,17 @@ const route = useRoute()
 <template>
   <div class="h-100vh flex">
     <Sidebar />
-    <div class="mt-[var(--header-height)] h-[calc(100vh-var(--header-height))] flex flex-grow-1">
+    <div class="mt-[var(--header-height)] h-[calc(100vh-var(--header-height))] flex flex-grow-1 flex-col">
       <Navbar />
-      <main class="h-full flex-1">
-        <TagView />
-        <div class="h-full p-2">
-          <IFrame v-if="route.meta.iframeSrc" />
-          <RouterView v-else>
-            <template #default="{ Component }">
-              <Transition name="fade-transform">
-                <component :is="Component" />
-              </Transition>
-            </template>
-          </RouterView>
-        </div>
+      <main class="h-full flex-1 p-2">
+        <IFrame v-if="route.meta.iframeSrc" />
+        <RouterView v-else>
+          <template #default="{ Component }">
+            <Transition name="fade-transform">
+              <component :is="Component" />
+            </Transition>
+          </template>
+        </RouterView>
       </main>
     </div>
     <Settings />

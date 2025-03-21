@@ -11,12 +11,21 @@ export default defineConfig({
   theme: {
     colors: {
       'primary': 'var(--el-color-primary)',
-      'primary-hover': 'var(--color-primary-hover)',
+      'primary-hover': 'var(--el-color-primary-light-3)',
     },
   },
+  variants: [
+    (matcher) => {
+      if (!matcher.startsWith('group-hover:'))
+        return matcher
+      return {
+        matcher: matcher.slice(12),
+        selector: s => `.group:hover ${s}`,
+      }
+    },
+  ],
   shortcuts: [
     ['flex-center', 'flex justify-center items-center'],
-    ['btn', 'text-white px-2 py-1 rounded inline-block bg-primary hover:bg-primary-hover cursor-pointer'],
   ],
   presets: [
     presetWind3(),
