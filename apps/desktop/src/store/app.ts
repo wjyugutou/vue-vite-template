@@ -19,6 +19,7 @@ interface AppState {
     defaultActive: string
     defaultOpeneds: string[]
   }
+  cachedList: string[]
 }
 
 export const useAppStore = defineStore('app', {
@@ -35,8 +36,12 @@ export const useAppStore = defineStore('app', {
       avatarSrc: 'https://unpkg.com/@vbenjs/static-source@0.1.7/source/avatar-v1.webp',
     }),
     menuState: useSessionStorage('app-menu-state', {
+      // 默认激活的菜单
       defaultActive: '',
+      // 默认展开的菜单
       defaultOpeneds: [],
     }),
+    // 默认缓存的页面
+    cachedList: useSessionStorage('app-keep-alive-list', []),
   }) as unknown as AppState,
 })

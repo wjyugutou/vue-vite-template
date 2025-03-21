@@ -6,6 +6,8 @@ import Sidebar from './components/Sidebar/index.vue'
 defineOptions({ name: 'BasicLayout' })
 
 const route = useRoute()
+
+const { cachedList } = storeToRefs(useAppStore())
 </script>
 
 <template>
@@ -19,7 +21,9 @@ const route = useRoute()
           <RouterView>
             <template #default="{ Component }">
               <Transition name="fade-transform">
-                <component :is="Component" />
+                <KeepAlive :include="cachedList">
+                  <component :is="Component" />
+                </KeepAlive>
               </Transition>
             </template>
           </RouterView>

@@ -29,14 +29,14 @@ function handleNext() {
     <Teleport v-if="visible" to="body">
       <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
         <button class="absolute right-12vw top-10 z-10 text-12 hover:text-primary" @click="handleClose">
-          <div class="i-carbon-close-outline" />
+          <div class="i-carbon-close-outline text-white" />
         </button>
         <button class="absolute left-18vw top-50% z-10 text-12 -translate-y-1/2 hover:text-primary" @click="handlePrev">
-          <div class="i-carbon-chevron-left" />
+          <div class="i-carbon-chevron-left text-white" />
         </button>
 
         <button class="absolute right-18vw top-50% z-10 text-12 -translate-y-1/2 hover:text-primary" @click="handleNext">
-          <div class="i-carbon-chevron-right" />
+          <div class="i-carbon-chevron-right text-white" />
         </button>
         <template v-for="item in urlList" :key="item">
           <video v-if="isVideoFile(item)" class="pointer-events-auto size-150" :src="item" controls :class="{ 'important-hidden': url !== item }" />

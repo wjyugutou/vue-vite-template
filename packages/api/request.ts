@@ -20,7 +20,7 @@ export interface CustomMeta {
 
 export interface Interceptor {
   beforeRequest?: (config: Method) => void
-  responded?: RespondedHandler<any>
+  responded?: RespondedHandlerRecord<any>
 }
 
 const interceptor: Interceptor = {
@@ -34,8 +34,6 @@ export function setInterceptor(ic: typeof interceptor) {
   interceptor.responded = ic.responded
 }
 
-console.log('createAlova')
-
 const alova = createAlova({
   baseURL: import.meta.env.VITE_BASE_URL,
   timeout: 5000,
@@ -48,8 +46,13 @@ const alova = createAlova({
   beforeRequest: (config) => {
     interceptor.beforeRequest?.(config)
   },
-  responded: (response, instance) => {
-    return interceptor.responded?.(response, instance)
+  responded: {
+    onSuccess: (response, instance) => {
+      return interceptor.responded?.onSuccess?.(response, instance)
+    },
+    onError: (error, instance) => {
+      return interceptor.responded?.onError?.(error, instance)
+    },
   },
 })
 

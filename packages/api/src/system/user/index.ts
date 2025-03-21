@@ -1,3 +1,4 @@
+import type { User } from './type'
 import request from '../../../request'
 
 /**
@@ -326,8 +327,38 @@ export function getUserMenuApi<T>() {
 }
 
 // 查询用户列表
-export function listUser(query: any) {
-  return request.Get('/system/user/list', {
+export function getListUserApi(query: any) {
+  return Promise.resolve({
+    data: [
+      {
+        id: 1,
+        username: '张三',
+        email: 'zhangsan@example.com',
+        phone: '12345678901',
+        status: '1',
+      },
+      {
+        id: 2,
+        username: '李四',
+        email: 'lisi@example.com',
+        phone: '12345678902',
+        status: '0',
+      },
+      {
+        id: 3,
+        username: '王五',
+        email: 'wangwu@example.com',
+        phone: '12345678903',
+        status: '1',
+      },
+    ],
+    total: 2,
+  })
+
+  return request.Get<{
+    data: User[]
+    total: number
+  }>('/system/user/list', {
     params: query,
   })
 }
