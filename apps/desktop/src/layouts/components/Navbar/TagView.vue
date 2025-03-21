@@ -6,7 +6,6 @@ interface Tag {
   title: string
 }
 
-const router = useRouter()
 const route = useRoute()
 
 const tags = useSessionStorage<Tag[]>('app-tags', [])
@@ -19,12 +18,12 @@ if (tags.value.findIndex(tag => tag.path === route.path) === -1) {
 }
 
 watch(route, () => {
-  if (tags.value.findIndex(tag => tag.path === route.path) === -1) {
-    tags.value.push({
-      path: route.path,
-      title: route.meta.title as string,
-    })
-  }
+  // if (tags.value.findIndex(tag => tag.path === route.path) === -1) {
+  tags.value.push({
+    path: route.path,
+    title: route.meta.title as string,
+  })
+  // }
 })
 function handleClose(e: Event, tag: Tag) {
   e.stopPropagation()
@@ -34,15 +33,25 @@ function handleClose(e: Event, tag: Tag) {
 </script>
 
 <template>
-  <div class="h-[var(--tag-view-height)] flex gap-2 border-b b-b-[var(--el-border-color)] px-2 py-1">
-    <RouterLink
-      v-for="tag in tags" :key="tag.path" :to="tag.path"
-      class="group flex cursor-pointer items-center justify-between rounded hover:(bg-primary text-white)"
-      :class="{ 'bg-primary text-white': tag.path === route.path }"
-    >
-      <span class="flex-1 px-2 text-12px">{{ tag.title }}</span>
-      <span v-if="tag.path !== '/' && tag.path !== '/home'" class="i-carbon-close hover:scale-80" @click="handleClose($event, tag)" />
-      <span v-else class="i-carbon-pin-filled" />
-    </RouterLink>
-  </div>
+  <ScrollView class="tag-view-scroll-view" scroll-x :scroll-y="false" hide-scrollbar>
+    <div class="tag-view">
+      <RouterLink
+        v-for="tag in tags" :key="tag.path" :to="tag.path"
+        class="group flex cursor-pointer items-center justify-between rounded hover:(bg-primary text-white)"
+        :class="{ 'bg-primary text-white': tag.path === route.path }"
+      >
+        <span class="flex-1 whitespace-nowrap px-2 text-12px">{{ tag.title }}</span>
+        <span v-if="tag.path !== '/' && tag.path !== '/home'" class="i-carbon-close hover:scale-80" @click="handleClose($event, tag)" />
+        <span v-else class="i-carbon-pin-filled" />
+      </RouterLink>
+    </div>
+  </ScrollView>
 </template>
+
+<style scoped>
+.tag-view {
+  @apply  h-[var(--tag-view-height)] flex gap-2 border-b b-b-[var(--el-border-color)] px-2 py-1;
+  width: fit-content;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+</style>

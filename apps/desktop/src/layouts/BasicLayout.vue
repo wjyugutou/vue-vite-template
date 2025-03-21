@@ -9,9 +9,9 @@ const route = useRoute()
 </script>
 
 <template>
-  <div class="h-100vh flex">
+  <div class="h-100vh w-100vw flex">
     <Sidebar />
-    <div class="mt-[var(--header-height)] h-[calc(100vh-var(--header-height))] flex flex-grow-1 flex-col">
+    <div class="mt-[var(--header-height)] h-[calc(100vh-var(--header-height))] w-[var(--sidebar-width)] flex flex-grow-1 flex-col">
       <Navbar />
       <main class="h-full flex-1 overflow-hidden">
         <IFrame v-if="route.meta.iframeSrc" />
