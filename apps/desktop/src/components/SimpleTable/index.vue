@@ -53,6 +53,10 @@ defineExpose({
         </template>
       </ElTableColumn>
     </template>
+
+    <template #empty>
+      <ElEmpty description="暂无数据" />
+    </template>
   </ElTable>
 </template>
 

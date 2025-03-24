@@ -35,8 +35,7 @@ declare module 'vue-router' {
      * 徽标颜色
      */
     badgeVariants?:
-      | 'default'
-      | 'destructive'
+      | 'danger'
       | 'primary'
       | 'success'
       | 'warning'

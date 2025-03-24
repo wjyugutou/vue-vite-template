@@ -42,13 +42,13 @@ export function resetRouter(routes: RouteRecordRawC[], parentName: RouteRecordRa
   router.addRoute(ErrorRoute)
 }
 
-const allView = import.meta.glob(['@/pages/**/*.vue', '!@/pages/*.vue'])
+const allView = import.meta.glob(['@/pages/**/*.vue'])
 
 function getComponent(route: RouteRecordRawC) {
   const component = route.component
-
   if (typeof component === 'string') {
-    const view = allView[`/src/pages/${component}.vue`]
+    const view = allView[`/src/pages/${component}.vue`] || allView[`/src/pages/${component}/index.vue`]
+
     if (view) {
       return view
     }

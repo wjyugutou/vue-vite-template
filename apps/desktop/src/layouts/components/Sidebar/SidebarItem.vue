@@ -9,20 +9,45 @@ const props = defineProps<{
 const router = useRouter()
 
 const { menuState } = storeToRefs(useAppStore())
+const { menus } = storeToRefs(useUserStore())
 
 const index = computed(() => `${props.item.path}`)
 
 const badgeClassMap: Record<string, string> = {
-  default: 'bg-default',
-  destructive: 'bg-destructive',
+  default: 'bg-gray-500',
+  danger: 'bg-danger',
   primary: 'bg-primary',
   success: 'bg-success',
   warning: 'bg-warning',
 }
 
-const badgeClass = computed(() => badgeClassMap[props.item.meta?.badgeVariants || 'default'])
+const badgeVariants = computed(() => props.item.meta?.badgeVariants || 'default')
+
+// 如果badgeVariants.value在badgeClassMap中不存在，则说明badgeVariants.value是自定义颜色
+const badgeColor = computed(() => {
+  if (badgeVariants.value) {
+    return badgeVariants.value in badgeClassMap
+      ? {
+          class: badgeClassMap[badgeVariants.value],
+        }
+      : {
+          style: {
+            backgroundColor: badgeVariants.value,
+          },
+        }
+  }
+  else {
+    return {
+      class: 'bg-danger',
+    }
+  }
+})
 
 function handleClick() {
+  if (props.item.name === 'BadgeDotDemo') {
+    console.log(props.item)
+  }
+
   menuState.value.defaultActive = props.item.meta?.activePath || props.item.path
 
   if (props.item.meta?.link) {
@@ -51,7 +76,8 @@ function handleClick() {
         <!-- <span>icon</span> -->
         <span>{{ item.meta?.title }}</span>
 
-        <div v-if="item.meta?.badge" class="menu-badge" :class="badgeClass">{{ item.meta?.badge }}</div>
+        <span v-if="item.meta?.badge" class="menu-badge" v-bind="badgeColor">{{ item.meta?.badge }}</span>
+        <span v-else-if="item.meta?.badgeType === 'dot'" class="menu-badge-dot" />
       </div>
     </template>
   </ElMenuItem>
@@ -74,7 +100,11 @@ function handleClick() {
     }
 
     .menu-badge {
-      @apply absolute right-2 h-20px w-20px flex items-center overflow-hidden justify-center text-ellipsis rounded-full p-1 whitespace-nowrap text-10px text-white;
+      @apply absolute right-2 size-4 line-height-2 overflow-hidden text-ellipsis rounded-full whitespace-nowrap text-10px text-center content-center text-white;
+    }
+
+    .menu-badge-dot {
+      @apply absolute right-2 size-2  bg-danger rounded-full;
     }
   }
 }
