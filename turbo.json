@@ -1,0 +1,48 @@
+{
+  "$schema": "./node_modules/turbo/schema.json",
+  "globalDependencies": [
+    ".env",
+    ".env.*",
+    "**/tsconfig*.json",
+    "**/vite.config.*",
+    "**/postcss.config.*",
+    "unocss.config.*"
+  ],
+  "globalEnv": [
+    "NODE_ENV"
+  ],
+  "tasks": {
+    "build": {
+      "dependsOn": ["@repo/config#stub", "build:desktop", "build:mobile"],
+      "outputs": [],
+      "outputLogs": "full"
+    },
+
+    "build:desktop": {
+      "dependsOn": ["@repo/config#stub"],
+      "outputs": ["dist/desktop/**"],
+      "outputLogs": "full",
+      "cache": false
+    },
+
+    "build:mobile": {
+      "dependsOn": ["@repo/config#stub"],
+      "outputs": ["dist/mobile/**"],
+      "outputLogs": "full",
+      "cache": false
+    },
+
+    "dev": {
+      "dependsOn": ["@repo/config#stub"],
+      "outputs": [],
+      "outputLogs": "full",
+      "cache": false,
+      "persistent": true
+    },
+
+    "stub": {
+      "cache": true
+    }
+
+  }
+}

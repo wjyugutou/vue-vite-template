@@ -47,9 +47,8 @@ export default function generatePlugins(mode: 'development' | 'production' | str
         dts: './types/components.d.ts',
       }),
 
-      codeInspectorPlugin({
+      mode !== 'preduction' && codeInspectorPlugin({
         bundler: 'vite',
-        dev: mode !== 'preduction',
         showSwitch: false, // 是否显示切换按钮,移动端建议打开
       }),
 

@@ -35,7 +35,7 @@ export function setInterceptor(ic: typeof interceptor) {
 }
 
 const alova = createAlova({
-  baseURL: import.meta.env.VITE_BASE_URL,
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   timeout: 5000,
   statesHook: vueHook,
   // 默认只缓存get请求 cacheFor

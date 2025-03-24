@@ -1,0 +1,29 @@
+{
+  "//": "turbo 需要name设置完整包名",
+  "name": "@repo/config",
+  "type": "module",
+  "version": "1.0.0",
+  "packageManager": "pnpm@10.6.5",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./dist/index.mjs"
+    }
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "stub": "pnpm unbuild --stub"
+  },
+  "dependencies": {
+    "unbuild": "^3.5.0"
+  }
+}

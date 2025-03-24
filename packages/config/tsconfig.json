@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "declaration": true,
+    "outDir": "./dist",
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*.ts", "../../vite-env.d.ts"]
+}

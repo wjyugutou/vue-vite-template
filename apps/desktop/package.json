@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "build:tsc": "tsc -b && vite build",
-    "build": "vite build",
-    "dev": "vite --port 3333",
+    "build": "vite build ",
+    "dev": "vite  --port 3333",
     "fix": "eslint --fix .",
     "lint": "eslint .",
     "typecheck": "vue-tsc --noEmit",
@@ -13,11 +13,12 @@
     "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
+    "@repo/api": "workspace:*",
+    "@repo/config": "workspace:*",
+    "@repo/utils": "workspace:*",
     "alova": "^3.2.10",
-    "api": "workspace:*",
     "element-plus": "^2.9.6",
-    "nprogress": "^0.2.0",
-    "utils": "workspace:*"
+    "nprogress": "^0.2.0"
   },
   "devDependencies": {
     "@types/nprogress": "^0.2.3"

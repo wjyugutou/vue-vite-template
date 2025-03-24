@@ -6,7 +6,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import Compression from 'vite-plugin-compression'
 
-export function generatePlugins(mode: 'development' | 'production' | string, env: ImportMetaEnv) {
+export function generatePlugins(mode: 'development' | 'production' | string, env: ImportMetaEnv): Plugin[] {
   return [
 
     // ⚠️ Vue must be placed after VueRouter()
@@ -29,7 +29,9 @@ export function generatePlugins(mode: 'development' | 'production' | string, env
       dirs: [
         './src/hooks',
         './src/store',
+        './src/composables',
       ],
+      vueTemplate: true,
     }),
 
     // https://github.com/antfu/vite-plugin-components
@@ -38,9 +40,8 @@ export function generatePlugins(mode: 'development' | 'production' | string, env
       dts: './types/components.d.ts',
     }),
 
-    codeInspectorPlugin({
+    mode !== 'preduction' && codeInspectorPlugin({
       bundler: 'vite',
-      dev: mode !== 'preduction',
       showSwitch: false, // 是否显示切换按钮,移动端建议打开
     }),
 

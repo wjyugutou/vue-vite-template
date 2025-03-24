@@ -46,4 +46,10 @@ watchEffect(() => {
 ```
 
 # 样式
-使用unocss 搭配 tailwindcss@4 的预设
+使用 UnoCSS 原子化 CSS
+
+## CSS 开发规范
+- 使用原子化 CSS 优先
+- 复杂样式使用 CSS Modules
+- 支持 CSS 嵌套语法
+- 遵循 BEM 命名规范

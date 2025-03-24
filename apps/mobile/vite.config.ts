@@ -1,23 +1,20 @@
 import path from 'node:path'
+import { createSharedConfig } from '@repo/config'
 import { defineConfig, loadEnv } from 'vite'
 import generatePlugins from './vite/plugin'
-
 /**
  * mode: 'development' | 'production'
  */
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '../../') as ImportMetaEnv
+  const root = path.resolve(import.meta.dirname, '../../')
 
   return {
-    resolve: {
-      alias: {
-        '@/': `${path.resolve(__dirname, 'src')}/`,
-      },
-    },
+    ...createSharedConfig('mobile', root, mode),
     server: {
       proxy: {
         '/api': {
-          target: env.VITE_BASE_URL,
+          target: env.VITE_API_BASE_URL,
           changeOrigin: true,
           rewrite: path => path.replace(/^\/api/, ''),
         },
@@ -26,19 +23,5 @@ export default defineConfig(({ mode }) => {
     plugins: [
       ...generatePlugins(mode, env),
     ],
-    build: {
-      esbuild: {
-        drop: mode === 'production' ? ['console', 'debugger'] : [],
-      },
-      outDir: 'dist',
-      assetsDir: 'assets/',
-      emptyOutDir: true,
-      rollupOptions: {
-        output: {
-          assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
-          chunkFileNames: 'static/js/[name]-[hash].js',
-        },
-      },
-    },
   }
 })

@@ -1,15 +1,47 @@
-.DS_Store
-.vite-ssg-dist
-.vite-ssg-temp
-*.local
-dist
-dist-ssr
+# Dependencies
 node_modules
-.idea/
+.pnpm-store
+
+# Build
+dist
+.turbo
+.output
+.nuxt
+.nitro
+.cache
+.temp
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+
+# Logs
+logs
 *.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Cache
+.cache
+.temp
+
+# Testing
+coverage
+.coverage
+
+# Env
+.env
+.env.*
+!.env.example
 
 # 压缩文件
 *.zip
 *.7z
 *.rar
 pnpm-lock.yaml
+
+output

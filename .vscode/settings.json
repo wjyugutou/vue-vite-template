@@ -6,5 +6,7 @@
     "source.fixAll.eslint": "explicit",
     "source.fixAll.stylelint": "explicit",
     "source.organizeImports": "never"
-  }
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true
 }

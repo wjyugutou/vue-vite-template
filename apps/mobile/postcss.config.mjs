@@ -1,9 +1,14 @@
-import autoprefixer from 'autoprefixer'
-import PxToRem from 'postcss-pxtorem'
+// import PxToRem from 'postcss-pxtorem'
+import postcssPresetEnv from 'postcss-preset-env'
 
 export default {
   plugins: [
-    autoprefixer(),
+    postcssPresetEnv({
+      stage: 3,
+      features: {
+        'nesting-rules': true,
+      },
+    }),
     // PxToRem({
     //   rootValue: 37.5, // Vant 官方根字体大小是 37.5
     //   propList: ['*'],
