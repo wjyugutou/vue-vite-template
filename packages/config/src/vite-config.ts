@@ -28,11 +28,5 @@ export function createSharedConfig(type: string, root: string, mode: string) {
     optimizeDeps: {
       include: ['vue', 'vue-router', 'pinia', '@vueuse/core'],
     },
-    resolve: {
-      alias: {
-        '~': '/src',
-        '@': '/src',
-      },
-    },
   })
 }
