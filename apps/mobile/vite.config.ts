@@ -11,6 +11,11 @@ export default defineConfig(({ mode }) => {
 
   return {
     ...createSharedConfig('mobile', root, mode),
+    resolve: {
+      alias: {
+        '@': path.resolve(import.meta.dirname, './src'),
+      },
+    },
     server: {
       proxy: {
         '/api': {
