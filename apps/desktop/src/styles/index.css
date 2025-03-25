@@ -21,8 +21,9 @@ html {
   }
 }
 
-body {
-  min-height: 100vh;
+body,
+#app {
+  height: 100vh;
 }
 
 .error-icon-svg {

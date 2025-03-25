@@ -3,6 +3,11 @@ import { BasicLayout } from '@/layouts'
 
 export const basicRoutes: RouteRecordRawC[] = [
   {
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/pages/login.vue'),
+  },
+  {
     path: '/',
     redirect: '/',
     name: 'Index',

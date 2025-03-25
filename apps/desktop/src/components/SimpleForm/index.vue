@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ElForm } from 'element-plus'
+import type { FormInstance } from 'element-plus'
 
 import type { Props } from './type'
 
@@ -12,24 +12,26 @@ const props = withDefaults(defineProps<Props>(), {
 
 const form = defineModel<Record<string, any>>({ required: true })
 
-const formRef = ref<InstanceType<typeof ElForm>>()
-const formData = reactive<Record<string, any>>({})
-const rules = reactive<Record<string, any>>({})
+const formRef = useTemplateRef<FormInstance>('formRef')
+const initData = reactive<Record<string, any>>({})
 
 // 初始化表单数据和规则
 props.formItems.forEach((item) => {
   if (item.prop) {
-    formData[item.prop] = props.defaultValue?.[item.prop] || ''
-    if (item.rules) {
-      rules[item.prop] = item.rules
-    }
+    initData[item.prop] = props.defaultValue?.[item.prop] || ''
   }
 })
 
+const rules = computed(() => {
+  return props.formItems.reduce((acc, item) => {
+    if (item.rules && item.prop) {
+      acc[item.prop] = item.rules
+    }
+    return acc
+  }, {} as Record<string, any>)
+})
 // 暴露方法给父组件
 defineExpose({
-  // 获取表单数据
-  getFormData: () => formData,
   // 清除表单验证
   clearValidate: () => {
     formRef.value?.clearValidate()
@@ -39,8 +41,8 @@ defineExpose({
     formRef.value?.resetFields()
   },
   // 验证表单
-  validate: () => {
-    return formRef.value?.validate()
+  validate: (cb: (valid: boolean) => void) => {
+    return formRef.value?.validate(cb)
   },
 })
 </script>
