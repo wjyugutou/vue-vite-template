@@ -1,24 +1,29 @@
 import router from './index'
 
-router.beforeEach(async (to, form, next) => {
-  const store = useUserStore()
+// route name 白名单
+const whiteList = ['Login']
 
-  try {
-    if (store.routes.length === 0) {
-      await store.getUserRoutes()
-      next({ ...to, replace: true })
-    }
-    else {
+router.beforeEach(async (to, form, next) => {
+  const userStore = useUserStore()
+
+  const token = useToken()
+
+  if (!token) {
+    if (whiteList.includes(to.name as string)) {
       next()
     }
+    else {
+      next({ path: '/login', query: { redirect: to.fullPath } })
+    }
   }
-  catch (error) {
-    const { menuState } = storeToRefs(useAppStore())
-
-    menuState.value.defaultActive = ''
-    menuState.value.defaultOpeneds = []
-
-    console.error('router error:', error)
-    next('/error/500')
+  else {
+    if (userStore.routes.length !== 0) {
+      next()
+    }
+    else {
+      await userStore.getUserInfo()
+      await userStore.getUserRoutes()
+      next({ ...to, replace: true })
+    }
   }
 })

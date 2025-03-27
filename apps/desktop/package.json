@@ -13,14 +13,20 @@
     "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
+    "@iconify-json/carbon": "^1.2.8",
     "@repo/api": "workspace:*",
     "@repo/config": "workspace:*",
     "@repo/utils": "workspace:*",
     "alova": "^3.2.10",
     "element-plus": "^2.9.6",
-    "nprogress": "^0.2.0"
+    "nprogress": "^0.2.0",
+    "pinia-plugin-persistedstate": "^4.2.0",
+    "splitpanes": "^4.0.3",
+    "universal-cookie": "^8.0.1"
   },
   "devDependencies": {
-    "@types/nprogress": "^0.2.3"
+    "@types/nprogress": "^0.2.3",
+    "@types/splitpanes": "^2.2.6"
   }
 }

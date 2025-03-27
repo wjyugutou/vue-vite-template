@@ -1,4 +1,4 @@
-import type { Method, RespondedHandler, RespondedHandlerRecord } from 'alova'
+import type { Method, RespondedHandlerRecord } from 'alova'
 import { createAlova } from 'alova'
 import adapterFetch from 'alova/fetch'
 import vueHook from 'alova/vue'
@@ -10,6 +10,8 @@ declare module 'alova' {
 }
 
 export interface CustomMeta {
+  /** 是否携带token */
+  token?: false
   /** 是否过滤data */
   original?: true
   /** blob */
@@ -36,15 +38,17 @@ export function setInterceptor(ic: typeof interceptor) {
 
 const alova = createAlova({
   baseURL: import.meta.env.VITE_API_BASE_URL,
-  timeout: 5000,
+  timeout: 10000,
   statesHook: vueHook,
   // 默认只缓存get请求 cacheFor
   cacheFor: {
     GET: 1000 * 60 * 1, // 1min
   },
   requestAdapter: adapterFetch(),
-  beforeRequest: (config) => {
-    interceptor.beforeRequest?.(config)
+  beforeRequest: (method) => {
+    // 请求需要携带cookie
+    // method.config.credentials = 'include'
+    interceptor.beforeRequest?.(method)
   },
   responded: {
     onSuccess: (response, instance) => {

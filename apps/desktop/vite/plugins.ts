@@ -1,3 +1,4 @@
+import type { Plugin } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import { codeInspectorPlugin } from 'code-inspector-plugin'
 import UnoCSS from 'unocss/vite'

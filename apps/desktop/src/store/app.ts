@@ -14,7 +14,7 @@ interface Default {
 
 interface AppState {
   settings: Settings
-  default: Default
+  defaultConfig: Default
   menuState: {
     defaultActive: string
     defaultOpeneds: string[]
@@ -23,25 +23,50 @@ interface AppState {
 }
 
 export const useAppStore = defineStore('app', {
-  // 持久化
   state: () => ({
-    settings: useLocalStorage<Settings>('app-settings', {
+    settings: {
       sidebarCollapse: false,
       layoutMode: 'side',
       settingsDrawerVisible: false,
       showTagView: true,
-    }),
-    default: useLocalStorage('app-default', {
+    },
+    defaultConfig: {
       homePath: '/home',
       avatarSrc: 'https://unpkg.com/@vbenjs/static-source@0.1.7/source/avatar-v1.webp',
-    }),
-    menuState: useSessionStorage('app-menu-state', {
+    },
+    menuState: {
       // 默认激活的菜单
       defaultActive: '',
       // 默认展开的菜单
       defaultOpeneds: [],
-    }),
+    },
     // 默认缓存的页面
-    cachedList: useSessionStorage('app-keep-alive-list', []),
-  }) as unknown as AppState,
+    cachedList: [],
+  }) as AppState,
+  getters: {
+  },
+  actions: {
+  },
+  persist: [
+    {
+      key: 'app-settings',
+      pick: ['settings'],
+      storage: localStorage,
+    },
+    {
+      key: 'app-default',
+      pick: ['defaultConfig'],
+      storage: localStorage,
+    },
+    {
+      key: 'app-menu-state',
+      pick: ['menuState'],
+      storage: sessionStorage,
+    },
+    {
+      key: 'app-keep-alive-list',
+      pick: ['cachedList'],
+      storage: sessionStorage,
+    },
+  ],
 })

@@ -20,8 +20,8 @@ export default defineConfig(({ mode }) => {
     },
     server: {
       proxy: {
-        '/api': {
-          target: env.VITE_API_BASE_URL,
+        [env.VITE_API_BASE_URL]: {
+          target: 'http://192.168.110.91:82/prod-api',
           changeOrigin: true,
           rewrite: path => path.replace(/^\/api/, ''),
         },

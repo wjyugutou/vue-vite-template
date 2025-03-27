@@ -18,6 +18,21 @@ const sidebarStyle = computed<CSSProperties>(() => ({
   left: 0,
   top: settings.value.layoutMode === 'vertical' ? 0 : 'var(--header-height)',
 }))
+
+// 初始化激活菜单
+function initActiveMenu() {
+  console.log('initActiveMenu')
+
+  const path = useRoute().path
+  const menu = menus.value.flatMap(menu => menu.children!).find(menu => menu?.path === path)
+
+  if (menu) {
+    menuState.value.defaultActive = menu.path
+    menuState.value.defaultOpeneds = menu.children?.map(child => child.path) || []
+  }
+}
+
+initActiveMenu()
 </script>
 
 <template>

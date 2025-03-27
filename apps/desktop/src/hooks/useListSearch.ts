@@ -14,8 +14,9 @@ export function useListSearch<T>(request: Request<T>, defaultForm: Record<string
     total: 0,
   })
 
-  function handleSearch() {
+  function search() {
     loading.value = true
+
     request({
       ...searchForm.value,
       pageNum: pagination.pageNum,
@@ -28,6 +29,11 @@ export function useListSearch<T>(request: Request<T>, defaultForm: Record<string
       .finally(() => {
         loading.value = false
       })
+  }
+
+  function handleSearch() {
+    pagination.pageNum = 1
+    search()
   }
 
   function handleReset() {
@@ -44,6 +50,7 @@ export function useListSearch<T>(request: Request<T>, defaultForm: Record<string
     data,
     loading,
     ...toRefs(pagination),
+    search,
     handleSearch,
     handleReset,
   }

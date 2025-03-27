@@ -13,10 +13,12 @@
     "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
+    "@iconify-json/carbon": "^1.2.8",
     "@repo/api": "workspace:*",
     "@repo/config": "workspace:*",
     "@repo/utils": "workspace:*",
     "alova": "^3.2.10",
+    "pinia-plugin-persistedstate": "^4.2.0",
     "vant": "^4.9.18"
   },
   "devDependencies": {

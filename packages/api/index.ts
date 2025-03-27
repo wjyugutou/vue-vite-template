@@ -1,5 +1,6 @@
 export * from './request'
 
+export * from './src/common'
 export * from './src/mock'
 export * from './src/system/dept'
 export * from './src/system/dict/data'
