@@ -31,6 +31,7 @@ export function generatePlugins(mode: 'development' | 'production' | string, env
         './src/hooks',
         './src/store',
         './src/composables',
+        './src/utils',
       ],
       vueTemplate: true,
     }),

@@ -43,8 +43,6 @@ const { data: deptOptions } = useRequest(deptTreeSelectApi, {
 })
 
 function filterNode(value: string, data: any) {
-  console.log('filterNode', data)
-
   if (!value)
     return true
   return data.label.includes(value)
@@ -52,15 +50,9 @@ function filterNode(value: string, data: any) {
 
 /** 节点单击事件 */
 function handleNodeClick(data: any) {
-  console.log('handleNodeClick', data)
-
   searchForm.value.deptId = data.id
   search()
 }
-
-watchEffect(() => {
-  console.log(deptOptions.value)
-})
 
 const checkedList = ref(false)
 

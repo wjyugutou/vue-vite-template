@@ -1,5 +1,5 @@
 import router from '@/router'
-import { setInterceptor } from 'api'
+import { setInterceptor } from '@repo/api'
 
 const codeMap: Record<string, string> = {
   401: '请先登录',

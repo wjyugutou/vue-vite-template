@@ -1,8 +1,7 @@
 import type { RouteRecordRawC } from '@/router/type'
-import type { LoginResult, UserInfo } from 'api'
-import router, { resetRouter } from '@/router'
-import { basicRoutes } from '@/router/routes'
-import { getUserMenuApi, logoutApi, userInfoApi } from 'api'
+import type { LoginResult, UserInfo } from '@repo/api'
+import router from '@/router'
+import { logoutApi, userInfoApi, userRouterApi } from '@repo/api'
 
 interface UserState {
   userInfo: UserInfo | null
@@ -15,10 +14,10 @@ interface UserState {
 export const useUserStore = defineStore('user', {
   state: () => ({
     userInfo: null,
-    routes: [] as RouteRecordRawC[],
-    menus: [] as RouteRecordRawC[],
-    roles: [] as string[],
-    permissions: [] as string[],
+    routes: [],
+    menus: [],
+    roles: [],
+    permissions: [],
   }) as UserState,
   getters: {
   },
@@ -60,13 +59,14 @@ export const useUserStore = defineStore('user', {
       }
     },
     async getUserRoutes() {
-      const userRoutes = (await getUserMenuApi<RouteRecordRawC>()).data
+      const userRoutes = (await userRouterApi())
+
       this.routes = userRoutes
 
-      const menus = [...basicRoutes].find(item => item.name === 'Index')!.children!.concat(userRoutes)
+      const menus = setupMenu(userRoutes)
       this.menus = menus
 
-      resetRouter(userRoutes)
+      setupRoutes(structuredClone(userRoutes))
     },
   },
   persist: [

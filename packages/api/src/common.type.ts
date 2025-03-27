@@ -41,3 +41,27 @@ export interface Dept {
   id: string
   name: string
 }
+
+export interface RouterResultItem {
+  children: RouterResultItem[]
+  component: string
+  hidden: boolean
+  name: string
+  path: string
+  redirect: string
+  alwaysShow: boolean
+  meta: {
+    /** 标题 */
+    title: string
+    /** 图标 */
+    icon?: string
+    /** 排序 */
+    order?: number
+    /** 是否缓存 */
+    noCache?: boolean
+    /** 是否显示面包屑 如果设置为false，则不会在breadcrumb面包屑中显示 */
+    breadcrumb?: boolean
+  }
+}
+
+export type RouterResult = RouterResultItem[]

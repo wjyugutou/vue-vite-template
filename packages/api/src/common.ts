@@ -1,4 +1,4 @@
-import type { DeptTreeSelect, LoginParams, LoginResult, UserInfoResult } from './common.type'
+import type { DeptTreeSelect, LoginParams, LoginResult, RouterResult, UserInfoResult } from './common.type'
 import request from '../request'
 
 export * from './common.type'
@@ -38,4 +38,11 @@ export function userInfoApi() {
       original: true,
     },
   })
+}
+
+/**
+ * 用户路由
+ */
+export function userRouterApi() {
+  return request.Get<RouterResult>('/system/menu/getRouters')
 }
