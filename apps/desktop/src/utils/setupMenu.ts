@@ -9,8 +9,6 @@ export function setupMenu(routes: RouterResult) {
 
   const menu = defaultMenu.concat(userMenu)
 
-  console.log('menu', menu)
-
   return menu
 }
 

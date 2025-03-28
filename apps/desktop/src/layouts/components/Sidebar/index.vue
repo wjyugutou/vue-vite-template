@@ -21,8 +21,6 @@ const sidebarStyle = computed<CSSProperties>(() => ({
 
 // 初始化激活菜单
 function initActiveMenu() {
-  console.log('initActiveMenu')
-
   const path = useRoute().path
   const menu = menus.value.flatMap(menu => menu.children!).find(menu => menu?.path === path)
 
@@ -33,15 +31,24 @@ function initActiveMenu() {
 }
 
 initActiveMenu()
+
+const menuItems = computed(() => {
+  return menus.value.flatMap(menu => menu.children!).filter(menu => !menu.meta?.hideInMenu)
+})
+
+function getMenuItems() {
+  return menus.value.flatMap(menu => menu.children!).filter(menu => !menu.meta?.hideInMenu)
+}
+
+console.log(menuItems)
 </script>
 
 <template>
   <div>
     <!-- sidebar 占位 -->
     <div :style="sidebarSeatStyle" class="h-0 transition-all" />
-    <ElMenu
+    <AMenu
       :style="sidebarStyle" class="sidebar"
-      :hide-timeout="0"
       :collapse-transition="false"
       :default-openeds="menuState.defaultOpeneds"
       :default-active="menuState.defaultActive"
@@ -49,18 +56,18 @@ initActiveMenu()
     >
       <Logo v-if="settings.layoutMode === 'vertical'" class="flex-shrink-0 b-b b-b-[var(--el-border-color)] px-20px" />
 
-      <ElScrollbar class="flex-1">
+      <ScrollView class="flex-1">
         <template v-for="menu in menus" :key="menu.path">
           <SidebarItem v-if="!menu.meta?.hideInMenu" :item="menu" />
         </template>
-      </ElScrollbar>
+      </ScrollView>
       <div class="h-[var(--sidebar-bottom-height)] w-full flex-shrink-0 content-center px-4">
         <div
           class="i-carbon-distribute-horizontal-left cursor-pointer hover:bg-primary/90" :class="{ 'bg-primary/90': settings.sidebarCollapse }"
           @click="settings.sidebarCollapse = !settings.sidebarCollapse"
         />
       </div>
-    </ElMenu>
+    </AMenu>
   </div>
 </template>
 

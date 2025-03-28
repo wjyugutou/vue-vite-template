@@ -10,6 +10,8 @@ declare module 'vue-router' {
     hiddenInMenu?: boolean
     /** 是否外链 */
     link?: string
+    /** 激活路径 */
+    activePath?: string
   }
 }
 
