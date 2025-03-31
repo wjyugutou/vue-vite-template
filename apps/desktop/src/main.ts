@@ -1,17 +1,16 @@
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { createApp } from 'vue'
-import App from './App.vue'
 
+import App from './App.vue'
 import directivePlugins from './directives'
+
 import router from './router'
 
 import '@unocss/reset/tailwind.css'
-import 'element-plus/theme-chalk/index.css'
 
 import 'virtual:uno.css'
-import 'element-plus/theme-chalk/dark/css-vars.css'
-
 import '@/styles/index.css'
+
 import '@/router/permission'
 
 import '@/api/settings'

@@ -72,7 +72,7 @@ function goHome() {
       class="md:1/3 h-1/3 w-1/2 lg:w-1/4"
     />
     <div class="text-center">
-      <ElButton type="primary" @click="goHome">返回首页</ElButton>
+      <AButton type="primary" @click="goHome">返回首页</AButton>
     </div>
   </div>
 </template>

@@ -21,7 +21,7 @@ if (tags.value.findIndex(tag => tag.path === route.path) === -1) {
 
 watch(route, () => {
   // 修改defaultActive
-  menuState.value.defaultActive = route.meta?.activePath || route.path
+  menuState.value.active = route.meta?.activePath || route.path
 
   if (tags.value.findIndex(tag => tag.path === route.path) === -1) {
     if (route.meta.keepAlive) {
@@ -52,7 +52,7 @@ function handleClose(e: Event, tag: Tag) {
     <div class="tag-view">
       <RouterLink
         v-for="tag in tags" :key="tag.path" :to="tag.path"
-        class="group flex cursor-pointer items-center justify-between rounded hover:(bg-primary text-white)"
+        class="group hover:bg-primary flex cursor-pointer items-center justify-between rounded hover:(text-white)"
         :class="{ 'bg-primary text-white': tag.path === route.path }"
       >
         <span class="flex-1 whitespace-nowrap px-2 text-12px">{{ tag.title }}</span>
@@ -65,7 +65,7 @@ function handleClose(e: Event, tag: Tag) {
 
 <style scoped>
 .tag-view {
-  @apply  h-[var(--tag-view-height)] flex gap-2 border-b b-b-[var(--el-border-color)] px-2 py-1;
+  @apply  h-[var(--tag-view-height)] flex gap-2 border-b b-b-[var(--colorBorder)] px-2 py-1;
   width: fit-content;
   min-width: 100%;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);

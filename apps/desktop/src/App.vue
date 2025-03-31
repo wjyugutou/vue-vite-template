@@ -5,10 +5,14 @@ import dayjs from 'dayjs'
 import 'dayjs/locale/zh-cn'
 
 dayjs.locale('zh-cn')
+
+useAntdThemeToCssVar()
 </script>
 
 <template>
   <AConfigProvider :locale="zhCN">
-    <RouterView />
+    <AStyleProvider hash-priority="high">
+      <RouterView />
+    </AStyleProvider>
   </AConfigProvider>
 </template>

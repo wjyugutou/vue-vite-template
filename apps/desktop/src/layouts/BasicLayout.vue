@@ -13,7 +13,7 @@ const { cachedList } = storeToRefs(useAppStore())
 <template>
   <div class="h-100vh w-100vw flex">
     <Sidebar />
-    <div class="mt-[var(--header-height)] h-[calc(100vh-var(--header-height))] w-[var(--sidebar-width)] flex flex-grow-1 flex-col">
+    <!-- <div class="mt-[var(--header-height)] h-[calc(100vh-var(--header-height))] w-[var(--sidebar-width)] flex flex-grow-1 flex-col">
       <Navbar />
       <main class="h-full flex-1 overflow-hidden">
         <IFrame v-if="route.meta.iframeSrc" />
@@ -30,14 +30,6 @@ const { cachedList } = storeToRefs(useAppStore())
         </ScrollView>
       </main>
     </div>
-    <Settings />
+    <Settings /> -->
   </div>
 </template>
-
-<style scoped>
-.scroll-view {
-  & :deep(.el-scrollbar__view) {
-    min-height: 100%;
-  }
-}
-</style>

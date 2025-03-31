@@ -69,7 +69,7 @@ watchEffect(() => {
         Go
       </button>
     </div>
-
+    <!--
     <ImageUpload />
 
     <SimpleTable
@@ -78,6 +78,6 @@ watchEffect(() => {
       :total="100"
       :current-page="1"
       :page-size="10"
-    />
+    /> -->
   </div>
 </template>

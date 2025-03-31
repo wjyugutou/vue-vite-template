@@ -16,8 +16,8 @@ interface AppState {
   settings: Settings
   defaultConfig: Default
   menuState: {
-    defaultActive: string
-    defaultOpeneds: string[]
+    selectedKeys: string[]
+    openKeys: string[]
   }
   cachedList: string[]
 }
@@ -36,9 +36,9 @@ export const useAppStore = defineStore('app', {
     },
     menuState: {
       // 默认激活的菜单
-      defaultActive: '',
+      selectedKeys: [],
       // 默认展开的菜单
-      defaultOpeneds: [],
+      openKeys: [],
     },
     // 默认缓存的页面
     cachedList: [],

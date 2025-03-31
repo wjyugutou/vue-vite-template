@@ -1,5 +1,6 @@
 import router from '@/router'
 import { setInterceptor } from '@repo/api'
+import { message } from 'ant-design-vue'
 
 const codeMap: Record<string, string> = {
   401: '请先登录',
@@ -25,7 +26,7 @@ setInterceptor({
             return instance.meta?.original ? res : res.data
           }
           else {
-            ElMessage.error(`${instance.url}: ${codeMap[res.code as string] || res.msg}`)
+            message.error(`${instance.url}: ${codeMap[res.code as string] || res.msg}`)
 
             if (res.code === 401) {
               router.push({
@@ -42,12 +43,12 @@ setInterceptor({
         return await response.text()
       }
       else {
-        ElMessage.error(`${instance.url}: ${response.statusText}`)
+        message.error(`${instance.url}: ${response.statusText}`)
         return Promise.reject(response)
       }
     },
     onError: (error, instance) => {
-      ElMessage.error(`${instance.url}: ${error.message}`)
+      message.error(`${instance.url}: ${error.message}`)
       return Promise.reject(error)
     },
   },

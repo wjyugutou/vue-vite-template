@@ -17,11 +17,11 @@ const { pageSize, pageNum, total, data, loading, searchForm, search, handleSearc
 })
 
 const formItems: FormItem[] = [
-  { prop: 'username', label: '用户名', span: 8, type: 'input', placeholder: '请输入用户名' },
-  { prop: 'phone', label: '手机号', span: 8, type: 'input', placeholder: '请输入手机号' },
-  { prop: 'status', label: '状态', span: 8, type: 'select', options: [{ label: '启用', value: '1' }, { label: '禁用', value: '0' }], placeholder: '请选择状态' },
+  { name: 'username', label: '用户名', span: 8, type: 'input', placeholder: '请输入用户名' },
+  { name: 'phone', label: '手机号', span: 8, type: 'input', placeholder: '请输入手机号' },
+  { name: 'status', label: '状态', span: 8, type: 'select', options: [{ label: '启用', value: '1' }, { label: '禁用', value: '0' }], placeholder: '请选择状态' },
   {
-    prop: 'createTime', label: '创建时间', span: 8, type: 'date',
+    name: 'createTime', label: '创建时间', span: 8, type: 'date',
     other: { type: 'daterange', startPlaceholder: '开始日期', endPlaceholder: '结束日期' } },
 ]
 

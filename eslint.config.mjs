@@ -5,7 +5,7 @@ export default antfu({
   yaml: false,
   test: false,
   jsx: false,
-  unocss: true,
+  unocss: { attributify: false },
 }, [
   {
     rules: {

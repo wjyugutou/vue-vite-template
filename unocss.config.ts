@@ -7,23 +7,6 @@ import {
 } from 'unocss'
 
 export default defineConfig({
-  theme: {
-    colors: {
-      'primary': 'var(--el-color-primary)',
-      'primary-hover': 'var(--el-color-primary-light-3)',
-      'success': 'var(--el-color-success)',
-      'warning': 'var(--el-color-warning)',
-      'danger': 'var(--el-color-danger)',
-      'info': 'var(--el-color-info)',
-    },
-    breakpoints: {
-      'sm': '640px',
-      'md': '768px',
-      'lg': '1024px',
-      'xl': '1280px',
-      '2xl': '1536px',
-    },
-  },
   variants: [
     (matcher) => {
       if (!matcher.startsWith('group-hover:'))
@@ -43,6 +26,10 @@ export default defineConfig({
     presetIcons({
       scale: 1.2,
       warn: true,
+      prefix: ['i-'],
+      extraProperties: {
+        display: 'inline-block',
+      },
     }),
   ],
   transformers: [

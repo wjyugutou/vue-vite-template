@@ -3,7 +3,7 @@ import Vue from '@vitejs/plugin-vue'
 import { codeInspectorPlugin } from 'code-inspector-plugin'
 import UnoCSS from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import Compression from 'vite-plugin-compression'
 
@@ -25,7 +25,7 @@ export function generatePlugins(mode: 'development' | 'production' | string, env
         'vue-router',
         '@vueuse/core',
       ],
-      resolvers: [ElementPlusResolver()],
+      resolvers: [AntDesignVueResolver()],
       dts: './types/auto-imports.d.ts',
       dirs: [
         './src/hooks',
@@ -38,7 +38,7 @@ export function generatePlugins(mode: 'development' | 'production' | string, env
 
     // https://github.com/antfu/vite-plugin-components
     Components({
-      resolvers: [ElementPlusResolver()],
+      resolvers: [AntDesignVueResolver({ importStyle: false })],
       dts: './types/components.d.ts',
     }),
 
