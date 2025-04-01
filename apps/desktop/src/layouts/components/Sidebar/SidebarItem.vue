@@ -23,7 +23,6 @@ const key = computed(() => `${props.parentPath ? `${props.parentPath}/` : ''}${p
   <template v-else>
     <AMenuItem :key="key" :route="item">
       <!-- <span v-if="item.meta?.icon" :class="  item.meta.icon" class="mr-4" /> -->
-      <!-- <span class="icon i-carbon-user" /> -->
       <span class="icon i-carbon-user" />
       <span>{{ item.meta?.title }}</span>
     </AMenuItem>

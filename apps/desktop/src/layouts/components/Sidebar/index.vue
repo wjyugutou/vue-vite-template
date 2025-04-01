@@ -67,7 +67,11 @@ function handleClick(menuInfo: MenuInfo) {
       </ScrollView>
       <div class="h-[var(--sidebar-bottom-height)] w-full flex-center flex-shrink-0 b-t px-4">
         <div
-          class="i-carbon-distribute-horizontal-left hover:bg-primary/90 cursor-pointer" :class="{ 'bg-primary/90': settings.sidebarCollapse }"
+          class="hover:bg-primary/90 cursor-pointer" :class="{
+            'bg-primary/90': settings.sidebarCollapse,
+            'i-ant-design-pic-left-outlined': !settings.sidebarCollapse,
+            'i-ant-design-pic-right-outlined': settings.sidebarCollapse,
+          }"
           @click="settings.sidebarCollapse = !settings.sidebarCollapse"
         />
       </div>

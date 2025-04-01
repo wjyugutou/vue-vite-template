@@ -1,26 +1,20 @@
-export interface Column {
-  prop?: string
-  label: string
-  width?: number | string
-  minWidth?: number | string
-  align?: 'left' | 'center' | 'right'
-  sortable?: boolean
-  fixed?: boolean | 'left' | 'right'
-  slot?: string
-  render?: (row: any, index: number) => any
-  formatter?: (value: any, row: any, index: number) => string
-}
+import type { TablePaginationConfig, TableProps } from 'ant-design-vue'
+import type { FilterValue, SorterResult } from 'ant-design-vue/es/table/interface'
 
 export interface Props {
-  columns: Column[]
-  tableData: any[]
-  height?: string | number
-  border?: boolean
-  stripe?: boolean
-  selection?: boolean
+  columns: TableProps['columns']
+  dataSource?: any[]
   index?: boolean
-  pagination?: boolean
+  rowSelection?: true | TableProps['rowSelection']
+  pagination?: Omit<TableProps['pagination'], 'total' | 'current' | 'pageSize'>
+  loading?: boolean
   total?: number
-  currentPage?: number
+  current?: number
   pageSize?: number
+}
+
+export interface ChangeEventParams {
+  pagination: Pick<TablePaginationConfig, 'current' | 'pageSize'>
+  filters: Record<string, FilterValue | null>
+  sorter: SorterResult<any> | SorterResult<any>[]
 }

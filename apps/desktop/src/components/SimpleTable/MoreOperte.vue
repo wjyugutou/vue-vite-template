@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { ArrowDown } from '@element-plus/icons-vue'
-
 const props = withDefaults(defineProps<{
   max?: number
 }>(), {
@@ -26,15 +24,19 @@ const moreSlotList = computed(() => {
   <template v-for="slot, index in slotList" :key="index">
     <component :is="slot" v-if="index < max" />
   </template>
-  <ElTooltip :effect="isDark ? 'dark' : 'light'">
-    <ElButton link type="primary">
-      更多<div class="i-carbon-chevron-down" />
-    </ElButton>
+  <ATooltip :color="isDark ? 'black' : 'white'" placement="bottom">
+    <AButton class="flex-center inline-flex" size="small" type="link">
+      更多<span class="i-ant-design-down-outlined" />
+    </AButton>
 
-    <template #content>
-      <div v-for="slot, index in moreSlotList" :key="index" class="">
-        <component :is="slot" />
+    <template #title>
+      <div v-for="slot, index in moreSlotList" :key="index" class="more-operte-list">
+        <component :is="slot" class="dark:text-white" />
       </div>
     </template>
-  </ElTooltip>
+  </ATooltip>
 </template>
+
+<style scoped>
+
+</style>

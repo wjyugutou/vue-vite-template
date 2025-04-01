@@ -38,6 +38,12 @@ export const useUserStore = defineStore('user', {
         this.menus = []
         this.roles = []
         this.permissions = []
+
+        const { menuState, tags } = storeToRefs(useAppStore())
+        menuState.value.openKeys = []
+        menuState.value.selectedKeys = ['/']
+        tags.value = [{ path: '/', title: '首页' }]
+
         router.replace('/login')
       }
       catch (error) {

@@ -65,3 +65,9 @@ export interface RouterResultItem {
 }
 
 export type RouterResult = RouterResultItem[]
+
+export interface Result<T = any> {
+  code: number
+  msg: string
+  data: T
+}

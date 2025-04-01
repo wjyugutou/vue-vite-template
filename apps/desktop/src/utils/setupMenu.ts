@@ -30,7 +30,7 @@ function getMenu(routes: RouterResult): RouteRecordRawC[] {
       component: item.component,
       meta: {
         hidden: item.hidden,
-        keepAlive: item.meta?.noCache,
+        keepAlive: !item.meta?.noCache,
         icon: item.meta?.icon,
         title: item.meta?.title,
         order: item.meta?.order,

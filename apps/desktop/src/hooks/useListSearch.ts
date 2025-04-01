@@ -1,5 +1,5 @@
 type Request<T> = (query: any) => Promise<{
-  data: T[]
+  rows: T[]
   total: number
 }>
 
@@ -23,7 +23,7 @@ export function useListSearch<T>(request: Request<T>, defaultForm: Record<string
       pageSize: pagination.pageSize,
     })
       .then((res) => {
-        data.value = res.data
+        data.value = res.rows
         pagination.total = res.total
       })
       .finally(() => {

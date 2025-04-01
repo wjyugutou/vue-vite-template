@@ -1,5 +1,7 @@
 <script lang="ts" setup>
-import type { ElImage, UploadProps, UploadUserFile } from 'element-plus'
+import type { Result } from '@repo/api'
+import type { UploadFile, UploadProps } from 'ant-design-vue'
+import { message } from 'ant-design-vue'
 import { isVideoFile } from 'utils'
 import { ref } from 'vue'
 
@@ -11,20 +13,29 @@ const props = withDefaults(defineProps<{
   accept: 'image/*,video/*',
 })
 
+const action = `11${import.meta.env.VITE_API_BASE_URL}11/file/upload`
+const headers = {
+  Authorization: `Bearer ${useToken()}`,
+}
+
 const modelValue = defineModel<string[]>({ default: [] })
 
-const fileList = ref<UploadUserFile[]>([
+const uploadFileList = ref<UploadFile[]>([
   {
     name: 'food.jpeg',
     url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+    uid: '1',
+    status: 'done',
   },
   {
     name: 'plant-1.png',
     url: '/images/plant-1.png',
+    uid: '2',
   },
   {
     name: 'flower.webm',
     url: 'https://5a5f653e-5f16-497b-a085-f93de26b4348.mdnplay.dev/shared-assets/videos/flower.webm',
+    uid: '3',
   },
 ])
 
@@ -32,72 +43,46 @@ const fileList = ref<UploadUserFile[]>([
 const dialogVisible = ref(false)
 const previewUrl = ref('')
 const previewUrlList = computed(() => {
-  return fileList.value.map(item => item.url!)
+  return uploadFileList.value.map(item => item.url!)
 })
-
-const handleRemove: UploadProps['onRemove'] = (uploadFile, uploadFiles) => {
-  fileList.value = fileList.value.filter(item => item.url !== uploadFile.url)
-  modelValue.value = modelValue.value.filter(item => item !== uploadFile.url)
-}
 
 const handlePictureCardPreview: UploadProps['onPreview'] = (uploadFile) => {
   previewUrl.value = uploadFile.url!
   dialogVisible.value = true
 }
 
-const handleSuccess: UploadProps['onSuccess'] = (response, uploadFile, uploadFiles) => {
-  fileList.value.push({
-    name: uploadFile.name,
-    url: response.url,
-  })
+const handleChange: UploadProps['onChange'] = ({ file, fileList, event }) => {
+  console.log({ file, fileList, event })
 
-  modelValue.value.push(response.url)
+  if (file.status === 'done') {
+    const response = file.response as Result
+    if (response.code === 200) {
+      modelValue.value.push(response.data.url)
+    }
+    else {
+      message.error(response.msg)
+      uploadFileList.value = uploadFileList.value.filter(item => item.uid !== file.uid)
+    }
+  }
 }
 
-const handleError: UploadProps['onError'] = (error, uploadFile, uploadFiles) => {
-  ElMessage.error(error.message)
-}
-
-function handleClickPreview(file: UploadUserFile) {
-  dialogVisible.value = true
-  previewUrl.value = file.url!
-}
-
-function handleClickRemove(file: UploadUserFile) {
-  fileList.value = fileList.value.filter(item => item.url !== file.url)
+const handleRemove: UploadProps['onRemove'] = (file) => {
+  modelValue.value = modelValue.value.filter(item => item !== (file.response as Result).data.url)
 }
 </script>
 
 <template>
   <div>
-    <ElUpload
-      :file-list="fileList"
-      action="http://127.0.0.1:4523/m2/4595320-4244870-default/266980986"
+    <AUpload
+      v-model:file-list="uploadFileList"
+      :action="action" :headers="headers"
       :list-type="listType"
-      :on-preview="handlePictureCardPreview"
-      :on-remove="handleRemove"
-      :on-success="handleSuccess"
-      :on-error="handleError"
+      @change="handleChange"
+      @remove="handleRemove"
+      @preview="handlePictureCardPreview"
     >
-      <div class="i-carbon-add text-8" />
-      <template v-if="listType === 'picture-card'" #file="{ file }">
-        <div class="file-item h-full w-full">
-          <!-- 视频 -->
-          <div v-if="isVideoFile(file.name)" class="h-full w-full">
-            <video class="h-full w-full object-cover" :src="file.url" controls />
-          </div>
-          <!-- 图片 -->
-          <div v-else class="h-full w-full">
-            <ElImage class="h-full w-full object-cover" :src="file.url" />
-          </div>
-
-          <div class="mask items-center justify-center gap-2">
-            <div class="i-carbon-view cursor-pointer text-4 hover:text-primary" @click="handleClickPreview(file)" />
-            <div class="i-carbon-trash-can cursor-pointer text-4 hover:text-primary" @click="handleClickRemove(file)" />
-          </div>
-        </div>
-      </template>
-    </ElUpload>
+      <div class="i-ant-design-plus-outlined text-8" />
+    </AUpload>
 
     <ImagePreview v-model:visible="dialogVisible" v-model:url="previewUrl" :url-list="previewUrlList" />
   </div>

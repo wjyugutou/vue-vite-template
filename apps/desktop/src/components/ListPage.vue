@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { FormItem } from '@/components/SimpleForm/type'
-import type { Column } from '@/components/SimpleTable/type'
-import { Refresh, Search } from '@element-plus/icons-vue'
+import type { FormItem, Props as FormProps } from '@/components/SimpleForm/type'
+import type { ChangeEventParams, Props } from '@/components/SimpleTable/type'
+import type { TableProps } from 'ant-design-vue'
 
 const props = withDefaults(defineProps<{
   tableData: Record<string, any>[]
@@ -9,23 +9,22 @@ const props = withDefaults(defineProps<{
   total: number
   pageSize: number
   pageNum: number
-  columns: Column[]
+  columns: Props['columns']
   formItems: FormItem[]
-  labelWidth?: string | number
+  labelCol?: FormProps['labelCol']
   handleSearch: () => void
   handleReset: () => void
-  pageSizes?: number[]
   layout?: string
-  selection?: boolean
+  rowSelection?: true | TableProps['rowSelection']
+  index?: boolean
 }>(), {
-  pageSizes: () => [10, 20, 50, 100],
-  layout: 'total, sizes, prev, pager, next, jumper',
+  index: true,
 })
 
 const emit = defineEmits<{
-  (e: 'update:pageNum', val: number): void
-  (e: 'update:pageSize', val: number): void
-  (e: 'selectionChange', val: any): void
+  'update:pageNum': [number]
+  'update:pageSize': [number]
+  'tableChange': [e: ChangeEventParams]
 }>()
 
 const searchForm = defineModel<Record<string, any>>({ required: true })
@@ -37,21 +36,14 @@ const _formItems = computed(() => {
 })
 
 const tableSlots = computed(() => {
-  return props.columns.filter(item => item.slot).map(item => item.slot)
+  // @ts-expect-error dataIndex
+  return props.columns!.filter(item => item.key === 'slot').map(item => item.dataIndex)
 })
 
-function handleCurrentChange(val: number) {
-  emit('update:pageNum', val)
-  props.handleSearch()
-}
-
-function handleSizeChange(val: number) {
-  emit('update:pageSize', val)
-  props.handleSearch()
-}
-
-function handleSelectionChange(val: any) {
-  emit('selectionChange', val)
+function handleChange({ pagination, filters, sorter }: ChangeEventParams) {
+  emit('update:pageNum', pagination.current!)
+  emit('update:pageSize', pagination.pageSize!)
+  emit('tableChange', { pagination, filters, sorter })
 }
 </script>
 
@@ -59,30 +51,41 @@ function handleSelectionChange(val: any) {
   <div class="size-full flex flex-1 flex-col p-2">
     <div class="search-form">
       <slot name="search">
-        <SimpleForm v-model="searchForm" :form-items="_formItems" :label-width="labelWidth">
+        <SimpleForm v-model="searchForm" :form-items="_formItems" :label-col="labelCol">
           <template #search>
-            <ElButton type="primary" :icon="Search" @click="handleSearch"> 搜索 </ElButton>
-            <ElButton :icon="Refresh" @click="handleReset"> 重置 </ElButton>
+            <AButton type="primary" class="ant-btn" @click="handleSearch">
+              <template #icon>
+                <div class="i-ant-design-search-outlined" />
+              </template>
+              <span>搜索</span>
+            </AButton>
+            <AButton class="ant-btn ml-2" @click="handleReset">
+              <template #icon>
+                <div class="i-ant-design-reload-outlined" />
+              </template>
+              <span>重置</span>
+            </AButton>
           </template>
         </SimpleForm>
       </slot>
     </div>
-    <div v-loading="loading" class="search-table h-0 flex flex-1 flex-col">
+    <div class="search-table h-0 flex flex-1 flex-col">
       <slot name="table">
-        <SimpleTable :columns="columns" :table-data="tableData" :selection="selection" @selection-change="handleSelectionChange">
+        <SimpleTable
+          :columns="columns" :data-source="tableData"
+          :loading="loading" :index="index" :row-selection="rowSelection"
+          :total="total" :current="pageNum" :page-size="pageSize"
+          @change="handleChange"
+        >
           <template #header>
             <slot name="table-header" />
           </template>
 
-          <template v-for="slot in tableSlots" #[slot]="{ row, index }">
-            <slot :name="slot" :row="row" :index="index" />
+          <template v-for="slot in tableSlots" #[slot]="{ record, index, column, text }">
+            <slot :name="slot" :record="record" :column="column" :index="index" :text="text" />
           </template>
         </SimpleTable>
       </slot>
-      <ElPagination
-        class="h-40px justify-end" :total="total" :page-size="pageSize" :page-num="pageNum" :page-sizes="pageSizes" :layout="layout"
-        @current-change="handleCurrentChange" @size-change="handleSizeChange"
-      />
     </div>
   </div>
 </template>

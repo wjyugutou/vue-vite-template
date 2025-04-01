@@ -5,31 +5,31 @@ const { settings } = storeToRefs(useAppStore())
 </script>
 
 <template>
-  <ElDrawer v-model="settings.settingsDrawerVisible" title="设置" append-to-body>
+  <ADrawer v-model:open="settings.settingsDrawerVisible" title="设置" append-to-body>
     <template #default>
-      <ElForm label-position="top">
-        <ElFormItem label="布局模式">
-          <ElRadioGroup v-model="settings.layoutMode">
-            <ElRadio value="side">
+      <AForm :label-col="{ span: 24 }">
+        <AFormItem label="布局模式">
+          <ARadioGroup v-model:value="settings.layoutMode">
+            <ARadio value="side">
               <span>侧边栏</span>
-            </ElRadio>
-            <ElRadio value="vertical">
+            </ARadio>
+            <ARadio value="vertical">
               <span>垂直</span>
-            </ElRadio>
-          </ElRadioGroup>
-        </ElFormItem>
+            </ARadio>
+          </ARadioGroup>
+        </AFormItem>
 
-        <ElFormItem label="标签栏">
-          <ElRadioGroup v-model="settings.showTagView">
-            <ElRadio :value="true">
+        <AFormItem label="标签栏">
+          <ARadioGroup v-model:value="settings.showTagView">
+            <ARadio :value="true">
               <span>显示</span>
-            </ElRadio>
-            <ElRadio :value="false">
+            </ARadio>
+            <ARadio :value="false">
               <span>隐藏</span>
-            </ElRadio>
-          </ElRadioGroup>
-        </ElFormItem>
-      </ElForm>
+            </ARadio>
+          </ARadioGroup>
+        </AFormItem>
+      </AForm>
     </template>
-  </ElDrawer>
+  </ADrawer>
 </template>

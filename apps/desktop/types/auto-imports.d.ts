@@ -326,6 +326,9 @@ declare global {
   // @ts-ignore
   export type { DictItem, DictReturn } from '../src/hooks/useDict'
   import('../src/hooks/useDict')
+  // @ts-ignore
+  export type { Settings, Tag, Default, AppState } from '../src/store/app'
+  import('../src/store/app')
 }
 
 // for vue template auto import

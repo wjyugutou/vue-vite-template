@@ -1,7 +1,12 @@
+import { defineConfig } from 'unocss'
 import config from '../../unocss.config'
 
-export default {
+export default defineConfig({
   ...config,
+  shortcuts: [
+    ...(config.shortcuts as Array<[string, string]>),
+    ['ant-btn', 'inline-flex gap-2 items-center'],
+  ],
   theme: {
     colors: {
       'primary': 'var(--colorPrimary)',
@@ -20,4 +25,4 @@ export default {
       '2xl': '1536px',
     },
   },
-}
+})

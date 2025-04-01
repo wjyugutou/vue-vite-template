@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import type { FormItem } from '@/components/SimpleForm/type'
-import type { Column } from '@/components/SimpleTable/type'
-import { Delete, Download, Plus, Upload } from '@element-plus/icons-vue'
+import type { ChangeEventParams } from '@/components/SimpleTable/type'
+import type { User } from '@repo/api'
+import type { TableProps } from 'ant-design-vue'
+import { deptTreeSelectApi, getListUserApi } from '@repo/api'
 import { useRequest } from 'alova/client'
-import { deptTreeSelectApi, getListUserApi } from 'api'
 import { Pane, Splitpanes } from 'splitpanes'
 import 'splitpanes/dist/splitpanes.css'
 
@@ -17,21 +18,21 @@ const { pageSize, pageNum, total, data, loading, searchForm, search, handleSearc
 })
 
 const formItems: FormItem[] = [
-  { name: 'username', label: '用户名', span: 8, type: 'input', placeholder: '请输入用户名' },
-  { name: 'phone', label: '手机号', span: 8, type: 'input', placeholder: '请输入手机号' },
+  { name: 'userName', label: '用户名', span: 8, type: 'input', placeholder: '请输入用户名' },
+  { name: 'phonenumber', label: '手机号', span: 8, type: 'input', placeholder: '请输入手机号' },
   { name: 'status', label: '状态', span: 8, type: 'select', options: [{ label: '启用', value: '1' }, { label: '禁用', value: '0' }], placeholder: '请选择状态' },
   {
     name: 'createTime', label: '创建时间', span: 8, type: 'date',
     other: { type: 'daterange', startPlaceholder: '开始日期', endPlaceholder: '结束日期' } },
 ]
 
-const columns: Column[] = [
-  { prop: 'username', label: '用户名' },
-  { prop: 'email', label: '邮箱', width: 210 },
-  { prop: 'phone', label: '手机号', width: 120 },
-  { prop: 'status', label: '状态', width: 80, formatter: (row: any) => row.status === '1' ? '启用' : '禁用' },
-  { prop: 'createTime', label: '创建时间' },
-  { slot: 'operation', label: '操作', width: 180 },
+const columns: TableProps['columns'] = [
+  { title: '用户名', dataIndex: 'userName' },
+  { title: '用户账号', dataIndex: 'nickName', width: 210 },
+  { title: '手机号', dataIndex: 'phonenumber', width: 120 },
+  { title: '状态', key: 'slot', dataIndex: 'status' },
+  { title: '创建时间', dataIndex: 'createTime', width: 180 },
+  { title: '操作', key: 'slot', dataIndex: 'operation', width: 200 },
 ]
 handleSearch()
 
@@ -84,17 +85,23 @@ function handleEdit(id: string) {
   console.log('编辑')
 }
 
-function handleSelectionChange(selection: any) {
-  checkedList.value = !selection.length
+function handleTableChange({ pagination, filters, sorter }: ChangeEventParams) {
+  pageNum.value = pagination.current!
+  pageSize.value = pagination.pageSize!
+  search()
+}
+
+function handleStatusChange(record: User) {
+  console.log('状态', record)
 }
 </script>
 
 <template>
   <div class="h-full">
     <Splitpanes class="default-theme">
-      <Pane size="16">
-        <ElInput v-model="deptName" placeholder="请输入部门名称" clearable prefix-icon="Search" style="margin-bottom: 20px" />
-        <ElTree
+      <Pane size="16" class="pr-2">
+        <AInput v-model="deptName" placeholder="请输入部门名称" allow-clear class="mb-2" />
+        <ATree
           ref="deptTreeRef" :data="deptOptions" :props="{ label: 'label', children: 'children' }" :expand-on-click-node="false"
           :filter-node-method="filterNode" node-key="id" highlight-current default-expand-all @node-click="handleNodeClick"
         />
@@ -105,27 +112,39 @@ function handleSelectionChange(selection: any) {
           v-model:page-size="pageSize"
           v-model:page-num="pageNum"
           :loading="loading"
-          :total="total" :table-data="data" :columns="columns" selection
-          :form-items="formItems" :label-width="70"
+          :total="total" :table-data="data" :columns="columns" row-selection
+          :form-items="formItems" :label-col="{ span: 5 }"
           :handle-search="handleSearch"
           :handle-reset="handleReset"
-          @selection-change="handleSelectionChange"
+          @table-change="handleTableChange"
         >
           <template #table-header>
-            <div class="mb-2">
-              <ElButton v-hasPermi="['system:user:add']" type="primary" plain :icon="Plus" @click="handleAdd">新增</ElButton>
-              <ElButton v-hasPermi="['system:user:remove']" type="danger" plain :icon="Delete" :disabled="checkedList" @click="handleDelete()">删除</ElButton>
-              <ElButton v-hasPermi="['system:user:import']" type="info" plain :icon="Upload" @click="handleImport">导入</ElButton>
-              <ElButton v-hasPermi="['system:user:export']" type="warning" plain :icon="Download" @click="handleExport">导出</ElButton>
+            <div class="mb-2 flex items-center gap-2">
+              <AButton v-hasPermi="['system:user:add']" type="primary" @click="handleAdd">
+                新增
+              </AButton>
+              <AButton v-hasPermi="['system:user:remove']" danger :disabled="checkedList" @click="handleDelete()">
+                删除
+              </AButton>
+              <AButton v-hasPermi="['system:user:import']" @click="handleImport">
+                导入
+              </AButton>
+              <AButton v-hasPermi="['system:user:export']" @click="handleExport">
+                导出
+              </AButton>
             </div>
           </template>
 
-          <template #operation="{ row }">
+          <template #status="{ record }">
+            <ASwitch :checked="record.status" checked-value="0" unchecked-value="1" @change="handleStatusChange(record)" />
+          </template>
+
+          <template #operation="{ record }">
             <MoreOperte>
-              <ElButton link type="primary" @click="handleEdit(row.id)"> 编辑 </ElButton>
-              <ElButton link type="primary" @click="handleEdit(row.id)"> 删除 </ElButton>
-              <ElButton link type="primary" @click="handleEdit(row.id)"> 重置密码 </ElButton>
-              <ElButton link type="primary" @click="handleEdit(row.id)"> 分配角色 </ElButton>
+              <AButton size="small" type="link" @click="handleEdit(record.id)"> 编辑 </AButton>
+              <AButton size="small" type="link" @click="handleEdit(record.id)"> 删除 </AButton>
+              <AButton size="small" type="link" @click="handleResetPassword(record.id)"> 重置密码 </AButton>
+              <AButton size="small" type="link" @click="handleAssignRole(record.id)"> 分配角色 </AButton>
             </MoreOperte>
           </template>
         </ListPage>

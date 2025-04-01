@@ -1,4 +1,4 @@
-interface Settings {
+export interface Settings {
   sidebarCollapse: boolean
   layoutMode: 'vertical' | 'side'
   /** 设置抽屉是否可见 */
@@ -7,12 +7,17 @@ interface Settings {
   showTagView: boolean
 }
 
-interface Default {
+export interface Tag {
+  path: string
+  title: string
+}
+
+export interface Default {
   homePath: string
   avatarSrc: string
 }
 
-interface AppState {
+export interface AppState {
   settings: Settings
   defaultConfig: Default
   menuState: {
@@ -20,10 +25,12 @@ interface AppState {
     openKeys: string[]
   }
   cachedList: string[]
+  tags: Tag[]
 }
 
 export const useAppStore = defineStore('app', {
   state: () => ({
+    tags: [{ path: '/', title: '首页' }],
     settings: {
       sidebarCollapse: false,
       layoutMode: 'side',
@@ -66,6 +73,11 @@ export const useAppStore = defineStore('app', {
     {
       key: 'app-keep-alive-list',
       pick: ['cachedList'],
+      storage: sessionStorage,
+    },
+    {
+      key: 'app-tags',
+      pick: ['tags'],
       storage: sessionStorage,
     },
   ],

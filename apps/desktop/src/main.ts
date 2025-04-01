@@ -6,7 +6,7 @@ import directivePlugins from './directives'
 
 import router from './router'
 
-import '@unocss/reset/tailwind.css'
+import '@unocss/reset/tailwind-compat.css'
 
 import 'virtual:uno.css'
 import '@/styles/index.css'

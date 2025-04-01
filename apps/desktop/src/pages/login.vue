@@ -37,8 +37,6 @@ async function handleLogin() {
 
     userStore.login(res)
 
-    // await userStore.getUserInfo()
-
     const path = (redirect as string) || '/'
     router.push(path)
   }

@@ -2,6 +2,7 @@
 import type { Props } from './type'
 
 const props = withDefaults(defineProps<Props>(), {
+  colon: true,
   disabled: false,
   labelCol: () => ({ span: 4 }),
   wrapperCol: (props) => {
@@ -33,7 +34,7 @@ props.formItems.forEach((item) => {
     <ARow :gutter="gutter">
       <ACol v-for="item in formItems" :key="item.name" :span="item.span || 12">
         <slot v-if="item.slot" :name="item.slot" />
-        <AFormItem v-else :label="item.label" v-bind="validateInfos[item.name!]">
+        <AFormItem v-else :label="item.label" v-bind="validateInfos?.[item.name!]" :label-col="item.labelCol" :wrapper-col="item.wrapperCol">
           <AInputPassword
             v-if="item.type === 'input' && item.other?.showPassword" v-model:value="form[item.name!]" class="w-full"
             :placeholder="item.placeholder" :disabled="item.disabled"

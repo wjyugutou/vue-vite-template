@@ -1,27 +1,15 @@
 <script lang="ts" setup>
-defineOptions({ name: 'TagView' })
-
-interface Tag {
-  path: string
-  title: string
-}
+import type { Tag } from '@/store/app'
 
 const route = useRoute()
 const router = useRouter()
-const tags = useSessionStorage<Tag[]>('app-tags', [])
-const { cachedList, menuState } = storeToRefs(useAppStore())
+// const {tags} = useSessionStorage<Tag[]>('app-tags', [{ path: '/', title: '首页' }])
 
-// 如果首页标签不存在，则添加
-if (tags.value.findIndex(tag => tag.path === route.path) === -1) {
-  tags.value.push({
-    path: route.path,
-    title: route.meta.title as string,
-  })
-}
+const { cachedList, menuState, tags } = storeToRefs(useAppStore())
 
 watch(route, () => {
   // 修改defaultActive
-  menuState.value.active = route.meta?.activePath || route.path
+  menuState.value.selectedKeys = [route.meta?.activePath || route.path]
 
   if (tags.value.findIndex(tag => tag.path === route.path) === -1) {
     if (route.meta.keepAlive) {
@@ -34,6 +22,7 @@ watch(route, () => {
     })
   }
 })
+
 function handleClose(e: Event, tag: Tag) {
   e.stopPropagation()
   e.preventDefault()
@@ -52,12 +41,12 @@ function handleClose(e: Event, tag: Tag) {
     <div class="tag-view">
       <RouterLink
         v-for="tag in tags" :key="tag.path" :to="tag.path"
-        class="group hover:bg-primary flex cursor-pointer items-center justify-between rounded hover:(text-white)"
+        class="group hover:bg-primary text-primary flex cursor-pointer items-center justify-between rounded decoration-none hover:(text-white)"
         :class="{ 'bg-primary text-white': tag.path === route.path }"
       >
         <span class="flex-1 whitespace-nowrap px-2 text-12px">{{ tag.title }}</span>
-        <span v-if="tag.path !== '/' && tag.path !== '/home'" class="i-carbon-close hover:scale-80" @click="handleClose($event, tag)" />
-        <span v-else class="i-carbon-pin-filled text-12px" />
+        <span v-if="tag.path === '/' || tag.path === '/home'" class="i-ant-design-pushpin-filled text-12px" />
+        <span v-else class="i-ant-design-close-outlined scale-80 hover:scale-60" @click="handleClose($event, tag)" />
       </RouterLink>
     </div>
   </ScrollView>
@@ -65,7 +54,8 @@ function handleClose(e: Event, tag: Tag) {
 
 <style scoped>
 .tag-view {
-  @apply  h-[var(--tag-view-height)] flex gap-2 border-b b-b-[var(--colorBorder)] px-2 py-1;
+  --at-apply: h-[var(--tag-view-height)] flex gap-2 border-b b-b-[var(--colorBorder)] px-2 py-1;
+
   width: fit-content;
   min-width: 100%;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);

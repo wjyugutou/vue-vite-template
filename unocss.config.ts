@@ -8,6 +8,13 @@ import {
 
 export default defineConfig({
   variants: [
+    /**
+     * 父元素 group 时，子元素 hover 时生效
+     * <div class="group">
+     *  <span class="group-hover:text-red">
+     *  </span>
+     * </div>
+     */
     (matcher) => {
       if (!matcher.startsWith('group-hover:'))
         return matcher

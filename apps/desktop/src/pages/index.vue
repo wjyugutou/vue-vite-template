@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { testApi } from '@repo/api'
-import { useRequest } from 'alova/client'
+import type SimpleTable from '@/components/SimpleTable/index.vue'
+import type { TableProps } from 'ant-design-vue'
+import type { ComponentInstance } from 'vue'
 
 const router = useRouter()
 
@@ -21,26 +22,6 @@ function changeUsename() {
 
   name.value = _name
 }
-
-const columns = [
-  { prop: 'name', label: '姓名' },
-  { prop: 'age', label: '年龄' },
-  { prop: 'gender', label: '性别' },
-]
-
-const tableData = [
-  { name: '张三', age: 18, gender: '男' },
-  { name: '李四', age: 20, gender: '女' },
-  { name: '王五', age: 22, gender: '男' },
-]
-
-const { data, loading, error } = useRequest(testApi)
-
-watchEffect(() => {
-  console.log('data', data.value)
-  console.log('loading', loading.value)
-  console.log('error', error.value)
-})
 </script>
 
 <template>
@@ -69,15 +50,6 @@ watchEffect(() => {
         Go
       </button>
     </div>
-    <!--
     <ImageUpload />
-
-    <SimpleTable
-      :columns="columns" :table-data="tableData"
-      pagination
-      :total="100"
-      :current-page="1"
-      :page-size="10"
-    /> -->
   </div>
 </template>

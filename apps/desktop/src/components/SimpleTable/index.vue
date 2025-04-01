@@ -1,91 +1,131 @@
 <script setup lang="ts">
-import type { Props } from './type'
+import type { ColumnType, TableProps } from 'ant-design-vue/es/table'
+import type { TableRowSelection } from 'ant-design-vue/es/table/interface'
+import type { ChangeEventParams, Props } from './type'
 
 defineOptions({ name: 'SimpleTable' })
-withDefaults(defineProps<Props>(), {
-  // border: true,
-  // stripe: true,
-  selection: false,
+
+/**
+ * column key 为 slot 时，会使用 dataIndex 作为 slot 的 name 进行渲染
+ */
+const props = withDefaults(defineProps<Props>(), {
   index: true,
-  // height: '100%',
+  pagination: () => ({
+    currentKey: 'page',
+    pageSizeKey: 'results',
+    showQuickJumper: true,
+    showSizeChanger: true,
+  }),
 })
 
 const emit = defineEmits<{
-  (e: 'selectionChange', val: any): void
+  change: [props: ChangeEventParams]
+  select: [selectedRowKeys: string[]]
 }>()
 
 defineSlots<{
-  [k: string]: (row: any, index: number) => any
+  [k: string]: (text: any, record: Record<string, any>, index: number, column: ColumnType<any>) => any
 }>()
 
-// 暴露方法
-defineExpose({
+const _columns = computed(() => {
+  const columns = [...props.columns!]
+  if (props.index) {
+    columns.unshift({
+      title: '序号',
+      key: 'index',
+    })
+  }
+  return columns
 })
 
-function handleSelectionChange(val: any) {
-  emit('selectionChange', val)
+// 选中行
+const selectedKeys = ref<string[]>([])
+const onSelectChange: TableRowSelection['onChange'] = (selectedRowKeys, selectedRows) => {
+  selectedKeys.value = selectedRowKeys as string[]
+  emit('select', selectedKeys.value)
+}
+
+const _rowSelection = computed<TableProps['rowSelection']>(() => {
+  return props.rowSelection === true
+    ? { selectedRowKeys: selectedKeys, preserveSelectedRowKeys: false, onChange: onSelectChange } as unknown as TableRowSelection
+    : props.rowSelection
+})
+
+// 分页
+const _pagination = computed<TableProps['pagination']>(() => {
+  return {
+    ...props.pagination,
+    current: props?.current ?? 1,
+    pageSize: props?.pageSize ?? 10,
+    total: props?.total ?? 0,
+  }
+})
+
+// 分页
+const handleChange: TableProps['onChange'] = (pagination, filters, sorter) => {
+  emit('change', { pagination, filters, sorter })
 }
 </script>
 
 <template>
   <div class="h-0 flex flex-1 flex-col">
-    <slot name="header">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center">
-          <slot name="header-left" />
-        </div>
+    <slot name="header" />
 
-        <div>
-          刷新
-        </div>
-      </div>
-    </slot>
-
-    <ElTable
-      v-bind="$attrs"
-      class="flex-1"
-      :data="tableData"
-      :height="height"
-      :border="border"
-      :stripe="stripe"
-      @selection-change="handleSelectionChange"
+    <ATable
+      class="simple-table"
+      sticky :loading="loading"
+      :data-source="dataSource" :columns="_columns"
+      :pagination="_pagination" :row-selection="_rowSelection"
+      @change="handleChange"
     >
-      <!-- 选择列 -->
-      <ElTableColumn v-if="selection" type="selection" width="55" />
-
-      <!-- 序号列 -->
-      <ElTableColumn v-if="index" type="index" label="序号" width="60" />
-
-      <!-- 动态列 -->
-      <template v-for="item in columns" :key="item.prop">
-        <ElTableColumn
-          :prop="item.prop" :align="item.align || 'left'"
-          :label="item.label" :width="item.width"
-          :sortable="item.sortable" :fixed="item.fixed"
-        >
-          <template v-if="item.slot" #default="scope">
-            <slot :name="item.slot" :row="scope.row" :index="scope.$index" />
-          </template>
-          <template v-else-if="item.render || item.formatter" #default="scope">
-            <!-- 自定义渲染函数 -->
-            <template v-if="item.render">
-              <component :is="item.render(scope.row, scope.$index)" />
-            </template>
-            <!-- 格式化函数 -->
-            <template v-else-if="item.formatter">
-              {{ item.formatter(scope.row?.[scope.column.property], scope.row, scope.$index) }}
-            </template>
-          </template>
-        </ElTableColumn>
+      <template #emptyText>
+        <AEmpty />
       </template>
 
-      <template #empty>
-        <ElEmpty description="暂无数据" />
+      <template #bodyCell="{ text, record, index, column }">
+        <template v-if="column.key === 'index'">
+          {{ index + 1 }}
+        </template>
+        <template v-else-if="column.key === 'slot'">
+          <slot :name="column.dataIndex" :record="record" :column="column" :index="index" :text="text" />
+        </template>
       </template>
-    </ElTable>
+    </ATable>
   </div>
 </template>
 
 <style scoped>
+.simple-table {
+  flex: 1;
+  height: 0;
 
+  &  :deep(.ant-spin-nested-loading) {
+    height: 100%;
+
+    &  :deep(.ant-spin-container) {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+
+      & :deep(.ant-table) {
+        flex: 1;
+        overflow: hidden;
+
+        &  :deep(.ant-table-container) {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          overflow: hidden;
+
+          &  :deep(.ant-table-body) {
+            flex: 1;
+            overflow: auto !important;
+          }
+        }
+      }
+    }
+  }
+}
 </style>

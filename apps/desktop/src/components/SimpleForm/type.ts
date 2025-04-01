@@ -6,6 +6,8 @@ export type FormRules = Record<string, any[]>
 export interface FormItem {
   type?: 'input' | 'select' | 'date'
   span?: number
+  labelCol?: FormProps['labelCol']
+  wrapperCol?: FormProps['wrapperCol']
   label?: string
   name?: string
   placeholder?: string
@@ -18,7 +20,7 @@ export interface FormItem {
 }
 
 export interface Props {
-  validateInfos: validateInfos
+  validateInfos?: validateInfos
   formItems: FormItem[]
   gutter?: number
   defaultValue?: Record<string, any>
