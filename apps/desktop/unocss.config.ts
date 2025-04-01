@@ -5,7 +5,7 @@ export default defineConfig({
   ...config,
   shortcuts: [
     ...(config.shortcuts as Array<[string, string]>),
-    ['ant-btn', 'inline-flex gap-2 items-center'],
+    ['ant-btn', 'inline-flex gap-2 items-center justify-center'],
   ],
   theme: {
     colors: {

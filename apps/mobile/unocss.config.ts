@@ -1,8 +1,9 @@
+import { defineConfig } from 'unocss'
 import config from '../../unocss.config'
 
-export default {
+export default defineConfig({
   ...config,
   theme: {
 
   },
-}
+})

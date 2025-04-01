@@ -3,6 +3,7 @@ import type { FormItem } from '@/components/SimpleForm/type'
 import type { ChangeEventParams } from '@/components/SimpleTable/type'
 import type { User } from '@repo/api'
 import type { TableProps } from 'ant-design-vue'
+import type { EventDataNode } from 'ant-design-vue/es/tree'
 import { deptTreeSelectApi, getListUserApi } from '@repo/api'
 import { useRequest } from 'alova/client'
 import { Pane, Splitpanes } from 'splitpanes'
@@ -37,16 +38,21 @@ const columns: TableProps['columns'] = [
 handleSearch()
 
 const deptName = ref()
-const deptTreeRef = ref()
 
 const { data: deptOptions } = useRequest(deptTreeSelectApi, {
   initialData: [],
 })
 
-function filterNode(value: string, data: any) {
-  if (!value)
-    return true
-  return data.label.includes(value)
+const expandedKeys = ref<string[]>([])
+const selectedKeys = ref<string[]>([])
+const checkedKeys = ref<string[]>([])
+
+function filterNode(treeNode: EventDataNode) {
+  console.log(treeNode)
+
+  if (!deptName.value)
+    return false
+  return treeNode.label.includes(deptName.value)
 }
 
 /** 节点单击事件 */
@@ -100,11 +106,27 @@ function handleStatusChange(record: User) {
   <div class="h-full">
     <Splitpanes class="default-theme">
       <Pane size="16" class="pr-2">
-        <AInput v-model="deptName" placeholder="请输入部门名称" allow-clear class="mb-2" />
-        <ATree
+        <AInputSearch v-model:value="deptName" placeholder="请输入部门名称" allow-clear class="mb-2" />
+        <!-- <ATree
           ref="deptTreeRef" :data="deptOptions" :props="{ label: 'label', children: 'children' }" :expand-on-click-node="false"
           :filter-node-method="filterNode" node-key="id" highlight-current default-expand-all @node-click="handleNodeClick"
-        />
+        /> -->
+        <ATree
+          v-model:expanded-keys="expandedKeys"
+          v-model:selected-keys="selectedKeys"
+          v-model:checked-keys="checkedKeys"
+          :tree-data="(deptOptions as any)"
+          auto-expand-parent
+          :field-names="{ key: 'id', title: 'label', children: 'children' }"
+          :filter-tree-node="filterNode"
+        >
+          <template #title="{ label }">
+            <span v-if="label.includes(deptName) && deptName" style="color: #f50">
+              {{ label }}
+            </span>
+            <span v-else>{{ label }}</span>
+          </template>
+        </ATree>
       </Pane>
       <Pane size="84">
         <ListPage
