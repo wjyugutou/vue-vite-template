@@ -26,6 +26,7 @@ props.formItems.forEach((item) => {
 <template>
   <AForm
     :model="form"
+    :layout="layout"
     :label-col="labelCol"
     :wrapper-col="wrapperCol"
     :disabled="disabled"
@@ -33,10 +34,11 @@ props.formItems.forEach((item) => {
   >
     <ARow :gutter="gutter">
       <ACol v-for="item in formItems" :key="item.name" :span="item.span || 12">
-        <slot v-if="item.slot" :name="item.slot" />
-        <AFormItem v-else :label="item.label" v-bind="validateInfos?.[item.name!]" :label-col="item.labelCol" :wrapper-col="item.wrapperCol">
+        <AFormItem :label="item.label" v-bind="validateInfos?.[item.name!]" :label-col="item.labelCol" :wrapper-col="item.wrapperCol">
+          <slot v-if="item.slot" :name="item.slot" />
+
           <AInputPassword
-            v-if="item.type === 'input' && item.other?.showPassword" v-model:value="form[item.name!]" class="w-full"
+            v-else-if="item.type === 'input' && item.other?.showPassword" v-model:value="form[item.name!]" class="w-full"
             :placeholder="item.placeholder" :disabled="item.disabled"
             v-bind="item.other"
           />
@@ -45,19 +47,34 @@ props.formItems.forEach((item) => {
             :placeholder="item.placeholder" :disabled="item.disabled"
             v-bind="item.other"
           />
+          <ATextarea
+            v-else-if="item.type === 'textarea'" v-model:value="form[item.name!]" class="w-full"
+            :placeholder="item.placeholder" :disabled="item.disabled"
+            v-bind="item.other"
+          />
           <ASelect
-            v-else-if="item.type === 'select'" v-model="form[item.name!]" class="w-full"
+            v-else-if="item.type === 'select'" v-model:value="form[item.name!]" class="w-full"
             :options="item.options" :placeholder="item.placeholder" :disabled="item.disabled"
             v-bind="item.other"
           />
           <ADatePicker
-            v-else-if="item.type === 'date'" v-model="form[item.name!]" class="w-full"
+            v-else-if="item.type === 'date'" v-model:value="form[item.name!]" class="w-full"
             :placeholder="item.placeholder" :disabled="item.disabled"
             v-bind="item.other"
           />
+          <ARangePicker
+            v-else-if="item.type === 'rangedate'" v-model:value="form[item.name!]" class="w-full"
+            :disabled="item.disabled"
+            v-bind="item.other"
+          />
           <ATimePicker
-            v-else-if="item.type === 'time'" v-model="form[item.name!]" class="w-full"
+            v-else-if="item.type === 'time'" v-model:value="form[item.name!]" class="w-full"
             :placeholder="item.placeholder" :disabled="item.disabled"
+            v-bind="item.other"
+          />
+          <ARadioGroup
+            v-else-if="item.type === 'radio'" v-model:value="form[item.name!]" class="w-full"
+            :options="item.options" :disabled="item.disabled"
             v-bind="item.other"
           />
         </AFormItem>

@@ -1,38 +1,38 @@
 <script setup lang="ts">
+import type { CSSProperties } from 'vue'
+
 withDefaults(
   defineProps<{
-    colon: boolean
-    border: boolean
-    column: number
-    list?: {
+    colon?: boolean
+    border?: boolean
+    column?: number
+    labelWidth?: string
+    data: Record<string, unknown>
+    list: {
       label: string
       span?: number
-      labelStyle?: string
-      contentStyle?: string
+      labelStyle?: CSSProperties
+      contentStyle?: CSSProperties
       slot?: string
       field: string
       formatter?: (value: unknown, item: any, data: Record<string, unknown>) => string
     }[]
-    data: Record<string, unknown>
-    labelWidth: string
   }>(), {
     colon: false,
     border: true,
     column: 3,
-    list: [] as any,
-    labelWidth: '120px',
   },
 )
 </script>
 
 <template>
-  <ElDescriptions
+  <ADescriptions
     :column="column"
     :colon="colon"
     :border="border"
     :label-style="{ width: labelWidth }"
   >
-    <ElDescriptionsItem
+    <ADescriptionsItem
       v-for="item in list"
       :key="item.label"
       :span="item.span"
@@ -50,6 +50,6 @@ withDefaults(
             : data[item.field]
         }}
       </template>
-    </ElDescriptionsItem>
-  </ElDescriptions>
+    </ADescriptionsItem>
+  </ADescriptions>
 </template>

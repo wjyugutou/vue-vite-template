@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { isVideoFile } from 'utils'
+import { isVideoFile } from '@repo/utils'
 
 const props = defineProps<{
   urlList: string[]

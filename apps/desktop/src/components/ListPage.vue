@@ -16,15 +16,14 @@ const props = withDefaults(defineProps<{
   handleReset: () => void
   layout?: string
   rowSelection?: true | TableProps['rowSelection']
-  index?: boolean
 }>(), {
-  index: true,
 })
 
 const emit = defineEmits<{
   'update:pageNum': [number]
   'update:pageSize': [number]
-  'tableChange': [e: ChangeEventParams]
+  'tableChange': [ChangeEventParams]
+  'select': [string[]]
 }>()
 
 const searchForm = defineModel<Record<string, any>>({ required: true })
@@ -44,6 +43,10 @@ function handleChange({ pagination, filters, sorter }: ChangeEventParams) {
   emit('update:pageNum', pagination.current!)
   emit('update:pageSize', pagination.pageSize!)
   emit('tableChange', { pagination, filters, sorter })
+}
+
+function handleSelect(selectedRowKeys: string[]) {
+  emit('select', selectedRowKeys)
 }
 </script>
 
@@ -73,9 +76,10 @@ function handleChange({ pagination, filters, sorter }: ChangeEventParams) {
       <slot name="table">
         <SimpleTable
           :columns="columns" :data-source="tableData"
-          :loading="loading" :index="index" :row-selection="rowSelection"
+          :loading="loading" :row-selection="rowSelection"
           :total="total" :current="pageNum" :page-size="pageSize"
           @change="handleChange"
+          @select="handleSelect"
         >
           <template #header>
             <slot name="table-header" />

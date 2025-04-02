@@ -1,4 +1,6 @@
-import { reactive, toRefs, type ToRefs } from 'vue'
+import type { ToRefs } from 'vue'
+import request from '@repo/api/request'
+import { reactive, toRefs } from 'vue'
 
 export interface DictItem {
   dictLabel: string
@@ -19,6 +21,8 @@ type Dict<T extends [...string[]]> = {
   [K in T[number]]: DictReturn
 }
 
+const dictMapCache = new Map<string, DictReturn>()
+
 /**
  * 字典hooks
  * @param dicts 字典值
@@ -28,13 +32,19 @@ export function useDict<T extends string[]>(...dicts: T): ToRefs<Dict<T>> {
     prev[item as T[number]] = { list: [], map: {} }
     return prev
   }, {} as Dict<T>)
-
   const dictMap = reactive(initvalue) as Dict<T>
 
   dicts.forEach((dict) => {
-    getDictApi(dict).then((res) => {
-      dictMap[dict as T[number]] = transformDict(res)
-    })
+    if (dictMapCache.has(dict)) {
+      dictMap[dict as T[number]] = dictMapCache.get(dict)!
+    }
+    else {
+      getDictApi(dict).then((res) => {
+        const dictReturn = transformDict(res)
+        dictMap[dict as T[number]] = dictReturn
+        dictMapCache.set(dict, dictReturn)
+      })
+    }
   })
 
   return toRefs(dictMap)

@@ -1,9 +1,11 @@
 <script setup lang="ts">
-defineOptions({ name: 'SystemUser' })
+defineOptions({ name: 'UserEdit' })
+
+const visible = defineModel<boolean>('visible', { required: true })
 </script>
 
 <template>
-  <div>
+  <AModal v-model:open="visible">
     <h1>用户add</h1>
-  </div>
+  </AModal>
 </template>

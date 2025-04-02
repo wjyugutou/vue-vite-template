@@ -4,7 +4,7 @@ import type { validateInfos } from 'ant-design-vue/es/form/useForm'
 export type FormRules = Record<string, any[]>
 
 export interface FormItem {
-  type?: 'input' | 'select' | 'date'
+  type?: 'input' | 'textarea' | 'select' | 'date' | 'rangedate' | 'time' | 'radio'
   span?: number
   labelCol?: FormProps['labelCol']
   wrapperCol?: FormProps['wrapperCol']
@@ -20,6 +20,7 @@ export interface FormItem {
 }
 
 export interface Props {
+  layout?: FormProps['layout']
   validateInfos?: validateInfos
   formItems: FormItem[]
   gutter?: number

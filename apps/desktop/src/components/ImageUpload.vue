@@ -2,7 +2,6 @@
 import type { Result } from '@repo/api'
 import type { UploadFile, UploadProps } from 'ant-design-vue'
 import { message } from 'ant-design-vue'
-import { isVideoFile } from 'utils'
 import { ref } from 'vue'
 
 const props = withDefaults(defineProps<{

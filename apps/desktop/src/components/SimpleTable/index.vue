@@ -9,7 +9,6 @@ defineOptions({ name: 'SimpleTable' })
  * column key 为 slot 时，会使用 dataIndex 作为 slot 的 name 进行渲染
  */
 const props = withDefaults(defineProps<Props>(), {
-  index: true,
   pagination: () => ({
     currentKey: 'page',
     pageSizeKey: 'results',
@@ -26,17 +25,6 @@ const emit = defineEmits<{
 defineSlots<{
   [k: string]: (text: any, record: Record<string, any>, index: number, column: ColumnType<any>) => any
 }>()
-
-const _columns = computed(() => {
-  const columns = [...props.columns!]
-  if (props.index) {
-    columns.unshift({
-      title: '序号',
-      key: 'index',
-    })
-  }
-  return columns
-})
 
 // 选中行
 const selectedKeys = ref<string[]>([])
@@ -74,7 +62,7 @@ const handleChange: TableProps['onChange'] = (pagination, filters, sorter) => {
     <ATable
       class="simple-table"
       sticky :loading="loading"
-      :data-source="dataSource" :columns="_columns"
+      :data-source="dataSource" :columns="columns"
       :pagination="_pagination" :row-selection="_rowSelection"
       @change="handleChange"
     >

@@ -3,10 +3,10 @@ import type { FormItem } from '@/components/SimpleForm/type'
 import type { ChangeEventParams } from '@/components/SimpleTable/type'
 import type { User } from '@repo/api'
 import type { TableProps } from 'ant-design-vue'
-import type { EventDataNode } from 'ant-design-vue/es/tree'
 import { deptTreeSelectApi, getListUserApi } from '@repo/api'
 import { useRequest } from 'alova/client'
 import { Pane, Splitpanes } from 'splitpanes'
+import EditModal from './components/EditModal.vue'
 import 'splitpanes/dist/splitpanes.css'
 
 defineOptions({ name: 'SystemUser' })
@@ -22,49 +22,64 @@ const formItems: FormItem[] = [
   { name: 'userName', label: '用户名', span: 8, type: 'input', placeholder: '请输入用户名' },
   { name: 'phonenumber', label: '手机号', span: 8, type: 'input', placeholder: '请输入手机号' },
   { name: 'status', label: '状态', span: 8, type: 'select', options: [{ label: '启用', value: '1' }, { label: '禁用', value: '0' }], placeholder: '请选择状态' },
-  {
-    name: 'createTime', label: '创建时间', span: 8, type: 'date',
-    other: { type: 'daterange', startPlaceholder: '开始日期', endPlaceholder: '结束日期' } },
+  { name: 'createTime', label: '创建时间', span: 8, type: 'rangedate', other: { placeholder: ['开始日期', '结束日期'] } },
 ]
 
 const columns: TableProps['columns'] = [
-  { title: '用户名', dataIndex: 'userName' },
-  { title: '用户账号', dataIndex: 'nickName', width: 210 },
+  { title: '序号', key: 'index', width: 60 },
+  { title: '用户账号', dataIndex: 'userName', width: 150 },
+  { title: '用户姓名', dataIndex: 'nickName', width: 150 },
   { title: '手机号', dataIndex: 'phonenumber', width: 120 },
-  { title: '状态', key: 'slot', dataIndex: 'status' },
+  { title: '状态', key: 'slot', dataIndex: 'status', width: 120 },
   { title: '创建时间', dataIndex: 'createTime', width: 180 },
   { title: '操作', key: 'slot', dataIndex: 'operation', width: 200 },
 ]
 handleSearch()
 
-const deptName = ref()
-
 const { data: deptOptions } = useRequest(deptTreeSelectApi, {
   initialData: [],
 })
 
-const expandedKeys = ref<string[]>([])
 const selectedKeys = ref<string[]>([])
 const checkedKeys = ref<string[]>([])
 
-function filterNode(treeNode: EventDataNode) {
-  console.log(treeNode)
+const treeData = ref<any[]>([])
+const filterTreeData = useDebounceFn((e: Event) => {
+  const searchValue = (e.target as HTMLInputElement).value
 
-  if (!deptName.value)
-    return false
-  return treeNode.label.includes(deptName.value)
-}
+  if (!searchValue) {
+    return treeData.value = []
+  }
 
-/** 节点单击事件 */
-function handleNodeClick(data: any) {
-  searchForm.value.deptId = data.id
-  search()
-}
+  const filterData: any[] = []
+  filterTreeData(deptOptions.value)
+
+  treeData.value = filterData
+
+  function filterTreeData(data: any[]) {
+    data.forEach((item) => {
+      if (item.label.includes(searchValue)) {
+        filterData.push({
+          ...item,
+          children: [],
+        })
+      }
+      if (item.children) {
+        filterTreeData(item.children)
+      }
+    })
+  }
+}, 300)
 
 const checkedList = ref(false)
 
+const editModalData = ref({
+  visible: false,
+  id: '',
+})
 function handleAdd() {
   console.log('新增')
+  editModalData.value = { visible: true, id: '' }
 }
 
 function handleDelete(id?: string) {
@@ -89,6 +104,7 @@ function handleAssignRole(id: string) {
 
 function handleEdit(id: string) {
   console.log('编辑')
+  editModalData.value = { visible: true, id }
 }
 
 function handleTableChange({ pagination, filters, sorter }: ChangeEventParams) {
@@ -106,27 +122,15 @@ function handleStatusChange(record: User) {
   <div class="h-full">
     <Splitpanes class="default-theme">
       <Pane size="16" class="pr-2">
-        <AInputSearch v-model:value="deptName" placeholder="请输入部门名称" allow-clear class="mb-2" />
-        <!-- <ATree
-          ref="deptTreeRef" :data="deptOptions" :props="{ label: 'label', children: 'children' }" :expand-on-click-node="false"
-          :filter-node-method="filterNode" node-key="id" highlight-current default-expand-all @node-click="handleNodeClick"
-        /> -->
+        <AInput placeholder="请输入部门名称" allow-clear class="mb-2" @change="filterTreeData" />
         <ATree
-          v-model:expanded-keys="expandedKeys"
+          v-if="deptOptions.length > 0"
           v-model:selected-keys="selectedKeys"
           v-model:checked-keys="checkedKeys"
-          :tree-data="(deptOptions as any)"
-          auto-expand-parent
+          :tree-data="(treeData.length ? treeData : deptOptions)"
+          auto-expand-parent default-expand-all
           :field-names="{ key: 'id', title: 'label', children: 'children' }"
-          :filter-tree-node="filterNode"
-        >
-          <template #title="{ label }">
-            <span v-if="label.includes(deptName) && deptName" style="color: #f50">
-              {{ label }}
-            </span>
-            <span v-else>{{ label }}</span>
-          </template>
-        </ATree>
+        />
       </Pane>
       <Pane size="84">
         <ListPage
@@ -172,5 +176,7 @@ function handleStatusChange(record: User) {
         </ListPage>
       </Pane>
     </Splitpanes>
+
+    <EditModal :id="editModalData.id" v-model:visible="editModalData.visible" />
   </div>
 </template>

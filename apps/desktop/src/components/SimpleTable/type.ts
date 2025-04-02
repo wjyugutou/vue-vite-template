@@ -4,7 +4,6 @@ import type { FilterValue, SorterResult } from 'ant-design-vue/es/table/interfac
 export interface Props {
   columns: TableProps['columns']
   dataSource?: any[]
-  index?: boolean
   rowSelection?: true | TableProps['rowSelection']
   pagination?: Omit<TableProps['pagination'], 'total' | 'current' | 'pageSize'>
   loading?: boolean
