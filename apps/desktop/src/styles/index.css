@@ -8,11 +8,14 @@
 
   --tag-view-height: 38px;
 
-  --splitpanes-default-bg: #fff;
+  /* 分割面板 */
+  --splitpanes-default-color: #fff;
+
+  --app-main-bg: var(--geekblue-10);
 }
 
 html.dark {
-  --splitpanes-default-bg: #141414;
+  --splitpanes-default-color: #000C17;
 }
 
 html {
@@ -54,6 +57,12 @@ body,
 
 
 /* 分割面板样式 */
-.splitpanes.default-theme .splitpanes__pane {
-  background-color: var(--splitpanes-default-bg) !important;
+.splitpanes.default-theme {
+  .splitpanes__pane.splitpanes__pane {
+    background-color: var(--splitpanes-default-color) ;
+  }
+
+  .dark & .splitpanes__splitter {
+    --at-apply: bg-gray-400 border-gray-400;
+  }
 }

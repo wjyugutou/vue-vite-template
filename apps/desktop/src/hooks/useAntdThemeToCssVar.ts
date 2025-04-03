@@ -1,11 +1,34 @@
+import type { ConfigProviderProps } from 'ant-design-vue'
 import { theme } from 'ant-design-vue'
 
 const { defaultSeed, defaultAlgorithm, darkAlgorithm } = theme
 
 /**
+ * 获取 antd 的主题色
+ */
+export function useAntdvTheme() {
+  const isDark = useTheme()
+
+  const theme = computed<ConfigProviderProps['theme']>(() => {
+    if (isDark.value) {
+      return {
+        token: darkAlgorithm(defaultSeed),
+        algorithm: darkAlgorithm,
+      }
+    }
+    return {
+      token: defaultAlgorithm(defaultSeed),
+      algorithm: defaultAlgorithm,
+    }
+  })
+
+  return theme
+}
+
+/**
  * 将 antd 的主题色转换为 css 变量
  */
-export function useAntdThemeToCssVar() {
+export function useAntdvThemeToCssVar() {
   const isDark = useTheme()
 
   watch(isDark, (value) => {

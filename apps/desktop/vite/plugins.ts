@@ -28,10 +28,9 @@ export function generatePlugins(mode: 'development' | 'production' | string, env
       resolvers: [AntDesignVueResolver()],
       dts: './types/auto-imports.d.ts',
       dirs: [
-        './src/hooks',
-        './src/store',
-        './src/composables',
-        './src/utils',
+        'src/hooks',
+        'src/store',
+        'src/utils',
       ],
       vueTemplate: true,
     }),

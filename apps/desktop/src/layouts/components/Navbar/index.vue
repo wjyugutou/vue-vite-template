@@ -26,16 +26,16 @@ function handleSettings() {
 
 <template>
   <div class="navbar">
-    <nav class="fixed right-0 top-0 h-[var(--header-height)] flex items-center justify-between b-b b-b-[var(--colorBorder)] px-4 transition-all" :style="navbarStyle">
+    <nav class="bg-primary fixed right-0 top-0 h-[var(--header-height)] flex items-center justify-between px-4 transition-all" :style="navbarStyle">
       <Logo v-if="settings.layoutMode === 'side'" />
       <div />
       <div class="flex items-center gap-col-4">
         <AButton class="hover:text-primary flex-center" type="text" @click="handleSettings">
-          <div class="i-ant-design-setting-outlined" />
+          <div class="i-ant-design-setting-outlined text-16px text-white" />
         </AButton>
 
         <AButton class="hover:text-primary flex-center" type="text" @click="toggleThemeMode">
-          <div class="dark:i-ant-design-moon-outlined i-ant-design-sun-outlined" />
+          <div class="dark:i-ant-design-moon-outlined i-ant-design-sun-outlined text-16px text-white" />
         </AButton>
 
         <Avatar />

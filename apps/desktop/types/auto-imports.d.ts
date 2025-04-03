@@ -109,6 +109,7 @@ declare global {
   const syncRef: typeof import('@vueuse/core')['syncRef']
   const syncRefs: typeof import('@vueuse/core')['syncRefs']
   const templateRef: typeof import('@vueuse/core')['templateRef']
+  const testHot: typeof import('../src/hooks/useAntdThemeToCssVar')['testHot']
   const throttledRef: typeof import('@vueuse/core')['throttledRef']
   const throttledWatch: typeof import('@vueuse/core')['throttledWatch']
   const toRaw: typeof import('vue')['toRaw']
@@ -128,7 +129,9 @@ declare global {
   const until: typeof import('@vueuse/core')['until']
   const useActiveElement: typeof import('@vueuse/core')['useActiveElement']
   const useAnimate: typeof import('@vueuse/core')['useAnimate']
-  const useAntdThemeToCssVar: typeof import('../src/hooks/useAntdThemeToCssVar')['useAntdThemeToCssVar']
+  const useAntdvTheme: typeof import('../src/hooks/useAntdThemeToCssVar')['useAntdvTheme']
+  const useAntdvThemeToCssVar: typeof import('../src/hooks/useAntdThemeToCssVar')['useAntdvThemeToCssVar']
+  const useAntdvThemeToken: typeof import('../src/hooks/useAntdThemeToCssVar')['useAntdvThemeToken']
   const useAppStore: typeof import('../src/store/app')['useAppStore']
   const useArrayDifference: typeof import('@vueuse/core')['useArrayDifference']
   const useArrayEvery: typeof import('@vueuse/core')['useArrayEvery']
@@ -439,6 +442,7 @@ declare module 'vue' {
     readonly syncRef: UnwrapRef<typeof import('@vueuse/core')['syncRef']>
     readonly syncRefs: UnwrapRef<typeof import('@vueuse/core')['syncRefs']>
     readonly templateRef: UnwrapRef<typeof import('@vueuse/core')['templateRef']>
+    readonly testHot: UnwrapRef<typeof import('../src/hooks/useAntdThemeToCssVar')['testHot']>
     readonly throttledRef: UnwrapRef<typeof import('@vueuse/core')['throttledRef']>
     readonly throttledWatch: UnwrapRef<typeof import('@vueuse/core')['throttledWatch']>
     readonly toRaw: UnwrapRef<typeof import('vue')['toRaw']>
@@ -458,7 +462,8 @@ declare module 'vue' {
     readonly until: UnwrapRef<typeof import('@vueuse/core')['until']>
     readonly useActiveElement: UnwrapRef<typeof import('@vueuse/core')['useActiveElement']>
     readonly useAnimate: UnwrapRef<typeof import('@vueuse/core')['useAnimate']>
-    readonly useAntdThemeToCssVar: UnwrapRef<typeof import('../src/hooks/useAntdThemeToCssVar')['useAntdThemeToCssVar']>
+    readonly useAntdvTheme: UnwrapRef<typeof import('../src/hooks/useAntdThemeToCssVar')['useAntdvTheme']>
+    readonly useAntdvThemeToCssVar: UnwrapRef<typeof import('../src/hooks/useAntdThemeToCssVar')['useAntdvThemeToCssVar']>
     readonly useAppStore: UnwrapRef<typeof import('../src/store/app')['useAppStore']>
     readonly useArrayDifference: UnwrapRef<typeof import('@vueuse/core')['useArrayDifference']>
     readonly useArrayEvery: UnwrapRef<typeof import('@vueuse/core')['useArrayEvery']>
@@ -546,7 +551,6 @@ declare module 'vue' {
     readonly useMediaQuery: UnwrapRef<typeof import('@vueuse/core')['useMediaQuery']>
     readonly useMemoize: UnwrapRef<typeof import('@vueuse/core')['useMemoize']>
     readonly useMemory: UnwrapRef<typeof import('@vueuse/core')['useMemory']>
-    readonly useModal: UnwrapRef<typeof import('../src/hooks/useModal')['useModal']>
     readonly useModel: UnwrapRef<typeof import('vue')['useModel']>
     readonly useMounted: UnwrapRef<typeof import('@vueuse/core')['useMounted']>
     readonly useMouse: UnwrapRef<typeof import('@vueuse/core')['useMouse']>

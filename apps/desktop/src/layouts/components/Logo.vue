@@ -8,6 +8,6 @@ function handleClickLogo() {
 
 <template>
   <div class="h-[var(--header-height)] flex cursor-pointer items-center" @click="handleClickLogo">
-    <div class="i-carbon-campsite" />
+    <div class="i-carbon-campsite text-24px text-white" />
   </div>
 </template>

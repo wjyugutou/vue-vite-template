@@ -7,7 +7,9 @@ import 'dayjs/locale/zh-cn'
 
 dayjs.locale('zh-cn')
 
-useAntdThemeToCssVar()
+useAntdvThemeToCssVar()
+
+const theme = useAntdvTheme()
 
 // table 空值显示 -
 const transformCellText: TableProps['transformCellText'] = ({ text, column, record, index }) => {
@@ -24,8 +26,8 @@ function renderEmpty() {
 </script>
 
 <template>
-  <AConfigProvider :locale="zhCN" :transform-cell-text="transformCellText" :render-empty="renderEmpty">
-    <!-- <AStyleProvider hash-priority="high"> -->
+  <AConfigProvider :locale="zhCN" :transform-cell-text="transformCellText" :theme="theme" :render-empty="renderEmpty">
+    <!-- <AStyleProvider  hash-priority="high"> -->
     <RouterView />
     <!-- </AStyleProvider> -->
   </AConfigProvider>

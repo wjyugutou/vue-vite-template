@@ -54,7 +54,7 @@ function handleClose(e: Event, tag: Tag) {
 
 <style scoped>
 .tag-view {
-  --at-apply: h-[var(--tag-view-height)] flex gap-2 border-b b-b-[var(--colorBorder)] px-2 py-1;
+  --at-apply: h-[var(--tag-view-height)] flex gap-2 px-2 py-1;
 
   width: fit-content;
   min-width: 100%;
