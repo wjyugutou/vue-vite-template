@@ -58,7 +58,7 @@ function handleClick(menuInfo: MenuInfo) {
       :inline-collapsed="settings.sidebarCollapse"
       @click="handleClick"
     >
-      <Logo v-if="settings.layoutMode === 'vertical'" class="flex-shrink-0 b-b b-b-[var(--el-border-color)] px-20px" />
+      <Logo v-if="settings.layoutMode === 'vertical'" class="flex-shrink-0 px-20px" />
 
       <ScrollView class="flex-1">
         <template v-for="menu in menus" :key="menu.path">

@@ -15,7 +15,7 @@ const form = ref({
 
 const formItems = ref<FormItem[]>([
   { label: '账号', span: 24, name: 'username', type: 'input', placeholder: '请输入账号', other: { allowClear: true } },
-  { label: '密码', span: 24, name: 'password', type: 'input', placeholder: '请输入密码', other: { allowClear: true, showPassword: true } },
+  { label: '密码', span: 24, name: 'password', type: 'input', placeholder: '请输入密码', other: { allowClear: true, password: true } },
   { slot: 'footer', span: 24 },
 ])
 

@@ -15,9 +15,9 @@ const { cachedList } = storeToRefs(useAppStore())
     <Sidebar />
     <div class="mt-[var(--header-height)] h-[calc(100vh-var(--header-height))] w-[var(--sidebar-width)] flex flex-grow-1 flex-col">
       <Navbar />
-      <main class="h-full flex-1 overflow-hidden bg-[var(--app-main-bg)]">
+      <main class="h-full flex-1 overflow-hidden bg-[var(--app-main-bg)] p-2">
         <IFrame v-if="route.meta.iframeSrc" />
-        <ScrollView v-else class="p-2">
+        <ScrollView v-else class="bg-[var(--app-bg-color)] p-2">
           <RouterView>
             <template #default="{ Component }">
               <Transition name="fade-transform">

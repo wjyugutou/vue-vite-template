@@ -8,27 +8,24 @@
 
   --tag-view-height: 38px;
 
-  /* 分割面板 */
-  --splitpanes-default-color: #fff;
 
   --app-main-bg: var(--geekblue-10);
+
+  --app-bg-color:#fff;
+
+  /* 分割面板 */
+  --splitpanes-default-color: var(--app-bg-color);
 }
 
 html.dark {
-  --splitpanes-default-color: #000C17;
+  --app-bg-color:#1b1b1f;
+  --app-main-bg: #1a2a4d;
+
 }
 
 html {
-  color-scheme: light dark;
   overflow: hidden;
 
-  &.dark {
-    color-scheme: dark;
-  }
-
-  &.light {
-    color-scheme: light;
-  }
 }
 
 body,

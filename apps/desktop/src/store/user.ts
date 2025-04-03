@@ -42,6 +42,9 @@ export const useUserStore = defineStore('user', {
         const { menuState, tags } = storeToRefs(useAppStore())
         menuState.value.openKeys = []
         menuState.value.selectedKeys = ['/']
+        // 退出登录清空路由
+        clearRoutes(this.routes)
+        // 退出登录清空tags
         tags.value = [{ path: '/', title: '首页' }]
 
         router.replace('/login')

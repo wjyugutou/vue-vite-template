@@ -23,12 +23,15 @@ const transformCellText: TableProps['transformCellText'] = ({ text, column, reco
 function renderEmpty() {
   return h(Empty, { description: '暂无数据' })
 }
+
+const { ContextHolder } = useMessage()
 </script>
 
 <template>
-  <AConfigProvider :locale="zhCN" :transform-cell-text="transformCellText" :theme="theme" :render-empty="renderEmpty">
+  <AConfigProvider :locale="zhCN" :transform-cell-text="transformCellText" :theme="theme" :render-empty="renderEmpty" :input="{ autocomplete: 'off' }">
     <!-- <AStyleProvider  hash-priority="high"> -->
     <RouterView />
     <!-- </AStyleProvider> -->
+    <ContextHolder />
   </AConfigProvider>
 </template>

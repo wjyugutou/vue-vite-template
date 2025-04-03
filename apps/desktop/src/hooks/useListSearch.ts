@@ -1,46 +1,29 @@
-type Request<T> = (query: any) => Promise<{
-  rows: T[]
-  total: number
-}>
+import { usePagination } from 'alova/client'
 
-export function useListSearch<T>(request: Request<T>, defaultForm: Record<string, any>) {
+export function useListSearch<T>(request: any, defaultForm: Record<string, any>) {
   const searchForm = ref<Record<string, any>>(defaultForm)
 
-  const loading = ref(false)
-  const data = ref<T[]>([])
-  const pagination = reactive({
-    pageSize: 10,
-    pageNum: 1,
-    total: 0,
-  })
-
-  function search() {
-    loading.value = true
-
-    request({
-      ...searchForm.value,
-      pageNum: pagination.pageNum,
-      pageSize: pagination.pageSize,
-    })
-      .then((res) => {
-        data.value = res.rows
-        pagination.total = res.total
-      })
-      .finally(() => {
-        loading.value = false
-      })
-  }
+  const {
+    loading,
+    data,
+    page,
+    pageSize,
+    total,
+    send: search,
+  } = usePagination((pageNum, pageSize) => request({ ...searchForm.value, pageNum, pageSize }))
 
   function handleSearch() {
-    pagination.pageNum = 1
+    console.log('handleSearch')
+
+    page.value = 1
     search()
   }
 
   function handleReset() {
     searchForm.value = {}
-    pagination.pageNum = 1
-    pagination.pageSize = 10
-    pagination.total = 0
+    page.value = 1
+    pageSize.value = 10
+    total.value = 0
     data.value = []
     handleSearch()
   }
@@ -49,9 +32,11 @@ export function useListSearch<T>(request: Request<T>, defaultForm: Record<string
     searchForm,
     data,
     loading,
-    ...toRefs(pagination),
-    search,
+    pageNum: page,
+    pageSize,
+    total,
     handleSearch,
     handleReset,
+    resetCache: search,
   }
 }

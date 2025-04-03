@@ -3,7 +3,7 @@ import type { FormItem } from '@/components/SimpleForm/type'
 import type { ChangeEventParams } from '@/components/SimpleTable/type'
 import type { User } from '@repo/api'
 import type { TableProps } from 'ant-design-vue'
-import { deptTreeSelectApi, getListUserApi } from '@repo/api'
+import { delUserApi, deptTreeSelectApi, getListUserApi } from '@repo/api'
 import { useRequest } from 'alova/client'
 import { Pane, Splitpanes } from 'splitpanes'
 import EditModal from './components/EditModal.vue'
@@ -11,7 +11,7 @@ import 'splitpanes/dist/splitpanes.css'
 
 defineOptions({ name: 'SystemUser' })
 
-const { pageSize, pageNum, total, data, loading, searchForm, search, handleSearch, handleReset } = useListSearch(getListUserApi, {
+const { pageSize, pageNum, total, data, loading, searchForm, handleSearch, handleReset } = useListSearch(getListUserApi, {
   username: '',
   phone: '',
   status: '',
@@ -78,12 +78,22 @@ const editModalData = ref({
   id: '',
 })
 function handleAdd() {
-  console.log('新增')
   editModalData.value = { visible: true, id: '' }
 }
 
-function handleDelete(id?: string) {
-  console.log('删除')
+function handleDelete(id?: string | number) {
+  if (id) {
+    delUserApi(id).then((res) => {
+      console.log(res)
+    })
+  }
+  else {
+    checkedKeys.value.forEach((key) => {
+      delUserApi(key).then((res) => {
+        console.log(res)
+      })
+    })
+  }
 }
 
 function handleImport() {
@@ -103,14 +113,13 @@ function handleAssignRole(id: string) {
 }
 
 function handleEdit(id: string) {
-  console.log('编辑')
+  console.log('编辑', id)
   editModalData.value = { visible: true, id }
 }
 
 function handleTableChange({ pagination, filters, sorter }: ChangeEventParams) {
   pageNum.value = pagination.current!
   pageSize.value = pagination.pageSize!
-  search()
 }
 
 function handleStatusChange(record: User) {
@@ -138,7 +147,7 @@ function handleStatusChange(record: User) {
           v-model:page-size="pageSize"
           v-model:page-num="pageNum"
           :loading="loading"
-          :total="total" :table-data="data" :columns="columns" row-selection
+          :total="total" :table-data="data" :columns="columns" row-key="userId" row-selection
           :form-items="formItems" :label-col="{ span: 5 }"
           :handle-search="handleSearch"
           :handle-reset="handleReset"
@@ -167,16 +176,18 @@ function handleStatusChange(record: User) {
 
           <template #operation="{ record }">
             <MoreOperte>
-              <AButton size="small" type="link" @click="handleEdit(record.id)"> 编辑 </AButton>
-              <AButton size="small" type="link" @click="handleEdit(record.id)"> 删除 </AButton>
-              <AButton size="small" type="link" @click="handleResetPassword(record.id)"> 重置密码 </AButton>
-              <AButton size="small" type="link" @click="handleAssignRole(record.id)"> 分配角色 </AButton>
+              <AButton size="small" type="link" @click="handleEdit(record.userId)"> 编辑 </AButton>
+              <APopconfirm title="确认删除该用户吗?" @confirm="handleDelete(record.userId)">
+                <AButton size="small" type="link" danger> 删除 </AButton>
+              </APopconfirm>
+              <AButton size="small" type="link" @click="handleResetPassword(record.userId)"> 重置密码 </AButton>
+              <AButton size="small" type="link" @click="handleAssignRole(record.userId)"> 分配角色 </AButton>
             </MoreOperte>
           </template>
         </ListPage>
       </Pane>
     </Splitpanes>
 
-    <EditModal :id="editModalData.id" v-model:visible="editModalData.visible" />
+    <EditModal v-model:visible="editModalData.visible" :user-id="editModalData.id" />
   </div>
 </template>

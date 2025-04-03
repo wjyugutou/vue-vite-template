@@ -60,7 +60,7 @@ const handleChange: TableProps['onChange'] = (pagination, filters, sorter) => {
     <slot name="header" />
 
     <ATable
-      class="simple-table"
+      class="simple-table" :row-key="rowKey"
       sticky :loading="loading"
       :data-source="dataSource" :columns="columns"
       :pagination="_pagination" :row-selection="_rowSelection"

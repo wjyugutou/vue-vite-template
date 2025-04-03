@@ -3,20 +3,30 @@ import type { RouterResult, RouterResultItem } from '@repo/api'
 import type { RouteComponent } from 'vue-router'
 import ErrorComponent from '@/pages/Error.vue'
 import router from '@/router'
-import { ErrorRoute } from '@/router/routes'
 
 /**
  * 注册动态路由
  */
 export function setupRoutes(routes: RouterResult) {
   addRoute(routes)
-  // // 最后添加Error路由
-  router.addRoute(ErrorRoute)
+}
+
+/**
+ * 退出登录清空路由
+ */
+export function clearRoutes(routes: RouterResult) {
+  routes.forEach((route) => {
+    router.removeRoute(route.name as string)
+    if (route.children) {
+      clearRoutes(route.children)
+    }
+  })
 }
 
 function addRoute(routes: RouterResult, parentName: string = 'Index', suffix?: string) {
   routes.forEach((route) => {
     const component = getComponent(route)
+
     if (component) {
       const _route: RouteRecordRawC = {
         name: route.name,
@@ -24,6 +34,7 @@ function addRoute(routes: RouterResult, parentName: string = 'Index', suffix?: s
         path: suffix ? `${suffix}/${route.path}` : route.path,
         component,
       }
+
       router.addRoute(parentName, _route)
     }
 

@@ -4,7 +4,7 @@ import type { ChangeEventParams, Props } from '@/components/SimpleTable/type'
 import type { TableProps } from 'ant-design-vue'
 
 const props = withDefaults(defineProps<{
-  tableData: Record<string, any>[]
+  tableData: any[]
   loading: boolean
   total: number
   pageSize: number
@@ -14,6 +14,7 @@ const props = withDefaults(defineProps<{
   labelCol?: FormProps['labelCol']
   handleSearch: () => void
   handleReset: () => void
+  rowKey: TableProps['rowKey']
   layout?: string
   rowSelection?: true | TableProps['rowSelection']
 }>(), {
@@ -48,6 +49,8 @@ function handleChange({ pagination, filters, sorter }: ChangeEventParams) {
 function handleSelect(selectedRowKeys: string[]) {
   emit('select', selectedRowKeys)
 }
+
+console.log(useSlots())
 </script>
 
 <template>
@@ -77,7 +80,7 @@ function handleSelect(selectedRowKeys: string[]) {
         <SimpleTable
           :columns="columns" :data-source="tableData"
           :loading="loading" :row-selection="rowSelection"
-          :total="total" :current="pageNum" :page-size="pageSize"
+          :total="total" :current="pageNum" :page-size="pageSize" :row-key="rowKey"
           @change="handleChange"
           @select="handleSelect"
         >

@@ -10,6 +10,7 @@ export interface Props {
   total?: number
   current?: number
   pageSize?: number
+  rowKey: TableProps['rowKey']
 }
 
 export interface ChangeEventParams {
