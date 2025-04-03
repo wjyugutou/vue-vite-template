@@ -25,7 +25,7 @@ const moreSlotList = computed(() => {
     <component :is="slot" v-if="index < max" />
   </template>
   <ATooltip :color="isDark ? 'black' : 'white'" placement="bottom">
-    <AButton class="flex-center inline-flex" size="small" type="link">
+    <AButton class="inline-flex items-center gap-0" size="small" type="link">
       更多<span class="i-ant-design-down-outlined" />
     </AButton>
 
