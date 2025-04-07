@@ -10,7 +10,16 @@ export function useListSearch<T>(request: any, defaultForm: Record<string, any>)
     pageSize,
     total,
     send: search,
-  } = usePagination((pageNum, pageSize) => request({ ...searchForm.value, pageNum, pageSize }))
+  } = usePagination((pageNum, pageSize) => request({ ...searchForm.value, pageNum, pageSize }), {
+    preloadNextPage: false,
+    preloadPreviousPage: false,
+    initialData: {
+      total: 0,
+      rows: [],
+    },
+    total: response => response.total,
+    data: response => response.rows,
+  })
 
   function handleSearch() {
     console.log('handleSearch')
