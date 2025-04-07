@@ -22,8 +22,6 @@ export function useListSearch<T>(request: any, defaultForm: Record<string, any>)
   })
 
   function handleSearch() {
-    console.log('handleSearch')
-
     page.value = 1
     search()
   }

@@ -1,8 +1,11 @@
+import type { Menu } from './type'
 import request from '../../../request'
+
+export * from './type'
 
 // 查询菜单列表
 export function getListMenuApi(query: any) {
-  return request.Get('/system/menu/list', {
+  return request.Get<Menu[]>('/system/menu/list', {
     params: query,
   })
 }

@@ -14,7 +14,7 @@ export interface DictReturn {
 }
 
 function getDictApi(dictType: string) {
-  return request.Get<DictItem[]>(`/system/dict/getDict/${dictType}`)
+  return request.Get<DictItem[]>(`/system/dict/data/type/${dictType}`)
 }
 
 type Dict<T extends [...string[]]> = {

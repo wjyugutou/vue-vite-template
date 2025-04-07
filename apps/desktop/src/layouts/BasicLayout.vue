@@ -17,7 +17,7 @@ const { cachedList } = storeToRefs(useAppStore())
       <Navbar />
       <main class="h-full flex-1 overflow-hidden bg-[var(--app-main-bg)] p-2">
         <IFrame v-if="route.meta.iframeSrc" />
-        <ScrollView v-else class="bg-[var(--app-bg-color)] p-2">
+        <ScrollView v-else class="bg-[var(--app-bg-color)] p-4">
           <RouterView>
             <template #default="{ Component }">
               <Transition name="fade-transform">

@@ -9,12 +9,11 @@ export const basicRoutes: RouteRecordRawC[] = [
   },
   {
     path: '/',
-    redirect: '/',
     name: 'Index',
     component: BasicLayout,
     children: [
       {
-        path: '/',
+        path: '',
         name: 'Home',
         meta: {
           title: '首页',
@@ -32,10 +31,10 @@ export const basicRoutes: RouteRecordRawC[] = [
     ],
   },
   {
-    path: '',
+    path: '/',
     component: BasicLayout,
     children: [{
-      path: '/:pathMatch(.*)*',
+      path: ':pathMatch(.*)*',
       name: 'Error',
       meta: {
         title: 'Error',

@@ -4,8 +4,8 @@ import type { FilterValue, SorterResult } from 'ant-design-vue/es/table/interfac
 export interface Props {
   columns: TableProps['columns']
   dataSource?: any[]
-  rowSelection?: true | TableProps['rowSelection']
-  pagination?: Omit<TableProps['pagination'], 'total' | 'current' | 'pageSize'>
+  rowSelection?: boolean | TableProps['rowSelection']
+  pagination?: Omit<TableProps['pagination'], 'total' | 'current' | 'pageSize'> | false
   loading?: boolean
   total?: number
   current?: number

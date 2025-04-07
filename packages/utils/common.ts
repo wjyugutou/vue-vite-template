@@ -72,13 +72,13 @@ export function stringToObj(str: string) {
  * 构造树型结构数据
  * @param {*} data 数据源
  * @param {*} args 配置项 必须显示指定才有类型提示 id:'id' parentId:'parentId' childrenList:'children'
- * @example handleTree([], 'id', 'parentId', 'children')
+ * @example generatTreeNode([], 'id', 'parentId', 'children')
  */
 export function generatTreeNode<T extends [...string[]]>(data: any[], ...args: T) {
   const config: TreeNodeConfig = {
-    id: args[0],
-    parentId: args[1],
-    childrenList: args[2],
+    id: args[0] || 'id',
+    parentId: args[1] || 'parentId',
+    childrenList: args[2] || 'children',
   }
 
   const childrenListMap: Record<string, TreeNode<T>[]> = {}

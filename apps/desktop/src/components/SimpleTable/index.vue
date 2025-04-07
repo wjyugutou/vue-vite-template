@@ -16,7 +16,6 @@ const props = withDefaults(defineProps<Props>(), {
     showSizeChanger: true,
   }),
 })
-
 const emit = defineEmits<{
   change: [props: ChangeEventParams]
   select: [selectedRowKeys: string[]]
@@ -34,19 +33,23 @@ const onSelectChange: TableRowSelection['onChange'] = (selectedRowKeys, selected
 }
 
 const _rowSelection = computed<TableProps['rowSelection']>(() => {
-  return props.rowSelection === true
-    ? { selectedRowKeys: selectedKeys, preserveSelectedRowKeys: false, onChange: onSelectChange } as unknown as TableRowSelection
-    : props.rowSelection
+  return props.rowSelection === false
+    ? undefined
+    : props.rowSelection === true
+      ? { selectedRowKeys: selectedKeys, preserveSelectedRowKeys: false, onChange: onSelectChange } as unknown as TableRowSelection
+      : props.rowSelection
 })
 
 // 分页
 const _pagination = computed<TableProps['pagination']>(() => {
-  return {
-    ...props.pagination,
-    current: props?.current ?? 1,
-    pageSize: props?.pageSize ?? 10,
-    total: props?.total ?? 0,
-  }
+  return props.pagination === false
+    ? false
+    : {
+        ...props.pagination,
+        current: props?.current ?? 1,
+        pageSize: props?.pageSize ?? 10,
+        total: props?.total ?? 0,
+      }
 })
 
 // 分页

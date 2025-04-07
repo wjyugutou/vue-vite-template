@@ -43,7 +43,7 @@ export const useAppStore = defineStore('app', {
     },
     menuState: {
       // 默认激活的菜单
-      selectedKeys: [],
+      selectedKeys: ['/'],
       // 默认展开的菜单
       openKeys: [],
     },

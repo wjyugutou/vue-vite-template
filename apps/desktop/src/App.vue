@@ -25,6 +25,8 @@ function renderEmpty() {
 }
 
 const { ContextHolder } = useMessage()
+
+console.log(useRouter().options.routes)
 </script>
 
 <template>

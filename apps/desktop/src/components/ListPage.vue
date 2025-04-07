@@ -3,12 +3,13 @@ import type { FormItem, Props as FormProps } from '@/components/SimpleForm/type'
 import type { ChangeEventParams, Props } from '@/components/SimpleTable/type'
 import type { TableProps } from 'ant-design-vue'
 
-const props = withDefaults(defineProps<{
+const props = defineProps<{
   tableData: any[]
   loading: boolean
-  total: number
-  pageSize: number
-  pageNum: number
+  pagination?: Props['pagination']
+  total?: number
+  pageSize?: number
+  pageNum?: number
   columns: Props['columns']
   formItems: FormItem[]
   labelCol?: FormProps['labelCol']
@@ -16,9 +17,8 @@ const props = withDefaults(defineProps<{
   handleReset: () => void
   rowKey: TableProps['rowKey']
   layout?: string
-  rowSelection?: true | TableProps['rowSelection']
-}>(), {
-})
+  rowSelection?: boolean | TableProps['rowSelection']
+}>()
 
 const emit = defineEmits<{
   'update:pageNum': [number]
@@ -31,6 +31,7 @@ const searchForm = defineModel<Record<string, any>>({ required: true })
 
 const _formItems = computed(() => {
   return [...props.formItems, {
+    span: 8,
     slot: 'search',
   }]
 })
@@ -41,8 +42,10 @@ const tableSlots = computed(() => {
 })
 
 function handleChange({ pagination, filters, sorter }: ChangeEventParams) {
-  emit('update:pageNum', pagination.current!)
-  emit('update:pageSize', pagination.pageSize!)
+  if (props.pagination !== false) {
+    emit('update:pageNum', pagination.current!)
+    emit('update:pageSize', pagination.pageSize!)
+  }
   emit('tableChange', { pagination, filters, sorter })
 }
 
@@ -78,7 +81,7 @@ function handleSelect(selectedRowKeys: string[]) {
         <SimpleTable
           :columns="columns" :data-source="tableData"
           :loading="loading" :row-selection="rowSelection"
-          :total="total" :current="pageNum" :page-size="pageSize" :row-key="rowKey"
+          :pagination="pagination" :total="total" :current="pageNum" :page-size="pageSize" :row-key="rowKey"
           @change="handleChange"
           @select="handleSelect"
         >

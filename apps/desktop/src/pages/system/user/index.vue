@@ -118,8 +118,7 @@ function handleEdit(id: string) {
 }
 
 function handleTableChange({ pagination, filters, sorter }: ChangeEventParams) {
-  pageNum.value = pagination.current!
-  pageSize.value = pagination.pageSize!
+  console.log('handleTableChange', pagination, filters, sorter)
 }
 
 function handleStatusChange(record: User) {

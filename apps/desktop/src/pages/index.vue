@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import type SimpleTable from '@/components/SimpleTable/index.vue'
-import type { TableProps } from 'ant-design-vue'
-import type { ComponentInstance } from 'vue'
-
 const router = useRouter()
 
 const name = ref('')
