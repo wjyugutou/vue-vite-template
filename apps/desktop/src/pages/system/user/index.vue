@@ -12,10 +12,10 @@ import 'splitpanes/dist/splitpanes.css'
 defineOptions({ name: 'SystemUser' })
 
 const { pageSize, pageNum, total, data, loading, searchForm, handleSearch, handleReset } = useListSearch(getListUserApi, {
-  username: '',
-  phone: '',
-  status: '',
-  createTime: [],
+  username: undefined,
+  phone: undefined,
+  status: undefined,
+  createTime: undefined,
 })
 
 const formItems: FormItem[] = [
