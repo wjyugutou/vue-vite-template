@@ -49,12 +49,10 @@ function handleChange({ pagination, filters, sorter }: ChangeEventParams) {
 function handleSelect(selectedRowKeys: string[]) {
   emit('select', selectedRowKeys)
 }
-
-console.log(useSlots())
 </script>
 
 <template>
-  <div class="size-full flex flex-1 flex-col p-2">
+  <div class="list-page size-full flex flex-1 flex-col">
     <div class="search-form">
       <slot name="search">
         <SimpleForm v-model="searchForm" :form-items="_formItems" :label-col="labelCol">
@@ -96,3 +94,11 @@ console.log(useSlots())
     </div>
   </div>
 </template>
+
+<style  scoped>
+.list-page {
+  & :deep(.ant-table-pagination) {
+    margin-bottom: 0;
+  }
+}
+</style>
