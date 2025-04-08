@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { isVideoFile } from 'utils'
+import { isVideoFile } from '@repo/utils'
 
 const props = defineProps<{
   urlList: string[]
@@ -28,14 +28,14 @@ function handleNext() {
   <Transition name="el-fade-in-linear">
     <Teleport v-if="visible" to="body">
       <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-        <button class="absolute right-12vw top-10 z-10 text-12 hover:text-primary" @click="handleClose">
+        <button class="hover:text-primary absolute right-12vw top-10 z-10 text-12" @click="handleClose">
           <div class="i-carbon-close-outline text-white" />
         </button>
-        <button class="absolute left-18vw top-50% z-10 text-12 -translate-y-1/2 hover:text-primary" @click="handlePrev">
+        <button class="hover:text-primary absolute left-18vw top-50% z-10 text-12 -translate-y-1/2" @click="handlePrev">
           <div class="i-carbon-chevron-left text-white" />
         </button>
 
-        <button class="absolute right-18vw top-50% z-10 text-12 -translate-y-1/2 hover:text-primary" @click="handleNext">
+        <button class="hover:text-primary absolute right-18vw top-50% z-10 text-12 -translate-y-1/2" @click="handleNext">
           <div class="i-carbon-chevron-right text-white" />
         </button>
         <template v-for="item in urlList" :key="item">

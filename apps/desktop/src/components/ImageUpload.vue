@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { ElImage, UploadProps, UploadUserFile } from 'element-plus'
-import { isVideoFile } from 'utils'
+import { isVideoFile } from '@repo/utils'
 import { ref } from 'vue'
 
 const props = withDefaults(defineProps<{
@@ -92,8 +92,8 @@ function handleClickRemove(file: UploadUserFile) {
           </div>
 
           <div class="mask items-center justify-center gap-2">
-            <div class="i-carbon-view cursor-pointer text-4 hover:text-primary" @click="handleClickPreview(file)" />
-            <div class="i-carbon-trash-can cursor-pointer text-4 hover:text-primary" @click="handleClickRemove(file)" />
+            <div class="i-carbon-view hover:text-primary cursor-pointer text-4" @click="handleClickPreview(file)" />
+            <div class="i-carbon-trash-can hover:text-primary cursor-pointer text-4" @click="handleClickRemove(file)" />
           </div>
         </div>
       </template>
