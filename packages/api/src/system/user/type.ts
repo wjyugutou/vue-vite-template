@@ -1,7 +1,7 @@
 import type { EnumBasicStatus } from 'src/common.type'
 
 export interface User {
-  id: number
+  userId: number
   username: string
   email: string
   phonenumber: string
@@ -15,6 +15,7 @@ export interface User {
   posts: Post[]
   roles: Role[]
   remark: string
+  [key: string]: any
 }
 
 export interface UserParams {

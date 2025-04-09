@@ -1,4 +1,7 @@
+import type { DictItem } from './type'
 import request from '../../../../request'
+
+export * from './type'
 
 // 查询字典数据列表
 export function listData(query: any) {
@@ -13,8 +16,8 @@ export function getData(dictCode: string) {
 }
 
 // 根据字典类型查询字典数据信息
-export function getDicts(dictType: string) {
-  return request.Get(`/system/dict/data/type/${dictType}`)
+export function getDictByTypeApi(dictType: string) {
+  return request.Get<DictItem[]>(`/system/dict/data/type/${dictType}`)
 }
 
 // 新增字典数据

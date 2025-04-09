@@ -1,12 +1,7 @@
+import type { DictItem } from '@repo/api'
 import type { ToRefs } from 'vue'
-import request from '@repo/api/request'
+import { getDictByTypeApi } from '@repo/api'
 import { reactive, toRefs } from 'vue'
-
-export interface DictItem {
-  dictLabel: string
-  dictValue: string | number
-  [key: string]: unknown
-}
 
 export interface DictReturn {
   list: { value: DictItem['dictValue'], label: DictItem['dictLabel'] }[]
@@ -14,7 +9,7 @@ export interface DictReturn {
 }
 
 function getDictApi(dictType: string) {
-  return request.Get<DictItem[]>(`/system/dict/getDict/${dictType}`)
+  return getDictByTypeApi(dictType)
 }
 
 type Dict<T extends [...string[]]> = {
