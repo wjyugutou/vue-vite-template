@@ -14,8 +14,8 @@ const _formItems = computed(() => {
   }]
 })
 
-const pageNum = defineModel<number>('pageNum', { required: true })
-const pageSize = defineModel<number>('pageSize', { required: true })
+const pageNum = defineModel<number>('pageNum')
+const pageSize = defineModel<number>('pageSize')
 const checkedKeys = defineModel<Record<string, any>[]>('checkedKeys')
 
 function handlePageChange(currentPage: number, newPageSize: number) {
@@ -70,6 +70,7 @@ function handleReset() {
       </SimpleTable>
 
       <ElPagination
+        v-if="pageNum"
         v-model:current-page="pageNum"
         v-model:page-size="pageSize"
         class="justify-end"

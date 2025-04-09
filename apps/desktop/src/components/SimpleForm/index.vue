@@ -61,7 +61,7 @@ onMounted(() => {
           </ElSelect>
           <ElDatePicker
             v-else-if="item.type === 'date'" v-model="form[item.prop!]" class="w-full" :placeholder="item.placeholder"
-            :disabled="item.disabled" v-bind="item.other" style="width: 100%;"
+            :disabled="item.disabled" value-format="YYYY-MM-DD" v-bind="item.other" style="width: 100%;"
           />
           <ElTimePicker
             v-else-if="item.type === 'time'" v-model="form[item.prop!]" class="w-full" :placeholder="item.placeholder"
