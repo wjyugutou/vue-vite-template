@@ -14,7 +14,7 @@ const formItems: FormItem[] = [
   { prop: 'userName', label: '用户名', span: 8, type: 'input', placeholder: '请输入用户名' },
   { prop: 'phonenumber', label: '手机号', span: 8, type: 'input', placeholder: '请输入手机号' },
   { prop: 'status', label: '状态', span: 8, type: 'select', options: [{ label: '启用', value: '1' }, { label: '禁用', value: '0' }], placeholder: '请选择状态' },
-  { prop: 'createTime', label: '创建时间', span: 8, type: 'date', other: { startPlaceholder: '开始日期', endPlaceholder: '结束日期' } },
+  { prop: 'daterange', label: '创建时间', span: 8, type: 'date', other: { type: 'daterange', startPlaceholder: '开始日期', endPlaceholder: '结束日期' } },
 ]
 
 const columns: Column[] = [
@@ -27,11 +27,11 @@ const columns: Column[] = [
 ]
 
 const formModel = ref({
-  userName: '',
-  phonenumber: '',
-  status: '',
-  createTime: '',
-  deptName: '',
+  userName: undefined,
+  phonenumber: undefined,
+  status: undefined,
+  daterange: undefined,
+  deptName: undefined,
 })
 
 const {
@@ -43,7 +43,13 @@ const {
   total,
   refresh,
   reload,
-} = usePagination((pageNum, pageSize) => getListUserApi({ ...formModel.value, pageNum, pageSize }), {
+} = usePagination((pageNum, pageSize) => getListUserApi({
+  ...formModel.value, pageNum, pageSize,
+  params: {
+    beginTime: formModel.value.daterange?.[0],
+    endTime: formModel.value.daterange?.[1],
+  },
+}), {
   initialData: { total: 0, rows: [] },
   total: response => response.total,
   data: response => response.rows,
@@ -81,7 +87,7 @@ function useTableOperate() {
       checkedKeys.value.forEach((key) => {
         delUserApi(key.userId).then((res) => {
           ElMessage.success('删除成功')
-          reload()
+          refresh(page.value)
         })
       })
     }
