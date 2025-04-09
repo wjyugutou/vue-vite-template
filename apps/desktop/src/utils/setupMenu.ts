@@ -12,7 +12,7 @@ export function setupMenu(routes: RouterResult) {
   return menu
 }
 
-function getMenu(routes: RouterResult): RouteRecordRawC[] {
+function getMenu(routes: RouterResult, parent?: RouterResultItem): RouteRecordRawC[] {
   const menu = routes.map((item) => {
     if (item.hidden) {
       return null
@@ -25,7 +25,7 @@ function getMenu(routes: RouterResult): RouteRecordRawC[] {
     }
 
     const menu = {
-      path: item.path,
+      path: parent ? `${parent.path}/${item.path}` : item.path,
       name: item.name,
       component: item.component,
       meta: {
@@ -35,7 +35,7 @@ function getMenu(routes: RouterResult): RouteRecordRawC[] {
         title: item.meta?.title,
         order: item.meta?.order,
       },
-      children: item.children ? getMenu(item.children) : undefined,
+      children: item.children ? getMenu(item.children, item) : undefined,
     } as unknown as RouteRecordRawC
     return menu
   }).filter(Boolean) as RouteRecordRawC[]

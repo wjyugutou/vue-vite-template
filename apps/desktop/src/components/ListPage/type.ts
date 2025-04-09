@@ -9,6 +9,7 @@ export interface Props {
   loading?: boolean
   selection?: boolean
   total?: number
+  index?: boolean
   handleSearch: () => void
   handleReset: () => void
 }

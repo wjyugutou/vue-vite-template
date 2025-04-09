@@ -58,11 +58,8 @@ function handleReset() {
 
       <SimpleTable
         v-model:checked-keys="checkedKeys"
-        :columns="columns"
-        :data="tableData"
         :loading="loading"
-        :row-key="rowKey"
-        :selection="selection"
+        :columns="columns" :data="tableData" :row-key="rowKey" :index="index" :selection="selection"
       >
         <template v-for="slot in tableSlots" #[slot]="{ row, index, column, text }">
           <slot :name="slot" :row="row" :column="column" :index="index" :text="text" />

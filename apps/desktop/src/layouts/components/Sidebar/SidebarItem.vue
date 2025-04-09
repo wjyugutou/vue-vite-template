@@ -10,8 +10,6 @@ const router = useRouter()
 
 const { menuState } = storeToRefs(useAppStore())
 
-const key = computed(() => `${props.parentPath ? `${props.parentPath}/` : ''}${props.item.path}`)
-
 function handleClick() {
   menuState.value.active = props.item.meta?.activePath || props.item.path
 
@@ -19,13 +17,13 @@ function handleClick() {
     window.open(props.item.meta.link, '_blank')
   }
   else {
-    router.push(key.value)
+    router.push(props.item.path)
   }
 }
 </script>
 
 <template>
-  <ElSubMenu v-if="item.children && item.children.length > 0" :index="key">
+  <ElSubMenu v-if="item.children && item.children.length > 0" :index="item.path">
     <template #title>
       <!-- <span v-if="item.meta?.icon" :class="item.meta.icon" class="mr-4" /> -->
       <span class="icon i-carbon-user" />
@@ -35,7 +33,7 @@ function handleClick() {
       <SidebarItem v-if="!child.meta?.hideInMenu" :item="child" :parent-path="item.path" />
     </template>
   </ElSubMenu>
-  <ElMenuItem v-else :index="key" :route="item" @click="handleClick">
+  <ElMenuItem v-else :index="item.path" :route="item" @click="handleClick">
     <template #title>
       <div class="relative w-full flex items-center">
         <!-- <span v-if="item.meta?.icon" :class="item.meta.icon" class="mr-4" /> -->

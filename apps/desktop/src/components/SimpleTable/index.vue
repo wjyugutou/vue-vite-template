@@ -2,13 +2,7 @@
 import type { Props } from './type'
 
 defineOptions({ name: 'SimpleTable' })
-const props = withDefaults(defineProps<Props>(), {
-  // border: true,
-  // stripe: true,
-  selection: false,
-  index: true,
-  // height: '100%',
-})
+defineProps<Props>()
 
 defineSlots<{
   [k: string]: (row: any, index: number) => any

@@ -4,7 +4,7 @@ import { getDictByTypeApi } from '@repo/api'
 import { reactive, toRefs } from 'vue'
 
 export interface DictReturn {
-  list: { value: DictItem['dictValue'], label: DictItem['dictLabel'] }[]
+  list: { value: DictItem['dictValue'], label: DictItem['dictLabel'], [key: string]: any }[]
   map: Record<string, string | number | boolean>
 }
 
@@ -39,7 +39,7 @@ export function useDict<T extends string[]>(...dicts: T): ToRefs<Dict<T>> {
 
 function transformDict(dictValue: DictItem[]): DictReturn {
   return {
-    list: dictValue.map(item => ({ value: item.dictValue, label: item.dictLabel })),
+    list: dictValue.map(item => ({ ...item, value: item.dictValue, label: item.dictLabel })),
     map: dictValue.reduce<DictReturn['map']>((prev, item) => {
       prev[item.dictValue] = item.dictLabel
       prev[item.dictLabel] = item.dictValue

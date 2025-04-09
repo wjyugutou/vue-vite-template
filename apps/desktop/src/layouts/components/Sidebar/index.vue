@@ -19,20 +19,21 @@ const sidebarStyle = computed<CSSProperties>(() => ({
   top: settings.value.layoutMode === 'vertical' ? 0 : 'var(--header-height)',
 }))
 
-// // 初始化激活菜单
-// function initActiveMenu() {
-//   console.log('initActiveMenu')
+// 初始化激活菜单
+function initActiveMenu() {
+  const path = useRoute().path
+  const menu = menus.value.flatMap(menu => menu.children!).find(menu => menu?.path === path)
+  console.log(menus.value)
 
-//   const path = useRoute().path
-//   const menu = menus.value.flatMap(menu => menu.children!).find(menu => menu?.path === path)
+  console.log(path, menu)
 
-//   if (menu) {
-//     menuState.value.defaultActive = menu.path
-//     menuState.value.defaultOpeneds = menu.children?.map(child => child.path) || []
-//   }
-// }
+  if (menu) {
+    menuState.value.active = menu.path
+    menuState.value.openeds = menu.children?.map(child => child.path) || []
+  }
+}
 
-// initActiveMenu()
+initActiveMenu()
 </script>
 
 <template>
