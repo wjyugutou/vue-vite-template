@@ -2,7 +2,7 @@ import {
   defineConfig,
   presetIcons,
   presetWind3,
-  transformerDirectives, // @apply
+  transformerDirectives, // --at-apply:
   transformerVariantGroup,
 } from 'unocss'
 

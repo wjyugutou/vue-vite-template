@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { ArrowDown } from '@element-plus/icons-vue'
-
 const props = withDefaults(defineProps<{
   max?: number
 }>(), {

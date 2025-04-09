@@ -8,8 +8,7 @@ interface Tag {
 
 const route = useRoute()
 const router = useRouter()
-const tags = useSessionStorage<Tag[]>('app-tags', [])
-const { cachedList, menuState } = storeToRefs(useAppStore())
+const { cachedList, menuState, tags } = storeToRefs(useAppStore())
 
 // 如果首页标签不存在，则添加
 if (tags.value.findIndex(tag => tag.path === route.path) === -1) {
@@ -21,7 +20,7 @@ if (tags.value.findIndex(tag => tag.path === route.path) === -1) {
 
 watch(route, () => {
   // 修改defaultActive
-  menuState.value.defaultActive = route.meta?.activePath || route.path
+  menuState.value.active = route.meta?.activePath || route.path
 
   if (tags.value.findIndex(tag => tag.path === route.path) === -1) {
     if (route.meta.keepAlive) {
@@ -65,7 +64,7 @@ function handleClose(e: Event, tag: Tag) {
 
 <style scoped>
 .tag-view {
-  @apply  h-[var(--tag-view-height)] flex gap-2 border-b b-b-[var(--el-border-color)] px-2 py-1;
+  --at-apply:  h-[var(--tag-view-height)] flex gap-2 border-b b-b-[var(--el-border-color)] px-2 py-1;
   width: fit-content;
   min-width: 100%;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);

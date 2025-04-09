@@ -31,15 +31,11 @@ export const basicRoutes: RouteRecordRawC[] = [
       },
     ],
   },
-
-]
-
-const staticRoutes: RouteRecordRawC[] = [
   {
     path: '/',
     component: BasicLayout,
     children: [{
-      path: 'error/:status',
+      path: ':pathMatch(.*)*',
       name: 'Error',
       meta: {
         title: 'Error',
@@ -51,17 +47,7 @@ const staticRoutes: RouteRecordRawC[] = [
     }],
   },
 ]
-export const ErrorRoute: RouteRecordRawC = {
-  path: '/:pathMatch(.*)*',
-  redirect(to) {
-    return {
-      path: '/error/404',
-      query: to.query,
-      params: to.params,
-    }
-  },
-}
 
-const routes: RouteRecordRawC[] = [...basicRoutes, ...staticRoutes]
+const routes: RouteRecordRawC[] = [...basicRoutes]
 
 export default routes

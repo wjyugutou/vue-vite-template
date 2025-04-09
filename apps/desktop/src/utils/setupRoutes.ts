@@ -1,46 +1,72 @@
+import type { RouteRecordRawC } from '@/router/type'
 import type { RouterResult, RouterResultItem } from '@repo/api'
+import type { RouteComponent } from 'vue-router'
+import ErrorComponent from '@/pages/Error.vue'
 import router from '@/router'
-import { ErrorRoute } from '@/router/routes'
 
 /**
  * 注册动态路由
  */
-export function setupRoutes(routes: RouterResult, parentName: string = 'Index', suffix: string = '') {
+export function setupRoutes(routes: RouterResult) {
+  addRoute(routes)
+}
+
+/**
+ * 退出登录清空路由
+ */
+export function clearRoutes(routes: RouterResult) {
   routes.forEach((route) => {
-    const component = route.component
-    route.path = suffix ? `${suffix}/${route.path}` : route.path
+    router.removeRoute(route.name as string)
+    if (route.children) {
+      clearRoutes(route.children)
+    }
+  })
+}
+
+function addRoute(routes: RouterResult, parentName: string = 'Index', suffix?: string) {
+  routes.forEach((route) => {
+    const component = getComponent(route)
+
     if (component) {
-      route.component = getComponent(route)
-      router.addRoute(parentName, route)
+      const _route: RouteRecordRawC = {
+        name: route.name,
+        meta: route.meta,
+        path: suffix ? `${suffix}/${route.path}` : route.path,
+        component,
+      }
+
+      router.addRoute(parentName, _route)
     }
 
     if (route.children) {
       // 组件不存在，说明是菜单
-      setupRoutes(route.children, component ? route.name : undefined, component ? '' : route.path)
+      addRoute(route.children, component ? route.name : undefined, component ? '' : route.path)
     }
   })
-  // 最后添加Error路由
-  router.addRoute(ErrorRoute)
 }
 
 const allView = import.meta.glob(['@/pages/**/*.vue'])
 
-function getComponent(route: RouterResultItem) {
+function getComponent(route: RouterResultItem): RouteComponent | null {
   const component = route.component
   if (typeof component === 'string') {
+    if (component === 'Layout') {
+      return null
+    }
+
     const view = allView[`/src/pages/${component}.vue`] || allView[`/src/pages/${component}/index.vue`]
 
     if (view) {
       return view
     }
     else {
-      return h(Error, {
+      return h(ErrorComponent, {
         title: `Path: ${route.path}`,
       })
     }
   }
   else {
-    return h(Error, {
+    return h(ErrorComponent, {
       title: `Path: ${route.path}`,
     })
   }

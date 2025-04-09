@@ -1,5 +1,7 @@
+import type { FormRules } from 'element-plus'
+
 export interface FormItem {
-  type?: 'input' | 'select' | 'date'
+  type?: 'input' | 'select' | 'date' | 'radio' | 'time'
   span?: number
   label?: string
   prop?: string
@@ -13,6 +15,7 @@ export interface FormItem {
 }
 
 export interface Props {
+  name?: string
   formItems: FormItem[]
   gutter?: number
   labelWidth?: string | number
@@ -20,4 +23,7 @@ export interface Props {
   disabled?: boolean
   labelPosition?: 'top' | 'left'
   formData?: Record<string, any>
+  rules?: FormRules
+  /** 是否显示冒号 */
+  colon?: boolean
 }

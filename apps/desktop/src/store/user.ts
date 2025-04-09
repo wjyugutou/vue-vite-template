@@ -1,11 +1,11 @@
 import type { RouteRecordRawC } from '@/router/type'
-import type { LoginResult, UserInfo } from '@repo/api'
+import type { LoginResult, RouterResult, UserInfo } from '@repo/api'
 import router from '@/router'
 import { logoutApi, userInfoApi, userRouterApi } from '@repo/api'
 
 interface UserState {
   userInfo: UserInfo | null
-  routes: RouteRecordRawC[]
+  routes: RouterResult
   menus: RouteRecordRawC[]
   roles: string[]
   permissions: string[]
@@ -38,6 +38,15 @@ export const useUserStore = defineStore('user', {
         this.menus = []
         this.roles = []
         this.permissions = []
+
+        const { menuState, tags } = storeToRefs(useAppStore())
+        menuState.value.openeds = []
+        menuState.value.active = ''
+        // 退出登录清空路由
+        clearRoutes(this.routes)
+        // 退出登录清空tags
+        tags.value = [{ path: '/', title: '首页' }]
+
         router.replace('/login')
       }
       catch (error) {
@@ -63,10 +72,8 @@ export const useUserStore = defineStore('user', {
 
       this.routes = userRoutes
 
-      const menus = setupMenu(userRoutes)
-      this.menus = menus
-
-      setupRoutes(structuredClone(userRoutes))
+      this.menus = setupMenu(userRoutes)
+      setupRoutes(userRoutes)
     },
   },
   persist: [

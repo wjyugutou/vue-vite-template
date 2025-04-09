@@ -34,8 +34,6 @@ const props = withDefaults(defineProps<{
 const route = useRoute()
 const router = useRouter()
 
-console.log('[Error]', route)
-
 const Icon403 = defineAsyncComponent(() => import('@/assets/icons/icon-403.vue'))
 const Icon404 = defineAsyncComponent(() => import('@/assets/icons/icon-404.vue'))
 const Icon500 = defineAsyncComponent(() => import('@/assets/icons/icon-500.vue'))

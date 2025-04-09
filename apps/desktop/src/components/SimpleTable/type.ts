@@ -13,7 +13,7 @@ export interface Column {
 
 export interface Props {
   columns: Column[]
-  tableData: any[]
+  data: any[]
   height?: string | number
   border?: boolean
   stripe?: boolean

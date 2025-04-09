@@ -23,7 +23,12 @@ router.beforeEach(async (to, form, next) => {
     else {
       await userStore.getUserInfo()
       await userStore.getUserRoutes()
-      next({ ...to, replace: true })
+      const _to = {
+        path: to.path,
+        query: to.query,
+      }
+
+      next({ ..._to, replace: true })
     }
   }
 })

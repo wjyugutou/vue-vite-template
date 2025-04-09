@@ -19,20 +19,20 @@ const sidebarStyle = computed<CSSProperties>(() => ({
   top: settings.value.layoutMode === 'vertical' ? 0 : 'var(--header-height)',
 }))
 
-// 初始化激活菜单
-function initActiveMenu() {
-  console.log('initActiveMenu')
+// // 初始化激活菜单
+// function initActiveMenu() {
+//   console.log('initActiveMenu')
 
-  const path = useRoute().path
-  const menu = menus.value.flatMap(menu => menu.children!).find(menu => menu?.path === path)
+//   const path = useRoute().path
+//   const menu = menus.value.flatMap(menu => menu.children!).find(menu => menu?.path === path)
 
-  if (menu) {
-    menuState.value.defaultActive = menu.path
-    menuState.value.defaultOpeneds = menu.children?.map(child => child.path) || []
-  }
-}
+//   if (menu) {
+//     menuState.value.defaultActive = menu.path
+//     menuState.value.defaultOpeneds = menu.children?.map(child => child.path) || []
+//   }
+// }
 
-initActiveMenu()
+// initActiveMenu()
 </script>
 
 <template>
@@ -43,8 +43,8 @@ initActiveMenu()
       :style="sidebarStyle" class="sidebar"
       :hide-timeout="0"
       :collapse-transition="false"
-      :default-openeds="menuState.defaultOpeneds"
-      :default-active="menuState.defaultActive"
+      :default-openeds="menuState.openeds"
+      :default-active="menuState.active"
       :collapse="settings.sidebarCollapse"
     >
       <Logo v-if="settings.layoutMode === 'vertical'" class="flex-shrink-0 b-b b-b-[var(--el-border-color)] px-20px" />
@@ -67,8 +67,8 @@ initActiveMenu()
 <style>
 .sidebar {
   --sidebar-bottom-height: 35px;
-  @apply bottom-0 left-0 flex-shrink-0 flex-basis-[var(--sidebar-width)] transition-all important-fixed;
-  @apply flex flex-col;
+  --at-apply: bottom-0 left-0 flex-shrink-0 flex-basis-[var(--sidebar-width)] transition-all important-fixed;
+  --at-apply: flex flex-col;
 
   &:not(.el-menu--collapse) {
     width: var(--sidebar-width);

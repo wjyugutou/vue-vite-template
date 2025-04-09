@@ -49,7 +49,7 @@ function handleLogin() {
   <div class="m-auto h-full w-30% content-center">
     <h1 class="mb-10 text-center text-2xl font-bold">登录</h1>
     <div class="">
-      <SimpleForm ref="formRef" v-model="form" :form-items="formItems" label-width="52px">
+      <SimpleForm ref="formRef" v-model="form" :form-items="formItems" label-width="60px">
         <template #footer>
           <div class="text-center">
             <ElButton type="primary" :loading="loading" @click="handleLogin">登录</ElButton>

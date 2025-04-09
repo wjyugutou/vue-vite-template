@@ -1,4 +1,6 @@
-import { reactive, toRefs, type ToRefs } from 'vue'
+import type { ToRefs } from 'vue'
+import request from '@repo/api/request'
+import { reactive, toRefs } from 'vue'
 
 export interface DictItem {
   dictLabel: string

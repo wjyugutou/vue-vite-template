@@ -9,8 +9,6 @@ export function setupMenu(routes: RouterResult) {
 
   const menu = defaultMenu.concat(userMenu)
 
-  console.log('menu', menu)
-
   return menu
 }
 
@@ -32,7 +30,7 @@ function getMenu(routes: RouterResult): RouteRecordRawC[] {
       component: item.component,
       meta: {
         hidden: item.hidden,
-        keepAlive: item.meta?.noCache,
+        keepAlive: !item.meta?.noCache,
         icon: item.meta?.icon,
         title: item.meta?.title,
         order: item.meta?.order,

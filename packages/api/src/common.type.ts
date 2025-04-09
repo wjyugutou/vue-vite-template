@@ -65,3 +65,16 @@ export interface RouterResultItem {
 }
 
 export type RouterResult = RouterResultItem[]
+
+export interface Result<T = any> {
+  code: number
+  msg: string
+  data: T
+}
+
+export const enum EnumBasicStatus {
+  /** 正常 */
+  ENABLE = '0',
+  /** 停用 */
+  DISABLE = '1',
+}
