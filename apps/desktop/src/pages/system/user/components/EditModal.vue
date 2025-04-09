@@ -57,7 +57,7 @@ const formItems = computed<FormItem[]>(() => [
   { label: '用户性别', prop: 'sex', type: 'input', placeholder: '请选择用户性别' },
   { label: '状态', prop: 'status', type: 'radio', options: [{ label: '正常', value: '0' }, { label: '停用', value: '1' }], placeholder: '请选择状态' },
   { label: '岗位', prop: 'postIds', type: 'select', options: posts.value, placeholder: '请选择岗位' },
-  { label: '角色', prop: 'roleIds', type: 'select', options: roles.value, placeholder: '请选择角色', other: { multiple: true} },
+  { label: '角色', prop: 'roleIds', type: 'select', options: roles.value, placeholder: '请选择角色', other: { multiple: true } },
   { label: '备注', prop: 'remark', type: 'input', placeholder: '请输入备注', span: 24, other: { rows: 2, type: 'textarea' } },
 ])
 
@@ -111,8 +111,6 @@ async function getUserInfo() {
 }
 
 async function handleSubmit() {
-  console.log(formContext)
-
   await formContext.value?.validate()
   try {
     if (props.userId) {
@@ -129,7 +127,6 @@ async function handleSubmit() {
     console.log(error)
   }
 }
-
 </script>
 
 <template>
