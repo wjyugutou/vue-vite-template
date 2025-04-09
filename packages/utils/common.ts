@@ -162,3 +162,28 @@ export function getFileType(fileUrl?: string) {
   const fileType = arr2.at(-1)
   return fileType
 }
+
+/**
+ * 处理get请求的params
+ */
+export function handleParams(params: Record<string, any>) {
+  if (!params.pageNum)
+    return
+
+  const paramsObj: Record<string, any> = {}
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined) {
+      if (typeof value === 'object' && value !== null) {
+        Object.entries(value).forEach(([_key, _value]) => {
+          const __key = encodeURIComponent(`${key}[${_key}]`)
+          paramsObj[__key] = _value
+        })
+      }
+      else if (typeof value !== 'object') {
+        paramsObj[key] = value
+      }
+    }
+  })
+
+  return paramsObj
+}

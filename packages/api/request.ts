@@ -1,4 +1,5 @@
 import type { Method, RespondedHandlerRecord } from 'alova'
+import { handleParams } from '@repo/utils'
 import { createAlova } from 'alova'
 import adapterFetch from 'alova/fetch'
 import vueHook from 'alova/vue'
@@ -48,6 +49,11 @@ const alova = createAlova({
   beforeRequest: (method) => {
     // 请求需要携带cookie
     // method.config.credentials = 'include'
+
+    if (method.config.params) {
+      method.config.params = handleParams(method.config.params)
+    }
+
     interceptor.beforeRequest?.(method)
   },
   responded: {
