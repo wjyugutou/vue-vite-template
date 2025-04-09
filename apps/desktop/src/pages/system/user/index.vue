@@ -2,7 +2,7 @@
 import type { FormItem } from '@/components/SimpleForm/type'
 import type { Column } from '@/components/SimpleTable/type'
 import type { User } from '@repo/api'
-import { delUserApi, deptTreeSelectApi, getListUserApi } from '@repo/api'
+import { changeUserStatusApi, delUserApi, deptTreeSelectApi, getListUserApi } from '@repo/api'
 import { usePagination, useRequest } from 'alova/client'
 import { Pane, Splitpanes } from 'splitpanes'
 import EditModal from './components/EditModal.vue'
@@ -22,8 +22,8 @@ const columns: Column[] = [
   { label: '用户姓名', prop: 'nickName', minWidth: 150 },
   { label: '手机号', prop: 'phonenumber', minWidth: 120 },
   { label: '状态', slot: 'status', minWidth: 120 },
-  { label: '创建时间', prop: 'createTime', minWidth: 180 },
-  { label: '操作', slot: 'operation', width: 200 },
+  { label: '创建时间', prop: 'createTime', width: 180 },
+  { label: '操作', slot: 'operation', width: 180 },
 ]
 
 const formModel = ref({
@@ -110,7 +110,22 @@ function useTableOperate() {
   }
 
   function handleStatusChange(row: User) {
-    console.log('状态', row)
+    return async () => {
+      try {
+        row.loading = true
+        await changeUserStatusApi(row.userId, row.status)
+        ElMessage.success('状态更新成功')
+        await refresh(page.value)
+        return true
+      }
+      catch (error) {
+        ElMessage.error('状态更新失败')
+        return false
+      }
+      finally {
+        row.loading = false
+      }
+    }
   }
 
   return {
@@ -162,7 +177,7 @@ const {
           :loading="loading" :columns="columns" row-key="userId" selection :table-data="data"
           :form-items="formItems"
           :handle-search="refresh" :handle-reset="refresh"
-        > 
+        >
           <template #table-header>
             <div class="mb-2 flex items-center gap-2">
               <ElButton v-hasPermi="['system:user:add']" type="primary" @click="handleAdd">
@@ -181,7 +196,7 @@ const {
           </template>
 
           <template #status="{ row }">
-            <ElSwitch :checked="row.status" checked-value="0" unchecked-value="1" @change="handleStatusChange(row)" />
+            <ElSwitch v-model="row.status" active-value="0" inactive-value="1" :loading="row.loading" :before-change="handleStatusChange(row)" />
           </template>
 
           <template #operation="{ row }">
