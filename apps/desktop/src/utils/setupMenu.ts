@@ -8,6 +8,7 @@ export function setupMenu(routes: RouterResult) {
   const userMenu = getMenu(routes)
 
   const menu = defaultMenu.concat(userMenu)
+  console.log('setupMenu', menu)
 
   return menu
 }

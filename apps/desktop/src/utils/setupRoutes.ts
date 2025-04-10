@@ -30,7 +30,13 @@ function addRoute(routes: RouterResult, parentName: string = 'Index', suffix?: s
     if (component) {
       const _route: RouteRecordRawC = {
         name: route.name,
-        meta: route.meta,
+        meta: {
+          hidden: route.hidden,
+          keepAlive: !route.meta?.noCache,
+          icon: route.meta?.icon,
+          title: route.meta?.title,
+          order: route.meta?.order,
+        },
         path: suffix ? `${suffix}/${route.path}` : route.path,
         component,
       }

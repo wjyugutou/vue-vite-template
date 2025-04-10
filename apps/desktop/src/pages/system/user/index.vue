@@ -8,7 +8,7 @@ import { Pane, Splitpanes } from 'splitpanes'
 import EditModal from './components/EditModal.vue'
 import 'splitpanes/dist/splitpanes.css'
 
-defineOptions({ name: 'SystemUser' })
+defineOptions({ name: 'User' })
 
 const formItems: FormItem[] = [
   { prop: 'userName', label: '用户名', span: 8, type: 'input', placeholder: '请输入用户名' },

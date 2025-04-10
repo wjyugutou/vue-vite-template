@@ -1,12 +1,12 @@
 {
   "folders": [
     {
-      "name": "h5",
-      "path": "apps/h5",
+      "name": "mobile",
+      "path": "apps/mobile",
     },
     {
-      "name": "pc",
-      "path": "apps/pc",
+      "name": "desktop",
+      "path": "apps/desktop",
     },
     {
       "name": "utils",

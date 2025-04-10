@@ -23,9 +23,6 @@ const sidebarStyle = computed<CSSProperties>(() => ({
 function initActiveMenu() {
   const path = useRoute().path
   const menu = menus.value.flatMap(menu => menu.children!).find(menu => menu?.path === path)
-  console.log(menus.value)
-
-  console.log(path, menu)
 
   if (menu) {
     menuState.value.active = menu.path

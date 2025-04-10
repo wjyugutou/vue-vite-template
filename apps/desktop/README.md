@@ -22,6 +22,9 @@ interface ImportMetaEnv {
 }
 ```
 
+# keepalive
+路由组件名称由菜单 path 首字母大写构成 例如：/user 对应组件名称 User， /system/user 对应组件名称 /system/user
+
 # 代码风格
 使用 eslint + @antfu/eslint-config
 

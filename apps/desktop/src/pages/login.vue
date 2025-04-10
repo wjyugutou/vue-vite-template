@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { FormItem } from '@/components/SimpleForm/type'
 import type { FormInstance } from 'element-plus'
+import { useForm } from '@/components/SimpleForm/useForm'
 import { loginApi } from '@repo/api'
 import { useRequest } from 'alova/client'
 
@@ -13,7 +14,6 @@ const form = ref({
   password: 'admin123',
 })
 
-const formRef = useTemplateRef<FormInstance>('formRef')
 const formItems = ref<FormItem[]>([
   { label: '账号', span: 24, prop: 'username', type: 'input', placeholder: '请输入账号', rules: [{ required: true, message: '请输入账号' }], other: { clearable: true } },
   { label: '密码', span: 24, prop: 'password', type: 'input', placeholder: '请输入密码', rules: [{ required: true, message: '请输入密码' }], other: { clearable: true, showPassword: true } },
@@ -24,8 +24,9 @@ const userStore = useUserStore()
 
 const { loading, send } = useRequest(loginApi, { immediate: false })
 
+const formIns = useForm()
 function handleLogin() {
-  formRef.value?.validate(async (valid) => {
+  formIns.value?.validate(async (valid) => {
     if (valid) {
       try {
         const res = await send(form.value)
@@ -49,7 +50,7 @@ function handleLogin() {
   <div class="m-auto h-full w-30% content-center">
     <h1 class="mb-10 text-center text-2xl font-bold">登录</h1>
     <div class="">
-      <SimpleForm ref="formRef" v-model="form" :form-items="formItems" label-width="60px">
+      <SimpleForm v-model="form" :form-items="formItems" label-width="60px">
         <template #footer>
           <div class="text-center">
             <ElButton type="primary" :loading="loading" @click="handleLogin">登录</ElButton>

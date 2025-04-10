@@ -23,8 +23,8 @@ watch(route, () => {
   menuState.value.active = route.meta?.activePath || route.path
 
   if (tags.value.findIndex(tag => tag.path === route.path) === -1) {
-    if (route.meta.keepAlive) {
-      cachedList.value.push(route.path)
+    if (route.meta.keepAlive && typeof route.name === 'string') {
+      cachedList.value.push(route.name)
     }
 
     tags.value.push({
@@ -32,7 +32,8 @@ watch(route, () => {
       title: route.meta.title as string,
     })
   }
-})
+}, { immediate: true })
+
 function handleClose(e: Event, tag: Tag) {
   e.stopPropagation()
   e.preventDefault()
