@@ -15,13 +15,13 @@ export const enum MenuVisible {
 }
 
 export const enum MenuIsFrame {
-  是 = '1',
-  否 = '0',
+  是 = '0',
+  否 = '1',
 }
 
 export const enum MenuIsCache {
-  是 = '1',
-  否 = '0',
+  是 = '0',
+  否 = '1',
 }
 
 export interface AddMenuParams {
