@@ -168,7 +168,7 @@ export function getFileType(fileUrl?: string) {
  */
 export function handleParams(params: Record<string, any>) {
   if (!params.pageNum)
-    return
+    return params
 
   const paramsObj: Record<string, any> = {}
   Object.entries(params).forEach(([key, value]) => {

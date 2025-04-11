@@ -146,7 +146,7 @@ async function handleSubmit() {
     </SimpleForm>
     <template #footer>
       <ElButton type="primary" @click="handleSubmit">
-        提交
+        确定
       </ElButton>
     </template>
   </ElDialog>

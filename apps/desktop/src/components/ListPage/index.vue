@@ -38,7 +38,7 @@ function handleReset() {
 </script>
 
 <template>
-  <div class="list-search">
+  <div v-loading="!!loading" class="list-search">
     <ElCard>
       <SimpleForm
         v-model="formModel"
@@ -76,6 +76,8 @@ function handleReset() {
         @change="handlePageChange"
       />
     </ElCard>
+
+    <slot />
   </div>
 </template>
 

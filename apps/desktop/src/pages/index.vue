@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { testApi } from '@repo/api'
-import { useRequest } from 'alova/client'
-
 const router = useRouter()
 
 const name = ref('')

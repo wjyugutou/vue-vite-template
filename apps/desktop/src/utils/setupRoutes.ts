@@ -27,9 +27,11 @@ function addRoute(routes: RouterResult, parentName: string = 'Index', suffix?: s
   routes.forEach((route) => {
     const component = getComponent(route)
 
+    const path = suffix ? `${suffix}/${route.path}` : route.path
+    const name = getRouteName(path)
     if (component) {
       const _route: RouteRecordRawC = {
-        name: route.name,
+        name,
         meta: {
           hidden: route.hidden,
           keepAlive: !route.meta?.noCache,
@@ -37,7 +39,7 @@ function addRoute(routes: RouterResult, parentName: string = 'Index', suffix?: s
           title: route.meta?.title,
           order: route.meta?.order,
         },
-        path: suffix ? `${suffix}/${route.path}` : route.path,
+        path,
         component,
       }
 
@@ -46,7 +48,7 @@ function addRoute(routes: RouterResult, parentName: string = 'Index', suffix?: s
 
     if (route.children) {
       // 组件不存在，说明是菜单
-      addRoute(route.children, component ? route.name : undefined, component ? '' : route.path)
+      addRoute(route.children, component ? name : undefined, component ? '' : route.path)
     }
   })
 }
@@ -76,4 +78,15 @@ function getComponent(route: RouterResultItem): RouteComponent | null {
       title: `Path: ${route.path}`,
     })
   }
+}
+
+/**
+ * 获取路由名称
+ * @param path 路由路径 /system/menu
+ * @returns 路由名称 SystemMenu
+ */
+function getRouteName(path: string) {
+  return path.split('/').map((item) => {
+    return item.charAt(0).toUpperCase() + item.slice(1)
+  }).join('')
 }

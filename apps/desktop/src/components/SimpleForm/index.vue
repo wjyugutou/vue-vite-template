@@ -51,25 +51,25 @@ onMounted(() => {
         <ElFormItem v-else :label="item.label" :prop="item.prop" :rules="item.rules" :placeholder="item.placeholder" :disabled="item.disabled">
           <ElInput
             v-if="item.type === 'input'" v-model="form[item.prop!]" class="w-full" :placeholder="item.placeholder"
-            :disabled="item.disabled" v-bind="item.other" style="width: 100%;"
+            :disabled="item.disabled" clearable v-bind="item.other" style="width: 100%;"
           />
           <ElSelect
             v-else-if="item.type === 'select'" v-model="form[item.prop!]" class="w-full" :placeholder="item.placeholder"
-            :disabled="item.disabled" v-bind="item.other" style="width: 100%;"
+            :disabled="item.disabled" clearable v-bind="item.other" style="width: 100%;"
           >
             <ElOption v-for="option in item.options" :key="option.value" :label="option.label" :value="option.value" />
           </ElSelect>
           <ElDatePicker
             v-else-if="item.type === 'date'" v-model="form[item.prop!]" class="w-full" :placeholder="item.placeholder"
-            :disabled="item.disabled" value-format="YYYY-MM-DD" v-bind="item.other" style="width: 100%;"
+            :disabled="item.disabled" clearable value-format="YYYY-MM-DD" v-bind="item.other" style="width: 100%;"
           />
           <ElTimePicker
             v-else-if="item.type === 'time'" v-model="form[item.prop!]" class="w-full" :placeholder="item.placeholder"
-            :disabled="item.disabled" v-bind="item.other" style="width: 100%;"
+            :disabled="item.disabled" clearable v-bind="item.other" style="width: 100%;"
           />
           <ElRadioGroup
             v-else-if="item.type === 'radio'" v-model="form[item.prop!]" class="w-full" :placeholder="item.placeholder"
-            :disabled="item.disabled" v-bind="item.other" style="width: 100%;"
+            :disabled="item.disabled" clearable v-bind="item.other" style="width: 100%;"
           >
             <ElRadio v-for="option in item.options" :key="option.value" :value="option.value">
               {{ option.label }}

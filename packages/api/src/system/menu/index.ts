@@ -1,4 +1,4 @@
-import type { Menu } from './type'
+import type { AddMenuParams, Menu } from './type'
 import request from '../../../request'
 
 export * from './type'
@@ -12,7 +12,7 @@ export function getListMenuApi(query: any) {
 
 // 查询菜单详细
 export function getMenuApi(menuId: string | number) {
-  return request.Get(`/system/menu/${menuId}`)
+  return request.Get<Menu>(`/system/menu/${menuId}`)
 }
 
 // 查询菜单下拉树结构
@@ -26,7 +26,7 @@ export function getRoleMenuTreeselectApi(roleId: string | number) {
 }
 
 // 新增菜单
-export function addMenuApi(data: any) {
+export function addMenuApi(data: AddMenuParams) {
   return request.Post('/system/menu', data)
 }
 
