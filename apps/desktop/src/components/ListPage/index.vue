@@ -5,7 +5,7 @@ defineOptions({ name: 'ListPage' })
 
 const props = defineProps<Props>()
 
-const formModel = defineModel<Record<string, any>>({ required: true })
+const formModel = defineModel<Record<string, any>>('formModel', { required: true })
 
 const _formItems = computed(() => {
   return [...props.formItems, {
@@ -33,6 +33,8 @@ function handleSearch() {
 
 function handleReset() {
   formModel.value = {}
+  pageNum.value = 1
+  pageSize.value = 10
   props.handleReset?.()
 }
 </script>
@@ -68,8 +70,7 @@ function handleReset() {
 
       <ElPagination
         v-if="pageNum"
-        v-model:current-page="pageNum"
-        v-model:page-size="pageSize"
+        v-model:current-page="pageNum" v-model:page-size="pageSize"
         class="justify-end"
         :total="total" :page-sizes="[10, 20, 50, 100, 200]"
         layout="total, sizes, prev, pager, next, jumper"

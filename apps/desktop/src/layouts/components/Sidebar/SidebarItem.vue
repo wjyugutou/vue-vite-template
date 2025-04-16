@@ -25,8 +25,10 @@ function handleClick() {
 <template>
   <ElSubMenu v-if="item.children && item.children.length > 0" :index="item.path">
     <template #title>
-      <!-- <span v-if="item.meta?.icon" :class="item.meta.icon" class="mr-4" /> -->
-      <span class="icon i-carbon-user" />
+      <ElIcon>
+        <!-- <span v-if="item.meta?.icon" :class="item.meta.icon" class="mr-4" /> -->
+        <span class="icon i-carbon-user" />
+      </ElIcon>
       <span>{{ item.meta?.title }}</span>
     </template>
     <template v-for="child in item.children" :key="child.path">
@@ -34,39 +36,12 @@ function handleClick() {
     </template>
   </ElSubMenu>
   <ElMenuItem v-else :index="item.path" :route="item" @click="handleClick">
+    <ElIcon>
+      <!-- <span v-if="item.meta?.icon" :class="item.meta.icon" class="mr-4" /> -->
+      <span class="icon i-carbon-user" />
+    </ElIcon>
     <template #title>
-      <div class="relative w-full flex items-center">
-        <!-- <span v-if="item.meta?.icon" :class="item.meta.icon" class="mr-4" /> -->
-        <span class="icon i-carbon-user" />
-        <span>{{ item.meta?.title }}</span>
-      </div>
+      <span>{{ item.meta?.title }}</span>
     </template>
   </ElMenuItem>
 </template>
-
-<style>
-.el-sub-menu {
-
-  &.is-active {
-
-    & > .el-sub-menu__title {
-      color: var(--el-menu-active-color);
-    }
-  }
-
-  .el-menu-item {
-
-    &.is-active{
-      background-color: var(--el-menu-hover-bg-color);
-    }
-
-    .menu-badge {
-      --at-apply: absolute right-2 size-4 line-height-2 overflow-hidden text-ellipsis rounded-full whitespace-nowrap text-10px text-center content-center text-white;
-    }
-
-    .menu-badge-dot {
-      --at-apply: absolute right-2 size-2  bg-danger rounded-full;
-    }
-  }
-}
-</style>

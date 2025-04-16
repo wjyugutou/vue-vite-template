@@ -8,13 +8,11 @@ export interface DictReturn {
   map: Record<string, string | number | boolean>
 }
 
-function getDictApi(dictType: string) {
-  return getDictByTypeApi(dictType)
-}
-
 type Dict<T extends [...string[]]> = {
   [K in T[number]]: DictReturn
 }
+
+const dictMapCache = new Map<string, DictReturn>()
 
 /**
  * 字典hooks
@@ -29,9 +27,17 @@ export function useDict<T extends string[]>(...dicts: T): ToRefs<Dict<T>> {
   const dictMap = reactive(initvalue) as Dict<T>
 
   dicts.forEach((dict) => {
-    getDictApi(dict).then((res) => {
-      dictMap[dict as T[number]] = transformDict(res)
-    })
+    const dictCache = dictMapCache.get(dict)
+    if (dictCache) {
+      dictMap[dict as T[number]] = dictCache
+    }
+    else {
+      getDictByTypeApi(dict).then((res) => {
+        const dictValue = transformDict(res)
+        dictMap[dict as T[number]] = dictValue
+        dictMapCache.set(dict, dictValue)
+      })
+    }
   })
 
   return toRefs(dictMap)

@@ -1,5 +1,4 @@
 <script lang='ts' setup>
-import type { CSSProperties } from 'vue'
 import Logo from '../Logo.vue'
 import SidebarItem from './SidebarItem.vue'
 
@@ -7,17 +6,6 @@ defineOptions({ name: 'Sidebar' })
 
 const { menus } = storeToRefs(useUserStore())
 const { menuState, settings } = storeToRefs(useAppStore())
-
-const sidebarSeatStyle = computed<CSSProperties>(() => ({
-  width: settings.value.sidebarCollapse ? 'var(--sidebar-width-collapsed)' : 'var(--sidebar-width)',
-  // minWidth: settings.value.sidebarCollapse ? 'var(--sidebar-width-collapsed)' : 'var(--sidebar-width)',
-  // maxWidth: settings.value.sidebarCollapse ? 'var(--sidebar-width-collapsed)' : 'var(--sidebar-width)',
-}))
-
-const sidebarStyle = computed<CSSProperties>(() => ({
-  left: 0,
-  top: settings.value.layoutMode === 'vertical' ? 0 : 'var(--header-height)',
-}))
 
 // 初始化激活菜单
 function initActiveMenu() {
@@ -34,46 +22,41 @@ initActiveMenu()
 </script>
 
 <template>
-  <div>
-    <!-- sidebar 占位 -->
-    <div :style="sidebarSeatStyle" class="h-0 transition-all" />
-    <ElMenu
-      :style="sidebarStyle" class="sidebar"
-      :hide-timeout="0"
-      :collapse-transition="false"
-      :default-openeds="menuState.openeds"
-      :default-active="menuState.active"
-      :collapse="settings.sidebarCollapse"
-    >
-      <Logo v-if="settings.layoutMode === 'vertical'" class="flex-shrink-0 b-b b-b-[var(--el-border-color)] px-20px" />
-
-      <ElScrollbar class="flex-1">
-        <template v-for="menu in menus" :key="menu.path">
-          <SidebarItem v-if="!menu.meta?.hideInMenu" :item="menu" />
-        </template>
-      </ElScrollbar>
-      <div class="h-[var(--sidebar-bottom-height)] w-full flex-shrink-0 content-center px-4">
-        <div
-          class="i-carbon-distribute-horizontal-left cursor-pointer hover:bg-primary/90" :class="{ 'bg-primary/90': settings.sidebarCollapse }"
-          @click="settings.sidebarCollapse = !settings.sidebarCollapse"
-        />
-      </div>
-    </ElMenu>
-  </div>
+  <ElMenu
+    class="sidebar"
+    :default-openeds="menuState.openeds"
+    :default-active="menuState.active"
+    :collapse="settings.sidebarCollapse"
+  >
+    <Logo v-if="settings.layoutMode === 'vertical'" class="px-20px" />
+    <ScrollView>
+      <template v-for="menu in menus" :key="menu.path">
+        <SidebarItem v-if="!menu.meta?.hideInMenu" :item="menu" />
+      </template>
+    </ScrollView>
+    <div class="absolute bottom-0 left-0 h-[var(--sidebar-bottom-height)] w-full flex-center b-t px-4">
+      <div
+        class="i-carbon-distribute-horizontal-left cursor-pointer hover:bg-primary/90" :class="{ 'bg-primary/90': settings.sidebarCollapse }"
+        @click="settings.sidebarCollapse = !settings.sidebarCollapse"
+      />
+    </div>
+  </ElMenu>
 </template>
 
 <style>
 .sidebar {
-  --sidebar-bottom-height: 35px;
-  --at-apply: bottom-0 left-0 flex-shrink-0 flex-basis-[var(--sidebar-width)] transition-all important-fixed;
   --at-apply: flex flex-col;
+  --sidebar-bottom-height: 35px;
 
-  &:not(.el-menu--collapse) {
-    width: var(--sidebar-width);
-  }
+  width: var(--sidebar-width);
+  padding-bottom: var(--sidebar-bottom-height);
 
   &.el-menu--collapse {
     width: var(--sidebar-width-collapsed);
+
+    .el-tooltip__trigger > *:not(:nth-child(1)) {
+      opacity: 0;
+    }
   }
 }
 </style>

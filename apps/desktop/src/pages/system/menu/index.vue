@@ -64,7 +64,7 @@ function handleAdd(id?: number) {
 
 <template>
   <ListPage
-    v-model="searchForm"
+    v-model:form-model="searchForm"
     :form-items="formItems" :table-data="tableData"
     :columns="columns" row-key="menuId" :loading="loading" :pagination="false"
     :handle-search="handleSearch" :handle-reset="handleReset"

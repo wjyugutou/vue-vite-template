@@ -9,6 +9,7 @@ export interface Column {
   slot?: string
   render?: (row: any, index: number) => any
   formatter?: (value: any, row: any, index: number) => string
+  showOverflowTooltip?: boolean
 }
 
 export interface Props {

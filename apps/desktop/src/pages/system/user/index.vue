@@ -175,13 +175,12 @@ const {
       </Pane>
       <Pane size="84">
         <ListPage
-          v-model="formModel"
-          v-model:page-num="page"
-          v-model:page-size="pageSize"
+          v-model:form-model="formModel"
+          v-model:page-num="page" v-model:page-size="pageSize"
           v-model:checked-keys="checkedKeys"
           :total="total"
-          :loading="loading" :columns="columns" row-key="userId" selection :table-data="data"
-          :form-items="formItems"
+          :form-items="formItems" :loading="loading"
+          :columns="columns" row-key="userId" selection :table-data="data"
           :handle-search="refresh" :handle-reset="refresh"
         >
           <template #table-header>

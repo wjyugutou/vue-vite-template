@@ -35,8 +35,8 @@ function handleSelectionChange(val: any) {
     <template v-for="item in columns" :key="item.prop">
       <ElTableColumn
         :prop="item.prop" :align="item.align || 'left'"
-        :label="item.label" :width="item.width"
-        :sortable="item.sortable" :fixed="item.fixed"
+        :label="item.label" :width="item.width" :sortable="item.sortable" :fixed="item.fixed"
+        :show-overflow-tooltip="item.showOverflowTooltip"
       >
         <template v-if="item.slot" #default="scope">
           <slot :name="item.slot" :row="scope.row" :index="scope.$index" :column="scope.column" :text="scope.text" />
