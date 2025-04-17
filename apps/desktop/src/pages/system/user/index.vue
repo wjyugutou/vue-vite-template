@@ -210,9 +210,9 @@ const {
           <template #operation="{ row }">
             <MoreOperte>
               <ElButton v-hasPermi="['system:user:edit']" size="small" type="primary" link @click="handleEdit(row.userId)"> 编辑 </ElButton>
-              <ElPopconfirm v-hasPermi="['system:user:remove']" title="确认删除该用户吗?" @confirm="handleDelete(row.userId)">
+              <ElPopconfirm title="确认删除该用户吗?" @confirm="handleDelete(row.userId)">
                 <template #reference>
-                  <ElButton size="small" type="danger" link> 删除 </ElButton>
+                  <ElButton v-hasPermi="['system:user:remove']" size="small" type="danger" link> 删除 </ElButton>
                 </template>
               </ElPopconfirm>
               <ElButton v-hasPermi="['system:user:resetPwd']" size="small" type="primary" link @click="handleResetPassword(row.userId)"> 重置密码 </ElButton>
