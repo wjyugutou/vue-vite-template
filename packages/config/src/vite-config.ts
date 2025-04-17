@@ -21,6 +21,7 @@ export function createSharedConfig(type: string, root: string, mode: string) {
           manualChunks: {
             'vue-vendor': ['vue', 'vue-router', 'pinia', '@vueuse/core'],
             'element-plus': ['element-plus'],
+            'vant': ['vant'],
           },
         },
       },

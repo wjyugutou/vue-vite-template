@@ -12,6 +12,7 @@ export default defineConfig(({ mode }) => {
   const root = path.resolve(import.meta.dirname, '../../')
 
   return {
+
     ...createSharedConfig('desktop', root, mode),
     resolve: {
       alias: {

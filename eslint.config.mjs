@@ -39,10 +39,10 @@ export default antfu({
     },
   },
   {
-    files: ['tsconfig.json', 'tsconfig.*.json'],
+    files: ['**/*/tsconfig.*.json', '**/*/tsconfig.json'],
     rules: {
       // tsconfig.json中的key值排序
-      'jsonc/sort-keys': 'off',
+      'jsonc/sort-keys': 'warn',
     },
   },
 ])

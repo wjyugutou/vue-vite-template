@@ -1,4 +1,5 @@
 import type { Plugin } from 'vite'
+import path from 'node:path'
 import Vue from '@vitejs/plugin-vue'
 import { codeInspectorPlugin } from 'code-inspector-plugin'
 import UnoCSS from 'unocss/vite'
@@ -6,8 +7,11 @@ import AutoImport from 'unplugin-auto-import/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import Compression from 'vite-plugin-compression'
+import zipPack from 'vite-plugin-zip-pack'
 
 export function generatePlugins(mode: 'development' | 'production' | string, env: ImportMetaEnv): Plugin[] {
+  const root = path.resolve(import.meta.dirname, '../../../')
+
   return [
 
     // ⚠️ Vue must be placed after VueRouter()
@@ -46,7 +50,21 @@ export function generatePlugins(mode: 'development' | 'production' | string, env
       bundler: 'vite',
       showSwitch: false, // 是否显示切换按钮,移动端建议打开
     }),
-
+    zipPack({
+      inDir: path.resolve(root, `./dist/desktop`), // 输入目录，默认为 dist
+      outDir: path.resolve(root, `./dist-zip`), // 输出 ZIP 文件的目录
+      outFileName: 'desktop-app.zip', // ZIP 文件名
+      pathPrefix: '', // ZIP 文件中的路径前缀（可选）
+      done: (err) => {
+        // 打包完成后的回调
+        if (err) {
+          console.error('ZIP packing failed:', err)
+        }
+        else {
+          console.log('ZIP packing completed successfully')
+        }
+      },
+    }),
     // gzip
     env.VITE_BUILD_GZIP === 'true' && mode === 'production' && Compression({
       verbose: true, // 输出压缩日志

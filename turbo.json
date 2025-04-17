@@ -13,36 +13,46 @@
   ],
   "tasks": {
     "build": {
-      "dependsOn": ["@repo/config#stub", "build:desktop", "build:mobile"],
+      "dependsOn": [
+        "@repo/config#stub",
+        "build:desktop",
+        "build:mobile"
+      ],
       "outputs": [],
       "outputLogs": "full"
     },
-
     "build:desktop": {
-      "dependsOn": ["@repo/config#stub"],
-      "outputs": ["dist/desktop/**"],
+      "dependsOn": [
+        "@repo/config#stub"
+      ],
+      "outputs": [
+        "dist/desktop/**",
+        "dist-zip/**"
+      ],
       "outputLogs": "full",
       "cache": false
     },
-
     "build:mobile": {
-      "dependsOn": ["@repo/config#stub"],
-      "outputs": ["dist/mobile/**"],
+      "dependsOn": [
+        "@repo/config#stub"
+      ],
+      "outputs": [
+        "dist/mobile/**"
+      ],
       "outputLogs": "full",
       "cache": false
     },
-
     "dev": {
-      "dependsOn": ["@repo/config#stub"],
+      "dependsOn": [
+        "@repo/config#stub"
+      ],
       "outputs": [],
       "outputLogs": "full",
       "cache": false,
       "persistent": true
     },
-
     "stub": {
       "cache": true
     }
-
   }
 }
