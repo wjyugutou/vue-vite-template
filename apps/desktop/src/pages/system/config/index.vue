@@ -23,7 +23,7 @@ const columns = ref<Column[]>([
   { label: '系统内置', slot: 'configType' },
   { label: '备注', prop: 'remark', width: 220, showOverflowTooltip: true },
   { label: '创建时间', prop: 'createTime', width: 180 },
-  { label: '操作', slot: 'operation', width: 120 },
+  { label: '操作', slot: 'operation', width: 120, fixed: 'right' },
 ])
 
 const formModel = ref({

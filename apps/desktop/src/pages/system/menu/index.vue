@@ -28,7 +28,7 @@ const columns: Column[] = [
   { label: '组件路径', prop: 'component', width: 180 },
   { label: '状态', slot: 'status', minWidth: 100 },
   { label: '创建时间', prop: 'createTime', width: 200 },
-  { label: '操作', slot: 'operation', width: 150 },
+  { label: '操作', slot: 'operation', width: 150, fixed: 'right' },
 ]
 
 function handleSearch() {

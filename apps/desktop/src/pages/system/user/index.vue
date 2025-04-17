@@ -23,7 +23,7 @@ const columns: Column[] = [
   { label: '手机号', prop: 'phonenumber', minWidth: 120 },
   { label: '状态', slot: 'status', minWidth: 120 },
   { label: '创建时间', prop: 'createTime', width: 180 },
-  { label: '操作', slot: 'operation', width: 180 },
+  { label: '操作', slot: 'operation', width: 180, fixed: 'right' },
 ]
 
 const formModel = ref({
