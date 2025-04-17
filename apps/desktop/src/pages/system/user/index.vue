@@ -164,7 +164,7 @@ function handleStatusChange(record: User) {
           :loading="loading"
           :total="total" :table-data="data" :columns="columns" row-key="userId" row-selection
           :form-items="formItems" :label-col="{ span: 5 }"
-          :handle-search="refresh" :handle-reset="reload"
+          :handle-search="reload" :handle-reset="reload"
           @table-change="handleTableChange"
           @select="handleSelect"
         >
