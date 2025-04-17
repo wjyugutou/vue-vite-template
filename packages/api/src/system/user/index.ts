@@ -43,7 +43,7 @@ export function updateUserApi(data: UserParams) {
 }
 
 // 删除用户
-export function delUserApi(userId: string | number) {
+export function delUserApi(userId: string | number | (string | number)[]) {
   return request.Delete(`/system/user/${userId}`)
 }
 

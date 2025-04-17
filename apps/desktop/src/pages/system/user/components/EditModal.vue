@@ -9,6 +9,10 @@ const props = defineProps<{
   userId?: string | number
 }>()
 
+const emit = defineEmits<{
+  success: []
+}>()
+
 const visible = defineModel<boolean>('visible', { required: true })
 
 const title = computed(() => props.userId ? '编辑用户' : '新增用户')
@@ -91,12 +95,12 @@ async function getUserInfo() {
   }
 }
 
-async function handleSubmit() {
-  console.log(form.value)
+const loading = ref(false)
 
-  return
+async function handleSubmit() {
   await validate()
   try {
+    loading.value = true
     if (props.userId) {
       await updateUserApi(Object.assign(form.value, { userId: props.userId }))
     }
@@ -105,9 +109,13 @@ async function handleSubmit() {
     }
     useMessage().success(`${title.value}成功`)
     visible.value = false
+    emit('success')
   }
   catch (error) {
     console.log(error)
+  }
+  finally {
+    loading.value = false
   }
 }
 </script>
@@ -123,7 +131,7 @@ async function handleSubmit() {
       </template>
     </SimpleForm>
     <template #footer>
-      <AButton type="primary" @click="handleSubmit">
+      <AButton type="primary" :loading="loading" @click="handleSubmit">
         提交
       </AButton>
     </template>

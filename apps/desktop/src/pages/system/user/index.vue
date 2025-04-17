@@ -4,19 +4,12 @@ import type { ChangeEventParams } from '@/components/SimpleTable/type'
 import type { User } from '@repo/api'
 import type { TableProps } from 'ant-design-vue'
 import { delUserApi, deptTreeSelectApi, getListUserApi } from '@repo/api'
-import { useRequest } from 'alova/client'
+import { usePagination, useRequest } from 'alova/client'
 import { Pane, Splitpanes } from 'splitpanes'
 import EditModal from './components/EditModal.vue'
 import 'splitpanes/dist/splitpanes.css'
 
 defineOptions({ name: 'SystemUser' })
-
-const { pageSize, pageNum, total, data, loading, searchForm, handleSearch, handleReset } = useListSearch(getListUserApi, {
-  username: undefined,
-  phone: undefined,
-  status: undefined,
-  createTime: undefined,
-})
 
 const formItems: FormItem[] = [
   { name: 'userName', label: '用户名', span: 8, type: 'input', placeholder: '请输入用户名' },
@@ -34,14 +27,32 @@ const columns: TableProps['columns'] = [
   { title: '创建时间', dataIndex: 'createTime', width: 180 },
   { title: '操作', key: 'slot', dataIndex: 'operation', width: 200 },
 ]
-handleSearch()
+
+const formModel = ref({
+  userName: undefined,
+  phonenumber: undefined,
+  status: undefined,
+  createTime: undefined,
+  deptName: undefined,
+})
+
+const {
+  loading,
+  data,
+  page,
+  pageSize,
+  total,
+  refresh,
+  reload,
+} = usePagination((pageNum, pageSize) => getListUserApi({ ...formModel.value, pageNum, pageSize }), {
+  initialData: { total: 0, rows: [] },
+  total: response => response.total,
+  data: response => response.rows,
+})
 
 const { data: deptOptions } = useRequest(deptTreeSelectApi, {
   initialData: [],
 })
-
-const selectedKeys = ref<string[]>([])
-const checkedKeys = ref<string[]>([])
 
 const treeData = ref<any[]>([])
 const filterTreeData = useDebounceFn((e: Event) => {
@@ -81,19 +92,26 @@ function handleAdd() {
   editModalData.value = { visible: true, id: '' }
 }
 
-function handleDelete(id?: string | number) {
-  if (id) {
-    delUserApi(id).then((res) => {
-      console.log(res)
-    })
+const tableSelect = ref<User[]>([])
+async function handleDelete(id?: string | number) {
+  try {
+    if (id) {
+      await delUserApi(id)
+      useMessage().success('删除成功')
+      reload()
+    }
+    else {
+      await delUserApi(tableSelect.value.map(item => item.userId))
+      useMessage().success('删除成功')
+      reload()
+    }
   }
-  else {
-    checkedKeys.value.forEach((key) => {
-      delUserApi(key).then((res) => {
-        console.log(res)
-      })
-    })
+  catch {
   }
+}
+
+function handleSelect(selectedRows: User[]) {
+  tableSelect.value = selectedRows
 }
 
 function handleImport() {
@@ -133,8 +151,6 @@ function handleStatusChange(record: User) {
         <AInput placeholder="请输入部门名称" allow-clear class="mb-2" @change="filterTreeData" />
         <ATree
           v-if="deptOptions.length > 0"
-          v-model:selected-keys="selectedKeys"
-          v-model:checked-keys="checkedKeys"
           :tree-data="(treeData.length ? treeData : deptOptions)"
           auto-expand-parent default-expand-all
           :field-names="{ key: 'id', title: 'label', children: 'children' }"
@@ -142,15 +158,15 @@ function handleStatusChange(record: User) {
       </Pane>
       <Pane size="84">
         <ListPage
-          v-model="searchForm"
+          v-model:form-model="formModel"
+          v-model:page-num="page"
           v-model:page-size="pageSize"
-          v-model:page-num="pageNum"
           :loading="loading"
           :total="total" :table-data="data" :columns="columns" row-key="userId" row-selection
           :form-items="formItems" :label-col="{ span: 5 }"
-          :handle-search="handleSearch"
-          :handle-reset="handleReset"
+          :handle-search="refresh" :handle-reset="reload"
           @table-change="handleTableChange"
+          @select="handleSelect"
         >
           <template #table-header>
             <div class="mb-2 flex items-center gap-2">
@@ -187,6 +203,6 @@ function handleStatusChange(record: User) {
       </Pane>
     </Splitpanes>
 
-    <EditModal v-model:visible="editModalData.visible" :user-id="editModalData.id" />
+    <EditModal v-model:visible="editModalData.visible" :user-id="editModalData.id" @success="reload()" />
   </div>
 </template>

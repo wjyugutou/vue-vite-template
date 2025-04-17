@@ -29,15 +29,17 @@ defineSlots<{
 const selectedKeys = ref<string[]>([])
 const onSelectChange: TableRowSelection['onChange'] = (selectedRowKeys, selectedRows) => {
   selectedKeys.value = selectedRowKeys as string[]
-  emit('select', selectedKeys.value)
+  emit('select', selectedRows.map(item => toRaw(item)))
 }
 
 const _rowSelection = computed<TableProps['rowSelection']>(() => {
-  return props.rowSelection === false
-    ? undefined
-    : props.rowSelection === true
-      ? { selectedRowKeys: selectedKeys, preserveSelectedRowKeys: false, onChange: onSelectChange } as unknown as TableRowSelection
-      : props.rowSelection
+  if (props.rowSelection === false) {
+    return undefined
+  }
+  if (props.rowSelection === true) {
+    return { selectedRowKeys: selectedKeys, preserveSelectedRowKeys: false, onChange: onSelectChange } as unknown as TableRowSelection
+  }
+  return props.rowSelection
 })
 
 // 分页

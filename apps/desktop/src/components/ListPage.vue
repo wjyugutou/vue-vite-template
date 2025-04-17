@@ -8,8 +8,6 @@ const props = defineProps<{
   loading: boolean
   pagination?: Props['pagination']
   total?: number
-  pageSize?: number
-  pageNum?: number
   columns: Props['columns']
   formItems: FormItem[]
   labelCol?: FormProps['labelCol']
@@ -17,17 +15,18 @@ const props = defineProps<{
   handleReset: () => void
   rowKey: TableProps['rowKey']
   layout?: string
-  rowSelection?: boolean | TableProps['rowSelection']
+  rowSelection?: Props['rowSelection']
 }>()
 
 const emit = defineEmits<{
-  'update:pageNum': [number]
-  'update:pageSize': [number]
-  'tableChange': [ChangeEventParams]
-  'select': [string[]]
+  tableChange: [ChangeEventParams]
+  select: [any[]]
 }>()
 
-const searchForm = defineModel<Record<string, any>>({ required: true })
+const searchForm = defineModel<Record<string, any>>('formModel', { required: true })
+const pageNum = defineModel<number>('pageNum', { required: true })
+const pageSize = defineModel<number>('pageSize', { required: true })
+// const checkedKeys = defineModel<Record<string, any>[]>('checkedKeys')
 
 const _formItems = computed(() => {
   return [...props.formItems, {
@@ -43,14 +42,14 @@ const tableSlots = computed(() => {
 
 function handleChange({ pagination, filters, sorter }: ChangeEventParams) {
   if (props.pagination !== false) {
-    emit('update:pageNum', pagination.current!)
-    emit('update:pageSize', pagination.pageSize!)
+    pageNum.value = pagination.current!
+    pageSize.value = pagination.pageSize!
   }
   emit('tableChange', { pagination, filters, sorter })
 }
 
-function handleSelect(selectedRowKeys: string[]) {
-  emit('select', selectedRowKeys)
+function handleSelect(selectedRows: any[]) {
+  emit('select', selectedRows)
 }
 </script>
 
