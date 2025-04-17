@@ -49,6 +49,7 @@ const _pagination = computed<TableProps['pagination']>(() => {
         current: props?.current ?? 1,
         pageSize: props?.pageSize ?? 10,
         total: props?.total ?? 0,
+        showTotal: total => `共 ${total} 条`,
       }
 })
 
