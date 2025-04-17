@@ -47,6 +47,8 @@ function changeUsename() {
       </button>
     </div>
 
-    <ImageUpload />
+    <div class="w-120">
+      <Editor v-model="name" />
+    </div>
   </div>
 </template>
