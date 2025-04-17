@@ -46,9 +46,5 @@ function changeUsename() {
         Go
       </button>
     </div>
-
-    <div class="w-120">
-      <Editor v-model="name" />
-    </div>
   </div>
 </template>

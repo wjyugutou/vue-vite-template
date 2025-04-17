@@ -65,6 +65,9 @@ function filterNode(value: string, data: any) {
   return data.label.includes(value)
 }
 
+/**
+ * 表格操作
+ */
 function useTableOperate() {
   const checkedKeys = ref<Record<string, any>[]>([])
 
@@ -206,14 +209,14 @@ const {
 
           <template #operation="{ row }">
             <MoreOperte>
-              <ElButton size="small" type="primary" link @click="handleEdit(row.userId)"> 编辑 </ElButton>
-              <ElPopconfirm title="确认删除该用户吗?" @confirm="handleDelete(row.userId)">
+              <ElButton v-hasPermi="['system:user:edit']" size="small" type="primary" link @click="handleEdit(row.userId)"> 编辑 </ElButton>
+              <ElPopconfirm v-hasPermi="['system:user:remove']" title="确认删除该用户吗?" @confirm="handleDelete(row.userId)">
                 <template #reference>
                   <ElButton size="small" type="danger" link> 删除 </ElButton>
                 </template>
               </ElPopconfirm>
-              <ElButton size="small" type="primary" link @click="handleResetPassword(row.userId)"> 重置密码 </ElButton>
-              <ElButton size="small" type="primary" link @click="handleAssignRole(row.userId)"> 分配角色 </ElButton>
+              <ElButton v-hasPermi="['system:user:resetPwd']" size="small" type="primary" link @click="handleResetPassword(row.userId)"> 重置密码 </ElButton>
+              <ElButton v-hasPermi="['system:user:edit']" size="small" type="primary" link @click="handleAssignRole(row.userId)"> 分配角色 </ElButton>
             </MoreOperte>
           </template>
         </ListPage>

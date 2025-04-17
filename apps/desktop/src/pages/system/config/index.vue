@@ -87,14 +87,14 @@ function handleRefreshCache() {
   >
     <template #table-header>
       <div>
-        <ElButton v-hasPermi="['system:config:add']" type="primary" plain @click="handleAdd">          新增        </ElButton>
+        <ElButton v-hasPermi="['system:config:add']" type="primary" plain @click="handleAdd">新增</ElButton>
         <ElButton
           v-hasPermi="['system:config:remove']" type="danger" plain :disabled="checkedKeys.length === 0"
           @click="handleDelete()"
         >
           删除
         </ElButton>
-        <ElButton v-hasPermi="['system:config:export']" plain @click="handleExport">          导出        </ElButton>
+        <ElButton v-hasPermi="['system:config:export']" plain @click="handleExport">导出</ElButton>
         <ElButton v-hasPermi="['system:config:remove']" type="danger" plain @click="handleRefreshCache">刷新缓存</ElButton>
       </div>
     </template>
@@ -103,10 +103,10 @@ function handleRefreshCache() {
       <DictTag :options="sys_yes_no.list" :value="row.configType" />
     </template>
     <template #operation="{ row }">
-      <ElButton type="primary" link @click="handleEdit(row.configId)"> 编辑 </ElButton>
+      <ElButton v-hasPermi="['system:config:edit']" type="primary" link @click="handleEdit(row.configId)"> 编辑 </ElButton>
       <ElPopconfirm title="确定删除吗？" @confirm="handleDelete(row.configId)">
         <template #reference>
-          <ElButton type="danger" link> 删除 </ElButton>
+          <ElButton v-hasPermi="['system:config:remove']" type="danger" link> 删除 </ElButton>
         </template>
       </ElPopconfirm>
     </template>
