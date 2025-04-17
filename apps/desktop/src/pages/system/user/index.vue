@@ -110,10 +110,6 @@ async function handleDelete(id?: string | number) {
   }
 }
 
-function handleSelect(selectedRows: User[]) {
-  tableSelect.value = selectedRows
-}
-
 function handleImport() {
   console.log('导入')
 }
@@ -161,12 +157,12 @@ function handleStatusChange(record: User) {
           v-model:form-model="formModel"
           v-model:page-num="page"
           v-model:page-size="pageSize"
+          v-model:table-select="tableSelect"
           :loading="loading"
           :total="total" :table-data="data" :columns="columns" row-key="userId" row-selection
           :form-items="formItems" :label-col="{ span: 5 }"
-          :handle-search="reload" :handle-reset="reload"
+          :handle-search="refresh" :handle-reset="reload"
           @table-change="handleTableChange"
-          @select="handleSelect"
         >
           <template #table-header>
             <div class="mb-2 flex items-center gap-2">

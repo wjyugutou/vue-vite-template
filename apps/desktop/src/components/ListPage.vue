@@ -26,7 +26,7 @@ const emit = defineEmits<{
 const searchForm = defineModel<Record<string, any>>('formModel', { required: true })
 const pageNum = defineModel<number>('pageNum', { required: true })
 const pageSize = defineModel<number>('pageSize', { required: true })
-// const checkedKeys = defineModel<Record<string, any>[]>('checkedKeys')
+const tableSelect = defineModel<any[]>('tableSelect', { required: true })
 
 const _formItems = computed(() => {
   return [...props.formItems, {
@@ -49,7 +49,7 @@ function handleChange({ pagination, filters, sorter }: ChangeEventParams) {
 }
 
 function handleSelect(selectedRows: any[]) {
-  emit('select', selectedRows)
+  tableSelect.value = selectedRows
 }
 </script>
 
