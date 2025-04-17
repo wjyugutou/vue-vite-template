@@ -83,14 +83,14 @@ function useTableOperate() {
     if (id) {
       delUserApi(id).then((res) => {
         ElMessage.success('删除成功')
-        refresh(page.value)
+        reload()
       })
     }
     else {
       checkedKeys.value.forEach((key) => {
         delUserApi(key.userId).then((res) => {
           ElMessage.success('删除成功')
-          refresh(page.value)
+          reload()
         })
       })
     }
@@ -124,7 +124,7 @@ function useTableOperate() {
         row.loading = true
         await changeUserStatusApi(row.userId, row.status)
         ElMessage.success('状态更新成功')
-        await refresh(page.value)
+        await reload()
         return true
       }
       catch (error) {
@@ -184,7 +184,7 @@ const {
           :total="total"
           :form-items="formItems" :loading="loading"
           :columns="columns" row-key="userId" selection :table-data="data"
-          :handle-search="refresh" :handle-reset="refresh"
+          :handle-search="refresh" :handle-reset="reload"
         >
           <template #table-header>
             <div class="mb-2 flex items-center gap-2">
@@ -223,6 +223,6 @@ const {
       </Pane>
     </Splitpanes>
 
-    <EditModal v-model:visible="editModalData.visible" :user-id="editModalData.id" @success="refresh(pageCount)" />
+    <EditModal v-model:visible="editModalData.visible" :user-id="editModalData.id" @success="reload(pageCount)" />
   </div>
 </template>
