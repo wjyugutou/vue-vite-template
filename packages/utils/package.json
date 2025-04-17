@@ -1,7 +1,7 @@
 {
   "name": "@repo/utils",
   "version": "1.0.0",
-  "packageManager": "pnpm@10.6.4",
+  "packageManager": "pnpm@10.8.1",
   "description": "",
   "author": "",
   "license": "ISC",
