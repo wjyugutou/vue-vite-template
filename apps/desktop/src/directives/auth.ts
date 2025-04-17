@@ -2,7 +2,7 @@ import type { CustomDirective } from '.'
 
 export const roleAuthDirective: CustomDirective = {
   name: 'hasRole',
-  beforeMount(el: HTMLElement, binding: any) {
+  mounted(el: HTMLElement, binding: any) {
     const value = binding.value
     const roles = useUserStore().roles
     const super_admin = 'admin'
@@ -26,7 +26,7 @@ export const roleAuthDirective: CustomDirective = {
 
 export const permissionAuthDirective: CustomDirective = {
   name: 'hasPermi',
-  beforeMount(el: HTMLElement, binding: any) {
+  mounted(el: HTMLElement, binding: any) {
     const value = binding.value
     const permissions = useUserStore().permissions
     const all_permission = '*:*:*'
