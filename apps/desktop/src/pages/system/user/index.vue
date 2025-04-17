@@ -223,6 +223,6 @@ const {
       </Pane>
     </Splitpanes>
 
-    <EditModal v-model:visible="editModalData.visible" :user-id="editModalData.id" @success="reload(pageCount)" />
+    <EditModal v-model:visible="editModalData.visible" :user-id="editModalData.id" @success="reload()" />
   </div>
 </template>
