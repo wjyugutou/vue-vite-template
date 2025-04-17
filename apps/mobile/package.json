@@ -19,7 +19,7 @@
     "@repo/utils": "workspace:*",
     "alova": "^3.2.10",
     "pinia-plugin-persistedstate": "^4.2.0",
-    "vant": "^4.9.18"
+    "vant": "^4.9.19"
   },
   "devDependencies": {
     "@vant/auto-import-resolver": "^1.3.0",
