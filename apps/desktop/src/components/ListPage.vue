@@ -23,7 +23,7 @@ const emit = defineEmits<{
   select: [any[]]
 }>()
 
-const searchForm = defineModel<Record<string, any>>('formModel', { required: true })
+const formModel = defineModel<Record<string, any>>('formModel', { required: true })
 const pageNum = defineModel<number>('pageNum', { required: true })
 const pageSize = defineModel<number>('pageSize', { required: true })
 const tableSelect = defineModel<any[]>('tableSelect', { required: true })
@@ -57,7 +57,7 @@ function handleSelect(selectedRows: any[]) {
   <div class="list-page size-full flex flex-1 flex-col">
     <div class="search-form">
       <slot name="search">
-        <SimpleForm v-model="searchForm" :form-items="_formItems" :label-col="labelCol">
+        <SimpleForm v-model="formModel" :form-items="_formItems" :label-col="labelCol">
           <template #search>
             <AButton type="primary" class="ant-btn" @click="handleSearch">
               <template #icon>

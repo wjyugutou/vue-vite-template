@@ -13,13 +13,10 @@ const props = withDefaults(defineProps<Props>(), {
 
 const form = defineModel<Record<string, any>>({ required: true })
 
-const initData = reactive<Record<string, any>>({})
+console.log('form', form.value)
 
-// 初始化表单数据和规则
-props.formItems.forEach((item) => {
-  if (item.name) {
-    initData[item.name] = props.defaultValue?.[item.name] || ''
-  }
+watchEffect(() => {
+  console.log('form', form.value)
 })
 </script>
 

@@ -33,7 +33,6 @@ const formModel = ref({
   phonenumber: undefined,
   status: undefined,
   createTime: undefined,
-  deptName: undefined,
 })
 
 const {
@@ -49,6 +48,11 @@ const {
   total: response => response.total,
   data: response => response.rows,
 })
+
+// 必须包一层，直接调用 refresh 会报错
+function handleSearch() {
+  refresh()
+}
 
 const { data: deptOptions } = useRequest(deptTreeSelectApi, {
   initialData: [],
@@ -161,7 +165,7 @@ function handleStatusChange(record: User) {
           :loading="loading"
           :total="total" :table-data="data" :columns="columns" row-key="userId" row-selection
           :form-items="formItems" :label-col="{ span: 5 }"
-          :handle-search="refresh" :handle-reset="reload"
+          :handle-search="handleSearch" :handle-reset="reload"
           @table-change="handleTableChange"
         >
           <template #table-header>
