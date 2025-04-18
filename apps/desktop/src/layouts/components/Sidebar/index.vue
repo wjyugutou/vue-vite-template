@@ -7,9 +7,11 @@ defineOptions({ name: 'Sidebar' })
 const { menus } = storeToRefs(useUserStore())
 const { menuState, settings } = storeToRefs(useAppStore())
 
+const route = useRoute()
+
 // 初始化激活菜单
 function initActiveMenu() {
-  const path = useRoute().path
+  const path = route.meta?.activePath || route.path
   const menu = menus.value.flatMap(menu => menu.children!).find(menu => menu?.path === path)
 
   if (menu) {

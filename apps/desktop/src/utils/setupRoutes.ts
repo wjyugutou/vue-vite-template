@@ -4,6 +4,18 @@ import type { RouteComponent } from 'vue-router'
 import ErrorComponent from '@/pages/Error.vue'
 import router from '@/router'
 
+function hasPermission(permissions: string[]) {
+  return permissions.some((permission) => {
+    return useUserStore().permissions.includes(permission)
+  })
+}
+
+function hasRole(roles: string[]) {
+  return roles.some((role) => {
+    return useUserStore().roles.includes(role)
+  })
+}
+
 /**
  * 注册动态路由
  */
@@ -25,6 +37,14 @@ export function clearRoutes(routes: RouterResult) {
 
 function addRoute(routes: RouterResult, parentName: string = 'Index', suffix?: string) {
   routes.forEach((route) => {
+    if (route?.permissions && !hasPermission(route.permissions)) {
+      return
+    }
+
+    if (route?.roles && !hasRole(route.roles)) {
+      return
+    }
+
     const component = getComponent(route)
 
     const path = suffix ? `${suffix}/${route.path}` : route.path
@@ -38,6 +58,7 @@ function addRoute(routes: RouterResult, parentName: string = 'Index', suffix?: s
           icon: route.meta?.icon,
           title: route.meta?.title,
           order: route.meta?.order,
+          activePath: route.meta?.activeMenu,
         },
         path,
         component,
