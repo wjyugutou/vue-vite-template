@@ -1,17 +1,23 @@
-import type { DictItem } from './type'
+import type { DictData, DictItem } from './type'
 import request from '../../../../request'
 
 export * from './type'
 
 // 查询字典数据列表
-export function listData(query: any) {
-  return request.Get('/system/dict/data/list', {
+export function dictListDataApi(query: any) {
+  return request.Get<{
+    total: number
+    rows: DictData[]
+  }>('/system/dict/data/list', {
     params: query,
+    meta: {
+      original: true,
+    },
   })
 }
 
 // 查询字典数据详细
-export function getData(dictCode: string) {
+export function getDictDataApi(dictCode: string) {
   return request.Get(`/system/dict/data/${dictCode}`)
 }
 
@@ -21,16 +27,16 @@ export function getDictByTypeApi(dictType: string) {
 }
 
 // 新增字典数据
-export function addData(data: any) {
+export function addDictDataApi(data: any) {
   return request.Post('/system/dict/data', data)
 }
 
 // 修改字典数据
-export function updateData(data: any) {
+export function updateDictDataApi(data: any) {
   return request.Put('/system/dict/data', data)
 }
 
 // 删除字典数据
-export function delData(dictCode: string) {
+export function delDictDataApi(dictCode: string) {
   return request.Delete(`/system/dict/data/${dictCode}`)
 }

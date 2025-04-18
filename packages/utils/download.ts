@@ -36,17 +36,13 @@ export function isPreviewFile(fileName: string) {
 
 /** 下载文件 */
 export function download(data: Blob | string, fileName: string) {
-  if (typeof data === 'string') {
-    fetch(data, { mode: 'no-cors' })
-      .then(res => res.blob())
-      .then((blob) => {
-        const link = document.createElement('a')
-        const data = window.URL.createObjectURL(blob)
-        link.href = data
-        link.download = fileName
-        link.click()
-        window.URL.revokeObjectURL(data)
-      })
+  if (data instanceof Blob) {
+    const link = document.createElement('a')
+    const _data = window.URL.createObjectURL(data)
+    link.href = _data
+    link.download = fileName
+    link.click()
+    window.URL.revokeObjectURL(_data)
   }
   else {
     const blob = new Blob([data])

@@ -104,3 +104,8 @@ export function updateAuthRoleApi(data: any) {
 export function getDeptTreeApi() {
   return request.Get('/system/user/deptTree')
 }
+
+// 用户导入
+export function importUserApi(data: any) {
+  return request.Post('/system/user/importData', data)
+}

@@ -46,3 +46,14 @@ export function userInfoApi() {
 export function userRouterApi() {
   return request.Get<RouterResult>('/system/menu/getRouters')
 }
+
+/**
+ * 通用下载
+ */
+export function downloadApi(url: string, data?: Record<string, any>) {
+  return request.Post<Blob>(url, data, {
+    meta: {
+      blob: true,
+    },
+  })
+}

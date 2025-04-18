@@ -50,6 +50,8 @@ export interface RouterResultItem {
   path: string
   redirect: string
   alwaysShow: boolean
+  permissions?: string[]
+  roles?: string[]
   meta: {
     /** 标题 */
     title: string
@@ -61,6 +63,8 @@ export interface RouterResultItem {
     noCache?: boolean
     /** 是否显示面包屑 如果设置为false，则不会在breadcrumb面包屑中显示 */
     breadcrumb?: boolean
+    /** 激活菜单 */
+    activeMenu?: string
   }
 }
 
