@@ -2,7 +2,7 @@
 import type { FormItem } from '@/components/SimpleForm/type'
 import type { Column } from '@/components/SimpleTable/type'
 import type { User } from '@repo/api'
-import { changeUserStatusApi, delUserApi, deptTreeSelectApi, getListUserApi } from '@repo/api'
+import { changeUserStatusApi, delUserApi, deptTreeSelectApi, getListUserApi, importUserApi } from '@repo/api'
 import { usePagination, useRequest } from 'alova/client'
 import { Pane, Splitpanes } from 'splitpanes'
 import EditModal from './components/EditModal.vue'
@@ -64,104 +64,73 @@ function filterNode(value: string, data: any) {
   return data.label.includes(value)
 }
 
-/**
- * 表格操作
- */
-function useTableOperate() {
-  const checkedKeys = ref<Record<string, any>[]>([])
+const editModalData = ref({
+  visible: false,
+  id: '',
+})
+function handleAdd() {
+  editModalData.value = { visible: true, id: '' }
+}
 
-  const editModalData = ref({
-    visible: false,
-    id: '',
-  })
-  function handleAdd() {
-    editModalData.value = { visible: true, id: '' }
+const checkedKeys = ref<Record<string, any>[]>([])
+function handleDelete(id?: string | number) {
+  if (id) {
+    delUserApi(id).then((res) => {
+      ElMessage.success('删除成功')
+      reload()
+    })
   }
-
-  function handleDelete(id?: string | number) {
-    if (id) {
-      delUserApi(id).then((res) => {
+  else {
+    checkedKeys.value.forEach((key) => {
+      delUserApi(key.userId).then((res) => {
         ElMessage.success('删除成功')
         reload()
       })
-    }
-    else {
-      checkedKeys.value.forEach((key) => {
-        delUserApi(key.userId).then((res) => {
-          ElMessage.success('删除成功')
-          reload()
-        })
-      })
-    }
-  }
-
-  function handleImport() {
-    console.log('导入')
-    reload()
-  }
-
-  function handleExport() {
-    console.log('导出')
-  }
-
-  function handleResetPassword(id: string) {
-    console.log('重置密码')
-  }
-
-  function handleAssignRole(id: string) {
-    console.log('分配角色')
-  }
-
-  function handleEdit(id: string) {
-    console.log('编辑', id)
-    editModalData.value = { visible: true, id }
-  }
-
-  function handleStatusChange(row: User) {
-    return async () => {
-      try {
-        row.loading = true
-        await changeUserStatusApi(row.userId, row.status)
-        ElMessage.success('状态更新成功')
-        await reload()
-        return true
-      }
-      catch (error) {
-        ElMessage.error('状态更新失败')
-        return false
-      }
-      finally {
-        row.loading = false
-      }
-    }
-  }
-
-  return {
-    checkedKeys,
-    editModalData,
-    handleAdd,
-    handleDelete,
-    handleImport,
-    handleExport,
-    handleResetPassword,
-    handleAssignRole,
-    handleEdit,
-    handleStatusChange,
+    })
   }
 }
 
-const {
-  checkedKeys,
-  editModalData,
-  handleAdd,
-  handleDelete,
-  handleImport,
-  handleExport,
-  handleResetPassword,
-  handleAssignRole,
-  handleEdit,
-  handleStatusChange,
-} = useTableOperate()
+const importDialogVisible = ref(false)
+function handleImport() {
+  importDialogVisible.value = true
+}
+
+const { download, loading: exportLoading } = useDownload('/system/user/export', '用户导出.xlsx')
+
+function handleExport() {
+  download(formModel.value)
+}
+
+function handleResetPassword(id: string) {
+  console.log('重置密码')
+}
+
+function handleAssignRole(id: string) {
+  console.log('分配角色')
+}
+
+function handleEdit(id: string) {
+  editModalData.value = { visible: true, id }
+}
+
+function handleStatusChange(row: User) {
+  return async () => {
+    try {
+      row.loading = true
+      await changeUserStatusApi(row.userId, row.status)
+      ElMessage.success('状态更新成功')
+      await reload()
+      return true
+    }
+    catch (error) {
+      ElMessage.error('状态更新失败')
+      return false
+    }
+    finally {
+      row.loading = false
+    }
+  }
+}
 </script>
 
 <template>
@@ -196,7 +165,7 @@ const {
               <ElButton v-hasPermi="['system:user:import']" @click="handleImport">
                 导入
               </ElButton>
-              <ElButton v-hasPermi="['system:user:export']" @click="handleExport">
+              <ElButton v-hasPermi="['system:user:export']" :loading="exportLoading" @click="handleExport">
                 导出
               </ElButton>
             </div>
@@ -221,6 +190,12 @@ const {
         </ListPage>
       </Pane>
     </Splitpanes>
+
+    <ImportDialog
+      v-model="importDialogVisible"
+      url="/system/user/importData" template-url="/system/user/importTemplate" template-name="用户导入模板.xlsx"
+      @success="reload"
+    />
 
     <EditModal v-model:visible="editModalData.visible" :user-id="editModalData.id" @success="reload()" />
   </div>
