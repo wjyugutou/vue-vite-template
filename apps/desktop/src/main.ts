@@ -36,6 +36,6 @@ app.mount('#app')
 //   })
 // }
 
-// router.onError((error, to, from) => {
-//   console.error(`routerError:: ${error}`, { to, from })
-// })
+router.onError((error, to, from) => {
+  console.error(`routerError:: ${error}`, { to, from })
+})
