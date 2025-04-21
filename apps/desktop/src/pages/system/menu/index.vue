@@ -2,6 +2,7 @@
 import type { FormItem } from '@/components/SimpleForm/type'
 import type { Column } from '@/components/SimpleTable/type'
 import { delMenuApi } from '@repo/api'
+import { useDict } from '@repo/hooks'
 import EditDialog from './components/EditDialog.vue'
 
 defineOptions({ name: 'SystemMenu' })

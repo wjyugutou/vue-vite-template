@@ -1,5 +1,5 @@
 {
-  "name": "@repo/utils",
+  "name": "@repo/hooks",
   "version": "1.0.0",
   "packageManager": "pnpm@10.8.1",
   "description": "",
@@ -8,5 +8,7 @@
   "keywords": [],
   "main": "index.js",
   "scripts": {},
-  "dependencies": {}
+  "dependencies": {
+    "@repo/utils": "workspace:^"
+  }
 }

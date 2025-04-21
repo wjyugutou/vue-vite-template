@@ -32,6 +32,11 @@ async function cleanTargetsRecursively(currentDir, targets) {
   }
 }
 
+/**
+ * 清理目标目录
+ * args:
+ * --del-lock 删除pnpm-lock.yaml文件
+ */
 (async function startCleanup() {
   // 要删除的目录及文件名称
   const targets = ['node_modules', 'dist', '.turbo', 'dist.zip']

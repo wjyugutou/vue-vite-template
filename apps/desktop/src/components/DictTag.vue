@@ -1,5 +1,5 @@
 <script lang='ts' setup>
-import type { DictReturn } from '@/hooks/useDict'
+import type { DictReturn } from '@repo/hooks'
 
 const props = defineProps<{
   options: DictReturn['list']

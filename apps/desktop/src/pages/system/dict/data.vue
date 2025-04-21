@@ -3,6 +3,7 @@ import type { FormItem } from '@/components/SimpleForm/type'
 import type { Column } from '@/components/SimpleTable/type'
 import type { DictData } from '@repo/api'
 import { dictListDataApi } from '@repo/api'
+import { useDict } from '@repo/hooks'
 import { usePagination } from 'alova/client'
 
 defineOptions({ name: 'SystemDictData' })
