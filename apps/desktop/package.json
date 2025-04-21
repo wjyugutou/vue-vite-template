@@ -21,7 +21,7 @@
     "@repo/hooks": "workspace:*",
     "@repo/utils": "workspace:*",
     "alova": "^3.2.10",
-    "element-plus": "^2.9.7",
+    "element-plus": "^2.9.8",
     "nprogress": "^0.2.0",
     "pinia-plugin-persistedstate": "^4.2.0",
     "quill": "2.0.3",
