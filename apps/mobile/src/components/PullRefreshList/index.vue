@@ -1,5 +1,4 @@
 <script lang='ts' setup generic="T">
-import type { FieldSelectProps } from '../FieldSelect/type'
 import type { PullRefreshListProps, PullRefreshListSlots } from './type'
 
 defineOptions({
@@ -17,16 +16,6 @@ const props = withDefaults(defineProps<PullRefreshListProps<T>>(), {
 })
 
 defineSlots<PullRefreshListSlots<T>>()
-
-const fieldOptions = computed<FieldSelectProps['fieldOptions']>(() => ({
-  placeholder: props.searchOptions?.placeholder,
-  name: props.searchOptions?.prop,
-}))
-
-const _dropdownList = ref<typeof props.dropdownOptions>([])
-watch(() => props.dropdownOptions, () => {
-  _dropdownList.value = props.dropdownOptions
-})
 
 const params = reactive<Record<string, any>>({
 
@@ -90,16 +79,8 @@ async function onListLoad() {
       <slot name="search">
         <VanField v-if=" searchOptions?.prop" v-model="params[searchOptions.prop]" :placeholder="searchOptions.placeholder" />
       </slot>
-      <slot name="picker">
-        <FieldSelect
-          v-if=" pickerOptions?.columns?.length && pickerOptions?.prop"
-          v-model="params[pickerOptions.prop]" :field-options="fieldOptions" :picker-options="{ columns: pickerOptions.columns }"
-        />
-      </slot>
       <slot name="dropdown">
-        <VanDropdownMenu v-if="dropdownOptions?.length">
-          <VanDropdownItem v-for="item, index in dropdownOptions" :key="index" v-model="params[item.prop]" :title="params[item.prop] ? undefined : item.title" :options="item.options" />
-        </VanDropdownMenu>
+        <ListDropdownMenu v-if="dropdownOptions?.length" v-model="params" :options="dropdownOptions" />
       </slot>
     </slot>
     <VanPullRefresh v-model="refreshLoading" class="h-full" :disabled="disabledPullRefresh" @refresh="onRefresh">

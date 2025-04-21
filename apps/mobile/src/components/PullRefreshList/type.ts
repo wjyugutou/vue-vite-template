@@ -33,26 +33,26 @@ export interface PullRefreshListProps<T> {
     label?: string
     placeholder?: string
   }
-
-  /**
-   * picker props
-   */
-  pickerOptions?: {
-    prop: string
-    label?: string
-    columns: (PickerColumn | PickerOption)[]
-  }
-
   /**
    * dropdown props
    * @field prop dropdown-item 的 v-model 属性
    * @field title dropdown-item 的 title 属性
    */
-  dropdownOptions?: {
-    prop: string
-    title: string
-    options: { text: string, value: string | number }[]
-  }[]
+  dropdownOptions?: DropdownOption[]
+}
+
+export type DropdownOption = {
+  prop: string
+  title: string
+  options: { text: string, value: string | number }[]
+  type: 'dropdown'
+  config?: Record<string, any>
+} | {
+  prop: string
+  title: string
+  options: PickerColumn
+  type: 'picker'
+  config?: Record<string, any>
 }
 
 export interface PullRefreshListSlots<T> {
