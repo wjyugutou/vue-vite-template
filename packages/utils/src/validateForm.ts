@@ -1,4 +1,4 @@
-import { vaildateIdCard, validateBankCard, validateCreditCode, validateEmail, validatePhone } from '../validate'
+import { vaildateIdCard, validateBankCard, validateCreditCode, validateEmail, validatePhone } from './validate'
 
 /**
  * 验证规则类型
