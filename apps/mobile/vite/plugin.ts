@@ -9,7 +9,7 @@ import Components from 'unplugin-vue-components/vite'
 import { VueRouterAutoImports } from 'unplugin-vue-router'
 import VueRouter from 'unplugin-vue-router/vite'
 import Compression from 'vite-plugin-compression'
-import zipPack from 'vite-plugin-zip-pack'
+import ZipPack from 'vite-plugin-zip-pack'
 import { beforeWriteFilesFn } from './myPlugins/auto-route-register'
 
 export default function generatePlugins(mode: 'development' | 'production' | string, env: ImportMetaEnv): Plugin[] {
@@ -56,7 +56,7 @@ export default function generatePlugins(mode: 'development' | 'production' | str
       showSwitch: false, // 是否显示切换按钮,移动端建议打开
     }),
 
-    zipPack({
+    ZipPack({
       inDir: path.resolve(root, `./dist/mobile`), // 输入目录，默认为 dist
       outDir: path.resolve(root, `./dist-zip`), // 输出 ZIP 文件的目录
       outFileName: 'mobile-app.zip', // ZIP 文件名
