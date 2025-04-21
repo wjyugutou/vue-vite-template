@@ -2,7 +2,7 @@
 import type { FormItem } from '@/components/SimpleForm/type'
 import type { Column } from '@/components/SimpleTable/type'
 import type { User } from '@repo/api'
-import { changeUserStatusApi, delUserApi, deptTreeSelectApi, getListUserApi, importUserApi } from '@repo/api'
+import { changeUserStatusApi, delUserApi, deptTreeSelectApi, getListUserApi } from '@repo/api'
 import { usePagination, useRequest } from 'alova/client'
 import { Pane, Splitpanes } from 'splitpanes'
 import EditModal from './components/EditModal.vue'
