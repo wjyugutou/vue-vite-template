@@ -1,0 +1,11 @@
+/* :root {
+} */
+
+.el-table.el-table {
+  --el-table-header-bg-color: #EBF0FA;
+  --el-table-header-text-color: #303133;
+
+  border-width: 1px 1px 0;
+  border-color: var(--el-table-border-color);
+  border-style: solid
+}

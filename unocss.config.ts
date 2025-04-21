@@ -2,9 +2,11 @@ import {
   defineConfig,
   presetIcons,
   presetWind3,
-  transformerDirectives, // --at-apply:
+  // preset-wind4, // 新版 与transformerDirectives存在兼容问题
+  transformerDirectives, // --at-apply: 代替@apply
   transformerVariantGroup,
 } from 'unocss'
+// import { createRemToPxResolver } from '@unocss/preset-wind4/utils' // 自带的rem转px
 
 export default defineConfig({
   theme: {
@@ -40,6 +42,10 @@ export default defineConfig({
   ],
   presets: [
     presetWind3(),
+    // presetWind4({
+    //   reset: true,
+    //   utilityResolver: createRemToPxResolver()
+    // }),
     presetIcons({
       scale: 1.2,
       warn: true,
