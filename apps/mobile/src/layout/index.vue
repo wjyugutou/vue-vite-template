@@ -16,7 +16,7 @@ watchEffect(() => {
 
 <template>
   <div class="layout-container h-100vh flex flex-col">
-    <VanNavBar v-if="!hideNavBar" :title="title" :left-arrow="!hideLeftArrow" @click-left="router.back" />
+    <VanNavBar v-if="!hideNavBar" :title="title" :left-arrow="!hideLeftArrow" safe-area-inset-top @click-left="router.back" />
     <main class="flex-1 overflow-auto">
       <RouterView />
     </main>

@@ -30,3 +30,15 @@ interface ImportMetaEnv {
 
 # 样式
 使用unocss
+
+关于 蓝湖，CoDesign等设计工具，需要使用unocss的配置，将设计稿的px转换为rem，基准像素为9.375px
+即可做到如下对应
+```css
+width: 74.03rem;
+height: 46.83rem;
+border-radius: 1.49rem;
+background: #fff;
+
+/* 转换为unocss的class */
+class="w-74.03 h-46.83 rounded-1.49 bg-white"
+```

@@ -27,8 +27,12 @@ function changeUsename() {
 
 <template>
   <div class="text-center">
-    <div class="i-carbon-campsite inline-block cursor-pointer text-4xl" @click="changeUsename" />
+    <div class="i-carbon-campsite text- inline-block cursor-pointer text-2xl" @click="changeUsename" />
     <p> Vitesse Lite </p>
+
+    <div class="h-46.83 w-74 bg-pink-500">
+      <button class="h-5.5 w-17 rounded-1 bg-red-500">红色预警</button>
+    </div>
 
     <div class="py-4" />
 
@@ -44,7 +48,7 @@ function changeUsename() {
 
     <div class="flex flex-col justify-center">
       <button
-        class="m-3 text-sm btn"
+        class="m-3 p-1 text-sm btn"
         :disabled="!userStore.name"
         @click="go"
       >

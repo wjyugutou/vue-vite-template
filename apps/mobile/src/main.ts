@@ -16,7 +16,6 @@ app.use(directivePlugins)
 app.mount('#app')
 
 // 全局错误处理
-
 app.config.errorHandler = (err, vm, info) => {
   console.error(`errorHandler:: ${err}`, {
     info,
