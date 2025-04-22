@@ -134,7 +134,7 @@
     {
       "node": {
         "value": {
-          "_type": 0,
+          "_type": 2,
           "parent": {
             "_type": 0,
             "rawSegment": "",
@@ -145,13 +145,29 @@
             "_overrides": {},
             "components": {}
           },
-          "rawSegment": "list",
-          "pathSegment": "list",
+          "rawSegment": "[...404]",
+          "pathSegment": ":404(.*)",
           "subSegments": [
-            "list"
+            "",
+            {
+              "paramName": "404",
+              "modifier": "",
+              "optional": false,
+              "repeatable": false,
+              "isSplat": true
+            }
           ],
           "_overrides": {},
-          "components": {}
+          "components": {},
+          "params": [
+            {
+              "paramName": "404",
+              "modifier": "",
+              "optional": false,
+              "repeatable": false,
+              "isSplat": true
+            }
+          ]
         },
         "children": {},
         "parent": {
@@ -225,7 +241,7 @@
     {
       "node": {
         "value": {
-          "_type": 2,
+          "_type": 0,
           "parent": {
             "_type": 0,
             "rawSegment": "",
@@ -236,29 +252,13 @@
             "_overrides": {},
             "components": {}
           },
-          "rawSegment": "[...404]",
-          "pathSegment": ":404(.*)",
+          "rawSegment": "example",
+          "pathSegment": "example",
           "subSegments": [
-            "",
-            {
-              "paramName": "404",
-              "modifier": "",
-              "optional": false,
-              "repeatable": false,
-              "isSplat": true
-            }
+            "example"
           ],
           "_overrides": {},
-          "components": {},
-          "params": [
-            {
-              "paramName": "404",
-              "modifier": "",
-              "optional": false,
-              "repeatable": false,
-              "isSplat": true
-            }
-          ]
+          "components": {}
         },
         "children": {},
         "parent": {

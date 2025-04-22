@@ -15,23 +15,12 @@
       "fullPath": "/",
       "path": "/",
       "name": "/",
-      "meta": {},
+      "meta": {
+        "hideLeftArrow": true,
+        "title": "Home"
+      },
       "children": [],
       "component": "F:/CODE/demo/demo/vue-vite-template/apps/mobile/src/pages/index.vue"
-    },
-    {
-      "parent": {
-        "path": "",
-        "fullPath": "/",
-        "name": "",
-        "meta": {}
-      },
-      "fullPath": "/list",
-      "path": "/list",
-      "name": "/list",
-      "meta": {},
-      "children": [],
-      "component": "F:/CODE/demo/demo/vue-vite-template/apps/mobile/src/pages/list.vue"
     },
     {
       "parent": {
@@ -46,6 +35,50 @@
       "meta": {},
       "children": [],
       "component": "F:/CODE/demo/demo/vue-vite-template/apps/mobile/src/pages/[...404].vue"
+    },
+    {
+      "parent": {
+        "path": "",
+        "fullPath": "/",
+        "name": "",
+        "meta": {}
+      },
+      "fullPath": "/example",
+      "path": "/example",
+      "name": "/example",
+      "meta": {},
+      "children": [
+        {
+          "parent": {
+            "path": "/example",
+            "fullPath": "/example",
+            "name": "/example",
+            "meta": {}
+          },
+          "fullPath": "/example/list",
+          "path": "list",
+          "name": "/example/list",
+          "meta": {},
+          "children": [],
+          "component": "F:/CODE/demo/demo/vue-vite-template/apps/mobile/src/pages/example/list.vue"
+        },
+        {
+          "parent": {
+            "path": "/example",
+            "fullPath": "/example",
+            "name": "/example",
+            "meta": {}
+          },
+          "fullPath": "/example/simpleform",
+          "path": "simpleform",
+          "name": "/example/simpleform",
+          "meta": {
+            "title": "SimpleForm 校验 示例"
+          },
+          "children": [],
+          "component": "F:/CODE/demo/demo/vue-vite-template/apps/mobile/src/pages/example/simpleform.vue"
+        }
+      ]
     },
     {
       "parent": {

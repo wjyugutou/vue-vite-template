@@ -1,5 +1,3 @@
-// 此文件实际不生效，具体生效文件在apps/*/unocss.config.ts
-// 此文件仅作为eslint校验使用
 import {
   defineConfig,
   presetIcons,
@@ -8,8 +6,26 @@ import {
   transformerDirectives, // --at-apply: 代替@apply
   transformerVariantGroup,
 } from 'unocss'
+// import { createRemToPxResolver } from '@unocss/preset-wind4/utils' // 自带的rem转px
 
 export default defineConfig({
+  theme: {
+    colors: {
+      'primary': 'var()',
+      'primary-hover': 'var()',
+      'success': 'var()',
+      'warning': 'var()',
+      'danger': 'var()',
+      'info': 'var()',
+    },
+    breakpoints: {
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1536px',
+    },
+  },
   variants: [
     (matcher) => {
       if (!matcher.startsWith('group-hover:'))

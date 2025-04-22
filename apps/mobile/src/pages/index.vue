@@ -1,3 +1,9 @@
+<route lang="yaml">
+meta:
+  hideLeftArrow: true
+  title: 'Home'
+</route>
+
 <script setup lang="ts">
 const userStore = useUserStore()
 
@@ -36,7 +42,7 @@ function changeUsename() {
       @keydown.enter="go"
     >
 
-    <div class="flex justify-center">
+    <div class="flex flex-col justify-center">
       <button
         class="m-3 text-sm btn"
         :disabled="!userStore.name"
@@ -44,8 +50,30 @@ function changeUsename() {
       >
         Go
       </button>
-      <RouterLink to="/list" class="m-3 text-sm btn">
+      <RouterLink to="/example/list" class="m-3 text-sm btn">
         List
+      </RouterLink>
+
+      <RouterLink to="/example/simpleform" class="m-3 text-sm btn">
+        SimpleForm
+      </RouterLink>
+      <RouterLink to="/example/simpleform" class="m-3 text-sm btn">
+        SimpleForm
+      </RouterLink>
+      <RouterLink to="/example/simpleform" class="m-3 text-sm btn">
+        SimpleForm
+      </RouterLink>
+      <RouterLink to="/example/simpleform" class="m-3 text-sm btn">
+        SimpleForm
+      </RouterLink>
+      <RouterLink to="/example/simpleform" class="m-3 text-sm btn">
+        SimpleForm
+      </RouterLink>
+      <RouterLink to="/example/simpleform" class="m-3 text-sm btn">
+        SimpleForm
+      </RouterLink>
+      <RouterLink to="/example/simpleform" class="m-3 text-sm btn">
+        SimpleForm
       </RouterLink>
     </div>
   </div>

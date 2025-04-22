@@ -21,17 +21,17 @@ function onConfirm(value: string | number) {
 </script>
 
 <template>
-  <van-field
+  <VanField
     v-bind="fieldOptions"
     v-model="modelValue"
     @click="showPicker = true"
   />
-  <van-popup v-bind="popupOptions" v-model:show="showPicker">
-    <van-picker
+  <VanPopup v-bind="popupOptions" v-model:show="showPicker">
+    <VanPicker
       v-bind="pickerOptions"
       :model-value="pickerValue"
       @confirm="onConfirm"
       @cancel="showPicker = false"
     />
-  </van-popup>
+  </VanPopup>
 </template>

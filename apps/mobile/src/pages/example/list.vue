@@ -1,37 +1,32 @@
 <script lang='ts' setup>
-const dropdownList = [
+import type { DropdownOption } from '@/components/PullRefreshList/type'
+
+const dropdownList: DropdownOption[] = [
   {
-    prop: 'month',
-    title: '月份',
+    prop: 'month', title: '月份', type: 'dropdown',
     options: [
       { text: '今天', value: 'today' },
       { text: '昨天', value: 'yesterday' },
     ],
   },
   {
-    prop: 'date',
-    title: '日期',
+    prop: 'date', title: '日期', type: 'dropdown',
     options: [
       { text: '今天', value: 'today' },
       { text: '昨天', value: 'yesterday' },
+    ],
+  },
+  {
+    prop: 'city', title: '城市', type: 'picker',
+    options: [
+      { text: '杭州', value: 'Hangzhou' },
+      { text: '宁波', value: 'Ningbo' },
+      { text: '温州', value: 'Wenzhou' },
     ],
   },
 ]
 
-const pickerOptions = {
-  prop: 'city',
-  columns: [
-    { text: '杭州', value: 'Hangzhou' },
-    { text: '宁波', value: 'Ningbo' },
-    { text: '温州', value: 'Wenzhou' },
-    { text: '绍兴', value: 'Shaoxing' },
-    { text: '湖州', value: 'Huzhou' },
-  ],
-}
-
 function getData(params: Record<string, any>) {
-  console.log('params', params)
-
   return new Promise<PagenationResponse<{ id: number, name: string }>>((resolve) => {
     setTimeout(() => {
       resolve({
@@ -48,7 +43,7 @@ function getData(params: Record<string, any>) {
 </script>
 
 <template>
-  <PullRefreshList :dropdown-options="dropdownList" picker-prop="city" :picker-options="pickerOptions" :data-fetch="getData">
+  <PullRefreshList :dropdown-options="dropdownList" :data-fetch="getData">
     <template #default="props">
       <div>
         {{ props.data }}

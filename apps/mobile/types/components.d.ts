@@ -10,9 +10,13 @@ declare module 'vue' {
   export interface GlobalComponents {
     FieldSelect: typeof import('./../src/components/FieldSelect/index.vue')['default']
     Footer: typeof import('./../src/components/Footer.vue')['default']
+    ListDropdownMenu: typeof import('./../src/components/PullRefreshList/ListDropdownMenu.vue')['default']
     PullRefreshList: typeof import('./../src/components/PullRefreshList/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Simpleform: typeof import('./../src/components/Simpleform/index.vue')['default']
+    VanButton: typeof import('vant/es')['Button']
+    VanCell: typeof import('vant/es')['Cell']
     VanDropdownItem: typeof import('vant/es')['DropdownItem']
     VanDropdownMenu: typeof import('vant/es')['DropdownMenu']
     VanField: typeof import('vant/es')['Field']
@@ -21,5 +25,6 @@ declare module 'vue' {
     VanPicker: typeof import('vant/es')['Picker']
     VanPopup: typeof import('vant/es')['Popup']
     VanPullRefresh: typeof import('vant/es')['PullRefresh']
+    VanSwitch: typeof import('vant/es')['Switch']
   }
 }
