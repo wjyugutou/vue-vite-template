@@ -14,6 +14,11 @@ export function validatePhone(phone: string) {
   return regex.test(phone)
 }
 
+/* 验证是否为空 */
+export function notEmpty(value: unknown) {
+  return value !== null && value !== undefined && value !== ''
+}
+
 /* 验证pad还是pc */
 export function vaildatePc() {
   const userAgentInfo = navigator.userAgent

@@ -1,12 +1,18 @@
 {
+  "//": "turbo 需要name设置完整包名",
   "name": "@repo/utils",
+  "type": "module",
   "version": "1.0.0",
   "packageManager": "pnpm@10.8.1",
   "description": "",
   "author": "",
   "license": "ISC",
   "keywords": [],
-  "main": "index.js",
-  "scripts": {},
-  "dependencies": {}
+  "main": "./index.js",
+  "scripts": {
+    "stub": "pnpm unbuild --stub"
+  },
+  "dependencies": {
+    "unbuild": "^3.5.0"
+  }
 }
