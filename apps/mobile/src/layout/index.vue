@@ -1,19 +1,28 @@
 <script lang='ts' setup>
+import Footer from './footer.vue'
+
 const router = useRouter()
 const route = useRoute()
 
 const title = computed(() => route.meta.title as string ?? 'Layout')
 
-const hideNavBar = computed(() => route.meta.hideNavBar as boolean)
+const hideNavBar = computed(() => route.meta.hideNavBar ?? false)
+
+const hideLeftArrow = computed(() => route.meta.hideLeftArrow ?? false)
+watchEffect(() => {
+  console.log(hideNavBar.value, route.path, route.meta.title)
+})
 </script>
 
 <template>
-  <VanNavBar v-if="!hideNavBar" :title="title" :left-arrow="(!route.meta.hideLeftArrow as boolean)" @click-left="router.back" />
-  <main class="overflow-auto" :class="[`${hideNavBar ? 'h-100vh' : 'h-[calc(100vh-var(--van-nav-bar-height))]'}`]">
-    <RouterView />
-  </main>
+  <div class="layout-container h-100vh flex flex-col">
+    <VanNavBar v-if="!hideNavBar" :title="title" :left-arrow="!hideLeftArrow" @click-left="router.back" />
+    <main class="flex-1 overflow-auto">
+      <RouterView />
+    </main>
+    <Footer />
+  </div>
 </template>
 
 <style scoped>
-
 </style>
