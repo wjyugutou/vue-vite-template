@@ -58,4 +58,8 @@ body,
 
 button {
   cursor: pointer;
+
+  &:is([disabled]) {
+    cursor: not-allowed;
+  }
 }

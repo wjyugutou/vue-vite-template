@@ -34,10 +34,18 @@ export default defineConfig({
         selector: s => `.group:hover ${s}`,
       }
     },
+    (matcher) => {
+      if (!matcher.startsWith('not-disabled-hover:'))
+        return matcher
+      return {
+        matcher: matcher.slice('not-disabled-hover:'.length),
+        selector: s => `${s}:not([disabled]):hover`,
+      }
+    },
   ],
   shortcuts: [
     ['flex-center', 'flex justify-center items-center'],
-    ['btn', 'px-4 py-1 rounded inline-block bg-teal-600 text-white cursor-pointer hover:bg-teal-700 disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50'],
+    ['btn', 'px-4 py-1 rounded inline-block bg-teal-600 text-white hover:not-disabled:bg-teal-700 disabled:bg-gray-600 disabled:opacity-50'],
   ],
   presets: [
     presetWind3(),
