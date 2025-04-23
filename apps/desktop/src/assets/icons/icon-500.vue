@@ -1,5 +1,6 @@
 <template>
   <svg
+    class="error-icon-svg"
     height="699"
     viewBox="0 0 1119 699"
     width="1119"
@@ -15,12 +16,12 @@
     />
     <path
       d="M140.09162,291.85056c0-78.36865,54.255-141.78356,121.30372-141.78356"
-      fill="hsl(var(--primary))"
+      fill="var(--primary)"
       transform="translate(-31.39089 -100.5)"
     />
     <path
       d="M70.77521,158.66768c0,73.61476,31.00285,133.18288,69.31641,133.18288"
-      fill="hsl(var(--primary))"
+      fill="var(--primary)"
       transform="translate(-31.39089 -100.5)"
     />
     <path

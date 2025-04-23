@@ -9,6 +9,7 @@
   --tag-view-height: 38px;
 
   --splitpanes-default-bg: light-dark(#fff, #141414);
+  --splitpanes-default-border-color: light-dark(#eee, #2D2F32);
 }
 
 html {
@@ -30,17 +31,27 @@ body,
 }
 
 .error-icon-svg {
-  --success: light-dark(144 57% 58%, 144 57% 58%);
-  --primary: light-dark(212 100% 45%, 212 100% 45%);
-  --destructive: light-dark(348 100% 61%, 348 100% 61%);
-  --warning: light-dark(42 84% 61%, 42 84% 61%);
-  --radius: 0.5rem;
+  --success: light-dark(hsl(144 57% 58%), hsl(144 57% 58%));
+  --primary: light-dark(hsl(212 100% 45%), hsl(212 100% 45%));
+  --destructive: light-dark(hsl(348 100% 61%), hsl(348 100% 61%));
+  --warning: light-dark(hsl(42 84% 61%), hsl(42 84% 61%));
+  --foreground: light-dark(hsl(210 6% 21%), hsl(0 0% 95%));
   
-  --foreground: light-dark(210 6% 21%, 0 0% 95%);
+  --radius: 0.5rem;
 }
 
 
 /* 分割面板样式 */
-.splitpanes.default-theme .splitpanes__pane {
-  background-color: var(--splitpanes-default-bg) !important;
+.splitpanes.default-theme {
+  .splitpanes__pane {
+    background-color: var(--splitpanes-default-bg) !important;
+  }
+  .splitpanes__splitter {
+    background-color: var(--splitpanes-default-bg) !important;
+    border-left-color: var(--splitpanes-default-border-color) !important;
+    &:after,
+    &:before {
+      background-color: var(--splitpanes-default-border-color) !important;
+    }
+  }
 }

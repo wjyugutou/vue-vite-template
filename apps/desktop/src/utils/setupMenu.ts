@@ -1,5 +1,6 @@
 import type { RouteRecordRawC } from '@/router/type'
 import type { RouterResult, RouterResultItem } from '@repo/api'
+import type { RouteMeta } from 'vue-router'
 import { basicRoutes } from '@/router/routes'
 
 export function setupMenu(routes: RouterResult) {
@@ -29,14 +30,15 @@ function getMenu(routes: RouterResult, parent?: RouterResultItem): RouteRecordRa
       name: item.name,
       component: item.component,
       meta: {
-        hidden: item.hidden,
+        hiddenInMenu: item.hidden,
         keepAlive: !item.meta?.noCache,
         icon: item.meta?.icon,
         title: item.meta?.title,
         order: item.meta?.order,
-      },
+      } as RouteMeta,
       children: item.children ? getMenu(item.children, item) : undefined,
     } as unknown as RouteRecordRawC
+
     return menu
   }).filter(Boolean) as RouteRecordRawC[]
 

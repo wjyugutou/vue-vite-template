@@ -1,5 +1,6 @@
 <template>
   <svg
+    class="error-icon-svg"
     height="659.29778"
     viewBox="0 0 586 659.29778"
     width="586"
@@ -80,7 +81,7 @@
     <circle
       cx="281.3585"
       cy="285.71051"
-      fill="hsl(var(--primary))"
+      fill="var(--primary)"
       r="51.12006"
       transform="translate(-26.58509 542.54478) rotate(-85.26884)"
     />

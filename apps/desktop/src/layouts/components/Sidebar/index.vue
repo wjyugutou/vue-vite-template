@@ -38,7 +38,7 @@ watchEffect(() => {
     <Logo v-if="settings.layoutMode === 'vertical'" class="px-20px" />
     <ScrollView>
       <template v-for="menu in menus" :key="menu.path">
-        <SidebarItem v-if="!menu.meta?.hideInMenu" :item="menu" />
+        <SidebarItem v-if="!menu.meta?.hiddenInMenu" :item="menu" />
       </template>
     </ScrollView>
     <div class="absolute bottom-0 left-0 h-[var(--sidebar-bottom-height)] w-full flex-center b-t px-4">

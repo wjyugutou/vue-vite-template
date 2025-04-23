@@ -25,16 +25,15 @@ export const basicRoutes: RouteRecordRawC[] = [
         path: 'hi/:name',
         meta: {
           title: '你好',
-          hideInMenu: true,
+          hiddenInMenu: true,
         },
         component: () => import('@/pages/hi/index.vue'),
       },
       {
         path: '/system/dict-data/:dictId(\\d+)',
-        hidden: true,
         component: () => import('@/pages/system/dict/data.vue'),
         name: 'Data',
-        meta: { title: '字典数据', activePath: '/system/dict', permissions: ['system:dict:list'] },
+        meta: { title: '字典数据', hiddenInMenu: true, activePath: '/system/dict', permissions: ['system:dict:list'] },
       },
     ],
   },

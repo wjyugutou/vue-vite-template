@@ -1,2 +1,2 @@
-export * from './useDict'
-export * from './useSysConfig'
+export * from './src/useDict'
+export * from './src/useSysConfig'

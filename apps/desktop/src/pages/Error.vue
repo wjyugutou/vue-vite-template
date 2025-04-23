@@ -58,6 +58,23 @@ const fallbackIcon = computed(() => {
 function goHome() {
   router.push(props.homePath)
 }
+
+const element = ref()
+
+onMounted(() => {
+  setTimeout(() => {
+    console.log(document.querySelector('.error-icon-svg'))
+    element.value = document.querySelector('.error-icon-svg')
+  }, 1000)
+})
+
+const a = useCssVar('--foreground', element)
+
+watchEffect(() => {
+  console.log(element.value)
+
+  console.log(a.value)
+})
 </script>
 
 <template>

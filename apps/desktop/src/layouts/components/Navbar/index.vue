@@ -30,13 +30,13 @@ function handleSettings() {
       <Logo v-if="settings.layoutMode === 'side'" />
       <div />
       <div class="flex items-center gap-col-4">
-        <button class="icon-btn hover:text-primary">
+        <ElButton class="icon-btn hover:text-primary" link>
           <div class="i-carbon-settings" @click="handleSettings" />
-        </button>
+        </ElButton>
 
-        <button class="icon-btn hover:text-primary" @click="toggleThemeMode">
-          <div class="dark:i-carbon-moon i-carbon-sun" />
-        </button>
+        <ElButton class="icon-btn hover:text-primary" link>
+          <div class="dark:i-carbon-moon i-carbon-sun" @click="toggleThemeMode" />
+        </ElButton>
 
         <Avatar />
       </div>
