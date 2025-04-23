@@ -21,11 +21,16 @@ function initActiveMenu() {
 }
 
 initActiveMenu()
+
+watchEffect(() => {
+  console.log('layoutMode', settings.value.layoutMode)
+})
 </script>
 
 <template>
   <ElMenu
     class="sidebar"
+    :style="{ marginTop: settings.layoutMode === 'side' ? 'var(--header-height)' : '0' }"
     :default-openeds="menuState.openeds"
     :default-active="menuState.active"
     :collapse="settings.sidebarCollapse"
@@ -38,7 +43,7 @@ initActiveMenu()
     </ScrollView>
     <div class="absolute bottom-0 left-0 h-[var(--sidebar-bottom-height)] w-full flex-center b-t px-4">
       <div
-        class="i-carbon-distribute-horizontal-left cursor-pointer hover:bg-primary/90" :class="{ 'bg-primary/90': settings.sidebarCollapse }"
+        class="i-carbon-distribute-horizontal-left hover:bg-primary/90 cursor-pointer" :class="{ 'bg-primary/90': settings.sidebarCollapse }"
         @click="settings.sidebarCollapse = !settings.sidebarCollapse"
       />
     </div>
