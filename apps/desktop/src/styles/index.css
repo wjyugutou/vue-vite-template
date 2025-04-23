@@ -8,16 +8,12 @@
 
   --tag-view-height: 38px;
 
-  --splitpanes-default-bg: #fff;
-}
-
-html.dark {
-  --splitpanes-default-bg: #141414;
+  --splitpanes-default-bg: light-dark(#fff, #141414);
 }
 
 html {
-  color-scheme: light dark;
   overflow: hidden;
+  color-scheme: light dark;
 
   &.dark {
     color-scheme: dark;
@@ -34,22 +30,13 @@ body,
 }
 
 .error-icon-svg {
-  --success: 144 57% 58%;
-  --primary: 212 100% 45%;
-  --destructive: 348 100% 61%;
-  --warning: 42 84% 61%;
+  --success: light-dark(144 57% 58%, 144 57% 58%);
+  --primary: light-dark(212 100% 45%, 212 100% 45%);
+  --destructive: light-dark(348 100% 61%, 348 100% 61%);
+  --warning: light-dark(42 84% 61%, 42 84% 61%);
   --radius: 0.5rem;
   
-  --foreground: 210 6% 21%;
-
-  .dark & {
-    
-    --success: 144 57% 58%;
-    --primary: 212 100% 45%;
-    --destructive: 348 100% 61%;
-    --warning: 42 84% 61%;
-    --foreground: 0 0% 95%;
-  }
+  --foreground: light-dark(210 6% 21%, 0 0% 95%);
 }
 
 
