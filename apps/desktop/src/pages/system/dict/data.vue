@@ -90,5 +90,11 @@ function handleExport() {
     <template #status="{ row }">
       <DictTag :options="sys_normal_disable.list" :value="row.status" />
     </template>
+
+    <template #operation="{ row }">
+      <ElButton type="primary" link> 编辑 </ElButton>
+      <ElButton type="danger" link> 删除 </ElButton>
+      <ElButton type="primary" link> 导出 </ElButton>
+    </template>
   </ListPage>
 </template>
