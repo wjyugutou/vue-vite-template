@@ -7,10 +7,9 @@ import generatePlugins from './vite/plugin'
  */
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '../../') as ImportMetaEnv
-  const root = path.resolve(import.meta.dirname, '../../')
 
   return {
-    ...createSharedConfig('mobile', root, mode),
+    ...createSharedConfig(env),
     resolve: {
       alias: {
         '@': path.resolve(import.meta.dirname, './src'),
