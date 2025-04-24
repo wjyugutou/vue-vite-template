@@ -6,6 +6,7 @@ export default antfu({
   test: false,
   jsx: false,
   unocss: true,
+  formatters: true,
 }, [
   {
     rules: {
@@ -25,7 +26,7 @@ export default antfu({
     files: ['**/*.vue'],
     rules: {
       // vue 标签不自动换行
-      'vue/singleline-html-element-content-newline': [0],
+      'vue/singleline-html-element-content-newline': 'off',
       // 组件名称 书写方式 自动修复为PascalCase
       'vue/component-name-in-template-casing': [
         'error',
