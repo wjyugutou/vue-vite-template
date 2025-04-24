@@ -10,6 +10,6 @@
   "scripts": {},
   "dependencies": {
     "@repo/utils": "workspace:*",
-    "alova": "^3.2.10"
+    "alova": "catalog:"
   }
 }

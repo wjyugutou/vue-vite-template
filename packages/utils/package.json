@@ -13,6 +13,6 @@
     "stub": "pnpm unbuild --stub"
   },
   "dependencies": {
-    "unbuild": "^3.5.0"
+    "unbuild": "catalog:"
   }
 }

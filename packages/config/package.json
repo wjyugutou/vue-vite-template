@@ -24,7 +24,8 @@
     "stub": "pnpm unbuild --stub",
     "build": "pnpm unbuild"
   },
-  "dependencies": {
-    "unbuild": "^3.5.0"
+  "devDependencies": {
+    "unbuild": "catalog:",
+    "vite": "catalog:"
   }
 }
