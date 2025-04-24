@@ -10,15 +10,20 @@
   ],
   "globalEnv": ["NODE_ENV"],
   "tasks": {
+    "build": {
+      "outputs": ["dist/**"],
+      "outputLogs": "none",
+      "cache": false
+    },
     "build:desktop": {
-      "dependsOn": ["@repo/config#build"],
+      "dependsOn": ["@repo/config#build", "desktop#build"],
       "outputs": ["dist/desktop/**"],
       "outputLogs": "full",
       "cache": false
     },
     "build:mobile": {
-      "dependsOn": ["@repo/config#build"],
-      "outputs": ["dist/**"],
+      "dependsOn": ["@repo/config#build", "mobile#build"],
+      "outputs": ["dist/mobile/**"],
       "outputLogs": "full",
       "cache": false
     },
@@ -30,7 +35,7 @@
       "persistent": false
     },
     "stub": {
-      "cache": true
+      "cache": false
     }
   }
 }
