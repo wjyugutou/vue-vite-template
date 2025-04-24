@@ -25,8 +25,8 @@ export function createSharedConfig(env: ImportMetaEnv) {
           chunkFileNames: 'static/js/[name]-[hash].js',
           manualChunks: {
             'vue-vendor': ['vue', 'vue-router', 'pinia', '@vueuse/core'],
-            'element-plus': ['element-plus'],
-            'vant': ['vant'],
+            'element-plus': appType === 'desktop' ? ['element-plus'] : [],
+            'vant': appType === 'mobile' ? ['vant'] : [],
           },
         },
       },
