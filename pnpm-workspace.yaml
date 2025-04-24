@@ -1,4 +1,31 @@
-
 packages:
+  # 应用目录
   - 'apps/*'
+  # 共享包目录
   - 'packages/*'
+
+# 排除以下目录和文件
+exclude:
+  # 构建输出目录
+  - '**/dist'
+  - '**/build'
+  # 测试目录
+  - '**/__tests__/**'
+  - '**/*.test.*'
+  # 缓存目录
+  - '**/node_modules'
+  - '**/.turbo'
+  - '**/.cache'
+  # 临时文件
+  - '**/temp'
+  - '**/tmp'
+  # 日志文件
+  - '**/logs'
+  # 调试文件
+  - '**/.debug'
+  # IDE 配置文件
+  - '**/.vscode'
+  - '**/.idea'
+  # 其他
+  - '**/coverage'
+  - '**/.env.*'
