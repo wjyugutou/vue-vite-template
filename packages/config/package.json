@@ -10,7 +10,7 @@
   "keywords": [],
   "exports": {
     ".": {
-      "types": "./src/index.ts",
+      "types": "./dist/index.d.mts",
       "default": "./dist/index.mjs"
     }
   },
@@ -18,14 +18,17 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "files": [
+    "*.d.ts",
     "dist"
   ],
   "scripts": {
     "stub": "pnpm unbuild --stub",
     "build": "pnpm unbuild"
   },
-  "devDependencies": {
-    "unbuild": "catalog:",
+  "peerDependencies": {
     "vite": "catalog:"
+  },
+  "devDependencies": {
+    "unbuild": "catalog:"
   }
 }
