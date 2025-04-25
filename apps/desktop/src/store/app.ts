@@ -55,25 +55,9 @@ export const useAppStore = defineStore('app', {
   actions: {
   },
   persist: [
-    {
-      key: 'app-settings',
-      pick: ['settings'],
-      storage: localStorage,
-    },
-    {
-      key: 'app-default',
-      pick: ['defaultConfig'],
-      storage: localStorage,
-    },
-    {
-      key: 'app-menu-state',
-      pick: ['menuState'],
-      storage: sessionStorage,
-    },
-    {
-      key: 'app-keep-alive-list',
-      pick: ['cachedList'],
-      storage: sessionStorage,
-    },
+    { key: 'app-settings', pick: ['settings'], storage: localStorage },
+    { key: 'app-default', pick: ['defaultConfig'], storage: localStorage },
+    { key: 'app-menu-state', pick: ['menuState'], storage: sessionStorage },
+    { key: 'app-keep-alive-list', pick: ['cachedList'], storage: sessionStorage },
   ],
 })
