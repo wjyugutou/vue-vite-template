@@ -17,6 +17,8 @@
     "dev:mobile": "turbo run dev --filter=mobile",
     "build:mobile": "turbo run build:mobile",
     "build:desktop": "turbo run build:desktop",
+    "postbuild:desktop": "node ./scripts/zip.mjs",
+    "postbuild:mobile": "node ./scripts/zip.mjs",
     "lint": "turbo run lint",
     "fix": "eslint --fix ."
   },
