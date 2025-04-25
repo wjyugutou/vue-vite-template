@@ -1,0 +1,15 @@
+---
+description: 
+globs: *.vue
+alwaysApply: false
+---
+
+# Vue 项目规范
+
+## 组件规范
+
+### 基础规则
+- 使用 Composition API
+- 组件名使用 PascalCase
+- Props 定义使用 defineProps
+- 事件使用 defineEmits

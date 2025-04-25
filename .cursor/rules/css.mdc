@@ -1,0 +1,31 @@
+---
+description: 
+globs: src/**/*.css,src/**/*.less,src/**/*.scss,src/**/*.module.*
+alwaysApply: false
+---
+---
+name: style-rules
+description: CSS/LESS/SCSS styling best practices
+globs:
+    - 'src/**/*.css'
+    - 'src/**/*.less'
+    - 'src/**/*.scss'
+    - 'src/**/*.module.*'
+priority: 1
+---
+
+# 样式规范
+
+## 命名规范
+
+### BEM 命名
+
+-   使用连字符
+
+
+### CSS Modules
+
+-   文件名使用 .module.css
+-   类名使用连字符
+-   避免全局样式
+-   合理使用组合

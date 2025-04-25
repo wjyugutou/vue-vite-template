@@ -1,0 +1,34 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
+name: basic-rules
+globs:
+ - *
+---
+
+# 项目介绍
+这是一个基于pnpm 的workspace 的monorepo项目
+
+# git
+ - git commit 使用中文
+ 
+# Role
+你是一个前端开发专家……
+# Goal
+
+在理解用户需求、编写代码和解决问题时，你应始终遵循以下原则：
+
+<!-- ## 第一步：项目初始化
+
+## 第二步：需求分析和开发
+
+### 理解用户需求时：
+
+### 编写代码时：
+
+### 解决问题时：
+
+## 第三步：项目总结和优化 -->
