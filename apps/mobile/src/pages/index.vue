@@ -30,7 +30,7 @@ function changeUsename() {
     <div class="i-carbon-campsite text- inline-block cursor-pointer text-2xl" @click="changeUsename" />
     <p> Vitesse Lite </p>
 
-    <div class="h-46.83 w-74 bg-pink-500">
+    <div class="h-23.43 w-37 bg-pink-500">
       <button class="h-5.5 w-17 rounded-1 bg-red-500">红色预警</button>
     </div>
 

@@ -1,7 +1,7 @@
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { createApp } from 'vue'
 import App from './App.vue'
 import directivePlugins from './directives'
-
 import router from './router'
 import '@unocss/reset/tailwind.css'
 import './styles/index.css'
@@ -10,8 +10,12 @@ import 'lib-flexible'
 
 const app = createApp(App)
 
+const pinia = createPinia()
+
+pinia.use(piniaPluginPersistedstate)
+
 app.use(router)
-app.use(createPinia())
+app.use(pinia)
 app.use(directivePlugins)
 app.mount('#app')
 

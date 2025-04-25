@@ -12,17 +12,4 @@ export const useUserStore = defineStore('user', {
       return `${this.name} (${this.age})`
     },
   },
-  actions: {
-    // Define your actions here
-    setName(name: string) {
-      this.name = name
-    },
-    // You can also use async/await
-    setAge(age: number) {
-      this.age = age
-    },
-    setEmail(email: string) {
-      this.email = email
-    },
-  },
 })

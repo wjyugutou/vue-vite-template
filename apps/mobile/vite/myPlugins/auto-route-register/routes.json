@@ -57,8 +57,11 @@
           },
           "fullPath": "/example/list",
           "path": "list",
-          "name": "/example/list",
-          "meta": {},
+          "name": "ExampleList",
+          "meta": {
+            "title": "示例 列表",
+            "keepAlive": true
+          },
           "children": [],
           "component": "F:/CODE/demo/demo/vue-vite-template/apps/mobile/src/pages/example/list.vue"
         },
@@ -115,7 +118,7 @@
           },
           "fullPath": "/hi/:name",
           "path": ":name",
-          "name": "/hi/[name]",
+          "name": "hi-name",
           "meta": {
             "title": "Name113322"
           },

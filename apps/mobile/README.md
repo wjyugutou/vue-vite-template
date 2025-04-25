@@ -23,17 +23,45 @@ interface ImportMetaEnv {
 ```
 
 # 代码风格
+
 使用 eslint + @antfu/eslint-config
 
 # 请求
+
 请求使用alova + fetchAdapter
 
+# 路由
+
+路由使用unplugin-vue-router
+
+## keepAlive
+
+开启keepAlive 需要配置name 以及meta.keepAlive 为 true
+
+```
+<route lang="yaml">
+{
+  name: 'ExampleList',
+  meta: {
+    title: '示例 列表',
+    keepAlive: true,
+  }
+}
+</route>
+<!-- 组件中 name 与 route 的 name 一致 -->
+defineOptions({ name: 'ExampleList' })
+
+```
+
 # 样式
+
 使用unocss
 
-关于 蓝湖，CoDesign等设计工具，需要使用unocss的配置，将设计稿的px转换为rem，基准像素为9.375px
+关于 蓝湖，CoDesign等设计工具，需要使用unocss的配置，将设计稿的px转换为rem，基准像素为18.75px
 即可做到如下对应
+
 ```css
+/* 设计稿 */
 width: 74.03rem;
 height: 46.83rem;
 border-radius: 1.49rem;

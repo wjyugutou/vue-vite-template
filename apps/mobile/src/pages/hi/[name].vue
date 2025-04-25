@@ -1,5 +1,6 @@
 <route lang="yaml">
 {
+  name: 'hi-name',
   meta: {
     title: "Name113322"
   }
@@ -8,7 +9,7 @@
 
 <script setup lang="ts">
 const router = useRouter()
-const route = useRoute('/hi/[name]')
+const route = useRoute('hi-name')
 
 const { params, meta } = route
 

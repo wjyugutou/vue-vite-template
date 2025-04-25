@@ -11,8 +11,15 @@ if (import.meta.hot) {
   handleHotUpdate(router)
 }
 
-router.beforeEach((to) => {
-  console.log('beforeEach', to)
+router.beforeEach((to, from, next) => {
+  const { cachedList } = storeToRefs(useAppStore())
+
+  if (to.meta.keepAlive) {
+    if (!cachedList.value.includes(to.name as string)) {
+      cachedList.value.push(to.name as string)
+    }
+  }
+  next()
 })
 
 export default router

@@ -1,6 +1,17 @@
+<route lang="yaml">
+{
+  name: 'ExampleList',
+  meta: {
+    title: '示例 列表',
+    keepAlive: true,
+  }
+}
+</route>
+
 <script lang='ts' setup>
 import type { DropdownOption } from '@/components/PullRefreshList/type'
 
+defineOptions({ name: 'ExampleList' })
 const dropdownList: DropdownOption[] = [
   {
     prop: 'month', title: '月份', type: 'dropdown',
