@@ -10,8 +10,15 @@ const router = createRouter({
 
 export default router
 
-router.beforeEach(() => {
+router.beforeEach((to, from, next) => {
   NProgress.start()
+
+  const { cachedList } = storeToRefs(useAppStore())
+
+  if (to.meta.keepAlive && typeof to.name === 'string') {
+    cachedList.value.push(to.name)
+  }
+  next()
 })
 
 router.afterEach(() => {

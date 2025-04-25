@@ -8,10 +8,6 @@ defineOptions({ name: 'BasicLayout' })
 const route = useRoute()
 
 const { cachedList } = storeToRefs(useAppStore())
-
-watch(cachedList, () => {
-  console.log('cachedList', cachedList.value)
-})
 </script>
 
 <template>

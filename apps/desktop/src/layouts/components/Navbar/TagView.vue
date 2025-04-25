@@ -8,7 +8,7 @@ interface Tag {
 
 const route = useRoute()
 const router = useRouter()
-const { cachedList, menuState, tags } = storeToRefs(useAppStore())
+const { menuState, tags } = storeToRefs(useAppStore())
 
 // 如果首页标签不存在，则添加
 if (tags.value.findIndex(tag => tag.path === route.path) === -1) {
@@ -23,10 +23,6 @@ watch(route, () => {
   menuState.value.active = route.meta?.activePath || route.path
 
   if (tags.value.findIndex(tag => tag.path === route.path) === -1) {
-    if (route.meta.keepAlive && typeof route.name === 'string') {
-      cachedList.value.push(route.name)
-    }
-
     tags.value.push({
       path: route.path,
       title: route.meta.title as string,
@@ -52,7 +48,7 @@ function handleClose(e: Event, tag: Tag) {
     <div class="tag-view">
       <RouterLink
         v-for="tag in tags" :key="tag.path" :to="tag.path"
-        class="group flex cursor-pointer items-center justify-between rounded hover:(bg-primary text-white)"
+        class="group hover:bg-primary flex cursor-pointer items-center justify-between rounded hover:(text-white)"
         :class="{ 'bg-primary text-white': tag.path === route.path }"
       >
         <span class="flex-1 whitespace-nowrap px-2 text-12px">{{ tag.title }}</span>
@@ -65,7 +61,7 @@ function handleClose(e: Event, tag: Tag) {
 
 <style scoped>
 .tag-view {
-  --at-apply:  h-[var(--tag-view-height)] flex gap-2 border-b b-b-[var(--el-border-color)] px-2 py-1;
+  --at-apply: h-[var(--tag-view-height)] flex gap-2 border-b b-b-[var(--el-border-color)] px-2 py-1;
   width: fit-content;
   min-width: 100%;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
