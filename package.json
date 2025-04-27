@@ -1,13 +1,12 @@
 {
-  "type": "module",
+  "name": "my-vue-app",
   "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "build:tsc": "tsc -b && vite build",
-    "build": "vite build",
     "dev": "vite --port 3333",
-    "fix": "eslint --fix .",
-    "lint": "eslint .",
-    "typecheck": "vue-tsc --noEmit",
+    "build:tsc": "vue-tsc -b && vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "preinstall": "npx only-allow pnpm"
   },
@@ -20,27 +19,20 @@
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^4.2.1",
-    "@iconify-json/carbon": "^1.2.7",
+    "@antfu/eslint-config": "^4.12.0",
+    "@tailwindcss/vite": "^4.1.4",
     "@types/node": "^22.13.4",
-    "@unocss/eslint-plugin": "^65.5.0",
-    "@unocss/reset": "^65.5.0",
-    "@vitejs/plugin-vue": "^5.2.1",
-    "autoprefixer": "^10.4.20",
-    "code-inspector-plugin": "^0.20.0",
-    "eslint": "^9.20.1",
-    "typescript": "^5.7.3",
-    "unocss": "^65.5.0",
+    "@vitejs/plugin-vue": "^5.2.2",
+    "@vue/tsconfig": "^0.7.0",
+    "code-inspector-plugin": "^0.20.10",
+    "eslint": "^9.25.1",
+    "eslint-plugin-tailwindcss": "^3.18.0",
+    "tailwindcss": "^4.1.4",
+    "typescript": "~5.7.2",
     "unplugin-auto-import": "^19.1.0",
     "unplugin-vue-components": "^28.1.0",
-    "vite": "^6.1.0",
+    "vite": "^6.3.1",
     "vite-plugin-compression": "^0.5.1",
-    "vue-tsc": "^2.2.2"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "vue-demi"
-    ]
+    "vue-tsc": "^2.2.8"
   }
 }

@@ -1,6 +1,6 @@
+import Tailwindcss from '@tailwindcss/vite'
 import Vue from '@vitejs/plugin-vue'
 import { codeInspectorPlugin } from 'code-inspector-plugin'
-import UnoCSS from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
@@ -12,9 +12,7 @@ export function generatePlugins(mode: 'development' | 'production' | string, env
     // ⚠️ Vue must be placed after VueRouter()
     Vue(),
 
-    // https://github.com/antfu/unocss
-    // see unocss.config.ts for config
-    UnoCSS(),
+    Tailwindcss(),
 
     // https://github.com/antfu/unplugin-auto-import
     AutoImport({

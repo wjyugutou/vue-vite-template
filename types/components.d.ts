@@ -8,24 +8,8 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    Description: typeof import('./../src/components/Description.vue')['default']
-    ElAvatar: typeof import('element-plus/es')['ElAvatar']
-    ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
-    ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
-    ElButton: typeof import('element-plus/es')['ElButton']
-    ElIcon: typeof import('element-plus/es')['ElIcon']
-    ElMenu: typeof import('element-plus/es')['ElMenu']
-    ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
-    ElMenuItemGroup: typeof import('element-plus/es')['ElMenuItemGroup']
-    ElPopover: typeof import('element-plus/es')['ElPopover']
-    ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
-    ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
-    Footer: typeof import('./../src/components/Footer.vue')['default']
-    IFrame: typeof import('./../src/components/IFrame.vue')['default']
+    HelloWorld: typeof import('./../src/components/HelloWorld.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-  }
-  export interface ComponentCustomProperties {
-    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }

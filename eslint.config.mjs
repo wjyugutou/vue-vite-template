@@ -5,7 +5,6 @@ export default antfu({
   yaml: false,
   test: false,
   jsx: false,
-  unocss: true,
 }, [
   {
     rules: {
@@ -32,6 +31,10 @@ export default antfu({
       ],
     },
   },
+  // {
+  //   files: ['**/*.vue', '**/*.css'],
+  //   plugins: [eslintPluginTailwindCSS()],
+  // },
   {
     files: ['tsconfig.json', 'tsconfig.*.json'],
     rules: {

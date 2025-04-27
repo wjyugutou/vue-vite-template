@@ -16,7 +16,7 @@
 - [Vite](https://vitejs.dev/)
 - [Pinia](https://pinia.esm.dev/)
 - [unplugin-vue-router](https://uvr.esm.is/)
-- [unocss](https://unocss.com/)
+- [tailwindcss](https://tailwindcss.com/)
 - [vueuse](https://vueuse.org/)
 - [alova](https://alova.dev/)
 
