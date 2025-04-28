@@ -16,19 +16,19 @@
       "cache": false
     },
     "build:desktop": {
-      "dependsOn": ["@repo/config#build", "desktop#build"],
+      "dependsOn": ["@repo/config#build", "@repo/api#build", "desktop#build"],
       "outputs": ["dist/desktop/**"],
       "outputLogs": "full",
       "cache": false
     },
     "build:mobile": {
-      "dependsOn": ["@repo/config#build", "mobile#build"],
+      "dependsOn": ["@repo/config#build", "@repo/api#build", "mobile#build"],
       "outputs": ["dist/mobile/**"],
       "outputLogs": "full",
       "cache": false
     },
     "dev": {
-      "dependsOn": ["@repo/config#stub"],
+      "dependsOn": ["@repo/config#stub", "@repo/api#stub"],
       "outputs": [],
       "outputLogs": "full",
       "cache": false,

@@ -1,54 +1,55 @@
-import router from '@/router'
-import { setInterceptor } from '@repo/api'
+import type { InterceptorsConfig, InterceptorsResponse } from '@repo/api/request'
+import request from '@repo/api/request'
 
-const codeMap: Record<string, string> = {
-  401: '请先登录',
-  403: '您没有权限访问',
-  404: '请求的资源不存在',
-  500: '服务器内部错误',
-}
+request.interceptors.request.use(
+  (config: InterceptorsConfig) => {
+    // 是否需要设置 token
+    const isToken = config.isToken !== false
 
-setInterceptor({
-  beforeRequest: (method) => {
-    method.config.headers.Authorization = `Bearer ${useToken()}`
+    // if (isToken) {
+    //   const token = useToken().access_token
+
+    //   if (token) {
+    //     config.headers.Authorization = `Bearer ${token}` // 让每个请求携带自定义token 请根据实际情况自行修改
+    //   }
+    // }
+
+    return config
   },
-  responded: {
-    onSuccess: async (response, instance) => {
-      if (response.status === 200 && response.ok) {
-        if (instance.meta?.blob) {
-          return await response.blob()
-        }
-        if (response.headers.get('Content-Type')?.includes('application/json')) {
-          const res = await response.json()
+  (error) => {
+    console.error(error)
 
-          if (res.code === 200) {
-            return instance.meta?.original ? res : res.data
-          }
-          else {
-            ElMessage.error(`${instance.url}: ${codeMap[res.code as string] || res.msg}`)
-
-            if (res.code === 401) {
-              router.push({
-                path: '/login',
-                query: {
-                  redirect: router.currentRoute.value.fullPath,
-                },
-              })
-            }
-            return Promise.reject(res)
-          }
-        }
-
-        return await response.text()
-      }
-      else {
-        ElMessage.error(`${instance.url}: ${response.statusText}`)
-        return Promise.reject(response)
-      }
-    },
-    onError: (error, instance) => {
-      ElMessage.error(`${instance.url}: ${error.message}`)
-      return Promise.reject(error)
-    },
+    throw error
   },
-})
+)
+
+request.interceptors.response.use(
+  (response: InterceptorsResponse) => {
+    const showMsg = response.config.showMsg ?? true
+
+    const res = response.data
+
+    if (res instanceof Blob) {
+      return response.data
+    }
+    else if (res.code === 200) {
+      return res.data
+    }
+    else {
+      // showMsg && alert(res.msg || '网络错误，请重试')
+
+      if (res.code === 401) {
+        // router.push('/login')
+        // return null
+      }
+      return null
+    }
+  },
+  (error) => {
+    console.error({ error })
+
+    // alert((`${error.message} 服务器错误，请重试`))
+
+    return null
+  },
+)

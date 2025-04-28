@@ -2,10 +2,14 @@
   "compilerOptions": {
     "target": "ESNext",
     "jsx": "preserve",
-    "lib": ["DOM", "ESNext"],
+    "lib": ["ESNext", "DOM"],
     "baseUrl": ".",
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "types": ["../../vite-env.d.ts"]
-  }
+    "paths": {
+      "~/*": ["src/*"]
+    },
+    "types": ["../../vite-env.d.ts", "@types/node"]
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "build.config.ts"]
 }

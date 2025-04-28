@@ -3,6 +3,7 @@ export interface DeptTreeSelect {
   label: string
   children: DeptTreeSelect[]
 }
+
 export interface LoginParams {
   username: string
   password: string
@@ -69,12 +70,6 @@ export interface RouterResultItem {
 }
 
 export type RouterResult = RouterResultItem[]
-
-export interface Result<T = any> {
-  code: number
-  msg: string
-  data: T
-}
 
 export const enum EnumBasicStatus {
   /** 正常 */

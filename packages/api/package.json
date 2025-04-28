@@ -1,15 +1,40 @@
 {
+  "//": "turbo 需要name设置完整包名",
   "name": "@repo/api",
+  "type": "module",
   "version": "1.0.0",
   "packageManager": "pnpm@10.8.1",
   "description": "",
   "author": "",
   "license": "ISC",
   "keywords": [],
-  "main": "index.js",
-  "scripts": {},
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.mjs"
+    },
+    "./request": {
+      "types": "./dist/request.d.ts",
+      "default": "./dist/request.mjs"
+    }
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "*.d.ts",
+    "dist"
+  ],
+  "scripts": {
+    "stub": "pnpm unbuild --stub",
+    "build": "pnpm unbuild"
+  },
   "dependencies": {
     "@repo/utils": "workspace:*",
     "axios": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "unbuild": "catalog:"
   }
 }

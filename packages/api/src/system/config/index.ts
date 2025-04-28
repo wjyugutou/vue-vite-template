@@ -1,47 +1,45 @@
 import type { Config } from './type'
-import request from '../../../request'
+import { del, get, post, put } from '~/request'
 
 export * from './type'
 
 // 查询参数列表
 export function listConfigApi(query: any) {
-  return request.Get<{
+  return get<{
     rows: Config[]
     total: number
   }>('/system/config/list', {
     params: query,
-    meta: {
-      original: true,
-    },
+    original: true,
   })
 }
 
 // 查询参数详细
 export function getConfigApi(configId: number) {
-  return request.Get<Config>(`/system/config/${configId}`)
+  return get<Config>(`/system/config/${configId}`)
 }
 
 // 根据参数键名查询参数值
 export function getConfigKeyApi(configKey: string) {
-  return request.Get<string>(`/system/config/configKey/${configKey}`)
+  return get<string>(`/system/config/configKey/${configKey}`)
 }
 
 // 新增参数配置
 export function addConfigApi(data) {
-  return request.Post('/system/config', data)
+  return post('/system/config', data)
 }
 
 // 修改参数配置
 export function updateConfigApi(data) {
-  return request.Put('/system/config', data)
+  return put('/system/config', data)
 }
 
 // 删除参数配置
 export function delConfigApi(configId) {
-  return request.Delete(`/system/config/${configId}`)
+  return del(`/system/config/${configId}`)
 }
 
 // 刷新参数缓存
 export function refreshCacheApi() {
-  return request.Delete('/system/config/refreshCache')
+  return del('/system/config/refreshCache')
 }

@@ -1,24 +1,22 @@
 import type { DeptTreeSelect, LoginParams, LoginResult, RouterResult, UserInfoResult } from './common.type'
-import request from '../request'
+import { del, get, post } from '~/request'
 
 export * from './common.type'
 
 /**
  * 获取部门树
- * @returns
+ * ~returns
  */
 export function deptTreeSelectApi() {
-  return request.Get<DeptTreeSelect[]>('/system/user/deptTree')
+  return get<DeptTreeSelect[]>('/system/user/deptTree')
 }
 
 /**
  * 登录
  */
 export function loginApi(data: LoginParams) {
-  return request.Post<LoginResult>('/auth/login', data, {
-    meta: {
-      token: false,
-    },
+  return post<LoginResult>('/auth/login', data, {
+    isToken: false,
   })
 }
 
@@ -26,17 +24,15 @@ export function loginApi(data: LoginParams) {
  * 退出登录
  */
 export function logoutApi() {
-  return request.Delete('/auth/logout')
+  return del('/auth/logout')
 }
 
 /**
  * 用户信息
  */
 export function userInfoApi() {
-  return request.Get<UserInfoResult>('/system/user/getInfo', {
-    meta: {
-      original: true,
-    },
+  return get<UserInfoResult>('/system/user/getInfo', {
+    original: true,
   })
 }
 
@@ -44,16 +40,14 @@ export function userInfoApi() {
  * 用户路由
  */
 export function userRouterApi() {
-  return request.Get<RouterResult>('/system/menu/getRouters')
+  return get<RouterResult>('/system/menu/getRouters')
 }
 
 /**
  * 通用下载
  */
 export function downloadApi(url: string, data?: Record<string, any>) {
-  return request.Post<Blob>(url, data, {
-    meta: {
-      blob: true,
-    },
+  return post<Blob>(url, data, {
+    blob: true,
   })
 }

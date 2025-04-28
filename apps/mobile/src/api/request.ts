@@ -1,49 +1,55 @@
-import { setInterceptor } from 'api'
+import type { InterceptorsConfig, InterceptorsResponse } from '@repo/api/request'
+import request from '@repo/api/request'
 
-setInterceptor({
-  beforeRequest: (config) => {
-    console.log('beforeRequest', config)
+request.interceptors.request.use(
+  (config: InterceptorsConfig) => {
+    // 是否需要设置 token
+    const isToken = config.isToken !== false
+
+    // if (isToken) {
+    //   const token = useToken().access_token
+
+    //   if (token) {
+    //     config.headers.Authorization = `Bearer ${token}` // 让每个请求携带自定义token 请根据实际情况自行修改
+    //   }
+    // }
+
+    return config
   },
-  responded: {
-    onSuccess: async (response, instance) => {
-      if (response.status === 200 && response.ok) {
-        const contentType = response.headers.get('content-type')
-        if (contentType?.includes('application/json')) {
-          const res = await response.json()
-          if (instance.meta?.original === true) {
-            return res
-          }
-          else {
-            if (res.code === 200) {
-              return res.data
-            }
-            else {
-              if (instance.meta?.hideAlert !== true) {
-                console.error(`${instance.url}: ${res.msg}`)
-                showFailToast(res.msg)
-              }
-              return Promise.reject(res.msg)
-            }
-          }
-        }
-        else {
-          return response
-        }
-      }
-      else {
-        if (instance.meta?.hideAlert !== true) {
-          console.error(`${instance.url}: ${response.statusText}`)
-          showFailToast(response.statusText)
-        }
-        return Promise.reject(response.statusText)
-      }
-    },
-    onError: (error, instance) => {
-      if (instance.meta?.hideAlert !== true) {
-        console.error(`${instance.url}: ${error.message}`)
-        showFailToast(error.message)
-      }
-      return Promise.reject(error)
-    },
+  (error) => {
+    console.error(error)
+
+    throw error
   },
-})
+)
+
+request.interceptors.response.use(
+  (response: InterceptorsResponse) => {
+    const showMsg = response.config.showMsg ?? true
+
+    const res = response.data
+
+    if (res instanceof Blob) {
+      return response.data
+    }
+    else if (res.code === 200) {
+      return res.data
+    }
+    else {
+      // showMsg && alert(res.msg || '网络错误，请重试')
+
+      if (res.code === 401) {
+        // router.push('/login')
+        // return null
+      }
+      return null
+    }
+  },
+  (error) => {
+    console.error({ error })
+
+    // alert((`${error.message} 服务器错误，请重试`))
+
+    return null
+  },
+)
