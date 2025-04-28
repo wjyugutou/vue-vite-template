@@ -10,6 +10,6 @@
   "scripts": {},
   "dependencies": {
     "@repo/utils": "workspace:*",
-    "alova": "catalog:"
+    "axios": "catalog:"
   }
 }

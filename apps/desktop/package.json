@@ -20,7 +20,7 @@
     "@repo/config": "workspace:*",
     "@repo/hooks": "workspace:*",
     "@repo/utils": "workspace:*",
-    "alova": "catalog:",
+    "@tanstack/vue-query": "catalog:",
     "element-plus": "catalog:",
     "nprogress": "catalog:",
     "pinia-plugin-persistedstate": "catalog:",

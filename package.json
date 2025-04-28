@@ -12,7 +12,6 @@
     "preinstall": "npx only-allow pnpm",
     "clean": "node ./scripts/clean.mjs",
     "update:deps": "npx taze -r -w major",
-
     "dev:desktop": "turbo run dev --filter=desktop",
     "dev:mobile": "turbo run dev --filter=mobile",
     "build:mobile": "turbo run build:mobile",

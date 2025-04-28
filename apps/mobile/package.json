@@ -18,10 +18,10 @@
     "@repo/api": "workspace:*",
     "@repo/config": "workspace:*",
     "@repo/utils": "workspace:*",
-    "alova": "catalog:",
+    "@tanstack/vue-query": "catalog:",
+    "lib-flexible": "catalog:",
     "pinia-plugin-persistedstate": "catalog:",
-    "vant": "catalog:",
-    "lib-flexible": "catalog:"
+    "vant": "catalog:"
   },
   "devDependencies": {
     "@vant/auto-import-resolver": "catalog:",
