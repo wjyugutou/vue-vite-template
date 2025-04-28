@@ -1,66 +1,108 @@
-import type { Method, RespondedHandlerRecord } from 'alova'
-import { handleParams } from '@repo/utils'
-import { createAlova } from 'alova'
-import adapterFetch from 'alova/fetch'
-import vueHook from 'alova/vue'
+import type { AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
+import router from '@/router'
+import axios from 'axios'
 
-declare module 'alova' {
-  export interface AlovaCustomTypes {
-    meta: CustomMeta
-  }
+type Result<T = any, B = object> = {
+  code: number
+  msg: string
+  data: T
+  [key: string]: any
+} & B
+
+interface CustomConfig {
+  /** 是否需要设置token */
+  isToken?: boolean
+  /** 是否需要显示错误提示 */
+  showMsg?: boolean
+  // loading?: boolean
+  // headers?: Record<string, any>
 }
 
-export interface CustomMeta {
-  /** 是否携带token */
-  token?: false
-  /** 是否过滤data */
-  original?: true
-  /** blob */
-  blob?: boolean
-  /** 是否隐藏错误提示 */
-  hideAlert?: true
+type RequestConfig = AxiosRequestConfig & CustomConfig
+
+type InterceptorsConfig = InternalAxiosRequestConfig & CustomConfig
+
+interface InterceptorsResponse extends AxiosResponse {
+  config: InterceptorsConfig
 }
 
-export interface Interceptor {
-  beforeRequest?: (config: Method) => void
-  responded?: RespondedHandlerRecord<any>
-}
+export const baseURL = import.meta.env.PUBLIC_BASE_API
 
-const codeMap: Record<string, string> = {
-  401: '请先登录',
-  403: '您没有权限访问',
-  404: '请求的资源不存在',
-  500: '服务器内部错误',
-}
-
-const alova = createAlova({
-  baseURL: import.meta.env.VITE_API_BASE_URL,
-  timeout: 10000,
-  statesHook: vueHook,
-  // 默认只缓存get请求 cacheFor
-  cacheFor: {
-    GET: 1000 * 60 * 1, // 1min
-  },
-  requestAdapter: adapterFetch(),
-  beforeRequest: (method) => {
-    // 请求需要携带cookie
-    // method.config.credentials = 'include'
-
-    if (method.config.params) {
-      method.config.params = handleParams(method.config.params)
-    }
-    method.config.headers.Authorization = `Bearer ${useToken()}`
-  },
-  responded: {
-    onSuccess: async (response, instance) => {
-    },
-    onError: (error, instance) => {
-      ElMessage.error(`${instance.url}: ${error.message}`)
-      return Promise.reject(error)
-    },
+const request = axios.create({
+  baseURL, // url = base url + request url
+  timeout: 15000, // request timeout
+  headers: {
+    'Content-Type': 'application/json',
   },
 })
 
-export type Instance = Method
+request.interceptors.request.use(
+  (config: InterceptorsConfig) => {
+    // 是否需要设置 token
+    const isToken = config.isToken !== false
 
-export default alova
+    if (isToken) {
+      const token = useToken().access_token
+
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}` // 让每个请求携带自定义token 请根据实际情况自行修改
+      }
+    }
+
+    return config
+  },
+  (error) => {
+    console.error(error)
+
+    throw error
+  },
+)
+
+request.interceptors.response.use(
+  (response: InterceptorsResponse) => {
+    const showMsg = response.config.showMsg === undefined ? true : response.config.showMsg
+
+    const res = response.data
+
+    if (res instanceof Blob) {
+      return response.data
+    }
+    else if (res.code === 200) {
+      return res.data
+    }
+    else {
+      showMsg && alert(res.msg || '网络错误，请重试')
+
+      if (res.code === 401) {
+        router.push('/login')
+        return null
+      }
+      return null
+    }
+  },
+  (error) => {
+    console.error({ error })
+
+    alert((`${error.message} 服务器错误，请重试`))
+
+    return null
+  },
+)
+
+export function get<T = unknown, B = object>(url: string, config?: RequestConfig): Promise<Result<T, B>> {
+  return request.get(url, config)
+}
+
+export function post<T = unknown, B = object>(url: string, data?: any, config?: RequestConfig): Promise<Result<T, B>> {
+  return request.post(url, data, config)
+}
+
+export function put<T = unknown, B = object>(url: string, data?: any, config?: RequestConfig): Promise<Result<T, B>> {
+  return request.put(url, data, config)
+}
+
+export function del<T = unknown, B = object>(url: string, config?: RequestConfig): Promise<Result<T, B>> {
+  return request.delete(url, config)
+}
+
+export default request

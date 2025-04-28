@@ -1,8 +1,8 @@
 {
   "name": "my-vue-app",
-  "private": true,
-  "version": "0.0.0",
   "type": "module",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
     "dev": "vite --port 3333",
     "build:tsc": "vue-tsc -b && vite build",
@@ -11,8 +11,9 @@
     "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
+    "@tanstack/vue-query": "^5.74.7",
     "@vueuse/core": "^12.7.0",
-    "alova": "^3.2.8",
+    "axios": "^1.9.0",
     "element-plus": "^2.9.5",
     "pinia": "^3.0.1",
     "universal-cookie": "^8.0.1",

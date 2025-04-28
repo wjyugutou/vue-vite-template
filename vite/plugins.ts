@@ -21,6 +21,11 @@ export function generatePlugins(mode: 'development' | 'production' | string, env
         'pinia',
         'vue-router',
         '@vueuse/core',
+        {
+          from: '@tanstack/vue-query',
+          imports: ['useQuery'],
+          type: true,
+        },
       ],
       resolvers: [ElementPlusResolver()],
       dts: './types/auto-imports.d.ts',
