@@ -2,7 +2,6 @@
 import type { FormItem } from '@/components/SimpleForm/type'
 import type { Column } from '@/components/SimpleTable/type'
 import { listConfigApi } from '@repo/api'
-import { usePagination } from 'alova/client'
 
 defineOptions({ name: 'SystemConfig' })
 

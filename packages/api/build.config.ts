@@ -4,7 +4,6 @@ import { defineBuildConfig } from 'unbuild'
 export default defineBuildConfig({
   entries: [
     './src/index.ts', // 主入口
-    './src/request.ts', // 单独导出的模块
   ],
   alias: {
     '~': fileURLToPath(new URL('src', import.meta.url)), // 将 ~ 映射到 src 目录

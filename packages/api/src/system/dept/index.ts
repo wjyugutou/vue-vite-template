@@ -1,4 +1,4 @@
-import { del, get, post, put } from '~/request'
+import { del, get, post, put } from '../../request'
 
 // 查询部门列表
 export function getListDeptApi(query: any) {

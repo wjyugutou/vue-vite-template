@@ -1,19 +1,21 @@
+import { vueQuerySettings } from '@/api/settings'
+import { VueQueryPlugin } from '@tanstack/vue-query'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
-import { createApp } from 'vue'
-import App from './App.vue'
 
+import { createApp } from 'vue'
+
+import App from './App.vue'
 import directivePlugins from './directives'
+
 import router from './router'
 
 import '@unocss/reset/tailwind-compat.css'
-
 import 'virtual:uno.css'
+
 import 'element-plus/theme-chalk/dark/css-vars.css'
-
 import '@/styles/index.css'
-import '@/router/permission'
 
-import '@/api/settings'
+import '@/router/permission'
 
 const pinia = createPinia()
 
@@ -24,6 +26,7 @@ const app = createApp(App)
 app.use(pinia)
 app.use(router)
 app.use(directivePlugins)
+app.use(VueQueryPlugin, vueQuerySettings)
 app.mount('#app')
 
 // 全局错误处理

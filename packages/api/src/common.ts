@@ -1,5 +1,5 @@
 import type { DeptTreeSelect, LoginParams, LoginResult, RouterResult, UserInfoResult } from './common.type'
-import { del, get, post } from '~/request'
+import { del, get, post } from './request'
 
 export * from './common.type'
 
@@ -15,6 +15,8 @@ export function deptTreeSelectApi() {
  * 登录
  */
 export function loginApi(data: LoginParams) {
+  console.log('loginApi', data)
+
   return post<LoginResult>('/auth/login', data, {
     isToken: false,
   })

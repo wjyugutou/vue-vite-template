@@ -3,7 +3,6 @@ import type { FormItem } from '@/components/SimpleForm/type'
 import type { FormInstance } from 'element-plus'
 import { useForm } from '@/components/SimpleForm/useForm'
 import { loginApi } from '@repo/api'
-import { useRequest } from 'alova/client'
 
 const router = useRouter()
 const route = useRoute()
@@ -22,16 +21,23 @@ const formItems = ref<FormItem[]>([
 
 const userStore = useUserStore()
 
-const { loading, send } = useRequest(loginApi, { immediate: false })
+const { isLoading, error, data, refetch } = useQuery({
+  queryFn: () => loginApi(form.value),
+  queryKey: ['login'],
+})
 
 const formIns = useForm()
 function handleLogin() {
   formIns.value?.validate(async (valid) => {
     if (valid) {
       try {
-        const res = await send(form.value)
+        await refetch()
 
-        userStore.login(res)
+        console.error(error.value)
+
+        console.log(data.value)
+        return
+        userStore.login(data.value!)
 
         // await userStore.getUserInfo()
 
@@ -53,7 +59,7 @@ function handleLogin() {
       <SimpleForm v-model="form" :form-items="formItems" label-width="60px">
         <template #footer>
           <div class="text-center">
-            <ElButton type="primary" :loading="loading" @click="handleLogin">登录</ElButton>
+            <ElButton type="primary" :loading="isLoading" @click="handleLogin">登录</ElButton>
           </div>
         </template>
       </SimpleForm>

@@ -1,12 +1,12 @@
 import type { AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 import axios from 'axios'
 
-export type Result<T = any, B = object> = {
+export type Result<T = any, B = object> = Promise<{
   code: number
   msg: string
   data: T
   [key: string]: any
-} & B
+} & B>
 
 export interface CustomConfig {
   /** 是否需要设置token */
@@ -31,7 +31,7 @@ export interface InterceptorsResponse extends AxiosResponse {
 
 export const baseURL = import.meta.env.VITE_API_BASE_URL
 
-const request = axios.create({
+export const request = axios.create({
   baseURL, // url = base url + request url
   timeout: 15000, // request timeout
   headers: {
@@ -41,29 +41,20 @@ const request = axios.create({
 
 request.interceptors.request.use(
   (config: InterceptorsConfig) => {
-    // 是否需要设置 token
-    const isToken = config.isToken !== false
-
-    // if (isToken) {
-    //   const token = useToken().access_token
-
-    //   if (token) {
-    //     config.headers.Authorization = `Bearer ${token}` // 让每个请求携带自定义token 请根据实际情况自行修改
-    //   }
-    // }
+    console.log('请求拦截器1111 config', config)
 
     return config
   },
   (error) => {
-    console.error(error)
+    console.error('请求拦截器 error', error)
 
-    throw error
+    return Promise.reject(error)
   },
 )
 
 request.interceptors.response.use(
   (response: InterceptorsResponse) => {
-    const showMsg = response.config.showMsg ?? true
+    console.log('响应拦截器 111')
 
     const res = response.data
 
@@ -80,7 +71,7 @@ request.interceptors.response.use(
         // router.push('/login')
         // return null
       }
-      return null
+      return Promise.reject(res)
     }
   },
   (error) => {
@@ -88,24 +79,22 @@ request.interceptors.response.use(
 
     // alert((`${error.message} 服务器错误，请重试`))
 
-    return null
+    return Promise.reject(error)
   },
 )
 
-export function get<T = unknown, B = object>(url: string, config?: RequestConfig): Promise<Result<T, B>> {
+export function get<T = unknown, B = object>(url: string, config?: RequestConfig): Result<T, B> {
   return request.get(url, config)
 }
 
-export function post<T = unknown, B = object>(url: string, data?: any, config?: RequestConfig): Promise<Result<T, B>> {
+export function post<T = unknown, B = object>(url: string, data?: any, config?: RequestConfig): Result<T, B> {
   return request.post(url, data, config)
 }
 
-export function put<T = unknown, B = object>(url: string, data?: any, config?: RequestConfig): Promise<Result<T, B>> {
+export function put<T = unknown, B = object>(url: string, data?: any, config?: RequestConfig): Result<T, B> {
   return request.put(url, data, config)
 }
 
-export function del<T = unknown, B = object>(url: string, config?: RequestConfig): Promise<Result<T, B>> {
+export function del<T = unknown, B = object>(url: string, config?: RequestConfig): Result<T, B> {
   return request.delete(url, config)
 }
-
-export default request

@@ -1,5 +1,5 @@
 import type { Plugin } from 'vite'
-import path from 'node:path'
+// import path from 'node:path'
 import Vue from '@vitejs/plugin-vue'
 import { codeInspectorPlugin } from 'code-inspector-plugin'
 import UnoCSS from 'unocss/vite'
@@ -9,7 +9,7 @@ import Components from 'unplugin-vue-components/vite'
 import Compression from 'vite-plugin-compression'
 
 export function generatePlugins(mode: 'development' | 'production' | string, env: ImportMetaEnv): Plugin[] {
-  const root = path.resolve(import.meta.dirname, '../../../')
+  // const root = path.resolve(import.meta.dirname, '../../../')
 
   return [
     // ⚠️ Vue must be placed after VueRouter()
@@ -26,6 +26,10 @@ export function generatePlugins(mode: 'development' | 'production' | string, env
         'pinia',
         'vue-router',
         '@vueuse/core',
+        {
+          from: '@tanstack/vue-query',
+          imports: ['useQuery'],
+        },
       ],
       resolvers: [ElementPlusResolver()],
       dts: './types/auto-imports.d.ts',

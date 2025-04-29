@@ -28,7 +28,7 @@
       "cache": false
     },
     "dev": {
-      "dependsOn": ["@repo/config#stub", "@repo/api#stub"],
+      "dependsOn": ["@repo/config#stub"],
       "outputs": [],
       "outputLogs": "full",
       "cache": false,

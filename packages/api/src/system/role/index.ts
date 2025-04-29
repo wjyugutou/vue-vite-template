@@ -1,4 +1,4 @@
-import { del, get, post, put } from '~/request'
+import { del, get, post, put } from '../../request'
 
 // 查询角色列表
 export function listRoleApi(query: any) {

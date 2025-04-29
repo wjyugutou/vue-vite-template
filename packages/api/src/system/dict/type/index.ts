@@ -1,4 +1,4 @@
-import { del, get, post, put } from '~/request'
+import { del, get, post, put } from '../../../request'
 
 // 查询字典类型列表
 export function dictListTypeApi(query: any) {

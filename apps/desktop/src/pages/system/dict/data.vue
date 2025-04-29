@@ -4,7 +4,6 @@ import type { Column } from '@/components/SimpleTable/type'
 import type { DictData } from '@repo/api'
 import { dictListDataApi } from '@repo/api'
 import { useDict } from '@repo/hooks'
-import { usePagination } from 'alova/client'
 
 defineOptions({ name: 'SystemDictData' })
 
@@ -33,18 +32,7 @@ const formModel = ref({
   dateRange: undefined,
 })
 
-const { data: tableData, loading, page, pageSize, total, refresh, reload } = usePagination((pageNum, pageSize) => dictListDataApi({
-  pageNum, pageSize,
-  ...formModel.value,
-  params: {
-    startDate: formModel.value.dateRange?.[0],
-    endDate: formModel.value.dateRange?.[1],
-  },
-}), {
-  initialData: { total: 0, rows: [] },
-  total: res => res.total,
-  data: res => res.rows,
-})
+const { data: tableData, loading, page, pageSize, total, refresh, reload } = usePagination(dictListDataApi, formModel.value)
 
 function handleAdd() {
   console.log('handleAdd')

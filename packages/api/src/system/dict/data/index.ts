@@ -1,5 +1,5 @@
 import type { DictData, DictItem } from './type'
-import { del, get, post, put } from '~/request'
+import { del, get, post, put } from '../../../request'
 
 export * from './type'
 

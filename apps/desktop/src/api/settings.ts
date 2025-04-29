@@ -1,5 +1,8 @@
-import type { InterceptorsConfig, InterceptorsResponse } from '@repo/api/request'
-import request from '@repo/api/request'
+import type { InterceptorsConfig, InterceptorsResponse } from '@repo/api'
+import type { VueQueryPluginOptions } from '@tanstack/vue-query'
+import { request } from '@repo/api'
+
+console.log(request)
 
 request.interceptors.request.use(
   (config: InterceptorsConfig) => {
@@ -14,18 +17,21 @@ request.interceptors.request.use(
     //   }
     // }
 
+    console.log('请求拦截器2222 config', config)
+
     return config
   },
   (error) => {
     console.error(error)
 
-    throw error
+    return Promise.reject(error)
   },
 )
 
 request.interceptors.response.use(
   (response: InterceptorsResponse) => {
     const showMsg = response.config.showMsg ?? true
+    console.log('响应拦截器 222')
 
     const res = response.data
 
@@ -53,3 +59,19 @@ request.interceptors.response.use(
     return null
   },
 )
+
+export const vueQuerySettings: VueQueryPluginOptions = {
+  queryClientConfig: {
+    defaultOptions: {
+      queries: {
+        enabled: false,
+        refetchOnWindowFocus: false,
+        refetchOnMount: false,
+        retry: false,
+      },
+      mutations: {
+        retry: false,
+      },
+    },
+  },
+}
