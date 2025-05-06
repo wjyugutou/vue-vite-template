@@ -57,6 +57,7 @@ catalog:
   vant: ^4.9.19
   vite: ^6.3.2
   vite-plugin-compression: ^0.5.1
+  vite-plugin-vue-devtools: ^7.7.6
   vite-plugin-zip-pack: ^1.2.4
   vue: ^3.5.13
   vue-router: ^4.5.0

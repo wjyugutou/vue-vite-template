@@ -26,6 +26,7 @@
   "devDependencies": {
     "@vant/auto-import-resolver": "catalog:",
     "postcss-pxtorem": "catalog:",
-    "unplugin-vue-router": "catalog:"
+    "unplugin-vue-router": "catalog:",
+    "vite-plugin-vue-devtools": "catalog:"
   }
 }

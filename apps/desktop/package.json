@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "@types/nprogress": "catalog:",
-    "@types/splitpanes": "catalog:"
+    "@types/splitpanes": "catalog:",
+    "vite-plugin-vue-devtools": "catalog:"
   }
 }
