@@ -28,7 +28,7 @@ export function usePagination<T extends (pageNum: number, pageSize: number) => P
     data,
     isLoading,
     ...toRefs(pagination),
-    refetch,
+    search: refetch,
     reload,
   }
 }

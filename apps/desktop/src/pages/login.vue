@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import type { FormItem } from '@/components/SimpleForm/type'
-import type { FormInstance } from 'element-plus'
-import { useForm } from '@/components/SimpleForm/useForm'
 import { loginApi } from '@repo/api'
+import { useForm } from '@/components/SimpleForm/useForm'
 
 const router = useRouter()
 const route = useRoute()
@@ -33,13 +32,7 @@ function handleLogin() {
       try {
         await refetch()
 
-        console.error(error.value)
-
-        console.log(data.value)
-        return
         userStore.login(data.value!)
-
-        // await userStore.getUserInfo()
 
         const path = (redirect as string) || '/'
         router.push(path)

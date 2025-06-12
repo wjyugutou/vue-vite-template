@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import type { FormItem } from '@/components/SimpleForm/type'
 import type { DeptTreeSelect, UserParams } from '@repo/api'
-import { useForm } from '@/components/SimpleForm/useForm'
+import type { FormItem } from '@/components/SimpleForm/type'
 import { addUserApi, deptTreeSelectApi, getPostsRolesApi, getUserInfoApi, updateUserApi } from '@repo/api'
-import { useRequest } from 'alova/client'
+import { useForm } from '@/components/SimpleForm/useForm'
 
 const props = defineProps<{
   userId?: string | number
@@ -40,8 +39,9 @@ const rules = shallowRef({
   roleIds: [{ required: true, message: '请选择角色' }],
 })
 
-const { data: userData, send: getPostsRoles } = useRequest(getPostsRolesApi, {
-  immediate: false,
+const { data: userData, refetch: getPostsRoles } = useQuery({
+  queryFn: getPostsRolesApi,
+  queryKey: ['getPostsRoles'],
 })
 
 const posts = computed<Option[]>(() => userData.value?.posts.map(post => ({ label: post.postName, value: post.postId })) || [])
@@ -61,9 +61,7 @@ const formItems = computed<FormItem[]>(() => [
   { label: '备注', prop: 'remark', type: 'input', placeholder: '请输入备注', span: 24, other: { rows: 2, type: 'textarea' } },
 ])
 
-const { data: deptOptions } = useRequest(deptTreeSelectApi, {
-  initialData: [],
-})
+const { data: deptOptions } = useQuery({ queryFn: deptTreeSelectApi, queryKey: ['deptTreeSelect'], initialData: [] })
 const treeData = ref<DeptTreeSelect[]>([])
 const flatTreeData = computed(() => {
   function flat(data: DeptTreeSelect[]): DeptTreeSelect[] {

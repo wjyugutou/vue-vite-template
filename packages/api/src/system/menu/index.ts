@@ -4,7 +4,7 @@ import { del, get, post, put } from '../../request'
 export * from './type'
 
 // 查询菜单列表
-export function getListMenuApi(query: any) {
+export function getListMenuApi(query?: any) {
   return get<Menu[]>('/system/menu/list', {
     params: query,
   })

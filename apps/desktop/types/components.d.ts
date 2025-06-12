@@ -58,4 +58,7 @@ declare module 'vue' {
     SimpleForm: typeof import('./../src/components/SimpleForm/index.vue')['default']
     SimpleTable: typeof import('./../src/components/SimpleTable/index.vue')['default']
   }
+  export interface GlobalDirectives {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
+  }
 }

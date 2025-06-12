@@ -1,12 +1,7 @@
 import type { AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 import axios from 'axios'
 
-export type Result<T = any, B = object> = Promise<{
-  code: number
-  msg: string
-  data: T
-  [key: string]: any
-} & B>
+export type Result<T = any, B = object> = Promise<T & B>
 
 export interface CustomConfig {
   /** 是否需要设置token */

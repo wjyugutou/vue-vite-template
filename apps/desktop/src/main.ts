@@ -1,8 +1,8 @@
-import { vueQuerySettings } from '@/api/settings'
 import { VueQueryPlugin } from '@tanstack/vue-query'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
-
 import { createApp } from 'vue'
+
+import { vueQuerySettings } from '@/api/settings'
 
 import App from './App.vue'
 import directivePlugins from './directives'

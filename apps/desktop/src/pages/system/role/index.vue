@@ -1,9 +1,8 @@
 <script setup lang="ts">
+import type { User } from '@repo/api'
 import type { FormItem } from '@/components/SimpleForm/type'
 import type { Column } from '@/components/SimpleTable/type'
-import type { User } from '@repo/api'
 import { changeRoleStatusApi, delRoleApi, listRoleApi } from '@repo/api'
-
 
 defineOptions({ name: 'SystemRole' })
 
@@ -31,12 +30,12 @@ const formModel = ref({
 })
 
 const {
-  loading,
+  isLoading: loading,
   data,
-  page,
+  pageNum,
   pageSize,
   total,
-  refresh,
+  search,
   reload,
 } = usePagination((pageNum, pageSize) => listRoleApi({
   ...formModel.value, pageNum, pageSize,
@@ -44,11 +43,7 @@ const {
     beginTime: formModel.value.daterange?.[0],
     endTime: formModel.value.daterange?.[1],
   },
-}), {
-  initialData: { total: 0, rows: [] },
-  total: response => response.total,
-  data: response => response.rows,
-})
+}))
 
 const editModalData = ref({
   visible: false,
@@ -84,7 +79,7 @@ function handleImport() {
 }
 
 // 导出
-const { download, loading: exportLoading } = useDownload('/system/role/export', '用户导出.xlsx')
+const { download, isLoading: exportLoading } = useDownload({ url: '/system/role/export', fileName: '用户导出.xlsx' })
 function handleExport() {
   download(formModel.value)
 }
@@ -124,12 +119,12 @@ function handleAssignUser(id: string) {
 <template>
   <ListPage
     v-model:form-model="formModel"
-    v-model:page-num="page" v-model:page-size="pageSize"
+    v-model:page-num="pageNum" v-model:page-size="pageSize"
     v-model:checked-keys="checkedKeys"
     :total="total"
     :form-items="formItems" :loading="loading"
     :columns="columns" row-key="roleId" selection index :table-data="data"
-    :handle-search="refresh" :handle-reset="reload"
+    :handle-search="search" :handle-reset="reload"
   >
     <template #table-header>
       <div class="mb-2 flex items-center gap-2">

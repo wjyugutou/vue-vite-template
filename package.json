@@ -51,6 +51,9 @@
     "vue-tsc": "catalog:"
   },
   "pnpm": {
+    "overrides": {
+      "vite": "npm:rolldown-vite@latest"
+    },
     "onlyBuiltDependencies": [
       "esbuild",
       "unrs-resolver",

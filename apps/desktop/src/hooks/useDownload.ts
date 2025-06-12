@@ -1,42 +1,63 @@
 import { downloadApi } from '@repo/api'
 import { download } from '@repo/utils'
-import { useRequest } from 'alova/client'
+import { useQuery, useQueryClient } from '@tanstack/vue-query'
 
-export function useDownload(url: string, fileName: string) {
+export interface DownloadOptions {
+  url: string
+  fileName: string
+  downloadFn?: (url: string, data?: Record<string, any>) => Promise<Blob | string>
+  data?: Record<string, any>
+}
+
+export function useDownload(options: DownloadOptions) {
+  const queryKey = ['download', options.url, JSON.stringify(options.data || {})]
+
   const {
-    loading,
-    send,
-    abort,
-  } = useRequest((data?: Record<string, any>) => downloadApi(url, data), {
-    immediate: false,
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey,
+    queryFn: ({ signal }) => (options.downloadFn || downloadApi)(options.url, {
+      ...options.data,
+      signal,
+    }),
   })
+
+  const queryClient = useQueryClient()
 
   async function handleDownload(data?: Record<string, any>) {
     try {
       ElNotification({
         title: '下载任务',
         message: () => h('div', [
-          loading.value ? `${fileName} 下载中...` : '下载成功!',
+          isLoading.value ? `${options.fileName} 下载中...` : '下载成功!',
         ]),
         onClose: () => {
-          if (loading.value) {
-            abort()
+          if (isLoading.value) {
+            queryClient.cancelQueries({ queryKey })
             ElMessage.warning('下载任务已取消')
           }
         },
       })
 
-      const res = await send(data)
+      const { data: response } = await refetch(data)
 
-      download(res, fileName)
+      if (response) {
+        download(response, options.fileName)
+      }
+      else {
+        ElMessage.error('下载失败')
+        console.error('下载失败:', response)
+      }
     }
-    catch (error) {
+    catch (error: any) {
+      ElMessage.error('下载失败:', error.message)
       console.error(error)
     }
   }
 
   return {
-    loading,
+    isLoading,
     download: handleDownload,
   }
 }
