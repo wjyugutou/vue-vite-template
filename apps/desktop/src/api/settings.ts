@@ -2,8 +2,6 @@ import type { InterceptorsConfig, InterceptorsResponse } from '@repo/api'
 import type { VueQueryPluginOptions } from '@tanstack/vue-query'
 import { request } from '@repo/api'
 
-console.log(request)
-
 request.interceptors.request.use(
   (config: InterceptorsConfig) => {
     // 是否需要设置 token
