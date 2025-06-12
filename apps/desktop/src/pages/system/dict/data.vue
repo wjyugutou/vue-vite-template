@@ -32,7 +32,7 @@ const formModel = ref({
   dateRange: undefined,
 })
 
-const { data: tableData, loading, page, pageSize, total, refresh, reload } = usePagination(dictListDataApi, formModel.value)
+const { data: tableData, isLoading, pageNum, pageSize, total, search, reload } = usePagination(dictListDataApi, formModel.value)
 
 function handleAdd() {
   console.log('handleAdd')
@@ -55,11 +55,11 @@ function handleExport() {
 <template>
   <ListPage
     v-model:form-model="formModel"
-    v-model:page-num="page" v-model:page-size="pageSize" v-model:checked-keys="checkedKeys"
+    v-model:page-num="pageNum" v-model:page-size="pageSize" v-model:checked-keys="checkedKeys"
     :total="total"
-    :form-items="formItems" :loading="loading"
+    :form-items="formItems" :loading="isLoading"
     :columns="columns" :table-data="tableData" row-key="dictId" index selection
-    :handle-search="refresh" :handle-reset="reload"
+    :handle-search="search" :handle-reset="reload"
   >
     <template #table-header>
       <div class="flex items-center gap-2">
