@@ -3,9 +3,8 @@
 import {
   defineConfig,
   presetIcons,
-  presetWind3,
-  // preset-wind4, // 新版 与transformerDirectives存在兼容问题
-  transformerDirectives, // --at-apply: 代替@apply
+  presetWind4,
+  transformerDirectives, // --at-apply: 代替@apply 避免警告信息
   transformerVariantGroup,
 } from 'unocss'
 
@@ -25,11 +24,11 @@ export default defineConfig({
     ['btn', 'px-4 py-1 rounded inline-block bg-teal-600 text-white cursor-pointer hover:bg-teal-700 disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50'],
   ],
   presets: [
-    presetWind3(),
-    // presetWind4({
-    //   reset: true,
-    //   utilityResolver: createRemToPxResolver()
-    // }),
+    presetWind4({
+      preflights: {
+        reset: true,
+      },
+    }),
     presetIcons({
       scale: 1.2,
       warn: true,
