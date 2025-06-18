@@ -14,6 +14,11 @@ export interface CustomConfig {
   original?: boolean
   /** blob */
   blob?: boolean
+  // 提示函数 desktop,mobile 内部实现
+  alertFn?: (type: 'warning' | 'error', msg: string) => void
+  // 未登录
+  unLoginFn?: () => void
+  [key: string]: any
 }
 
 export type RequestConfig = AxiosRequestConfig & CustomConfig
@@ -23,6 +28,8 @@ export type InterceptorsConfig = InternalAxiosRequestConfig & CustomConfig
 export interface InterceptorsResponse extends AxiosResponse {
   config: InterceptorsConfig
 }
+
+// export
 
 export const baseURL = import.meta.env.VITE_API_BASE_URL
 
@@ -36,22 +43,24 @@ export const request = axios.create({
 
 request.interceptors.request.use(
   (config: InterceptorsConfig) => {
-    console.log('请求拦截器1111 config', config)
-
+    console.log('请求拦截器@repo/api', config)
+    config.headers.set('dddddd', 'aaaaaa')
     return config
   },
   (error) => {
-    console.error('请求拦截器 error', error)
-
     return Promise.reject(error)
   },
 )
 
 request.interceptors.response.use(
   (response: InterceptorsResponse) => {
-    console.log('响应拦截器 111')
+    const config = response.config
 
     const res = response.data
+
+    if (config.original) {
+      return res
+    }
 
     if (res instanceof Blob) {
       return response.data
@@ -60,10 +69,12 @@ request.interceptors.response.use(
       return res.data
     }
     else {
-      // showMsg && alert(res.msg || '网络错误，请重试')
+      if (config.showMsg) {
+        config.alertFn?.('error', res.msg || '网络错误，请重试')
+      }
 
       if (res.code === 401) {
-        // router.push('/login')
+        config.unLoginFn?.()
         // return null
       }
       return Promise.reject(res)

@@ -23,23 +23,22 @@ const userStore = useUserStore()
 const { isLoading, error, data, refetch } = useQuery({
   queryFn: () => loginApi(form.value),
   queryKey: ['login'],
+  enabled: false,
 })
 
 const formIns = useForm()
 function handleLogin() {
   formIns.value?.validate(async (valid) => {
     if (valid) {
-      try {
-        await refetch()
+      await refetch()
 
-        userStore.login(data.value!)
+      if (error.value)
+        return console.error('loginApi:', error.value)
 
-        const path = (redirect as string) || '/'
-        router.push(path)
-      }
-      catch (error) {
+      userStore.login(data.value!)
 
-      }
+      const path = (redirect as string) || '/'
+      router.push(path)
     }
   })
 }
@@ -47,7 +46,7 @@ function handleLogin() {
 
 <template>
   <div class="m-auto h-full w-30% content-center">
-    <h1 class="mb-10 text-center text-2xl font-bold">登录</h1>
+    <h1 class="text-2xl font-bold mb-10 text-center">登录</h1>
     <div class="">
       <SimpleForm v-model="form" :form-items="formItems" label-width="60px">
         <template #footer>

@@ -1,21 +1,41 @@
 import type { InterceptorsConfig, InterceptorsResponse } from '@repo/api'
 import type { VueQueryPluginOptions } from '@tanstack/vue-query'
 import { request } from '@repo/api'
+import { ElMessage } from 'element-plus'
+import router from '@/router'
 
 request.interceptors.request.use(
   (config: InterceptorsConfig) => {
+    console.log('请求拦截器desktop', config)
+
     // 是否需要设置 token
     const isToken = config.isToken !== false
 
-    // if (isToken) {
-    //   const token = useToken().access_token
+    console.log('isToken', isToken)
 
-    //   if (token) {
-    //     config.headers.Authorization = `Bearer ${token}` // 让每个请求携带自定义token 请根据实际情况自行修改
-    //   }
-    // }
+    if (isToken) {
+      const token = useToken()
 
-    console.log('请求拦截器2222 config', config)
+      console.log('token', token)
+
+      if (token) {
+        config.headers.set('Authorization', `Bearer ${token}`)
+        // .Authorization = `Bearer ${token}` // 让每个请求携带自定义token 请根据实际情况自行修改
+      }
+    }
+
+    config.alertFn = (type, message) => {
+      ElMessage({
+        type,
+        message,
+      })
+    }
+    config.unLoginFn = () => {
+      console.log('未登录', window.location.href)
+
+      router.push('/login')
+    }
+    console.log('请求拦截器desktop----end', config)
 
     return config
   },
@@ -26,37 +46,22 @@ request.interceptors.request.use(
   },
 )
 
-request.interceptors.response.use(
-  (response: InterceptorsResponse) => {
-    const showMsg = response.config.showMsg ?? true
-    console.log('响应拦截器 222')
+// request.interceptors.response.use(
+//   (response: InterceptorsResponse) => {
+//     console.log('响应拦截器desktop', response)
 
-    const res = response.data
+//     if (response.config) {
+//     }
 
-    if (res instanceof Blob) {
-      return response.data
-    }
-    else if (res.code === 200) {
-      return res.data
-    }
-    else {
-      // showMsg && alert(res.msg || '网络错误，请重试')
+//   },
+//   (error) => {
+//     console.error({ error })
 
-      if (res.code === 401) {
-        // router.push('/login')
-        // return null
-      }
-      return null
-    }
-  },
-  (error) => {
-    console.error({ error })
+//     // alert((`${error.message} 服务器错误，请重试`))
 
-    // alert((`${error.message} 服务器错误，请重试`))
-
-    return null
-  },
-)
+//     return null
+//   },
+// )
 
 export const vueQuerySettings: VueQueryPluginOptions = {
   queryClientConfig: {
