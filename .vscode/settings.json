@@ -3,11 +3,14 @@
   "prettier.enable": false,
   "editor.codeActionsOnSave": {
     "source.fixAll": "never",
-    "source.fixAll.eslint": "explicit",
+    "source.fixAll.oxc": "explicit",
     "source.organizeImports": "never"
   },
   "[json]": {
-   "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+   "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
   },
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true

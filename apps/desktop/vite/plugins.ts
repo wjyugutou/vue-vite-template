@@ -7,7 +7,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import Compression from 'vite-plugin-compression'
-
+ 
 export function generatePlugins(mode: 'development' | 'production' | string, env: ImportMetaEnv): Plugin[] {
   // const root = path.resolve(import.meta.dirname, '../../../')
 

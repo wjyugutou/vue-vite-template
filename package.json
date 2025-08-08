@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@vueuse/core": "catalog:",
+    "oxlint": "^1.11.0",
     "pinia": "catalog:",
     "postcss-preset-env": "catalog:",
     "vue": "catalog:",

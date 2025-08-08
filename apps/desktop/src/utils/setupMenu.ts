@@ -19,7 +19,7 @@ function getMenu(routes: RouterResult, parent?: RouterResultItem): RouteRecordRa
       return null
     }
 
-    const child = hasOneShowingChild(item.children, item)
+    const child = hasOneShowingChild(item.children)
 
     if (child) {
       return child
@@ -48,10 +48,9 @@ function getMenu(routes: RouterResult, parent?: RouterResultItem): RouteRecordRa
 /**
  * 判断是否只有一个显示的子路由
  * @param children
- * @param parent
- * @returns
+ * @returns 
  */
-function hasOneShowingChild(children: RouterResultItem[] = [], parent: RouterResultItem) {
+function hasOneShowingChild(children: RouterResultItem[] = []) {
   if (!children) {
     children = []
   }

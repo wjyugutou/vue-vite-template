@@ -12,7 +12,7 @@ export function usePagination<T extends (pageNum: number, pageSize: number) => P
   const { data, isLoading, refetch } = useQuery({
     queryFn: () => queryFn(pagination.pageNum, pagination.pageSize),
     queryKey: ['usePagination', pagination],
-    ...(options ?? {}),
+    ...options,
   })
 
   watch(pagination, () => {

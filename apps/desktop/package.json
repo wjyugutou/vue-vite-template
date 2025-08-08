@@ -6,7 +6,7 @@
     "build:tsc": "tsc -b && set APP_TYPE=desktop && vite build",
     "build": "set APP_TYPE=desktop && vite build ",
     "dev": "set APP_TYPE=desktop && vite  --port 3333 --host",
-    "fix": "eslint --fix .",
+    "fix": "oxlint --fix .",
     "lint": "eslint .",
     "typecheck": "vue-tsc --noEmit",
     "preview": "vite preview",
