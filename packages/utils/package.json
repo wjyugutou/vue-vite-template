@@ -3,7 +3,7 @@
   "name": "@repo/utils",
   "type": "module",
   "version": "1.0.0",
-  "packageManager": "pnpm@10.12.1",
+  "packageManager": "pnpm@10.14.0",
   "description": "",
   "author": "",
   "license": "ISC",
