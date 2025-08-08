@@ -13,8 +13,6 @@ dist-zip
 .temp
 
 # Editor
-.vscode/*
-!.vscode/extensions.json
 .idea
 
 # Logs
