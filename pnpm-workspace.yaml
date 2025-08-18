@@ -18,44 +18,44 @@ exclude:
   - "**/coverage"
   - "**/.env.*"
 catalog:
-  "@antfu/eslint-config": ^5.2.0
-  "@iconify-json/carbon": ^1.2.11
+  "@antfu/eslint-config": ^5.2.1
+  "@iconify-json/carbon": ^1.2.13
   "@iconify-json/ep": ^1.2.3
   "@iconify-json/mdi": ^1.2.3
-  "@tanstack/vue-query": ^5.83.1
+  "@tanstack/vue-query": ^5.85.3
   "@types/archiver": ^6.0.3
-  "@types/node": ^24.2.0
+  "@types/node": ^24.3.0
   "@types/nprogress": ^0.2.3
   "@types/splitpanes": ^2.2.6
-  "@unocss/eslint-plugin": ^66.4.1
-  "@unocss/reset": ^66.4.1
+  "@unocss/eslint-plugin": ^66.4.2
+  "@unocss/reset": ^66.4.2
   "@vant/auto-import-resolver": ^1.3.0
   "@vitejs/plugin-vue": ^6.0.1
   "@vueuse/core": ^13.6.0
   archiver: ^7.0.1
   axios: ^1.11.0
-  code-inspector-plugin: ^1.0.4
-  element-plus: ^2.10.6
-  eslint: ^9.32.0
+  code-inspector-plugin: ^1.2.1
+  element-plus: ^2.10.7
+  eslint: ^9.33.0
   eslint-plugin-format: ^1.0.1
   lib-flexible: ^0.3.2
   nprogress: ^0.2.0
   pinia: ^3.0.3
-  pinia-plugin-persistedstate: ^4.4.1
+  pinia-plugin-persistedstate: ^4.5.0
   postcss-preset-env: ^10.2.4
   postcss-pxtorem: ^6.1.0
   quill: 2.0.3
   splitpanes: ^4.0.4
-  turbo: ^2.5.5
+  turbo: ^2.5.6
   typescript: ^5.9.2
-  unbuild: ^3.6.0
+  unbuild: ^3.6.1
   universal-cookie: ^8.0.1
-  unocss: ^66.4.1
+  unocss: ^66.4.2
   unplugin-auto-import: ^20.0.0
   unplugin-vue-components: ^29.0.0
   unplugin-vue-router: ^0.15.0
   vant: ^4.9.21
-  vite: ^7.1.1
+  vite: ^7.1.2
   vite-plugin-compression: ^0.5.1
   vite-plugin-vue-devtools: ^8.0.0
   vite-plugin-zip-pack: ^1.2.4
