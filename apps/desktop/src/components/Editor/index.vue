@@ -23,9 +23,9 @@ type AlertType = 'success' | 'info' | 'warning' | 'error'
 
 // 内容 HTML
 const modelValue = defineModel<string>('<p>hello</p>')
+
 // 编辑器实例，必须用 shallowRef，重要！
 const editorRef = shallowRef<IDomEditor>()
-
 const toolbarConfig: Partial<IToolbarConfig> = {}
 const editorConfig: Partial<IEditorConfig> = { placeholder: '请输入内容...' }
 
