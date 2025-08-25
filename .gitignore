@@ -41,6 +41,5 @@ coverage
 *.zip
 *.7z
 *.rar
-pnpm-lock.yaml
 
 output
