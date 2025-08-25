@@ -21,10 +21,11 @@
     "@repo/hooks": "workspace:*",
     "@repo/utils": "workspace:*",
     "@tanstack/vue-query": "catalog:",
+    "@wangeditor-next/editor": "catalog:",
+    "@wangeditor-next/editor-for-vue": "catalog:",
     "element-plus": "catalog:",
     "nprogress": "catalog:",
     "pinia-plugin-persistedstate": "catalog:",
-    "quill": "catalog:",
     "splitpanes": "catalog:",
     "universal-cookie": "catalog:"
   },

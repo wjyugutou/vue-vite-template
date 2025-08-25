@@ -55,6 +55,7 @@
       "vite": "npm:rolldown-vite@latest"
     },
     "onlyBuiltDependencies": [
+      "es5-ext",
       "esbuild",
       "unrs-resolver",
       "vue-demi"
