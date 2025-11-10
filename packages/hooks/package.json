@@ -1,7 +1,7 @@
 {
   "name": "@repo/hooks",
   "version": "1.0.0",
-  "packageManager": "pnpm@10.15.0",
+  "packageManager": "pnpm@10.21.0",
   "description": "",
   "author": "",
   "license": "ISC",
