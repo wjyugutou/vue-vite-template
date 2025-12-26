@@ -1,7 +1,20 @@
-import type { DictItem } from '@repo/api'
 import type { ToRefs } from 'vue'
-import { getDictByTypeApi } from '@repo/api'
+// import { getDictByTypeApi } from '@repo/api'
 import { reactive, toRefs } from 'vue'
+
+function getDictByTypeApi(type: string) {
+  return new Promise<DictItem[]>((resolve) => {
+    resolve([
+      { dictValue: '1', dictLabel: '男' },
+      { dictValue: '2', dictLabel: '女' },
+    ])
+  })
+}
+
+export interface DictItem {
+  dictValue: string
+  dictLabel: string
+}
 
 export interface DictReturn {
   list: { value: DictItem['dictValue'], label: DictItem['dictLabel'], [key: string]: any }[]

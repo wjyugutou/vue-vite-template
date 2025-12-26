@@ -21,10 +21,6 @@ function initActiveMenu() {
 }
 
 initActiveMenu()
-
-watchEffect(() => {
-  console.log('layoutMode', settings.value.layoutMode)
-})
 </script>
 
 <template>
@@ -41,7 +37,7 @@ watchEffect(() => {
         <SidebarItem v-if="!menu.meta?.hiddenInMenu" :item="menu" />
       </template>
     </ScrollView>
-    <div class="absolute bottom-0 left-0 h-[var(--sidebar-bottom-height)] w-full flex-center b-t px-4">
+    <div class="px-4 b-t flex-center h-[var(--sidebar-bottom-height)] w-full bottom-0 left-0 absolute">
       <div
         class="i-carbon-distribute-horizontal-left hover:bg-primary/90 cursor-pointer" :class="{ 'bg-primary/90': settings.sidebarCollapse }"
         @click="settings.sidebarCollapse = !settings.sidebarCollapse"

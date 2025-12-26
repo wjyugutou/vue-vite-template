@@ -1,23 +1,27 @@
-import type { UseQueryOptions } from '@tanstack/vue-query'
+import { keepPreviousData, useQueryClient } from '@tanstack/vue-query'
 
-type Options = Omit<UseQueryOptions, 'queryKey' | 'queryFn'>
+interface Options {
+  queryFn: QueryFn<any>
+}
 
-export function usePagination<T extends (pageNum: number, pageSize: number) => Promise<any>>(queryFn: T, options?: Options) {
+type QueryFn<T> = (...args: any) => Promise<T>
+
+export function usePagination<T extends { total: number, rows: any[] }>(options: Options) {
   const pagination = reactive({
     pageNum: 1,
     pageSize: 10,
-    total: 0,
   })
+
+  const path = useRoute().path
 
   const { data, isLoading, refetch } = useQuery({
-    queryFn: () => queryFn(pagination.pageNum, pagination.pageSize),
-    queryKey: ['usePagination', pagination],
-    ...(options ?? {}),
+    placeholderData: keepPreviousData,
+    enabled: true,
+    queryFn: () => options.queryFn(pagination.pageNum, pagination.pageSize),
+    queryKey: [`${path}-usePagination`, pagination],
+    staleTime: 1000 * 5,
   })
-
-  watch(pagination, () => {
-    refetch()
-  })
+  refetch()
 
   function reload() {
     pagination.pageNum = 1
@@ -25,8 +29,8 @@ export function usePagination<T extends (pageNum: number, pageSize: number) => P
   }
 
   return {
-    data,
-    isLoading,
+    data: data.value ? data : { total: 0, rows: [] },
+    loading: isLoading,
     ...toRefs(pagination),
     search: refetch,
     reload,

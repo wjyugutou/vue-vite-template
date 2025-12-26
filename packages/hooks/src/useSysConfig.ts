@@ -1,5 +1,11 @@
 import type { ToRefs } from 'vue'
-import { getConfigKeyApi } from '@repo/api'
+// import { getConfigKeyApi } from '@repo/api'
+
+function getConfigKeyApi(key: string) {
+  return new Promise<string>((resolve) => {
+    resolve('123')
+  })
+}
 
 type ConfigState<T extends [...string[]]> = {
   [K in T[number]]: string

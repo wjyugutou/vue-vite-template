@@ -1,4 +1,6 @@
-import { reactive, toRefs, type ToRefs } from 'vue'
+import type { ToRefs } from 'vue'
+import { get } from '@repo/api'
+import { reactive, toRefs } from 'vue'
 
 export interface DictItem {
   dictLabel: string
@@ -12,7 +14,7 @@ export interface DictReturn {
 }
 
 function getDictApi(dictType: string) {
-  return request.Get<DictItem[]>(`/system/dict/getDict/${dictType}`)
+  return get<DictItem[]>(`/system/dict/getDict/${dictType}`)
 }
 
 type Dict<T extends [...string[]]> = {
@@ -28,6 +30,7 @@ export function useDict<T extends string[]>(...dicts: T): ToRefs<Dict<T>> {
     prev[item as T[number]] = { list: [], map: {} }
     return prev
   }, {} as Dict<T>)
+  console.log('reducereduce')
 
   const dictMap = reactive(initvalue) as Dict<T>
 
