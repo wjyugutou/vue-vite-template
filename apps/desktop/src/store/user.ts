@@ -1,7 +1,7 @@
-import type { RouteRecordRawC } from '@/router/type'
 import type { LoginResult, RouterResult, UserInfo } from '@repo/api'
-import router from '@/router'
+import type { RouteRecordRawC } from '@/router/type'
 import { logoutApi, userInfoApi, userRouterApi } from '@repo/api'
+import router from '@/router'
 
 interface UserState {
   userInfo: UserInfo | null
@@ -15,7 +15,7 @@ export const useUserStore = defineStore('user', {
   state: () => ({
     userInfo: null,
     routes: [],
-    menus: [],
+    menus: setupMenu([]),
     roles: [],
     permissions: [],
   }) as UserState,

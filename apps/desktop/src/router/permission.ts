@@ -4,6 +4,8 @@ import router from './index'
 const whiteList = ['Login']
 
 router.beforeEach(async (to, form, next) => {
+  next()
+  return
   const userStore = useUserStore()
 
   const token = useToken()

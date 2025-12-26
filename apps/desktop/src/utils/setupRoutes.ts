@@ -1,6 +1,10 @@
-import type { RouteRecordRawC } from '@/router/type'
+/**
+ * 根据接口返回路由数组注册动态路由
+ */
+
 import type { RouterResult, RouterResultItem } from '@repo/api'
 import type { RouteComponent } from 'vue-router'
+import type { RouteRecordRawC } from '@/router/type'
 import ErrorComponent from '@/pages/Error.vue'
 import router from '@/router'
 

@@ -30,10 +30,10 @@ const formIns = useForm()
 function handleLogin() {
   formIns.value?.validate(async (valid) => {
     if (valid) {
-      await refetch()
+      // await refetch()
 
-      if (error.value)
-        return console.error('loginApi:', error.value)
+      // if (error.value)
+      //   return
 
       userStore.login(data.value!)
 

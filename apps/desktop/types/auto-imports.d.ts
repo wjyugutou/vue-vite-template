@@ -7,8 +7,6 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue').EffectScope
-  const ElMessage: typeof import('element-plus/es')['ElMessage']
-  const ElNotification: typeof import('element-plus/es')['ElNotification']
   const acceptHMRUpdate: typeof import('pinia').acceptHMRUpdate
   const asyncComputed: typeof import('@vueuse/core').asyncComputed
   const autoResetRef: typeof import('@vueuse/core').autoResetRef
@@ -102,7 +100,6 @@ declare global {
   const refWithControl: typeof import('@vueuse/core').refWithControl
   const resolveComponent: typeof import('vue').resolveComponent
   const resolveRef: typeof import('@vueuse/core').resolveRef
-  const resolveUnref: typeof import('@vueuse/core')['resolveUnref']
   const setActivePinia: typeof import('pinia').setActivePinia
   const setMapStoreSuffix: typeof import('pinia').setMapStoreSuffix
   const setupMenu: typeof import('../src/utils/setupMenu').setupMenu
@@ -164,6 +161,7 @@ declare global {
   const useConfirmDialog: typeof import('@vueuse/core').useConfirmDialog
   const useCountdown: typeof import('@vueuse/core').useCountdown
   const useCounter: typeof import('@vueuse/core').useCounter
+  const useCrud: typeof import('../src/hooks/useCrud/index').useCrud
   const useCssModule: typeof import('vue').useCssModule
   const useCssVar: typeof import('@vueuse/core').useCssVar
   const useCssVars: typeof import('vue').useCssVars
@@ -178,7 +176,6 @@ declare global {
   const useDeviceOrientation: typeof import('@vueuse/core').useDeviceOrientation
   const useDevicePixelRatio: typeof import('@vueuse/core').useDevicePixelRatio
   const useDevicesList: typeof import('@vueuse/core').useDevicesList
-  const useDict: typeof import('../../../packages/hooks/src/useDict')['useDict']
   const useDisplayMedia: typeof import('@vueuse/core').useDisplayMedia
   const useDocumentVisibility: typeof import('@vueuse/core').useDocumentVisibility
   const useDownload: typeof import('../src/hooks/useDownload').useDownload
@@ -206,7 +203,6 @@ declare global {
   const useId: typeof import('vue').useId
   const useIdle: typeof import('@vueuse/core').useIdle
   const useImage: typeof import('@vueuse/core').useImage
-  const useImport: typeof import('../src/hooks/useImport')['useImport']
   const useInfiniteScroll: typeof import('@vueuse/core').useInfiniteScroll
   const useIntersectionObserver: typeof import('@vueuse/core').useIntersectionObserver
   const useInterval: typeof import('@vueuse/core').useInterval
@@ -274,7 +270,6 @@ declare global {
   const useStyleTag: typeof import('@vueuse/core').useStyleTag
   const useSupported: typeof import('@vueuse/core').useSupported
   const useSwipe: typeof import('@vueuse/core').useSwipe
-  const useSysConfig: typeof import('../../../packages/hooks/src/useSysConfig')['useSysConfig']
   const useTemplateRef: typeof import('vue').useTemplateRef
   const useTemplateRefsList: typeof import('@vueuse/core').useTemplateRefsList
   const useTextDirection: typeof import('@vueuse/core').useTextDirection

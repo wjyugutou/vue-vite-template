@@ -32,7 +32,7 @@ function handleClick() {
       <span>{{ item.meta?.title }}</span>
     </template>
     <template v-for="child in item.children" :key="child.path">
-      <SidebarItem v-if="!child.meta?.hideInMenu" :item="child" :parent-path="item.path" />
+      <SidebarItem v-if="!child.meta?.hiddenInMenu" :item="child as RouteRecordRawC" :parent-path="item.path" />
     </template>
   </ElSubMenu>
   <ElMenuItem v-else :index="item.path" :route="item" @click="handleClick">

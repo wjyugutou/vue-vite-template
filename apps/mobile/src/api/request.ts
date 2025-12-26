@@ -45,10 +45,8 @@ request.interceptors.response.use(
       return null
     }
   },
-  (error) => {
-    console.error({ error })
-
-    // alert((`${error.message} 服务器错误，请重试`))
+  (error: any) => {
+    console.error('request Error', { error })
 
     return null
   },

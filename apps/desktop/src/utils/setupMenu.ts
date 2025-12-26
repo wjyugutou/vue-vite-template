@@ -1,8 +1,14 @@
-import type { RouteRecordRawC } from '@/router/type'
 import type { RouterResult, RouterResultItem } from '@repo/api'
 import type { RouteMeta } from 'vue-router'
+import type { RouteRecordRawC } from '@/router/type'
 import { basicRoutes } from '@/router/routes'
 
+/**
+ * 目前根据ruoyi的规范
+ * 根据路由生成左侧菜单 数组
+ * @param routes
+ * @returns
+ */
 export function setupMenu(routes: RouterResult) {
   const defaultMenu = [...basicRoutes].find(item => item.name === 'Index')!.children!
 

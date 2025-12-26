@@ -6,17 +6,13 @@ import router from '@/router'
 
 request.interceptors.request.use(
   (config: InterceptorsConfig) => {
-    console.log('请求拦截器desktop', config)
+    console.log('请求拦截器Desktop')
 
     // 是否需要设置 token
     const isToken = config.isToken !== false
 
-    console.log('isToken', isToken)
-
     if (isToken) {
       const token = useToken()
-
-      console.log('token', token)
 
       if (token) {
         config.headers.set('Authorization', `Bearer ${token}`)
@@ -35,8 +31,6 @@ request.interceptors.request.use(
 
       router.push('/login')
     }
-    console.log('请求拦截器desktop----end', config)
-
     return config
   },
   (error) => {
@@ -45,23 +39,6 @@ request.interceptors.request.use(
     return Promise.reject(error)
   },
 )
-
-// request.interceptors.response.use(
-//   (response: InterceptorsResponse) => {
-//     console.log('响应拦截器desktop', response)
-
-//     if (response.config) {
-//     }
-
-//   },
-//   (error) => {
-//     console.error({ error })
-
-//     // alert((`${error.message} 服务器错误，请重试`))
-
-//     return null
-//   },
-// )
 
 export const vueQuerySettings: VueQueryPluginOptions = {
   queryClientConfig: {
