@@ -8,7 +8,7 @@ import type { RouteRecordRawC } from '@/router/type'
 import ErrorComponent from '@/pages/Error.vue'
 import router from '@/router'
 
-function hasPermission(permissions: string[]) {
+function authssion(permissions: string[]) {
   return permissions.some((permission) => {
     return useUserStore().permissions.includes(permission)
   })
@@ -41,7 +41,7 @@ export function clearRoutes(routes: RouterResult) {
 
 function addRoute(routes: RouterResult, parentName: string = 'Index', suffix?: string) {
   routes.forEach((route) => {
-    if (route?.permissions && !hasPermission(route.permissions)) {
+    if (route?.permissions && !authssion(route.permissions)) {
       return
     }
 

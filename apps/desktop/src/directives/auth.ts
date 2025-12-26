@@ -25,7 +25,7 @@ export const roleAuthDirective: CustomDirective = {
 }
 
 export const permissionAuthDirective: CustomDirective = {
-  name: 'hasPermi',
+  name: 'auth',
   mounted(el: HTMLElement, binding: any) {
     const value = binding.value
     const permissions = useUserStore().permissions
@@ -34,11 +34,11 @@ export const permissionAuthDirective: CustomDirective = {
     if (value && Array.isArray(value) && value.length > 0) {
       const permissionFlag = value
 
-      const hasPermissions = permissions.some((permission) => {
+      const auths = permissions.some((permission) => {
         return all_permission === permission || permissionFlag.includes(permission)
       })
 
-      if (!hasPermissions) {
+      if (!auths) {
         el.remove()
       }
     }
