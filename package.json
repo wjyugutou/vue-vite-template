@@ -2,7 +2,7 @@
   "name": "monorepo",
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@10.21.0",
+  "packageManager": "pnpm@10.26.2",
   "engines": {
     "node": ">=18.20.8",
     "pnpm": ">=10.8.1"
